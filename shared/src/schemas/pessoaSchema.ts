@@ -42,9 +42,9 @@ export type ListarPessoaDTO = z.infer<typeof ListarPessoaSchema>
 export const AlterarPessoaSchema = z.object({
     id_pessoa:z.coerce.number(),
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres").optional(),
-    cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/).optional(),
+    cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/," Formato inválido").optional(),
     email: z.string().email("E-mail inválido").optional(),
-    telefone: z.string().min(9,"Telefone inválido").regex(/^\d+$/).optional(),
+    telefone: z.string().min(9,"Telefone inválido").regex(/^\d+$/," Formato inválido").optional(),
     id_cargo: z.coerce.number().min(1,"Selecione um cargo").optional(),  
     ativo:z.boolean().optional()
 })
