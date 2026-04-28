@@ -1,4 +1,4 @@
-import { EditarHorarioDTO } from "../../../shared/schemas/horarioSchema";
+import { EditarHorarioDTO } from '@app/shared';
 import sql from "../public/db";
 
 export default class HorarioRepository {
