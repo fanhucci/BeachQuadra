@@ -6,17 +6,7 @@ import PessoaService from '../services/pessoaService';
 export default class PessoaController{
     private service = new PessoaService();
 
-    async listarPessoas(req:Request, res:Response){
-        
-        const parse = PessoaQuerySchema.safeParse(req.query);
-        
-        if(!parse.success) return res.status(400).json({erro: parse.error.message})
-
-        const pessoas = await this.service.listarPessoas(parse.data);
-
-        res.json(pessoas);
-
-    }
+    
 
     async adicionarPessoa(req:Request, res:Response){
       
