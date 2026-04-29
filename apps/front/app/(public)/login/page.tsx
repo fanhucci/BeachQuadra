@@ -2,6 +2,7 @@
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
 import { LoginDTO, LoginSchema } from "@app/shared";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react"
@@ -51,7 +52,9 @@ export default function LoginPage(){
 
             <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
 
-            
+                <Link href="/" className="text-gray-600">
+                    <ArrowLeft />
+                </Link>
                 <div className="text-center space-y-2">
                 <h1 className="text-3xl font-semibold text-gray-800">
                     Bem-vindo de volta

@@ -10,9 +10,3 @@ export const CadastrarUsuarioSchema = z.object({
 })
 
 export type CadastrarUsuarioDTO = z.infer<typeof CadastrarUsuarioSchema>
-
-export const EsqueciSenhaSechema = z.object({
-    email:z.string().email("E-mail inválido"),
-})
-
-export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSechema>

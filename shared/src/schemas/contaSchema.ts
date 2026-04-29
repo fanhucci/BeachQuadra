@@ -35,3 +35,10 @@ export const LoginSchema = z.object({
   senha:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. ")
 })
 export type LoginDTO = z.infer<typeof LoginSchema>;
+
+
+export const EsqueciSenhaSechema = z.object({
+    email:z.string().email("E-mail inválido"),
+})
+
+export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSechema>

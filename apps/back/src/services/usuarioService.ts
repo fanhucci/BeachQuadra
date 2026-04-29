@@ -3,7 +3,7 @@ import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../public/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
-
+import { teste } from "../public/emailHandler";
 export default class UsuarioService{
 
     private pessoa = new PessoaRepository();
@@ -48,6 +48,11 @@ export default class UsuarioService{
             });
             return pessoa;
         })
+    }
+
+    async testeEmail(){
+        await teste();
+        return null;
     }
 
 }

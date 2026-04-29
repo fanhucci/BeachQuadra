@@ -1,5 +1,5 @@
 
-import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO } from "@app/shared";
+import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO,EsqueciSenhaDTO } from "@app/shared";
 import sql from "../public/db";
 import { sqlExecutor } from "./contaRepository";
 
@@ -120,6 +120,14 @@ export default class PessoaRepository {
 
     async alterarStatus(id:number,status:boolean){
         return await sql`update pessoas set ativo = ${status} where id_pessoa = ${id}`;
+    }
+
+    async buscarPorEmail(email:string){
+        const [resposta] = await sql`
+            select id_pessoa from pessoas where email = ${email}
+        `
+
+        return resposta ?? null
     }
 
 }

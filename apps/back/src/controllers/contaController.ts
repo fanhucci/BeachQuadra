@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AlterarSenhaSchema, AlterarStatusContaSchema, CriarContaSchema } from "@app/shared";
+import { AlterarSenhaSchema, AlterarStatusContaSchema, CriarContaSchema, EsqueciSenhaSchema } from "@app/shared";
 import ContaService from '../services/contaService';
 
 export default class ContaController{
@@ -54,8 +54,14 @@ export default class ContaController{
         
     }
 
-    async recuperarSenha(req:Request, res:Response){
+    async esqueciSenha(req:Request, res:Response){
+        const parse = EsqueciSenhaSchema.safeParse(req.body);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message})
+
+        await this.service.esqueciSenha(parse.data);
         
+        return res.sendStatus(200);
     }
 
 }

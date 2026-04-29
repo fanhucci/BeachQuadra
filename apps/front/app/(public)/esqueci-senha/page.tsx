@@ -3,6 +3,7 @@ import CustomInput from "@/components/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { EsqueciSenhaDTO, EsqueciSenhaSechema } from "@app/shared";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react"
 import { toast } from "sonner";
@@ -39,12 +40,13 @@ export default function EsqueciSenhaPage(){
 
             <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
 
-            
+                <Link href="/" className="text-gray-600">
+                    <ArrowLeft />
+                </Link>
+
                 <div className="text-center space-y-2">
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Voltar
-                    </Link>
                     
+
                     <h1 className="text-3xl font-semibold text-gray-800">
                         Redefinir senha
                     </h1>

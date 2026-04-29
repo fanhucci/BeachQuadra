@@ -2,6 +2,7 @@
 import CustomInput from "@/components/customInput";
 import useCadastro from "./useCadastro"
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default function CadastroPage(){
     const cadastro = useCadastro();
@@ -9,7 +10,10 @@ export default function CadastroPage(){
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
-
+                <Link href="/" className="text-gray-600">
+                    <ArrowLeft />
+                </Link>
+                
                 <h1 className="text-2xl font-semibold text-center mb-8 text-gray-700">Criar Conta</h1>
 
                 <div className="flex flex-col gap-5">

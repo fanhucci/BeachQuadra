@@ -51,4 +51,10 @@ export default class UsuarioController{
        
     }
 
+    async testeEmail(req:Request,res:Response){
+        const resposta = await this.service.testeEmail();
+        return res.status(200).json(resposta);
+    }
+
+
 }
