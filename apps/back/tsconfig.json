@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "commonjs",
     "outDir": "dist",
-    "rootDir": "./",        // A "caixa" agora é a pasta do back-end toda
+    "rootDir": "../../",        // A "caixa" agora é a pasta do back-end toda
     "strict": true,
     "esModuleInterop": true,
     "baseUrl": ".",
