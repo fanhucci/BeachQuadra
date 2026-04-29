@@ -5,7 +5,7 @@ declare global {
     interface Request {
       user?: {
         id: number;
-        cargo: string;
+        cargo: number;
       };
     }
   }

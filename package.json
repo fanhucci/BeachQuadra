@@ -1,5 +1,11 @@
-
 {
   "private": true,
-  "workspaces": ["apps/*", "shared"]
+  "workspaces": [
+    "apps/*",
+    "shared"
+  ],
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19"
+  }
 }

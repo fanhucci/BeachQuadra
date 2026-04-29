@@ -2,11 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import AppError from "../public/appError";
 import jwt from "jsonwebtoken";
 
+type TokenPayload = {
+    id:number,
+    cargo:number;
+}
 
 export default class AuthMiddleware{
-
-    
-
+   
     async auth(req:Request, res:Response, next:NextFunction){
         
         
@@ -18,7 +20,7 @@ export default class AuthMiddleware{
             const decoded = jwt.verify(
                 token,
                 process.env.JWT_SECRET!
-            )
+            ) as TokenPayload;
 
             req.user = {
                 id:decoded.id,

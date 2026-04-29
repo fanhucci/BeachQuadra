@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import AuthService from "../services/authService";
 import { LoginSchema } from "@app/shared";
 
+
 export default class AuthController{
     private service = new AuthService();
 

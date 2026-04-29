@@ -1,7 +1,7 @@
 
 import AppError from "../public/appError";
 import QuadraRepository from "../repositories/quadraRepository";
-import { AdicionarQuadraDTO, QuadraQueryDTO } from "@app/shared";
+import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
 
 
 export default class QuadraService{
@@ -19,7 +19,7 @@ export default class QuadraService{
         return await this.repo.adicionarQuadra(quadra);
     }
 
-    async editarQuadra(quadra:AdicionarQuadraDTO){
+    async editarQuadra(quadra:QuadraDTO){
 
         const existe = await this.repo.quadraExistente(quadra.nome, quadra.id_quadra);
 

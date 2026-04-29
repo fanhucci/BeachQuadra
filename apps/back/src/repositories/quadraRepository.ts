@@ -1,5 +1,5 @@
 
-import { AdicionarQuadraDTO, QuadraQueryDTO } from "@app/shared";
+import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
 import sql from "../public/db";
 
 export default class QuadraRepository {
@@ -16,7 +16,7 @@ export default class QuadraRepository {
         return await sql`update quadras set ativo = true where id_quadra = ${id}`;
     } 
 
-    async editarQuadra(quadra:AdicionarQuadraDTO){
+    async editarQuadra(quadra:QuadraDTO){
         return await sql`update quadras set nome = ${quadra.nome}, tipo = ${quadra.tipo}, status = ${quadra.status}, valor = ${quadra.valor} where id_quadra = ${quadra.id_quadra} returning *`;
     }
 

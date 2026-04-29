@@ -19,7 +19,8 @@ export default class UsuarioController{
 
     async listarUsuarioPerfil(req:Request,res:Response){
 
-        const id = Number(req.user.id);
+
+        const id = Number(req.user?.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
 
@@ -31,7 +32,7 @@ export default class UsuarioController{
     async listarUsuarioPorId(req:Request, res:Response){
         const id_busca = Number(req.params.id);
         
-        const id_logado = Number(req.user.id);
+        const id_logado = Number(req.user?.id);
 
         if(isNaN(id_busca)) return res.status(400).json({erro: "Id inválido"})
 
