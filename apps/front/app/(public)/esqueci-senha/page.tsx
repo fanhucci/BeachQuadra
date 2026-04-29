@@ -2,7 +2,7 @@
 import CustomInput from "@/components/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
-import { EsqueciSenhaDTO, EsqueciSenhaSechema } from "@app/shared";
+import { EsqueciSenhaDTO, EsqueciSenhaSchema } from "@app/shared";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react"
@@ -13,7 +13,7 @@ export default function EsqueciSenhaPage(){
     const [erros,setErros] = useState<Partial<Record<keyof EsqueciSenhaDTO,string>>>({});
 
     async function procurarConta() {
-        const parse = EsqueciSenhaSechema.safeParse({email});
+        const parse = EsqueciSenhaSchema.safeParse({email});
         if(!parse.success){
             setErros(formatarErrosZod(parse.error))
             return;

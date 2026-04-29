@@ -37,8 +37,8 @@ export const LoginSchema = z.object({
 export type LoginDTO = z.infer<typeof LoginSchema>;
 
 
-export const EsqueciSenhaSechema = z.object({
+export const EsqueciSenhaSchema = z.object({
     email:z.string().email("E-mail inválido"),
 })
 
-export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSechema>
+export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSchema>
