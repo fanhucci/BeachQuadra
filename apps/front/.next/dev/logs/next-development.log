@@ -212,3 +212,83 @@ Import traces:
     ./apps/front/app/(public)/login/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
+[00:01:09.715] Browser ERROR   ./apps/front/app/(public)/login/page.tsx:4:1
+Module not found: Can't resolve '@app/shared'
+  2 | import { useUser } from "@/context/userContext";
+  3 | import { apiRequest } from "@/utils/apiHandler";
+> 4 | import { LoginDTO, LoginSchema } from "@app/shared";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Link from "next/link";
+  6 | import { useState } from "react"
+  7 | import { toast } from "sonner";
+
+Import traces:
+  Client Component Browser:
+    ./apps/front/app/(public)/login/page.tsx [Client Component Browser]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/front/app/(public)/login/page.tsx [Client Component SSR]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:01:15.715] Browser ERROR   ./apps/front/app/(public)/login/page.tsx:4:1
+Module not found: Can't resolve '@app/shared'
+  2 | import { useUser } from "@/context/userContext";
+  3 | import { apiRequest } from "@/utils/apiHandler";
+> 4 | import { LoginDTO, LoginSchema } from "@app/shared";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Link from "next/link";
+  6 | import { useState } from "react"
+  7 | import { toast } from "sonner";
+
+Import traces:
+  Client Component Browser:
+    ./apps/front/app/(public)/login/page.tsx [Client Component Browser]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/front/app/(public)/login/page.tsx [Client Component SSR]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:01:15.715] Browser ERROR   ./apps/front/app/(public)/login/page.tsx:4:1
+Module not found: Can't resolve '@app/shared'
+  2 | import { useUser } from "@/context/userContext";
+  3 | import { apiRequest } from "@/utils/apiHandler";
+> 4 | import { LoginDTO, LoginSchema } from "@app/shared";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Link from "next/link";
+  6 | import { useState } from "react"
+  7 | import { toast } from "sonner";
+
+Import traces:
+  Client Component Browser:
+    ./apps/front/app/(public)/login/page.tsx [Client Component Browser]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/front/app/(public)/login/page.tsx [Client Component SSR]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:01:19.714] Browser ERROR   ./apps/front/app/(public)/login/page.tsx:4:1
+Module not found: Can't resolve '@app/shared'
+  2 | import { useUser } from "@/context/userContext";
+  3 | import { apiRequest } from "@/utils/apiHandler";
+> 4 | import { LoginDTO, LoginSchema } from "@app/shared";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import Link from "next/link";
+  6 | import { useState } from "react"
+  7 | import { toast } from "sonner";
+
+Import traces:
+  Client Component Browser:
+    ./apps/front/app/(public)/login/page.tsx [Client Component Browser]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/front/app/(public)/login/page.tsx [Client Component SSR]
+    ./apps/front/app/(public)/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
