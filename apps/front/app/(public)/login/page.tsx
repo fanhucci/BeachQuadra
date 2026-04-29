@@ -3,11 +3,12 @@ import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
 import { LoginDTO, LoginSchema } from "@app/shared";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { toast } from "sonner";
 
 export default function LoginPage(){
-
+    const router = useRouter();
     const estadoInicial = { email:"", senha:"" };
 
     const [formData,setFormData] = useState(estadoInicial);
@@ -23,6 +24,7 @@ export default function LoginPage(){
         }))
     }
 
+
     async function fazerLogin(){
         const parse = LoginSchema.safeParse(formData);
 
@@ -37,8 +39,8 @@ export default function LoginPage(){
                 method:"POST",
                 body:JSON.stringify(parse.data)
             })
-      
-            window.location.href = "/";
+            
+            router.push('/');
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
         }
