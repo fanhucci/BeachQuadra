@@ -1,4 +1,5 @@
 'use client'
+import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { CadastrarUsuarioDTO, CadastrarUsuarioSchema } from "@app/shared";
@@ -19,6 +20,7 @@ export default function useCadastro(){
     const [formData,setFormData] = useState<CadastrarUsuarioDTO>(estado_inicial);
     const [erros,setErros] = useState<Partial<Record<keyof CadastrarUsuarioDTO,string>>>({});
 
+    const {refreshUser} = useUser();
     const router = useRouter();
 
     async function cadastrarUsuario(){
@@ -34,13 +36,23 @@ export default function useCadastro(){
             await apiRequest(`/usuarios/cadastro`,{
                 method:"POST",
                 body:JSON.stringify(parse.data)
-            })  
+            });
             setErros({});
-            router.push(`/perfil`);
+            await apiRequest(`/login`,{
+                method:"POST",
+                body:JSON.stringify({
+                    email:parse.data.email,
+                    senha:parse.data.senha
+                })
+            });
+            await refreshUser();
+            router.push('/perfil');
         } 
         catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
         }
+
+
     }
 
     function handleChange(e:React.ChangeEvent<HTMLInputElement>){
