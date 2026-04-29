@@ -1,5 +1,6 @@
 'use client'
 import { apiRequest } from "@/utils/apiHandler";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
@@ -21,6 +22,7 @@ const UserContext = createContext<UserContextType>({} as UserContextType);
 export function UserProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading,setLoading] = useState<boolean>(true);
+    const router = useRouter();
 
     async function refreshUser() {
         try {
@@ -40,7 +42,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
         setUser(null);
 
-        window.location.href = '/';
+        router.push('/');
     }
 
     useEffect(() => {
