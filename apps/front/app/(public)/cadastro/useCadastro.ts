@@ -1,3 +1,4 @@
+'use client'
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { CadastrarUsuarioDTO, CadastrarUsuarioSchema } from "@app/shared";
