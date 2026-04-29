@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true, 
   },/* config options here */
-  transpilePackages:['@acme/shared']
+  transpilePackages:['@app/shared']
 };
 
 export default nextConfig;

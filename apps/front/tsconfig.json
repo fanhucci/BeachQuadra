@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@app/shared": ["../../shared/src/index.ts"]
     }
   },
   "include": [
