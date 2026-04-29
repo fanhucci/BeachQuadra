@@ -2,17 +2,10 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
+    "rootDir": "src",
     "outDir": "dist",
-    "rootDir": "../../",        // A "caixa" agora é a pasta do back-end toda
     "strict": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "@shared/*": ["../../shared/src/*"] 
-    }
+    "esModuleInterop": true
   },
-  "include": [
-    "src/**/*", 
-    "../../shared/src/**/*" // Você avisa explicitamente para incluir o shared
-  ]
+  "include": ["src"]
 }
