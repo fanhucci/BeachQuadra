@@ -3,13 +3,14 @@
 
 import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
+import sql from "../public/db";
 
 
 export default class PessoaService{
     private repo = new PessoaRepository();
 
     async adicionarPessoa(dados:CriarPessoaDTO){
-        return await this.repo.adicionarPessoa(dados);
+        return await this.repo.adicionarPessoa(sql,dados);
     }
 
     async editarPessoa(dados:AlterarPessoaDTO){

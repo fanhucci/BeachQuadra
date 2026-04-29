@@ -1,7 +1,8 @@
-import { PessoaQueryDTO, CadastrarUsuarioSchema,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
+import { PessoaQueryDTO, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../public/db";
 import ContaRepository from "../repositories/contaRepository";
+
 
 export default class UsuarioService{
 
@@ -35,7 +36,7 @@ export default class UsuarioService{
         return resposta;
     }
 
-    async cadastrarUsuario (dados:CadastrarUsuarioSchema){
+    async cadastrarUsuario (dados:CadastrarUsuarioDTO ){
         return await sql.begin(async (tx)=>{
             const pessoa:ListarPessoaDTO = await this.pessoa.adicionarPessoa(tx, dados);
 

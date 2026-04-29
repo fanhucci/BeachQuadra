@@ -1,8 +1,8 @@
 
 import { AlterarSenhaDTO, AlterarStatusContaDTO, CriarContaDTO } from "@app/shared";
 import ContaRepository from "../repositories/contaRepository";
-import AppError from "../public/appError";
 import bcrypt from "bcrypt";
+import sql from "../public/db";
 
 export default class ContaService{
     private repo = new ContaRepository();
@@ -15,7 +15,7 @@ export default class ContaService{
 
         const senhaHash = await bcrypt.hash(dados.senha,10);
 
-        return await this.repo.adicionarConta({
+        return await this.repo.adicionarConta(sql,{
             ...dados,
             senha:senhaHash
         });
