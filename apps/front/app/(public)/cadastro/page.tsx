@@ -1,4 +1,4 @@
-
+'use client'
 import CustomInput from "@/components/customInput";
 import useCadastro from "./useCadastro"
 
