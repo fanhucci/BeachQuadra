@@ -38,7 +38,7 @@ export default class UsuarioService{
 
     async cadastrarUsuario (dados:CadastrarUsuarioDTO ){
         return await sql.begin(async (tx)=>{
-            const [pessoa]:ListarPessoaDTO = await this.pessoa.adicionarPessoa(tx, dados);
+            const [pessoa] = await this.pessoa.adicionarPessoa(tx, dados);
 
             const senhaHash = await bcrypt.hash(dados.senha,10);
 
