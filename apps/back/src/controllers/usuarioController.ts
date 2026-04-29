@@ -45,10 +45,10 @@ export default class UsuarioController{
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        //const resposta = await this.cadastrarUsuario(parse.data);
+        const resposta = await this.service.cadastrarUsuario(parse.data);
 
-        //return res.status(201).json(resposta);
-        return res.status(201)
+        return res.status(201).json(resposta);
+       
     }
 
 }

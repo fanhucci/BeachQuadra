@@ -1,11 +1,12 @@
 
 import { AlterarStatusContaDTO, AlterarSenhaDTO, CriarContaDTO } from "@app/shared";
 import sql from "../public/db";
+import { TransactionSql } from "postgres";
 
 export default class ContaRepository{
 
-    async adicionarConta(conta:CriarContaDTO){
-        return await sql`insert into contas (id_pessoa, senha) values (${conta.id_pessoa}, ${conta.senha}) returning *`
+    async adicionarConta(tx:TransactionSql,conta:CriarContaDTO){
+        return await tx`insert into contas (id_pessoa, senha) values (${conta.id_pessoa}, ${conta.senha}) returning *`
     }
 
     async alterarStatus(dados:AlterarStatusContaDTO){

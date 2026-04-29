@@ -10,6 +10,6 @@ const authMiddleware = new AuthMiddleware();
 router.get(`/usuarios`, authMiddleware.auth, ctrl.listarUsuarios.bind(ctrl));
 router.get(`/usuarios/perfil`, authMiddleware.auth, ctrl.listarUsuarioPerfil.bind(ctrl));
 router.get(`/usuarios/:id`, authMiddleware.auth, ctrl.listarUsuarioPorId.bind(ctrl));
-
+router.post(`usuarios/cadastro`, ctrl.cadastrarUsuario.bind(ctrl));
 
 export default router;

@@ -1,11 +1,12 @@
 
 import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO } from "@app/shared";
 import sql from "../public/db";
+import { TransactionSql } from "postgres";
 
 export default class PessoaRepository {
 
-    async adicionarPessoa(dados:CriarPessoaDTO){
-        return await sql`insert into pessoas (nome, cpf, telefone, email, id_cargo) values (${dados.nome},${dados.cpf},${dados.telefone}, ${dados.email}, ${dados.id_cargo}) returning *`;
+    async adicionarPessoa(tx:TransactionSql,dados:CriarPessoaDTO){
+        return await tx`insert into pessoas (nome, cpf, telefone, email, id_cargo) values (${dados.nome},${dados.cpf},${dados.telefone}, ${dados.email}, ${dados.id_cargo}) returning *`;
     }
 
 
