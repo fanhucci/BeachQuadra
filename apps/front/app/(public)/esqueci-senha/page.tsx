@@ -19,12 +19,12 @@ export default function EsqueciSenhaPage(){
         }
 
         try {
-            await apiRequest(`esqueci-senha`,{
+            await apiRequest(`/esqueci-senha`,{
                 method:'POST',
                 body:JSON.stringify(parse.data)
             })
             setErros({});
-            toast.success('Se existir uma conta com esse email, enviaremos instruções de redefinição!');
+            toast.success('Se existir uma conta com esse e-mail, enviaremos instruções de redefinição!');
             
         } 
         catch (error) {
@@ -41,8 +41,12 @@ export default function EsqueciSenhaPage(){
 
             
                 <div className="text-center space-y-2">
+                    <Link href="/" className="text-blue-600 hover:underline">
+                        Voltar
+                    </Link>
+                    
                     <h1 className="text-3xl font-semibold text-gray-800">
-                        Esqueci a senha
+                        Redefinir senha
                     </h1>
                     <p className="text-sm text-gray-500">
                         Informe o e-mail associado a conta abaixo!
