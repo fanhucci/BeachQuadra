@@ -2,7 +2,7 @@ import { PessoaQueryDTO, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } f
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../public/db";
 import ContaRepository from "../repositories/contaRepository";
-
+import bcrypt from "bcrypt";
 
 export default class UsuarioService{
 
@@ -38,14 +38,14 @@ export default class UsuarioService{
 
     async cadastrarUsuario (dados:CadastrarUsuarioDTO ){
         return await sql.begin(async (tx)=>{
-            const pessoa:ListarPessoaDTO = await this.pessoa.adicionarPessoa(tx, dados);
+            const [pessoa]:ListarPessoaDTO = await this.pessoa.adicionarPessoa(tx, dados);
 
-            const conta:CriarContaDTO = {
-                id_pessoa: pessoa.id_pessoa,
-                senha:pessoa.senha
-            }
+            const senhaHash = await bcrypt.hash(dados.senha,10);
 
-            await this.conta.adicionarConta(tx, conta);
+            await this.conta.adicionarConta(tx, {
+                id_pessoa:pessoa.id_pessoa,
+                senha:senhaHash
+            });
 
         })
     }

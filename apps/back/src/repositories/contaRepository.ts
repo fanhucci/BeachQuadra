@@ -1,8 +1,9 @@
 
 import { AlterarStatusContaDTO, AlterarSenhaDTO, CriarContaDTO } from "@app/shared";
 import sql from "../public/db";
+import { TransactionSql } from "postgres";
 
-export type sqlExecutor = typeof sql;
+export type sqlExecutor = typeof sql|TransactionSql;
 
 export default class ContaRepository{
 
