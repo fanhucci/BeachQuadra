@@ -13,11 +13,11 @@ export default class AuthController{
         const usuarioAutorizado = await this.service.login(parse.data);
 
         return res.cookie('token',usuarioAutorizado,{
-                httpOnly:true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite:"lax",
-                maxAge: 8 * 60 * 60 * 1000,
-            }).sendStatus(200);
+            httpOnly:true,
+            secure: true,//process.env.NODE_ENV === 'production',
+            sameSite:"none",
+            maxAge: 8 * 60 * 60 * 1000,
+        }).sendStatus(200);
     }
 
     async logout(req:Request, res:Response){
