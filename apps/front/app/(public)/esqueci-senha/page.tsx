@@ -1,3 +1,4 @@
+'use client'
 import CustomInput from "@/components/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
