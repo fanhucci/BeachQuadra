@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:3000';
+const base_url = 'https://beachquadra-api.onrender.com/';
 
 export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
