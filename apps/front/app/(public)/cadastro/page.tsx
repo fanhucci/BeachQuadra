@@ -1,13 +1,14 @@
 'use client'
 import CustomInput from "@/components/customInput";
 import useCadastro from "./useCadastro"
+import Link from "next/link";
 
 export default function CadastroPage(){
     const cadastro = useCadastro();
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-lg bg-white shadow-xl rounded-2xl p-8">
+            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
 
                 <h1 className="text-2xl font-semibold text-center mb-8 text-gray-700">Criar Conta</h1>
 
@@ -54,10 +55,20 @@ export default function CadastroPage(){
                         onChange={cadastro.handleChange}
                     />
 
+                    <div className="flex justify-between text-sm">
+                        <Link href="/login" className="text-blue-600 hover:underline">
+                            Voltar ao login
+                        </Link>
+                    </div>
+
                     <button
                         onClick={cadastro.cadastrarUsuario}
-                        className="mt-4 h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">Cadastrar</button>
+                        className="mt-4 h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                    >
+                        Cadastrar
+                    </button>
                 </div>
+
             </div>
         </div>
     );

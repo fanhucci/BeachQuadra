@@ -5,7 +5,11 @@
     "rootDir": "src",
     "outDir": "dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/shared": ["../../shared/src/index.ts"] 
+    }
   },
   "include": ["src"]
 }

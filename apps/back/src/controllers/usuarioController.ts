@@ -1,4 +1,4 @@
-import { PessoaQuerySchema } from "@app/shared";
+import { PessoaQuerySchema, CadastrarUsuarioSchema  } from "@app/shared";
 import { Request, Response } from 'express';
 import UsuarioService from "../services/usuarioService";
 
@@ -19,7 +19,6 @@ export default class UsuarioController{
 
     async listarUsuarioPerfil(req:Request,res:Response){
 
-
         const id = Number(req.user?.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
@@ -39,6 +38,17 @@ export default class UsuarioController{
         const usuario = await this.service.listarUsuarioPorId(id_logado,id_busca);
 
         res.json(usuario);
+    }
+
+    async cadastrarUsuario(req:Request, res:Response){
+        const parse = CadastrarUsuarioSchema.safeParse(req.body);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+
+        //const resposta = await this.cadastrarUsuario(parse.data);
+
+        //return res.status(201).json(resposta);
+        return res.status(201)
     }
 
 }
