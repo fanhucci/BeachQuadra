@@ -13,7 +13,7 @@ export default function LoginPage(){
 
     const [formData,setFormData] = useState(estadoInicial);
     const [erros,setErros] = useState<Partial<LoginDTO>>({});
-    const {login} = useUser();
+    const {refreshUser} = useUser();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         const {id,value} = e.target;
@@ -39,8 +39,8 @@ export default function LoginPage(){
                 method:"POST",
                 body:JSON.stringify(parse.data)
             })
-            
-            router.push('/');
+            await refreshUser();
+            router.push('/perfil');
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
         }
