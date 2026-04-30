@@ -1,20 +1,18 @@
 
-import { AlterarSenhaDTO, AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO } from "@app/shared";
+import { AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO } from "@app/shared";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
 import sql from "../infra/db";
 import { enviarEmail } from "../infra/email/emailHandler";
 import redefinirSenhaTemplate from "../infra/email/templates/redefinirSenha";
-import jwt from "jsonwebtoken";
 import AppError from "../infra/appError";
+import crypto from 'crypto';
+import ResetTokenRepository from "../repositories/resetTokenRepository";
 
-type ResetTokenPayload = {
-    id_conta:number;
-    motivo:string;
-}
 
 export default class ContaService{
     private conta = new ContaRepository();
+    private resetSenha = new ResetTokenRepository();
 
     // async listarContas(filtro:ContaQueryDTO){
     //     return await this.repo.listarContas(filtro);
@@ -45,25 +43,25 @@ export default class ContaService{
     }
 
     
-    async resetarSenha(dados: ResetarSenhaDTO) {
-        let token: ResetTokenPayload;
+    async resetarSenha(dados: ResetarSenhaDTO){
 
-        try {
-            token = jwt.verify(
-                dados.token,
-                process.env.JWT_SECRET!
-            ) as ResetTokenPayload;
-        } catch {
-            throw new AppError('Token inválido ou expirado', 401);
+        await this.resetSenha.removerTokensExpirados();
+
+        const registros = await this.resetSenha.procurarTokensValidos();
+
+        for( const r of registros) {
+            const ok = await bcrypt.compare(dados.token,r.token_hash);
+
+            if(!ok) continue;
+
+            const senhaHash = await bcrypt.hash(dados.senha, 10);
+            await this.conta.alterarSenhaPorId(r.id_conta, senhaHash);
+
+            return;
         }
+
+        throw new AppError('Token inválido ou expirado', 400);
         
-        if (token.motivo !== 'resetar_senha') {
-            throw new AppError('Token inválido', 401);
-        }
-
-        const senhaHash = await bcrypt.hash(dados.senha, 10);
-
-        return await this.conta.alterarSenhaPorId(token.id_conta, senhaHash);
     }
 
     async esqueciSenha(dados:EsqueciSenhaDTO){
@@ -74,15 +72,14 @@ export default class ContaService{
             return;
         }
 
-        const tokenResetarSenha = jwt.sign({
-            id_conta:conta.id_conta,
-            motivo:'resetar_senha'
-            },
-            process.env.JWT_SECRET!,
-            { expiresIn:'5m'}
-        );
+        await this.resetSenha.removerTokensExpirados();
+        
+        const token = crypto.randomBytes(32).toString('hex');
+        const tokenHash = await bcrypt.hash(token,10);
 
-        const link = `${process.env.FRONT_URL}/resetar-senha/${tokenResetarSenha}`
+        await this.resetSenha.criarToken(conta.id_conta,tokenHash);
+
+        const link = `${process.env.FRONT_URL}/resetar-senha/${token}`
         
         await enviarEmail({
             to:dados.email,
