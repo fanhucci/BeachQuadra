@@ -2,7 +2,7 @@ const base_url = process.env.BACK_URL;
 
 export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
-    const response = await fetch(`${base_url}${endpoint}`, {
+    const response = await fetch(`${base_url}/${endpoint}`, {
         ...options,
         credentials: 'include', 
         headers: {
