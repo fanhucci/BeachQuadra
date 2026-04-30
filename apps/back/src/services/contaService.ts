@@ -57,6 +57,8 @@ export default class ContaService{
             const senhaHash = await bcrypt.hash(dados.senha, 10);
             await this.conta.alterarSenhaPorId(r.id_conta, senhaHash);
 
+            await this.resetSenha.deletarToken(r.id_conta);
+            
             return;
         }
 
