@@ -56,7 +56,7 @@ export default class ContaService{
         } catch {
             throw new AppError('Token inválido ou expirado', 401);
         }
-        console.log(token.motivo)
+        
         if (token.motivo !== 'resetar_senha') {
             throw new AppError('Token inválido', 401);
         }

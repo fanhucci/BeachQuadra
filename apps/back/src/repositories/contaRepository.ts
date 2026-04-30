@@ -60,7 +60,7 @@ export default class ContaRepository{
     }
     
     async alterarSenhaPorId(id:number,senha:string){
-        await sql`
+        return await sql`
             update contas set senha = ${senha} where id_conta = ${id}
         `;
     }
