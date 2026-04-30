@@ -20,7 +20,7 @@ export default function EsqueciSenhaPage(){
         }
 
         try {
-            await apiRequest(`/esqueci-senha`,{
+            await apiRequest(`/contas/esqueci-senha`,{
                 method:'POST',
                 body:JSON.stringify(parse.data)
             })
