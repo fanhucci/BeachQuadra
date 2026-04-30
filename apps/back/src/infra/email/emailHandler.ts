@@ -10,8 +10,8 @@ type enviarEmailProps = {
 
 export async function enviarEmail(email:enviarEmailProps) {
     
-    const remetente = process.env.EMAIL_DOMAIN || 'onboarding@resend.dev';
-    const destinatario = process.env.EMAIL_DOMAIN ? email.to : 'delivered@resend.dev';
+    const remetente = process.env.EMAIL_SENDER || 'onboarding@resend.dev';
+    const destinatario = process.env.EMAIL_SENDER ? email.to : 'delivered@resend.dev';
 
     await resend.emails.send({
         from: `BeachQuadra <${remetente}>`,

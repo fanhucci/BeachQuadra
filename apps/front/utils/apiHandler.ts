@@ -1,8 +1,8 @@
-const base_url = process.env.BACK_URL;
+const base_url = process.env.NEXT_PUBLIC_BACK_URL || `achou nao em` ;
 
 export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
-    const response = await fetch(`${base_url}/${endpoint}`, {
+    const response = await fetch(`${base_url}${endpoint}`, {
         ...options,
         credentials: 'include', 
         headers: {
@@ -19,7 +19,7 @@ export async function apiRequest(endpoint: string, options: RequestInit = {}) {
         : null;
 
     if (!response.ok) {
-        throw new Error(data?.erro || `Erro HTTP ${response.status}`);
+        throw new Error(data?.erro || `Erro HTTP ${response.status}, ${base_url}`);
     }
 
     return data;
