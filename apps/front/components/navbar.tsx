@@ -1,5 +1,6 @@
 'use client'
 import { useUser } from "@/context/userContext";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
@@ -58,7 +59,7 @@ export default function Navbar() {
               className="flex items-center gap-2 px-3 py-1.5 rounded hover:bg-gray-700 transition"
             >
               <span>{user?.nome}</span>
-              <span className="text-xs opacity-60">▼</span>
+              <span className="text-xs opacity-60"><Menu /></span>
             </button>
 
             {open && (
