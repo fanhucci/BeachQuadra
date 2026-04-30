@@ -30,13 +30,13 @@ export default class ContaService{
         });
     }
 
-    async alterarSenha(dados:AlterarSenhaDTO){
+    // async alterarSenha(dados:AlterarSenhaDTO){
 
-        const senhaHash = await bcrypt.hash(dados.senha,10);
+    //     const senhaHash = await bcrypt.hash(dados.senha,10);
 
-        return await this.conta.alterarSenhaPorId(dados.id_pessoa, senhaHash);
+    //     return await this.conta.alterarSenhaPorId(dados.id_pessoa, senhaHash);
         
-    }
+    // }
 
     async alterarStatus(status:AlterarStatusContaDTO){
         
@@ -70,9 +70,6 @@ export default class ContaService{
 
         const conta = await this.conta.buscarContaPorEmail(dados.email);
 
-        if(!conta.id_conta){
-            //criar conta sem senha "", é impossivel entrar com conta com menos de 6 caracteres e esse fluxo ja é o de redefinir senha
-        }
         if(!conta){
             return;
         }

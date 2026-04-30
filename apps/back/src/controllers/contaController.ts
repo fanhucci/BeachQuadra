@@ -33,8 +33,8 @@ export default class ContaController{
         
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
-        const resposta = await this.service.alterarSenha(parse.data);
-
+        //const resposta = await this.service.alterarSenha(parse.data);
+        const resposta = {message:'interditado'}
         return res.status(200).json(resposta);
     }
 
