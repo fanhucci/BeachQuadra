@@ -1,21 +1,9 @@
 import { Request, Response } from 'express';
-import { AlterarSenhaSchema, AlterarStatusContaSchema, CriarContaSchema, EsqueciSenhaSchema } from "@app/shared";
+import { AlterarSenhaSchema, AlterarStatusContaSchema, CriarContaSchema, EsqueciSenhaSchema,ResetarSenhaSchema } from "@app/shared";
 import ContaService from '../services/contaService';
 
 export default class ContaController{
     private service = new ContaService();
-
-    // async listarContas(req:Request, res:Response){
-   
-    //     const parse = ListarContaSchema.safeParse(req.query);
-
-    //     if(!parse.success) return res.status(400).json({erro: parse.error.message})
-
-    //     const contas = await this.service.listarContas(parse.data);
-   
-    //     res.json(contas);
-        
-    // }
 
     async adicionarConta(req:Request, res:Response){
        
@@ -35,7 +23,7 @@ export default class ContaController{
         if(!parse.success) return res.status(400).json({erro:"Id inválido"});
 
         const resposta = await this.service.alterarStatus(parse.data);
-        console.log(JSON.stringify(resposta))
+
         return res.status(200).json(resposta);
     }
 
@@ -50,8 +38,14 @@ export default class ContaController{
         return res.status(200).json(resposta);
     }
 
-    async redefinirSenha(req:Request, res:Response){
-        
+    async resetarSenha(req:Request, res:Response){
+        const parse = ResetarSenhaSchema.safeParse(req.body);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+
+        const resposta = await this.service.resetarSenha(parse.data);
+
+        return res.status(200).json(resposta);
     }
 
     async esqueciSenha(req:Request, res:Response){

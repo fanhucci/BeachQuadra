@@ -6,28 +6,13 @@ export const CriarContaSchema = z.object({
 }) 
 export type CriarContaDTO = z.infer<typeof CriarContaSchema>
 
-export const ListarContaSchema = z.object({
-  id_conta:z.coerce.number(),
-  id_pessoa:z.coerce.number(),
-  ativo:z.boolean()
-})
-export type ListarContaDTO = z.infer<typeof ListarContaSchema>
-
-export const AlterarSenhaSchema = z.object({
-  id_conta:z.coerce.number(),
-  senha:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. "),
-})
-export type AlterarSenhaDTO = z.infer<typeof AlterarSenhaSchema>
-
-export const RedefinirSenhaSchema = z.object({
-  id_conta:z.coerce.number(),
-})
-export type RedefinirSenhaDTO = z.infer<typeof RedefinirSenhaSchema>
-
+//provavelmente vai ser apagado
 export const AlterarStatusContaSchema = z.object({
   id_conta:z.coerce.number(),
 })
 export type AlterarStatusContaDTO = z.infer<typeof AlterarStatusContaSchema>
+
+
 
 
 export const LoginSchema = z.object({
@@ -36,9 +21,34 @@ export const LoginSchema = z.object({
 })
 export type LoginDTO = z.infer<typeof LoginSchema>;
 
-
 export const EsqueciSenhaSchema = z.object({
-    email:z.string().email("E-mail inválido"),
+  email:z.string().email("E-mail inválido"),
 })
-
 export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSchema>
+
+
+
+export const ForcarRedefinirSenhaSchema = z.object({
+  id_conta:z.coerce.number(),
+})
+export type ForcarRedefinirSenhaDTO = z.infer<typeof ForcarRedefinirSenhaSchema>
+
+
+
+export const AlterarSenhaSchema = z.object({
+  senhaAtual:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. "),
+  senhaNova:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. "),
+})
+export type AlterarSenhaDTO = z.infer<typeof AlterarSenhaSchema>
+
+
+export const ResetarSenhaSchema = z.object({
+  token: z.string(),
+  senha: z.string().min(6),
+  senhaConfirmar: z.string().min(6),
+})
+.refine(data => data.senha === data.senhaConfirmar, {
+  message: "Senhas não coincidem",
+  path: ["senhaConfirmar"],
+});
+export type ResetarSenhaDTO = z.infer<typeof ResetarSenhaSchema>

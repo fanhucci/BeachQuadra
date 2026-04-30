@@ -15,11 +15,6 @@ export default class ContaRepository{
         return await sql`update contas set ativo = not ativo where id_conta = ${dados.id_conta}`;
     }
 
-    async alterarSenha(dados:AlterarSenhaDTO){
-        return await sql`update contas set senha = ${dados.senha} where id_conta = ${dados.id_conta}`;
-    }
-
-
 
     // async listarContas(filtro:ContaQueryDTO) {
     //     return await sql`
@@ -50,5 +45,23 @@ export default class ContaRepository{
 
     async contaAtivo(id:number){
         return await sql`select ativo from contas where id_conta = ${id}`;
+    }
+
+
+    async buscarContaPorEmail(email:string){
+        const [resposta] = await sql`
+            select a.id_conta
+            from contas a 
+            inner join pessoas b
+            on a.id_pessoa = b.id_pessoa
+            where b.email = ${email}
+        `
+        return resposta ?? null
+    }
+    
+    async alterarSenhaPorId(id:number,senha:string){
+        await sql`
+            update contas set senha = ${senha} where id_conta = ${id}
+        `;
     }
 }

@@ -122,12 +122,5 @@ export default class PessoaRepository {
         return await sql`update pessoas set ativo = ${status} where id_pessoa = ${id}`;
     }
 
-    async buscarPorEmail(email:string){
-        const [resposta] = await sql`
-            select id_pessoa,nome,email from pessoas where email = ${email}
-        `
-
-        return resposta ?? null
-    }
 
 }

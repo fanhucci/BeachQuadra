@@ -14,6 +14,7 @@ export default function EsqueciSenhaPage(){
 
     async function procurarConta() {
         const parse = EsqueciSenhaSchema.safeParse({email});
+
         if(!parse.success){
             setErros(formatarErrosZod(parse.error))
             return;
@@ -33,8 +34,6 @@ export default function EsqueciSenhaPage(){
         }
     }
 
-
-
     return(
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
 
@@ -48,7 +47,7 @@ export default function EsqueciSenhaPage(){
                     
 
                     <h1 className="text-3xl font-semibold text-gray-800">
-                        Redefinir senha
+                        Recuperação de senha
                     </h1>
                     <p className="text-sm text-gray-500">
                         Informe o e-mail associado a conta abaixo!
@@ -59,38 +58,38 @@ export default function EsqueciSenhaPage(){
                 <form className="flex flex-col gap-6">
 
            
-                <CustomInput
-                    label="E-mail"
-                    name="email"
-                    value={email}
-                    erro={erros.email}
-                    onChange={(e=>{
-                        setEmail(e.target.value)
-                    })}
-                />
+                    <CustomInput
+                        label="E-mail"
+                        name="email"
+                        value={email}
+                        erro={erros.email}
+                        onChange={(e=>{
+                            setEmail(e.target.value)
+                        })}
+                    />
 
-                <div className="flex justify-between text-sm">
-                    <Link href="/cadastro" className="text-blue-600 hover:underline">
-                    Criar conta
-                    </Link>
+                    <div className="flex justify-between text-sm">
+                        <Link href="/cadastro" className="text-blue-600 hover:underline">
+                        Criar conta
+                        </Link>
 
-                    <Link href="/login" className="text-gray-500 hover:underline">
-                    Login
-                    </Link>
-                </div>
+                        <Link href="/login" className="text-gray-500 hover:underline">
+                        Login
+                        </Link>
+                    </div>
 
-                <button
-                    type="button"
-                    onClick={procurarConta}
-                    className="
-                    mt-2 h-12 rounded-xl
-                    bg-blue-600 text-white font-semibold
-                    hover:bg-blue-700 active:scale-[.99]
-                    transition
-                    "
-                >
-                    Enviar
-                </button>
+                    <button
+                        type="button"
+                        onClick={procurarConta}
+                        className="
+                        mt-2 h-12 rounded-xl
+                        bg-blue-600 text-white font-semibold
+                        hover:bg-blue-700 active:scale-[.99]
+                        transition
+                        "
+                    >
+                        Enviar
+                    </button>
 
                 </form>
             </div>
