@@ -5,29 +5,22 @@ import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { ResetarSenhaDTO, ResetarSenhaSchema } from "@app/shared";
 import { ArrowLeft, Link } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function resetarSenhaPage(){
-    const params = useSearchParams();
+    const { token } = useParams<{ token: string }>();
     const router = useRouter();
 
     const estadoInicial = {
         senha:"",
         senhaConfirmar:"",
-        token:"",
+        token:token,
     }
 
     const [formData,setFormData] = useState<ResetarSenhaDTO>(estadoInicial);
     const [erros,setErros] = useState<Partial<Record<keyof ResetarSenhaDTO, string>>>({});
-
-    useEffect(()=>{
-        const token = params.get('token');
-        if(token){
-            setFormData(prev=>({...prev,token:token}));
-        }
-    },[params]);
 
     async function alterarSenha(){
         const parse = ResetarSenhaSchema.safeParse(formData);

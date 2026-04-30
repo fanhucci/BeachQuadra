@@ -82,7 +82,7 @@ export default class ContaService{
             { expiresIn:'5m'}
         );
 
-        const link = `${process.env.FRONT_URL}/resetar-senha?token=${tokenResetarSenha}`
+        const link = `${process.env.FRONT_URL}/resetar-senha/${tokenResetarSenha}`
         
         await enviarEmail({
             to:dados.email,
