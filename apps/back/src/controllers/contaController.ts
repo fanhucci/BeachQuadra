@@ -34,8 +34,8 @@ export default class ContaController{
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
         //const resposta = await this.service.alterarSenha(parse.data);
-        const resposta = {message:'interditado'}
-        return res.status(200).json(resposta);
+       
+        return res.sendStatus(204);
     }
 
     async resetarSenha(req:Request, res:Response){
@@ -43,9 +43,9 @@ export default class ContaController{
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const resposta = await this.service.resetarSenha(parse.data);
+        await this.service.resetarSenha(parse.data);
 
-        return res.status(200).json(resposta);
+        return res.sendStatus(204);
     }
 
     async esqueciSenha(req:Request, res:Response){
@@ -55,7 +55,7 @@ export default class ContaController{
 
         await this.service.esqueciSenha(parse.data);
         
-        return res.sendStatus(200);
+        return res.sendStatus(204);
     }
 
 }
