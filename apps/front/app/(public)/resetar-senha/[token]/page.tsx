@@ -71,6 +71,7 @@ export default function resetarSenhaPage(){
                         value={formData.senha}
                         erro={erros.senha}
                         onChange={handleChange}
+                        type="password"
                     />
 
                     <CustomInput
@@ -79,6 +80,7 @@ export default function resetarSenhaPage(){
                         value={formData.senhaConfirmar}
                         erro={erros.senhaConfirmar}
                         onChange={handleChange}
+                        type="password"
                     />
 
 
