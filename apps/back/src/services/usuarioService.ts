@@ -3,7 +3,6 @@ import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
-import { teste } from "../infra/email/emailHandler";
 export default class UsuarioService{
 
     private pessoa = new PessoaRepository();
