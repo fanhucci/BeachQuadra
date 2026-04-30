@@ -4,13 +4,15 @@ import CustomInput from "@/components/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { ResetarSenhaDTO, ResetarSenhaSchema } from "@app/shared";
-import { ArrowLeft, Link } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export default function resetarSenhaPage(){
     const { token } = useParams<{ token: string }>();
+    
     const router = useRouter();
 
     const estadoInicial = {

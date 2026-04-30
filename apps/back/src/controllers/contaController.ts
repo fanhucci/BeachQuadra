@@ -40,7 +40,7 @@ export default class ContaController{
 
     async resetarSenha(req:Request, res:Response){
         const parse = ResetarSenhaSchema.safeParse(req.body);
-
+        console.log(parse.data)
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
         const resposta = await this.service.resetarSenha(parse.data);
