@@ -1,5 +1,5 @@
 import { EditarHorarioDTO } from '@app/shared';
-import sql from "../public/db";
+import sql from "../infra/db";
 
 export default class HorarioRepository {
     async editarHorario(horario: EditarHorarioDTO[]) {

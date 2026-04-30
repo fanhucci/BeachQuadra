@@ -15,7 +15,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors({
-  origin: 'https://beach-quadra-front.vercel.app',
+  origin: process.env.FRONT_URL,
   credentials: true
 }));
 app.use(cookieParser());

@@ -1,4 +1,4 @@
-import sql from './public/db';
+import sql from './infra/db';
 
 async function testConnection() {
   try {

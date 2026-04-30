@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import AppError from "../public/appError";
+import AppError from "../infra/appError";
 import jwt from "jsonwebtoken";
 
 type TokenPayload = {

@@ -1,6 +1,6 @@
 
 import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO,EsqueciSenhaDTO } from "@app/shared";
-import sql from "../public/db";
+import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
 
 export default class PessoaRepository {
@@ -124,7 +124,7 @@ export default class PessoaRepository {
 
     async buscarPorEmail(email:string){
         const [resposta] = await sql`
-            select id_pessoa from pessoas where email = ${email}
+            select id_pessoa,nome,email from pessoas where email = ${email}
         `
 
         return resposta ?? null

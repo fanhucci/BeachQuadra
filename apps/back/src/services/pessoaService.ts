@@ -3,7 +3,7 @@
 
 import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
-import sql from "../public/db";
+import sql from "../infra/db";
 
 
 export default class PessoaService{

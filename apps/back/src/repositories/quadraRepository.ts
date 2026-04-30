@@ -1,6 +1,6 @@
 
 import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
-import sql from "../public/db";
+import sql from "../infra/db";
 
 export default class QuadraRepository {
 

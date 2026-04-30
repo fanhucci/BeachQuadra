@@ -1,4 +1,4 @@
-const base_url = 'https://beachquadra-api.onrender.com';
+const base_url = process.env.BACK_URL;
 
 export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 

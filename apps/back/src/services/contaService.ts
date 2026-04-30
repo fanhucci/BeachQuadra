@@ -2,8 +2,11 @@
 import { AlterarSenhaDTO, AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO } from "@app/shared";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
-import sql from "../public/db";
+import sql from "../infra/db";
 import PessoaRepository from "../repositories/pessoaRepository";
+import { enviarEmail } from "../infra/email/emailHandler";
+import redefinirSenhaTemplate from "../infra/email/redefinirSenha";
+import jwt from "jsonwebtoken";
 
 export default class ContaService{
     private conta = new ContaRepository();
@@ -46,7 +49,21 @@ export default class ContaService{
 
         if(!pessoa) return;
 
+        const tokenRedefinirSenha = jwt.sign({
+            id_pessoa:pessoa.id_pessoa,
+            motivo:'redefinir_senha'
+            },
+            process.env.JWT_SECRET!,
+            { expiresIn:'5m'}
+        );
+
+        const link = `${process.env.FRONT_URL}/redefinir-senha?=${tokenRedefinirSenha}`
         
+        await enviarEmail({
+            to:pessoa.email,
+            subject:"Redefinição de senha",
+            html:redefinirSenhaTemplate(link),
+        })
 
     }
 }

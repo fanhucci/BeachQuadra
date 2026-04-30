@@ -1,5 +1,5 @@
 import { LoginDTO } from "@app/shared";
-import AppError from "../public/appError";
+import AppError from "../infra/appError";
 import ContaRepository from "../repositories/contaRepository"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

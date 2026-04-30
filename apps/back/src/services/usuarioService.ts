@@ -1,9 +1,9 @@
 import { PessoaQueryDTO, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
-import sql from "../public/db";
+import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
-import { teste } from "../public/emailHandler";
+import { teste } from "../infra/email/emailHandler";
 export default class UsuarioService{
 
     private pessoa = new PessoaRepository();
@@ -48,11 +48,6 @@ export default class UsuarioService{
             });
             return pessoa;
         })
-    }
-
-    async testeEmail(){
-        await teste();
-        return null;
     }
 
 }

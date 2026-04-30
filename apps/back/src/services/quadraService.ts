@@ -1,5 +1,5 @@
 
-import AppError from "../public/appError";
+import AppError from "../infra/appError";
 import QuadraRepository from "../repositories/quadraRepository";
 import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
 
