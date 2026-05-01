@@ -4,12 +4,12 @@ import {NovaReservaDTO} from '@app/shared';
 
 export default class ReservaRepository{
     
-    async criarReserva(tx:TransactionSql,dados:NovaReservaDTO){
+    async criarReserva(tx:TransactionSql,id_agendamento:number,dados:NovaReservaDTO){
         return await tx`
             insert into reservas
             (id_agendamento, id_quadra, valor)
             select
-            ${dados.id_agendamento},
+            ${id_agendamento},
             q.id_quadra,
             q.valor
             from quadras q

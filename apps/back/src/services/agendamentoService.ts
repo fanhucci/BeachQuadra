@@ -17,10 +17,7 @@ export default class AgendamentoService{
             const id_agendamento = await this.agenda.novoAgendamento(tx,dados,total);
 
             for(const r of reservas){
-                await this.reserva.criarReserva(tx,{
-                    id_agendamento,
-                    ...r
-                });
+                await this.reserva.criarReserva(tx,id_agendamento,r);
             }
 
             return id_agendamento;
