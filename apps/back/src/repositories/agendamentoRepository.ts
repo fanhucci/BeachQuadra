@@ -13,11 +13,11 @@ export default class AgendamentoRepository{
         return Number(total);
     }
 
-    async novoAgendamento(tx:TransactionSql,dados:NovoAgendamentoDTO){
+    async novoAgendamento(tx:TransactionSql,dados:NovoAgendamentoDTO,total:number){
         const [{id_agendamento}] = await tx`
             insert into agendamentos
             (id_pessoa, valor_total, created_by)
-            values(${dados.id_pessoa, dados.valor_total, dados.created_by})
+            values(${dados.id_pessoa, total, dados.created_by})
             returning id_agendamento
         `;
         return id_agendamento;

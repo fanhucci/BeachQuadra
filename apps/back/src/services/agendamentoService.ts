@@ -14,11 +14,7 @@ export default class AgendamentoService{
         return await sql.begin(async(tx)=>{
             const total = await this.agenda.calcularTotal(tx,quadras);
 
-            const id_agendamento = await this.agenda.novoAgendamento(tx,{
-                id_pessoa:dados.id_pessoa,
-                valor_total:total,
-                created_by:dados.created_by
-            });
+            const id_agendamento = await this.agenda.novoAgendamento(tx,dados,total);
 
             for(const r of reservas){
                 await this.reserva.criarReserva(tx,{
@@ -26,7 +22,7 @@ export default class AgendamentoService{
                     ...r
                 });
             }
-            
+
             return id_agendamento;
         });
     }
