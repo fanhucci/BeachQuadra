@@ -5,6 +5,7 @@ import contaRouter from "./routes/contaRoute";
 import horarioRouter from "./routes/horarioRoute";
 import usuarioRouter from "./routes/usuarioRoute";
 import authRouter from "./routes/authRoute";
+import agendamentoRouter from './routes/agendamentoRoute';
 import cookieParser from "cookie-parser";
 
 
@@ -25,6 +26,7 @@ app.use(quadraRouter);
 app.use(contaRouter);
 app.use(horarioRouter);
 app.use(usuarioRouter);
+app.use(agendamentoRouter);
 app.use(authRouter);
 
 app.get("/", (req: Request, res: Response) => {

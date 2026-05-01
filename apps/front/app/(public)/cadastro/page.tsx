@@ -20,6 +20,7 @@ export default function CadastroPage(){
 
                     <CustomInput
                         label="Nome"
+                        placeholder="seu nome"
                         name="nome"
                         value={cadastro.formData.nome}
                         erro={cadastro.erros.nome}
@@ -36,6 +37,7 @@ export default function CadastroPage(){
 
                     <CustomInput
                         label="E-mail"
+                        placeholder="seu@email.com"
                         name="email"
                         value={cadastro.formData.email}
                         erro={cadastro.erros.email}

@@ -153,8 +153,8 @@ export default function UsuarioPage(){
     }
 
     return(
-        <AuthGuard>
-            <div className="flex flex-col flex-1 p-6 gap-4">
+
+        <div className="flex flex-col flex-1 p-6 gap-4">
                 <div className="flex items-center justify-between">
                             
                     <h1 className="text-xl font-semibold text-gray-800">Usuários</h1>
@@ -386,7 +386,7 @@ export default function UsuarioPage(){
                     </div>
                 </CustomModal>
 
-            </div>
-        </AuthGuard>
+        </div>
+     
     )
 }

@@ -1,4 +1,5 @@
 'use client'
+import CustomInput from "@/components/customInput";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
 import { LoginDTO, LoginSchema } from "@app/shared";
@@ -67,82 +68,47 @@ export default function LoginPage(){
     
                 <form className="flex flex-col gap-6">
 
-           
-                <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="text-sm text-gray-600">
-                    E-mail
-                    </label>
-
-                    <input
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="seu@email.com"
-                    className={`
-                        border rounded-xl h-12 px-4 text-sm
-                        focus:outline-none focus:ring-2
-                        transition
-                        ${erros.email
-                        ? "border-red-500 focus:ring-red-400"
-                        : "border-gray-300 focus:ring-blue-500"}
-                    `}
+                    <CustomInput
+                        label="E-mail"
+                        placeholder="seu@email.com"
+                        name="email"
+                        onChange={handleChange}
+                        value={formData.email}
+                        erro={erros.email}
                     />
 
-                    {erros.email && (
-                    <p className="text-xs text-red-500">{erros.email}</p>
-                    )}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                    <label htmlFor="senha" className="text-sm text-gray-600">
-                    Senha
-                    </label>
-
-                    <input
-                    id="senha"
-                    name="senha"
-                    type="password"
-                    value={formData.senha}
-                    onChange={handleChange}
-                    placeholder="••••••••"
-                    className={`
-                        border rounded-xl h-12 px-4 text-sm
-                        focus:outline-none focus:ring-2
-                        transition
-                        ${erros.senha
-                        ? "border-red-500 focus:ring-red-400"
-                        : "border-gray-300 focus:ring-blue-500"}
-                    `}
+                    <CustomInput
+                        label="Senha"
+                        placeholder="senha"
+                        name="senha"
+                        onChange={handleChange}
+                        value={formData.senha}
+                        erro={erros.senha}
+                        type="password"
                     />
 
-                    {erros.senha && (
-                    <p className="text-xs text-red-500">{erros.senha}</p>
-                    )}
-                </div>
+                    <div className="flex justify-between text-sm">
+                        <Link href="/cadastro" className="text-blue-600 hover:underline">
+                        Criar conta
+                        </Link>
 
-                <div className="flex justify-between text-sm">
-                    <Link href="/cadastro" className="text-blue-600 hover:underline">
-                    Criar conta
-                    </Link>
+                        <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
+                        Esqueci a senha
+                        </Link>
+                    </div>
 
-                    <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
-                    Esqueci a senha
-                    </Link>
-                </div>
-
-                <button
-                    type="button"
-                    onClick={fazerLogin}
-                    className="
-                    mt-2 h-12 rounded-xl
-                    bg-blue-600 text-white font-semibold
-                    hover:bg-blue-700 active:scale-[.99]
-                    transition
-                    "
-                >
-                    Entrar
-                </button>
+                    <button
+                        type="button"
+                        onClick={fazerLogin}
+                        className="
+                        mt-2 h-12 rounded-xl
+                        bg-blue-600 text-white font-semibold
+                        hover:bg-blue-700 active:scale-[.99]
+                        transition
+                        "
+                    >
+                        Entrar
+                    </button>
 
                 </form>
             </div>

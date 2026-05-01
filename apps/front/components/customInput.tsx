@@ -2,6 +2,7 @@ import React from "react";
 
 type InputProps = {
   label: string;
+  placeholder?: string;
   name: string;
   value: string | number;
   erro?: string;
@@ -11,6 +12,7 @@ type InputProps = {
 
 export default function CustomInput({
     label,
+    placeholder,
     name,
     value,
     erro,
@@ -25,6 +27,7 @@ export default function CustomInput({
 
             <input
                 id={name}
+                placeholder={placeholder}
                 name={name}
                 type={type}
                 value={value}

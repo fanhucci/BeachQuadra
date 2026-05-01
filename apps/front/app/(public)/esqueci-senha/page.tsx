@@ -50,7 +50,7 @@ export default function EsqueciSenhaPage(){
                         Recuperação de senha
                     </h1>
                     <p className="text-sm text-gray-500">
-                        Informe o e-mail associado a conta abaixo!
+                        Informe o e-mail associado a conta abaixo
                     </p>
                 </div>
 
@@ -61,6 +61,7 @@ export default function EsqueciSenhaPage(){
                     <CustomInput
                         label="E-mail"
                         name="email"
+                        placeholder="seu@email.com"
                         value={email}
                         erro={erros.email}
                         onChange={(e=>{
@@ -74,7 +75,7 @@ export default function EsqueciSenhaPage(){
                         </Link>
 
                         <Link href="/login" className="text-gray-500 hover:underline">
-                        Login
+                        Entrar
                         </Link>
                     </div>
 
