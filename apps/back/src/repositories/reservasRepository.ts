@@ -1,14 +1,19 @@
 import { TransactionSql } from "postgres";
 import sql from "../infra/db";
+import {NovaReservaDTO} from '@app/shared';
 
 export default class ReservaRepository{
     
-    async criarReserva(tx:TransactionSql,dados){
+    async criarReserva(tx:TransactionSql,dados:NovaReservaDTO){
         return await tx`
             insert into reservas
             (id_agendamento, id_quadra, valor)
-            values (${dados.id_agendamento,dados.id_quadra,dados.valor})
-            returning id_reserva
+            select
+            ${dados.id_agendamento},
+            q.id_quadra,
+            q.valor
+            from quadras q
+            where q.id_quadra = ${dados.id_quadra}
         `
     }
 
