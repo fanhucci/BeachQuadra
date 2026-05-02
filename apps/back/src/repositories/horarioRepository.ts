@@ -36,6 +36,8 @@ export default class HorarioRepository {
     async retornarHorariosPermitidos(horarios: Date[]) {
     if (horarios.length === 0) return [];
         console.log(typeof horarios)
+        console.log(Array.isArray(horarios))
+        console.log(JSON.stringify(horarios))
     return await sql`
         with lista_horarios as (
             select unnest(${sql.array(horarios, 1184)}) as horario
