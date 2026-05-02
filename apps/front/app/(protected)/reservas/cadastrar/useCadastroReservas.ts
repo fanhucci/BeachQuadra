@@ -83,7 +83,7 @@ export default function useCadastroReservas(){
 
     function selecionarHorario(valor){
         const {horario,quadras} = valor;
-        
+        console.log("entrou",valor)
         setHorarioSelecionado((prev)=>{
             const indiceExistente = prev.reservas.findIndex(
                 (r)=> r.horario === horario
