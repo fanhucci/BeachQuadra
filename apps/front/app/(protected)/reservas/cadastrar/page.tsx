@@ -16,7 +16,7 @@ export default function CadastroReservasPage(){
                 <tr>
                     <th>Hora</th>
                     {diasDaSemana.map(dia => (
-                        <th key={dia}>{dia}</th>
+                        <th key={dia}>{dia.toLocaleDataString()}</th>
                     ))}
                 </tr>
             </thead>

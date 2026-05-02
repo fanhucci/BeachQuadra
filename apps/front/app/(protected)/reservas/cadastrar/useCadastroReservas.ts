@@ -8,7 +8,7 @@ export default function useCadastroReservas(){
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel`);
-        setDados(organizarSlots(slots));
+        setDados(organizarSlots(slots));    
     }
 
     function organizarSlots(slots:any[]) {
