@@ -9,101 +9,100 @@ export default function CadastroReservasPage(){
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7) ;
 
- return (
-  <div className="w-screen h-screen overflow-hidden flex flex-col bg-white">
+    return (
+        <div className="w-full h-full overflow-hidden flex flex-col bg-white">
 
-    {/* Header */}
-    <div className="p-4 flex justify-between items-center border-b shrink-0">
-      <button
-        onClick={semanaAnterior}
-        disabled={pagina === 0}
-        className="px-4 py-2 rounded-lg border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-30"
-      >
-        ← Semana anterior
-      </button>
+           
+            <div className="p-4 flex justify-between items-center border-b shrink-0">
+                <button
+                    onClick={semanaAnterior}
+                    disabled={pagina === 0}
+                    className="px-4 py-2 rounded-lg border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-30"
+                >
+                    ← Semana anterior
+                </button>
 
-      <h2 className="text-lg font-semibold text-gray-700">
-        Selecionar horário
-      </h2>
+                <h2 className="text-lg font-semibold text-gray-700">
+                    Selecionar horário
+                </h2>
 
-      <button
-        onClick={proximaSemana}
-        disabled={(pagina + 1) * 7 >= diasMeses.length}
-        className="px-4 py-2 rounded-lg border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-30"
-      >
-        Próxima semana →
-      </button>
-    </div>
+                <button
+                    onClick={proximaSemana}
+                    disabled={(pagina + 1) * 7 >= diasMeses.length}
+                    className="px-4 py-2 rounded-lg border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-30"
+                >
+                    Próxima semana →
+                </button>
+            </div>
 
-    {/* Calendário ocupa tudo */}
-    <div className="flex-1 overflow-auto">
-      <table className="w-full border-separate border-spacing-0 text-sm">
-        <thead className="bg-gray-50 sticky top-0 z-10">
-          <tr>
-            <th className="p-3 border-b text-gray-600 font-semibold w-24">
-              Hora
-            </th>
 
-            {diasVisiveis.map((dia, index) => (
-              <th key={dia} className="p-3 border-b text-center">
-                <div className="flex flex-col">
-                  <span className="text-gray-500 text-xs uppercase tracking-wide">
-                    {tableHeaders[index]}
-                  </span>
-                  <span className="font-semibold text-gray-800">
-                    {dia}
-                  </span>
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
+            <div className="flex-1 w-[80%] overflow-auto">
+                <table className="w-full border-separate border-spacing-0 text-sm">
+                    <thead className="bg-gray-50 sticky top-0 z-10">
+                        <tr>
+                            <th className="p-3 border-b text-gray-600 font-semibold w-24">
+                            Hora
+                            </th>
 
-        <tbody>
-          {horarioSemana.map((hora) => (
-            <tr key={hora}>
-              <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700">
-                {hora}
-              </td>
+                            {diasVisiveis.map((dia, index) => (
+                            <th key={dia} className="p-3 border-b text-center">
+                                <div className="flex flex-col">
+                                    <span className="text-gray-500 text-xs uppercase tracking-wide">
+                                        {tableHeaders[index]}
+                                    </span>
+                                    <span className="font-semibold text-gray-800">
+                                        {dia}
+                                    </span>
+                                </div>
+                            </th>
+                            ))}
+                        </tr>
+                    </thead>
 
-              {diasVisiveis.map((dia) => {
-                const slot = dados[dia]?.[hora];
-                const permitido = slot?.permitido;
+                    <tbody>
+                    {horarioSemana.map((hora) => (
+                        <tr key={hora}>
+                            <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700">
+                                {hora}
+                            </td>
 
-                return (
-                  <td key={dia + hora} className="border-b border-l p-2">
-                    <div
-                      className={`
-                        h-12 flex items-center justify-center rounded-md text-xs font-medium
-                        transition-all duration-150
-                        ${
-                          permitido
-                            ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
-                            : "bg-red-100 text-red-700 opacity-70 cursor-not-allowed"
-                        }
-                      `}
-                    >
-                      {slot?.quadras?.length ?? 0} quadras
-                    </div>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+                            {diasVisiveis.map((dia) => {
+                                const slot = dados[dia]?.[hora];
+                                const permitido = slot?.permitido;
 
-    {/* Rodapé fixo */}
-    <div className="p-4 border-t shrink-0">
-      <button
-        onClick={salvarReservas}
-        className="w-full h-11 rounded-lg bg-blue-600 text-white"
-      >
-        Reservar
-      </button>
-    </div>
+                                return (
+                                    <td key={dia + hora} className="border-b border-l p-2">
+                                        <div
+                                            className={`
+                                                h-12 flex items-center justify-center rounded-md text-xs font-medium
+                                                transition-all duration-150
+                                                ${
+                                                permitido
+                                                    ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
+                                                    : "bg-red-100 text-red-700 opacity-70 cursor-not-allowed"
+                                                }
+                                            `}
+                                        >
+                                            {slot?.quadras?.length ?? 0} quadras
+                                        </div>
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
 
-  </div>
-);
+            <div className="p-4 border-t shrink-0">
+                <button
+                    onClick={salvarReservas}
+                    className="w-full h-11 rounded-lg bg-blue-600 text-white"
+                >
+                    Reservar
+                </button>
+            </div>
+
+        </div>
+    );
 }
