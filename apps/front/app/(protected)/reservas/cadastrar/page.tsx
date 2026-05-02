@@ -9,7 +9,7 @@ export default function CadastroReservasPage(){
     const [pagina, setPagina] = useState<number>(0);
     const [diasVisiveis,setDiasVisiveis] = useState([]);
 
-    if(!dados) return <>carregando...</>
+    if(diasVisiveis.length === 0) return <>carregando...</>
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
 
     function proximaSemana(){
