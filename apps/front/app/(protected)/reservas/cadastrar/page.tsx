@@ -13,7 +13,7 @@ export default function CadastroReservasPage(){
 
             
             <div className="p-4 flex justify-between items-center border-b shrink-0">
-                <p>{JSON.stringify(dados)}</p>
+                
                 <button
                     onClick={semanaAnterior}
                     disabled={pagina === 0}
@@ -33,7 +33,7 @@ export default function CadastroReservasPage(){
 
            
             <div className="flex-1 w-full p-2 min-h-0"> 
-                
+                <p>{JSON.stringify(dados)}</p>
                 
                 <table className="w-full h-full border-separate border-spacing-0 text-xs table-auto">
                     <thead>
