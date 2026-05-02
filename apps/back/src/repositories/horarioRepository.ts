@@ -37,7 +37,7 @@ export default class HorarioRepository {
         console.log(JSON.stringify(horarios));
         return await sql`
             with lista_horarios as (
-                select unnest(${horarios}) as horario
+                select unnest(${Array(horarios)}::timestamptz[]) as horario
             )
             select 
                 h.horario, 
