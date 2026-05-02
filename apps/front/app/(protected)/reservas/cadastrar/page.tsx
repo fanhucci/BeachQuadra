@@ -11,24 +11,24 @@ export default function CadastroReservasPage(){
 
     const diasVisiveis = diasDaSemana.slice(pagina * 7, pagina * 7 + 7);
 
-    // function proximaSemana(){
-    //     if ((pagina + 1) * 7 < diasDaSemana.length) {
-    //         setPagina(p => p + 1);
-    //     }
-    // }
+    function proximaSemana(){
+        if ((pagina + 1) * 7 < diasDaSemana.length) {
+            setPagina(p => p + 1);
+        }
+    }
 
-    // function semanaAnterior(){
-    //     if (pagina > 0) {
-    //         setPagina(p => p - 1);
-    //     }
-    // }
+    function semanaAnterior(){
+        if (pagina > 0) {
+            setPagina(p => p - 1);
+        }
+    }
 
     return(
         <div className="p-6">
             {/* Navegação */}
             <div className="flex justify-between items-center mb-4">
                 <button
-                    // onClick={semanaAnterior}
+                    onClick={semanaAnterior}
                     disabled={pagina === 0}
                     className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
                 >
@@ -36,7 +36,7 @@ export default function CadastroReservasPage(){
                 </button>
 
                 <button
-                    // onClick={proximaSemana}
+                    onClick={proximaSemana}
                     disabled={(pagina + 1) * 7 >= diasDaSemana.length}
                     className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
                 >
@@ -57,7 +57,7 @@ export default function CadastroReservasPage(){
                         </tr>
                     </thead>
 
-                    <tbody>
+                    {/* <tbody>
                         {horariosDoDia.map(hora => (
                             <tr key={hora}>
                                 <td className="p-2 border font-medium text-center bg-gray-50">
@@ -84,7 +84,7 @@ export default function CadastroReservasPage(){
                                 })}
                             </tr>
                         ))}
-                    </tbody>
+                    </tbody> */}
                 </table>
             </div>
         </div>
