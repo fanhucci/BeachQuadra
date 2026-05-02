@@ -81,7 +81,7 @@ export default function useCadastroReservas(){
 
         setHorarioSelecionado((prev)=>({
             ...prev,
-            reservas:
+            //reservas:
         }))
     }
 
