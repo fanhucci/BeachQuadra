@@ -18,7 +18,7 @@ export default function useCadastroReservas(){
 
         for (const s of slots) {
             const [horario,] = s.horario.split('Z'); 
-            const data = new Date(horario);
+            const data = new Date(s.horario);
 
             const dia = data.toLocaleDateString('pt-BR', { 
                 day: '2-digit', 
@@ -28,7 +28,8 @@ export default function useCadastroReservas(){
             const hora = data.toLocaleTimeString('pt-BR', { 
                 hour: '2-digit', 
                 minute: '2-digit',
-                hour12: false  
+                hour12: false ,
+                timeZone: 'UTC'
             });
             diasSet.add(dia);
             horasSet.add(hora);
