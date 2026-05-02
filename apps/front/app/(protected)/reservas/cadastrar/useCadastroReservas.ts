@@ -74,14 +74,15 @@ export default function useCadastroReservas(){
 
     const [horarioSelecionado,setHorarioSelecionado] = useState({});
 
-    function selecionarHorario(e:React.ChangeEvent<HTMLInputElement>){
-        const {name,value} = e.target;
+    function selecionarHorario(valor){
+        const {horario,quadras} = valor;
+        console.log(valor);
         //pegar o array com reservas atuais e caso nao tenha um indice igual a este valor(id_quadra,horario)
         //adicionar ao array, caso contrario remover o indice do array
 
         setHorarioSelecionado((prev)=>({
             ...prev,
-            //reservas:
+            //  reservas:
         }))
     }
 
@@ -99,6 +100,7 @@ export default function useCadastroReservas(){
         horarioSelecionado,
         semanaAnterior,
         proximaSemana,
+        selecionarHorario,
         salvarReservas
     };
 }

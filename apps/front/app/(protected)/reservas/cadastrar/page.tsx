@@ -3,7 +3,7 @@
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
-    const {dados, diasMeses, horarioSemana, pagina, semanaAnterior, proximaSemana, salvarReservas} = useCadastroReservas();
+    const {dados, diasMeses, horarioSemana, pagina, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas} = useCadastroReservas();
     
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
@@ -66,7 +66,7 @@ export default function CadastroReservasPage(){
                                     return (
                                         <td key={dia + hora} className="border-b border-l p-0.5">
                                             <button
-                                                onClick={()=>salvarReservas()}
+                                                onClick={()=>selecionarHorario(slot)}
                                                 disabled={!permitido}
                                                 className={`
                                                     h-full w-full flex items-center justify-center rounded text-[10px]
