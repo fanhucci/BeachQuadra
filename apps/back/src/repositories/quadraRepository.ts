@@ -60,28 +60,31 @@ export default class QuadraRepository {
 
     async listarQuadrasDisponiveis(horarios:Date[], permitido:boolean[]){
         return await sql`
-            with lista_horarios as(
-                select 
-                    unnest(${sql.array(horarios)}) as horario,
-                    unnest(${permitido}::boolean[]) as permitido
+            with lista_horarios as (
+                select *from unnest(
+                    ${sql.array(horarios)},
+                    ${sql.array(permitido)}
+                ) as t(horario, permitido)
             )
+
             select 
-                h.horario,
-                h.permitido,
-                (   
+            h.horario,
+            h.permitido,
+            case
+                when not h.permitido then '[]'::json
+                else (
                     select coalesce(json_agg(q.id_quadra),'[]')
                     from quadras q
-                    where h.permitido = true
-                    and not exists(
+                    where not exists (
                         select 1
                         from reservas r
                         where r.id_quadra = q.id_quadra
                         and r.horario = h.horario
                         and r.status = 'ativo'
                     )
-                )as quadras
+                )
+            end as quadras
             from lista_horarios h
-        
         `;
     }
 
