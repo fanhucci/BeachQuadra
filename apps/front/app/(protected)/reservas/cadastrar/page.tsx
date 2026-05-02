@@ -3,7 +3,7 @@
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
-    const {dados, diasMeses, horarioSemana, pagina, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas} = useCadastroReservas();
+    const {dados, diasMeses, horarioSemana, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas} = useCadastroReservas();
     
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
@@ -60,7 +60,9 @@ export default function CadastroReservasPage(){
                                 {diasVisiveis.map((dia) => {
                                     const slot = dados[dia]?.[hora];
                                     const permitido = slot?.permitido;
-
+                                    const isSelected = horarioSelecionado.reservas.some(
+                                        (r) => r.horario === slot.horario
+                                    );
                                     return (
                                         <td key={dia + hora} className="border-b border-l p-0.5">
                                             <button
@@ -76,7 +78,7 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {hora}
+                                                {isSelected?'Remover': hora}
                                             </button>
                                         </td>
                                     );
