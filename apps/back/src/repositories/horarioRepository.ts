@@ -37,25 +37,24 @@ export default class HorarioRepository {
         if (horarios.length === 0) return [];
 
         return await sql`
-            select
-                h.horario,
-                (
-                    not exists(
-                        select 1 from dias_bloqueados db 
-                        where h.horario >= db.inicio_bloqueio 
-                        and h.horario < db.fim_bloqueio
-                    )
-                    and exists(
-                        select 1 from horario_funcionamento hf
-                        where hf.ativo = true
-                        and hf.dia_semana = extract(dow from h.horario)
-                        and h.horario::time >= hf.horario_abertura::time
-                        and (h.horario::time + interval '1 hour') <= hf.horario_fechamento::time
-                    )
-                ) as permitido
-            from (
+            with lista_horarios as (
+            select * from (
                 values ${horarios.map(h => sql`(${h})`)}
-            ) as h(horario)
+            ) as t(horario)
+        )
+        select
+            h.horario,
+            (
+                not exists(select 1 from dias_bloqueados db 
+                           where h.horario >= db.inicio_bloqueio and h.horario < db.fim_bloqueio)
+                and
+                exists(select 1 from horario_funcionamento hf
+                       where hf.ativo = true
+                         and hf.dia_semana = extract(dow from h.horario)
+                         and h.horario::time >= hf.horario_abertura::time
+                         and (h.horario::time + interval '1 hour') <= hf.horario_fechamento::time)
+            ) as permitido
+        from lista_horarios h
         `;
     }
 }
