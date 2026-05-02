@@ -10,7 +10,7 @@ export default class ReservaRepository{
                 q.id_quadra,
                 lista.horario,
                 q.valor
-            from unnest(${horarios}::timestamptz[]) with ordinality as lista(horario, ord)
+            from unnest(${horarios}) with ordinality as lista(horario, ord)
             join unnest(${idsQuadras}::int[]) with ordinality as ids(id, ord) on lista.ord = ids.ord
             join quadras q on q.id_quadra = ids.id
     `;
