@@ -2,6 +2,7 @@
 import CustomInput from "@/components/customInput";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
+import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { LoginDTO, LoginSchema } from "@app/shared";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -14,7 +15,7 @@ export default function LoginPage(){
     const estadoInicial = { email:"", senha:"" };
 
     const [formData,setFormData] = useState(estadoInicial);
-    const [erros,setErros] = useState<Partial<LoginDTO>>({});
+    const [erros,setErros] = useState<Partial<Record<keyof LoginDTO, string>>>({});
     const {refreshUser} = useUser();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -31,7 +32,7 @@ export default function LoginPage(){
         const parse = LoginSchema.safeParse(formData);
 
         if(!parse.success){
-            setErros(parse.error.flatten().fieldErrors);
+            setErros(formatarErrosZod(parse.error));
             return;
         }
 

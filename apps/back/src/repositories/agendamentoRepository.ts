@@ -23,8 +23,8 @@ export default class AgendamentoRepository{
         return id_agendamento;
     }
 
-    async alterarStatusAgendamento(id_agendamento:number,status:string){
-        return await sql`
+    async alterarStatusAgendamento(tx:TransactionSql,id_agendamento:number,status:string){
+        return await tx`
             update agendamentos
             set status = ${status}
             where id_agendamento = ${id_agendamento}

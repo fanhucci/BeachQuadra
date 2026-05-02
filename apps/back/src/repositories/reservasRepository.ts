@@ -1,5 +1,4 @@
 import { TransactionSql } from "postgres";
-import sql from "../infra/db";
 import {NovaReservaDTO} from '@app/shared';
 
 export default class ReservaRepository{
@@ -17,11 +16,11 @@ export default class ReservaRepository{
         `
     }
 
-    async alterarStatusReserva(id_reserva:number,status:string){
-        return await sql`
+    async cancelarReservas(tx:TransactionSql,id_agendamento:number){
+        return await tx`
             update reservas
-            set status = ${status}
-            where id_reserva = ${id_reserva}
+            set status = 'cancelado'
+            where id_agendamento = ${id_agendamento}
         `;
     }
 }
