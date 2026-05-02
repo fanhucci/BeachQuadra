@@ -2,12 +2,25 @@
 
 import { apiRequest } from "@/utils/apiHandler"
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function useCadastroReservas(){
     const [dados, setDados] = useState<any>([]);
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
     const [pagina, setPagina] = useState<number>(0);
+
+    async function salvarReservas(){
+        try {
+            await apiRequest('/agendamento',{
+                method:"POST",
+                body:JSON.stringify({})
+            })
+            toast.success('Horarios reservados com sucesso');
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : "Erro inesperado");
+        }
+    }
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel`);
@@ -70,6 +83,7 @@ export default function useCadastroReservas(){
         diasMeses,
         horarioSemana,
         semanaAnterior,
-        proximaSemana
+        proximaSemana,
+        salvarReservas
     };
 }
