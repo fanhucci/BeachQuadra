@@ -4,11 +4,11 @@ import { apiRequest } from "@/utils/apiHandler"
 import { useEffect, useState } from "react";
 
 export default function useCadastroReservas(){
-    const [dados, setDados] = useState<any>(null);
-    const [pagina, setPagina] = useState(0);
-    const [diasDaSemana,setDiasDaSemana] = useState();
-    const [horariosDoDia,setHorariosDoDia] = useState();
-    const [diasVisiveis,setDiasVisiveis] = useState();
+    const [dados, setDados] = useState<any>([]);
+    
+    const [diasMeses,setDiasMeses] = useState<string[]>([]);
+    const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
+    
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel`);
@@ -42,38 +42,18 @@ export default function useCadastroReservas(){
             mapa[dia][hora] = s;
         }
         setDados(mapa);
-        setDiasDaSemana(Array.from(diasSet));
-        setHorariosDoDia(Array.from(horasSet));
+        setDiasMeses(Array.from(diasSet));
+        setHorarioSemana(Array.from(horasSet));
     }
-
-    
-
-    function proximaSemana(){
-        if ((pagina + 1) * 7 < dados.diasDaSemana.length) {
-            setPagina(p => p + 1);
-        }
-    }
-
-    function semanaAnterior(){
-        if (pagina > 0) {
-            setPagina(p => p - 1);
-        }
-    }
-
 
     useEffect(()=>{
         carregarDiasLivres();
     },[]);
 
-    useEffect(()=>{
-        setDiasVisiveis(diasDaSemana.slice(pagina * 7, pagina * 7 + 7));
-    },[pagina]);
-
+   
     return {
-        pagina,
-        diasVisiveis,
-        diasDaSemana,
-        proximaSemana,
-        semanaAnterior
+        dados,
+        diasMeses,
+        horarioSemana,
     };
 }

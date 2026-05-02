@@ -1,26 +1,46 @@
 'use client'
 
+import { useEffect, useState } from "react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
-    const hook = useCadastroReservas();
-    if(!hook) return<div>Carregando...</div>
+
+    const {dados,diasMeses,horarioSemana} = useCadastroReservas();
+    const [pagina, setPagina] = useState<number>(0);
+    const [diasVisiveis,setDiasVisiveis] = useState([]);
+
+    const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+
+    function proximaSemana(){
+        if ((pagina + 1) * 7 < dados.diasMeses.length) {
+            setPagina(p => p + 1);
+        }
+    }
+    
+    function semanaAnterior(){
+        if (pagina > 0) {
+            setPagina(p => p - 1);
+        }
+    }
+
+    useEffect(()=>{
+        setDiasVisiveis(diasMeses.slice(pagina * 7, pagina * 7 + 7));
+    },[pagina]);
     
     return(
         <div className="p-6">
-            {/* Navegação */}
             <div className="flex justify-between items-center mb-4">
                 <button
-                    onClick={hook.semanaAnterior}
-                    disabled={hook.pagina === 0}
+                    onClick={semanaAnterior}
+                    disabled={pagina===0}
                     className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
                 >
                     ← Semana anterior
                 </button>
 
                 <button
-                    onClick={hook.proximaSemana}
-                    disabled={(hook.pagina + 1) * 7 >= hook.diasDaSemana.length}
+                    onClick={proximaSemana}
+                    disabled={pagina>0}
                     className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
                 >
                     Próxima semana →
@@ -32,23 +52,26 @@ export default function CadastroReservasPage(){
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="p-2 border">Hora</th>
-                            {hook.diasVisiveis.map(dia => (
-                                <th key={dia} className="p-2 border text-center">
-                                    {dia}
+                            {diasVisiveis.map((dia,index) => (
+                                <th key={index} className="p-2 border text-center">
+                                    <div className="flex-col">
+                                        <span>{tableHeaders[index]}</span>
+                                        <span>{dia}</span>
+                                    </div>
                                 </th>
                             ))}
                         </tr>
                     </thead>
 
                     <tbody>
-                        {horariosDoDia.map(hora => (
+                        {horarioSemana.map(hora => (
                             <tr key={hora}>
                                 <td className="p-2 border font-medium text-center bg-gray-50">
                                     {hora}
                                 </td>
 
                                 {diasVisiveis.map(dia => {
-                                    const slot = mapa[dia]?.[hora];
+                                    const slot = dados[dia]?.[hora];
                                     const permitido = slot?.permitido;
 
                                     return (
