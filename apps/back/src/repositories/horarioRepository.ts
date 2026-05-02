@@ -34,10 +34,10 @@ export default class HorarioRepository {
     }
 
     async retornarHorariosPermitidos( horarios:Date[]){
-        console.log(JSON.stringify(horarios));
+        const array = horarios.map(a=>a);
         return await sql`
             with lista_horarios as (
-                select unnest(ARRAY[${horarios}]) as horario
+                select unnest(${array}::timestamptz[]) as horario
             )
             select 
                 h.horario, 
