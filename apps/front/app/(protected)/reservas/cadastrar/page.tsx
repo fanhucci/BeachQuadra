@@ -36,22 +36,26 @@ export default function CadastroReservasPage(){
             </div>
 
 
-            <div className="flex-1 w-full flex justify-center"> {/* Container pai centralizando a tabela */}
-    <div className="max-w-full overflow-x-auto border rounded-lg"> {/* Limita a largura ao espaço disponível e permite scroll horizontal se necessário */}
-        <table className="table-auto border-separate border-spacing-0 text-sm"> {/* table-auto faz as colunas seguirem o conteúdo */}
+<div className="flex-1 min-h-0 w-full flex flex-col items-center p-4"> 
+    
+    {/* Wrapper do Scroll: max-w-full impede que ele estoure o componente pai */}
+    <div className="w-full max-w-full overflow-auto border rounded-lg shadow-sm bg-gray-50">
+        
+        <table className="table-auto min-w-full border-separate border-spacing-0 text-sm bg-white">
             <thead className="bg-gray-50 sticky top-0 z-10">
                 <tr>
-                    <th className="p-3 border-b text-gray-600 font-semibold whitespace-nowrap">
+                    {/* Coluna de Hora fixada ou com largura mínima controlada */}
+                    <th className="p-3 border-b text-gray-600 font-semibold whitespace-nowrap sticky left-0 bg-gray-50 z-20">
                         Hora
                     </th>
 
                     {diasVisiveis.map((dia, index) => (
                         <th key={dia} className="p-3 border-b text-center whitespace-nowrap">
-                            <div className="flex flex-col min-w-[100px]"> {/* min-w garante que não fique espremido demais, mas cresce se precisar */}
-                                <span className="text-gray-500 text-xs uppercase tracking-wide">
+                            <div className="flex flex-col px-2">
+                                <span className="text-gray-500 text-[10px] uppercase tracking-tighter">
                                     {tableHeaders[index]}
                                 </span>
-                                <span className="font-semibold text-gray-800">
+                                <span className="font-bold text-gray-800">
                                     {dia}
                                 </span>
                             </div>
@@ -62,8 +66,8 @@ export default function CadastroReservasPage(){
 
             <tbody>
                 {horarioSemana.map((hora) => (
-                    <tr key={hora}>
-                        <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap">
+                    <tr key={hora} className="hover:bg-gray-50 transition-colors">
+                        <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap sticky left-0 z-10">
                             {hora}
                         </td>
 
@@ -72,15 +76,15 @@ export default function CadastroReservasPage(){
                             const permitido = slot?.permitido;
 
                             return (
-                                <td key={dia + hora} className="border-b border-l p-2">
+                                <td key={dia + hora} className="border-b border-l p-2 min-w-[120px]">
                                     <div
                                         className={`
-                                            h-12 px-4 flex items-center justify-center rounded-md text-xs font-medium
-                                            transition-all duration-150 whitespace-nowrap
+                                            h-12 w-full flex items-center justify-center rounded-md text-xs font-medium
+                                            transition-all duration-150
                                             ${
                                                 permitido
-                                                    ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
-                                                    : "bg-red-100 text-red-700 opacity-70 cursor-not-allowed"
+                                                    ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm active:scale-95"
+                                                    : "bg-red-50 text-red-400 opacity-60 cursor-not-allowed"
                                             }
                                         `}
                                     >
