@@ -35,55 +35,29 @@ export default class HorarioRepository {
 
     async retornarHorariosPermitidos(horarios: Date[]) {
         return await sql`
-            select 
-            h as horario,
-            (
-                not exists(
-                select 1 
-                from dias_bloqueados db
-                where h >= db.inicio_bloqueio 
-                    and h < db.fim_bloqueio
-                )
-                and 
-                exists(
-                select 1 
-                from horario_funcionamento hf
-                where
-                    hf.ativo = true 
-                    and hf.dia_semana = extract(dow from h)
-                    and h::time >= hf.horario_abertura
-                    and (h::time + interval '1 hour') <= hf.horario_fechamento
-                )
-            ) as permitido
-            from unnest(${horarios}::timestamptz[]) as h
+            with lista_horarios as (
+                select unnest(${sql.array(horarios)}::timestamptz[]) as horario
+            )
+            select
+                h.horario,
+                (
+                    not exists(
+                        select 1 from dias_bloqueados db
+                        where h.horario >= db.inicio_bloqueio 
+                        and h.horario < db.fim_bloqueio
+                    )
+                    and exists(
+                        select 1 from horario_funcionamento hf
+                        where hf.ativo = true
+                        and hf.dia_semana = extract(dow from h.horario)
+                        and h.horario::time >= hf.horario_abertura::time
+                        and h.horario::time + interval '1 hour' <= hf.horario_fechamento::time
+                    )
+                ) as permitido
+            from lista_horarios h
+            order by h.horario;
         `;
     }
-
-    // async retornarHorariosPermitidos(horarios: Date[]) {
-    //     return await sql`
-    //         with lista_horarios as (
-    //             select unnest(${sql.array(horarios)}::timestamptz[]) as horario
-    //         )
-    //         select
-    //             h.horario,
-    //             (
-    //                 not exists(
-    //                     select 1 from dias_bloqueados db
-    //                     where h.horario >= db.inicio_bloqueio 
-    //                     and h.horario < db.fim_bloqueio
-    //                 )
-    //                 and exists(
-    //                     select 1 from horario_funcionamento hf
-    //                     where hf.ativo = true
-    //                     and hf.dia_semana = extract(dow from h.horario)
-    //                     and h.horario::time >= hf.horario_abertura::time
-    //                     and h.horario::time + interval '1 hour' <= hf.horario_fechamento::time
-    //                 )
-    //             ) as permitido
-    //         from lista_horarios h
-    //         order by h.horario;
-    //     `;
-    // }
 }
 
 //select unnest(${sql.array(horarios, 1184)}) as horario
