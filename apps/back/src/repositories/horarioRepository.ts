@@ -36,7 +36,7 @@ export default class HorarioRepository {
     async retornarHorariosPermitidos(horarios: Date[]) {
         return await sql`
             with lista_horarios as (
-                select unnest(${horarios}::timestamptz[]) as horario
+                select unnest(${sql.array(horarios)}::timestamptz[]) as horario
             )
             select
                 h.horario,
