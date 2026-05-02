@@ -9,14 +9,21 @@ export default function CadastroReservasPage(){
     if (!dados) return <div>Carregando...</div>;
 
     const { mapa, diasDaSemana, horariosDoDia } = dados;
-
+    const semanaHeader = [
+        'Segunda','Terça','Quarta','Quinta','Sexta','Sabado','Domingo'
+    ]
     return(
         <table>
             <thead>
                 <tr>
                     <th>Hora</th>
                     {diasDaSemana.map(dia => (
-                        <th key={dia}>{dia}</th>
+                        <th key={dia}>
+                            <div>
+                                <span>{semanaHeader[dia]}</span>
+                                <span>{dia}</span>
+                            </div>
+                        </th>
                     ))}
                 </tr>
             </thead>
