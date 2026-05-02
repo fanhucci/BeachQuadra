@@ -35,6 +35,7 @@ export default class HorarioRepository {
 
     async retornarHorariosPermitidos(horarios: Date[]) {
     if (horarios.length === 0) return [];
+        console.log(horarios.length);
         console.log(typeof horarios)
         console.log(Array.isArray(horarios))
         console.log(typeof horarios[0]);
