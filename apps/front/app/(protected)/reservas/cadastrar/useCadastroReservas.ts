@@ -1,6 +1,7 @@
 'use client'
 
 import { apiRequest } from "@/utils/apiHandler"
+import { NovaReservaDTO } from "@app/shared";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -9,7 +10,7 @@ export default function useCadastroReservas(){
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
     const [pagina, setPagina] = useState<number>(0);
-    const [horarioSelecionado,setHorarioSelecionado] = useState<any[]>([]);
+    const [horarioSelecionado,setHorarioSelecionado] = useState<NovaReservaDTO[]>([]);
 
     async function salvarReservas(){
         console.log(JSON.stringify(horarioSelecionado))
@@ -80,21 +81,21 @@ export default function useCadastroReservas(){
         const {horario,quadras} = valor;
         
         setHorarioSelecionado((prev)=>{
-            const indiceExistente = prev.horario.findIndex(
+            const indiceExistente = prev.findIndex(
                 (r)=> r.horario === horario
             ) 
             
             if(indiceExistente!==-1){
                 return{
                     ...prev,
-                    reservas: prev.reservas.filter((_, i) => i !== indiceExistente)
+                    reservas: prev.filter((_, i) => i !== indiceExistente)
                 }
             }
 
             return {
                 ...prev,
                 reservas:[
-                    ...prev.reservas,
+                    ...prev,
                     {
                         id_quadra:quadras[0],
                         horario:horario
