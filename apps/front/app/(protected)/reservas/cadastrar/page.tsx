@@ -10,7 +10,7 @@ export default function CadastroReservasPage(){
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7) ;
 
     return (
-        <div className="p-8">
+        <div className="justify-center items-center p-8">
             <div className="flex justify-between items-center mb-6">
                 <button
                     onClick={semanaAnterior}
