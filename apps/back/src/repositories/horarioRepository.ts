@@ -34,6 +34,7 @@ export default class HorarioRepository {
     }
 
     async retornarHorariosPermitidos( horarios:Date[]){
+        console.log(JSON.stringify(horarios));
         return await sql`
             with lista_horarios as (
                 select unnest(${horarios}::timestamptz[]) as horario
