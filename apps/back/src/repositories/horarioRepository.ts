@@ -54,8 +54,8 @@ export default class HorarioRepository {
                         where
                             hf.ativo = true 
                             and hf.dia_semana = extract(dow from h.horario)
-                            and h.horario::time >= hf.horario_abertura
-                            and (h.horario::time + interval '1 hour') <= hf.horario_fechamento
+                            and h.horario::time >= hf.horario_abertura::time
+                            and (h.horario::time + interval '1 hour') <= hf.horario_fechamento::time
                     )
                 )as permitido
             from lista_horarios h 
