@@ -34,7 +34,7 @@ export default function CadastroReservasPage(){
             </div>
 
            
-            <div className="overflow-auto border rounded-xl shadow-sm">
+            <div className="flex flex-1 overflow-auto border rounded-xl shadow-sm">
                 <table className="w-full border-separate border-spacing-0 text-sm">
                     <thead className="bg-gray-50 sticky top-0 z-10">
                         <tr>
@@ -81,7 +81,7 @@ export default function CadastroReservasPage(){
                                             transition-all duration-150
                                             ${
                                             permitido
-                                                ? "bg-green-600 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
+                                                ? "bg-green-500 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
                                                 : "bg-red-400 text-red-700 opacity-70 cursor-not-allowed"
                                             }
                                         `}
