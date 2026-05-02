@@ -62,7 +62,7 @@ export default class QuadraRepository {
         return await sql`
             with lista_horarios as(
                 select 
-                    unnset(${horarios}::timestamp[]) as horario,
+                    unnset(${horarios}::timestamptz[]) as horario,
                     unnest(${permitido}::boolean[]) as permitido
             )
             select 
