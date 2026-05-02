@@ -37,6 +37,7 @@ export default class HorarioRepository {
     if (horarios.length === 0) return [];
         console.log(typeof horarios)
         console.log(Array.isArray(horarios))
+        console.log(horarios[0]);
         console.log(JSON.stringify(horarios))
     return await sql`
         with lista_horarios as (
