@@ -19,23 +19,28 @@ export default function useCadastroReservas(){
         for (const s of slots) {
             const [horario,] = s.horario.split('Z'); 
             const data = new Date(horario);
-            console.log(new Date(s.horario));
-            console.log(new Date(s.horario).toLocaleString())
 
-            const dia = data.toLocaleDateString();
-            const hora = data.toLocaleTimeString();
-
+            const dia = data.toLocaleDateString('pt-BR', { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: 'numeric' 
+            });
+            const hora = data.toLocaleTimeString('pt-BR', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false  
+            });
             diasSet.add(dia);
             horasSet.add(hora);
 
             if (!mapa[dia]) mapa[dia] = {};
             mapa[dia][hora] = s;
         }
-        console.log(JSON.stringify(mapa))
+
         return {
             mapa,
-            diasDaSemana: Array.from(diasSet).sort(),
-            horariosDoDia: Array.from(horasSet).sort()
+            diasDaSemana: Array.from(diasSet),
+            horariosDoDia: Array.from(horasSet)
         };
     }
 
