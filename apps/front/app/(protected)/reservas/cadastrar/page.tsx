@@ -10,10 +10,10 @@ export default function CadastroReservasPage(){
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7) ;
 
  return (
-  <div className="h-screen flex flex-col bg-white">
+  <div className="w-screen h-screen overflow-hidden flex flex-col bg-white">
 
     {/* Header */}
-    <div className="p-6 flex justify-between items-center border-b">
+    <div className="p-4 flex justify-between items-center border-b shrink-0">
       <button
         onClick={semanaAnterior}
         disabled={pagina === 0}
@@ -95,10 +95,10 @@ export default function CadastroReservasPage(){
     </div>
 
     {/* Rodapé fixo */}
-    <div className="p-4 border-t bg-white">
+    <div className="p-4 border-t shrink-0">
       <button
         onClick={salvarReservas}
-        className="w-full h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+        className="w-full h-11 rounded-lg bg-blue-600 text-white"
       >
         Reservar
       </button>
