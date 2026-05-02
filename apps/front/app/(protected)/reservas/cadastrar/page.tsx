@@ -76,7 +76,7 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {slot?.quadras?.length ?? 0} quadras
+                                                {hora}
                                             </button>
                                         </td>
                                     );
