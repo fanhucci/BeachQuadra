@@ -20,7 +20,7 @@ export default function useCadastroReservas(){
             const [horario,] = s.horario.split('Z'); 
             const data = new Date(horario);
 
-            const dia = data.toLocaleString();
+            const dia = data.toLocaleDateString();
             const hora = data.toLocaleTimeString();
 
             diasSet.add(dia);
@@ -29,7 +29,7 @@ export default function useCadastroReservas(){
             if (!mapa[dia]) mapa[dia] = {};
             mapa[dia][hora] = s;
         }
-
+        console.log(JSON.stringify(mapa))
         return {
             mapa,
             diasDaSemana: Array.from(diasSet).sort(),
