@@ -19,6 +19,8 @@ export default function useCadastroReservas(){
         for (const s of slots) {
             const [horario,] = s.horario.split('Z'); 
             const data = new Date(horario);
+            console.log(new Date(s.horario));
+            console.log(new Date(s.horario).toLocaleString())
 
             const dia = data.toLocaleDateString();
             const hora = data.toLocaleTimeString();
