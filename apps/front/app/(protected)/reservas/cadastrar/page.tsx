@@ -36,9 +36,9 @@ export default function CadastroReservasPage(){
                 <table className="w-full h-full border-separate border-spacing-0 text-xs table-auto">
                     <thead>
                         <tr className="bg-gray-50">
-                            <th className="p-1 border-b text-gray-600 font-semibold whitespace-nowrap w-16">
+                            {/* <th className="p-1 border-b text-gray-600 font-semibold whitespace-nowrap w-16">
                                 Hora
-                            </th>
+                            </th> */}
                             {diasVisiveis.map((dia, index) => (
                                 <th key={dia} className="p-1 border-b text-center whitespace-nowrap">
                                     <div className="flex flex-col">
@@ -53,32 +53,39 @@ export default function CadastroReservasPage(){
                     <tbody>
                         {horarioSemana.map((hora) => (
                             <tr key={hora}>
-                                <td className="border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap border-r">
+                                {/* <td className="border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap border-r">
                                     {hora}
-                                </td>
+                                </td> */}
 
                                 {diasVisiveis.map((dia) => {
                                     const slot = dados[dia]?.[hora];
                                     const permitido = slot?.permitido;
+                                    
+                                    
                                     const isSelected = horarioSelecionado.reservas.some(
-                                        (r) => r.horario === slot.horario
+                                        (r) => r.horario === slot?.horario
                                     );
+
                                     return (
                                         <td key={dia + hora} className="border-b border-l p-0.5">
                                             <button
-                                                onClick={()=>selecionarHorario(slot)}
+                                                type="button"
+                                                onClick={() => selecionarHorario(slot)}
                                                 disabled={!permitido}
                                                 className={`
                                                     h-full w-full flex items-center justify-center rounded text-[10px]
-                                                    transition-all duration-150
+                                                    transition-all duration-150 font-medium
                                                     ${
-                                                        permitido
-                                                            ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer"
-                                                            : "bg-red-50 text-red-300 opacity-50"
+                                                        isSelected
+                                                            ? "bg-blue-600 text-white shadow-inner" // Estilo SELECIONADO (Azul)
+                                                            : permitido
+                                                                ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer" 
+                                                                : "bg-red-50 text-red-300 opacity-50 cursor-not-allowed" 
                                                     }
                                                 `}
                                             >
-                                                {isSelected?'Remover': hora}
+        
+                                                {isSelected ? 'Remover' : `${hora}`}
                                             </button>
                                         </td>
                                     );
