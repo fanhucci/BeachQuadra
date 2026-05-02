@@ -33,33 +33,29 @@ export default class HorarioRepository {
         return await sql`select * from horario_funcionamento order by id_horario`;
     }
 
-    async retornarHorariosPermitidos( horarios:Date[]){
+    async retornarHorariosPermitidos(horarios: Date[]) {
+        if (horarios.length === 0) return [];
+
         return await sql`
-            with lista_horarios as (
-                select unnest(${sql.array(horarios, 1184)}) as horario
-        )
-            )
-            select 
-                h.horario, 
+            select
+                h.horario,
                 (
                     not exists(
-                        select 1 
-                        from dias_bloqueados db
+                        select 1 from dias_bloqueados db 
                         where h.horario >= db.inicio_bloqueio 
                         and h.horario < db.fim_bloqueio
                     )
-                    and 
-                    exists(
-                        select 1 
-                        from horario_funcionamento hf
-                        where
-                            hf.ativo = true 
-                            and hf.dia_semana = extract(dow from h.horario)
-                            and h.horario::time >= hf.horario_abertura::time
-                            and (h.horario::time + interval '1 hour') <= hf.horario_fechamento::time
+                    and exists(
+                        select 1 from horario_funcionamento hf
+                        where hf.ativo = true
+                        and hf.dia_semana = extract(dow from h.horario)
+                        and h.horario::time >= hf.horario_abertura::time
+                        and (h.horario::time + interval '1 hour') <= hf.horario_fechamento::time
                     )
-                )as permitido
-            from lista_horarios h 
+                ) as permitido
+            from (
+                values ${horarios.map(h => sql`(${h})`)}
+            ) as h(horario)
         `;
     }
 }
