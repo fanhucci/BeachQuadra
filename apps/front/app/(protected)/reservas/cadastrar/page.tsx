@@ -12,7 +12,7 @@ export default function CadastroReservasPage(){
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
 
     function proximaSemana(){
-        if ((pagina + 1) * 7 < dados.diasMeses.length) {
+        if ((pagina + 1) * 7 < diasMeses.length) {
             setPagina(p => p + 1);
         }
     }
