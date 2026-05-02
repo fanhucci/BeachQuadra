@@ -9,17 +9,19 @@ export default function useCadastroReservas(){
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
     const [pagina, setPagina] = useState<number>(0);
+    const [horarioSelecionado,setHorarioSelecionado] = useState({});
 
     async function salvarReservas(){
-        try {
-            await apiRequest('/agendamento',{
-                method:"POST",
-                body:JSON.stringify({})
-            })
-            toast.success('Horarios reservados com sucesso');
-        } catch (error) {
-            toast.error(error instanceof Error? error.message : "Erro inesperado");
-        }
+        console.log(JSON.stringify(horarioSelecionado))
+        // try {
+        //     await apiRequest('/agendamento',{
+        //         method:"POST",
+        //         body:JSON.stringify(horarioSelecionado)
+        //     })
+        //     toast.success('Horarios reservados com sucesso');
+        // } catch (error) {
+        //     toast.error(error instanceof Error? error.message : "Erro inesperado");
+        // }
     }
 
     async function carregarDiasLivres() {
@@ -72,18 +74,35 @@ export default function useCadastroReservas(){
         }
     }
 
-    const [horarioSelecionado,setHorarioSelecionado] = useState({});
+    
 
     function selecionarHorario(valor){
         const {horario,quadras} = valor;
-        console.log(valor);
-        //pegar o array com reservas atuais e caso nao tenha um indice igual a este valor(id_quadra,horario)
-        //adicionar ao array, caso contrario remover o indice do array
+        
+        setHorarioSelecionado((prev)=>{
+            const indiceExistente = prev.horario.findIndex(
+                (r)=> r.horario === horario
+            ) 
+            
+            if(indiceExistente!==-1){
+                return{
+                    ...prev,
+                    reservas: prev.reservas.filter((_, i) => i !== indiceExistente)
+                }
+            }
 
-        // setHorarioSelecionado((prev)=>({
-        //     ...prev,
-        //     //  reservas:
-        // }))
+            return {
+                ...prev,
+                reservas:[
+                    ...prev.reservas,
+                    {
+                        id_quadra:quadras[0],
+                        horario:horario
+                    }
+                ]
+            }
+            
+        })
     }
 
 
