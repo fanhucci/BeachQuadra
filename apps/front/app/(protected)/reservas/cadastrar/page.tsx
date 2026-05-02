@@ -36,62 +36,64 @@ export default function CadastroReservasPage(){
             </div>
 
 
-            <div className="flex-1 w-[80%] overflow-auto justify-center items-center">
-                <table className="w-full border-separate border-spacing-0 text-sm">
-                    <thead className="bg-gray-50 sticky top-0 z-10">
-                        <tr>
-                            <th className="p-3 border-b text-gray-600 font-semibold w-24">
-                            Hora
-                            </th>
+            <div className="flex-1 w-full items-center">
+                <div className="flex-1 w-[80%] overflow-auto">
+                    <table className="w-full border-separate border-spacing-0 text-sm">
+                        <thead className="bg-gray-50 sticky top-0 z-10">
+                            <tr>
+                                <th className="p-3 border-b text-gray-600 font-semibold w-24">
+                                Hora
+                                </th>
 
-                            {diasVisiveis.map((dia, index) => (
-                            <th key={dia} className="p-3 border-b text-center">
-                                <div className="flex flex-col">
-                                    <span className="text-gray-500 text-xs uppercase tracking-wide">
-                                        {tableHeaders[index]}
-                                    </span>
-                                    <span className="font-semibold text-gray-800">
-                                        {dia}
-                                    </span>
-                                </div>
-                            </th>
-                            ))}
-                        </tr>
-                    </thead>
+                                {diasVisiveis.map((dia, index) => (
+                                <th key={dia} className="p-3 border-b text-center">
+                                    <div className="flex flex-col">
+                                        <span className="text-gray-500 text-xs uppercase tracking-wide">
+                                            {tableHeaders[index]}
+                                        </span>
+                                        <span className="font-semibold text-gray-800">
+                                            {dia}
+                                        </span>
+                                    </div>
+                                </th>
+                                ))}
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                    {horarioSemana.map((hora) => (
-                        <tr key={hora}>
-                            <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700">
-                                {hora}
-                            </td>
+                        <tbody>
+                        {horarioSemana.map((hora) => (
+                            <tr key={hora}>
+                                <td className="p-3 border-b bg-gray-50 text-center font-medium text-gray-700">
+                                    {hora}
+                                </td>
 
-                            {diasVisiveis.map((dia) => {
-                                const slot = dados[dia]?.[hora];
-                                const permitido = slot?.permitido;
+                                {diasVisiveis.map((dia) => {
+                                    const slot = dados[dia]?.[hora];
+                                    const permitido = slot?.permitido;
 
-                                return (
-                                    <td key={dia + hora} className="border-b border-l p-2">
-                                        <div
-                                            className={`
-                                                h-12 flex items-center justify-center rounded-md text-xs font-medium
-                                                transition-all duration-150
-                                                ${
-                                                permitido
-                                                    ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
-                                                    : "bg-red-100 text-red-700 opacity-70 cursor-not-allowed"
-                                                }
-                                            `}
-                                        >
-                                            {slot?.quadras?.length ?? 0} quadras
-                                        </div>
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+                                    return (
+                                        <td key={dia + hora} className="border-b border-l p-2">
+                                            <div
+                                                className={`
+                                                    h-12 flex items-center justify-center rounded-md text-xs font-medium
+                                                    transition-all duration-150
+                                                    ${
+                                                    permitido
+                                                        ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer shadow-sm"
+                                                        : "bg-red-100 text-red-700 opacity-70 cursor-not-allowed"
+                                                    }
+                                                `}
+                                            >
+                                                {slot?.quadras?.length ?? 0} quadras
+                                            </div>
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div className="p-4 border-t shrink-0">
