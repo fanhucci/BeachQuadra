@@ -9,7 +9,7 @@ export default function useCadastroReservas(){
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
     const [pagina, setPagina] = useState<number>(0);
-    const [horarioSelecionado,setHorarioSelecionado] = useState({});
+    const [horarioSelecionado,setHorarioSelecionado] = useState<any[]>([]);
 
     async function salvarReservas(){
         console.log(JSON.stringify(horarioSelecionado))
