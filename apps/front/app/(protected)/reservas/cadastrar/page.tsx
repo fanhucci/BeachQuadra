@@ -17,10 +17,10 @@ export default function CadastroReservasPage(){
             <thead>
                 <tr>
                     <th>Hora</th>
-                    {diasDaSemana.map(dia => (
+                    {diasDaSemana.map((dia,index) => (
                         <th key={dia}>
                             <div>
-                                <span>{semanaHeader[dia]}</span>
+                                <span>{semanaHeader[index]}</span>
                                 <span>{dia}</span>
                             </div>
                         </th>
