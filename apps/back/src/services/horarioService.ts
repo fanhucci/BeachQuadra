@@ -8,6 +8,7 @@ export default class HorarioService{
 
     private horario = new HorarioRepository();
     private quadra = new QuadraRepository();
+    
     async listarHorario(){
         return await this.horario.listarHorario();
     }
