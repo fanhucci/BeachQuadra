@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 
 export default function useCadastroReservas(){
     const [dados, setDados] = useState<any>([]);
-    
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
-    
+    const [pagina, setPagina] = useState<number>(0);
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel`);
@@ -46,14 +45,31 @@ export default function useCadastroReservas(){
         setHorarioSemana(Array.from(horasSet));
     }
 
+
+    
+    function proximaSemana(){
+        if ((pagina + 1) * 7 < diasMeses.length) {
+            setPagina(p => p + 1);
+        }
+    }
+    
+    function semanaAnterior(){
+        if (pagina > 0) {
+            setPagina(p => p - 1);
+        }
+    }
+
     useEffect(()=>{
         carregarDiasLivres();
     },[]);
 
    
     return {
+        pagina,
         dados,
         diasMeses,
         horarioSemana,
+        semanaAnterior,
+        proximaSemana
     };
 }

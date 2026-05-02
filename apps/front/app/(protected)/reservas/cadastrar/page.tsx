@@ -1,33 +1,14 @@
 'use client'
 
-import { useEffect, useState } from "react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
 
-    const {dados,diasMeses,horarioSemana} = useCadastroReservas();
-    const [pagina, setPagina] = useState<number>(0);
-    const [diasVisiveis,setDiasVisiveis] = useState([]);
-
-    if(diasVisiveis.length === 0) return <>carregando...</>
+    const {dados,diasMeses,horarioSemana, pagina, semanaAnterior, proximaSemana} = useCadastroReservas();
+    
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+    const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7) ;
 
-    function proximaSemana(){
-        if ((pagina + 1) * 7 < diasMeses.length) {
-            setPagina(p => p + 1);
-        }
-    }
-    
-    function semanaAnterior(){
-        if (pagina > 0) {
-            setPagina(p => p - 1);
-        }
-    }
-
-    useEffect(()=>{
-        setDiasVisiveis(diasMeses.slice(pagina * 7, pagina * 7 + 7));
-    },[pagina]);
-    
     return(
         <div className="p-6">
             <div className="flex justify-between items-center mb-4">
@@ -56,8 +37,8 @@ export default function CadastroReservasPage(){
                             {diasVisiveis.map((dia,index) => (
                                 <th key={index} className="p-2 border text-center">
                                     <div className="flex-col">
-                                        <span>{tableHeaders[index]}</span>
-                                        <span>{dia}</span>
+                                        <p>{tableHeaders[index]}</p>
+                                        <p>{dia}</p>
                                     </div>
                                 </th>
                             ))}
