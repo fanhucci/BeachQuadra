@@ -33,11 +33,10 @@ export default class HorarioRepository {
         return await sql`select * from horario_funcionamento order by id_horario`;
     }
 
-    async retornarHorariosPermitidos( horarios:Date[]){
-        const array = horarios.map(a=>a);
+    async retornarHorariosPermitidos( horarios:string[]){
         return await sql`
             with lista_horarios as (
-                select unnest(${array}::timestamptz[]) as horario
+                select unnest(${sql(horarios)}::timestamptz[]) as horario
             )
             select 
                 h.horario, 
