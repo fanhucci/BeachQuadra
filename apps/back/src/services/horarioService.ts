@@ -18,7 +18,7 @@ export default class HorarioService{
 
     async listarHorariosDisponiveisParaReserva(){
 
-        const periodo = gerarGradeDeHorarios(60);
+        const periodo = gerarGradeDeHorarios(14);
 
         const horarios = await this.horario.retornarHorariosPermitidos(periodo);
 
