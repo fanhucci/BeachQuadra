@@ -5,10 +5,14 @@ import { useEffect, useState } from "react";
 
 export default function useCadastroReservas(){
     const [dados, setDados] = useState<any>(null);
+    const [pagina, setPagina] = useState(0);
+    const [diasDaSemana,setDiasDaSemana] = useState();
+    const [horariosDoDia,setHorariosDoDia] = useState();
+    const [diasVisiveis,setDiasVisiveis] = useState();
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel`);
-        setDados(organizarSlots(slots));    
+        organizarSlots(slots);    
     }
 
     function organizarSlots(slots:any[]) {
@@ -37,17 +41,39 @@ export default function useCadastroReservas(){
             if (!mapa[dia]) mapa[dia] = {};
             mapa[dia][hora] = s;
         }
-
-        return {
-            mapa,
-            diasDaSemana: Array.from(diasSet),
-            horariosDoDia: Array.from(horasSet)
-        };
+        setDados(mapa);
+        setDiasDaSemana(Array.from(diasSet));
+        setHorariosDoDia(Array.from(horasSet));
     }
+
+    
+
+    function proximaSemana(){
+        if ((pagina + 1) * 7 < dados.diasDaSemana.length) {
+            setPagina(p => p + 1);
+        }
+    }
+
+    function semanaAnterior(){
+        if (pagina > 0) {
+            setPagina(p => p - 1);
+        }
+    }
+
 
     useEffect(()=>{
         carregarDiasLivres();
-    },[])
+    },[]);
 
-    return dados;
+    useEffect(()=>{
+        setDiasVisiveis(diasDaSemana.slice(pagina * 7, pagina * 7 + 7));
+    },[pagina]);
+
+    return {
+        pagina,
+        diasVisiveis,
+        diasDaSemana,
+        proximaSemana,
+        semanaAnterior
+    };
 }
