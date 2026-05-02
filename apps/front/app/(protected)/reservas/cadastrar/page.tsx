@@ -34,7 +34,7 @@ export default function CadastroReservasPage(){
             </div>
 
            
-            <div className="flex flex-1 overflow-auto border rounded-xl shadow-sm">
+            <div className="flex flex-1 w-[70%] overflow-auto border rounded-xl shadow-sm">
                 <table className="w-full border-separate border-spacing-0 text-sm">
                     <thead className="bg-gray-50 sticky top-0 z-10">
                         <tr>
