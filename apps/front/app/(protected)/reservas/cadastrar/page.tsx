@@ -4,8 +4,9 @@ import { useState } from "react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
-
-    const { mapa, diasDaSemana, horariosDoDia } = useCadastroReservas();
+    const dados = useCadastroReservas();
+    if(!dados) return<>Carregando...</>
+    const { mapa, diasDaSemana, horariosDoDia } = dados;
     const [pagina, setPagina] = useState(0);
 
     const diasVisiveis = diasDaSemana.slice(pagina * 7, pagina * 7 + 7);
