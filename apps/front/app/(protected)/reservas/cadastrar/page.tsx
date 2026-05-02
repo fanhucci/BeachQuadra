@@ -1,57 +1,91 @@
 'use client'
 
+import { useState } from "react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
 
-    const dados = useCadastroReservas();
+    const { mapa, diasDaSemana, horariosDoDia } = useCadastroReservas();
+    const [pagina, setPagina] = useState(0);
 
-    if (!dados) return <div>Carregando...</div>;
+    const diasVisiveis = diasDaSemana.slice(pagina * 7, pagina * 7 + 7);
 
-    const { mapa, diasDaSemana, horariosDoDia } = dados;
-    const semanaHeader = [
-        'Segunda','Terça','Quarta','Quinta','Sexta','Sabado','Domingo'
-    ]
+    function proximaSemana(){
+        if ((pagina + 1) * 7 < diasDaSemana.length) {
+            setPagina(p => p + 1);
+        }
+    }
+
+    function semanaAnterior(){
+        if (pagina > 0) {
+            setPagina(p => p - 1);
+        }
+    }
+
     return(
-        <table>
-            <thead>
-                <tr>
-                    <th>Hora</th>
-                    {diasDaSemana.map((dia,index) => (
-                        <th key={dia}>
-                            <div>
-                                <span>{semanaHeader[index]}</span>
-                                <span>{dia}</span>
-                            </div>
-                        </th>
-                    ))}
-                </tr>
-            </thead>
+        <div className="p-6">
+            {/* Navegação */}
+            <div className="flex justify-between items-center mb-4">
+                <button
+                    onClick={semanaAnterior}
+                    disabled={pagina === 0}
+                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
+                >
+                    ← Semana anterior
+                </button>
 
-            <tbody>
-                {horariosDoDia.map(hora => (
-                    <tr key={hora}>
-                        <td>{hora}</td>
+                <button
+                    onClick={proximaSemana}
+                    disabled={(pagina + 1) * 7 >= diasDaSemana.length}
+                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-40"
+                >
+                    Próxima semana →
+                </button>
+            </div>
 
-                        {diasDaSemana.map(dia => {
-                            const slot = mapa[dia]?.[hora];
+            <div className="overflow-auto border rounded-lg shadow">
+                <table className="min-w-full border-collapse text-sm">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            <th className="p-2 border">Hora</th>
+                            {diasVisiveis.map(dia => (
+                                <th key={dia} className="p-2 border text-center">
+                                    {dia}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
 
-                            return (
-                                <td
-                                    key={dia + hora}
-                                    style={{
-                                        backgroundColor: slot?.permitido ? 'green' : 'red',
-                                        cursor: slot?.permitido ? 'pointer' : 'not-allowed',
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    {slot?.quadras.length ?? 0}
+                    <tbody>
+                        {horariosDoDia.map(hora => (
+                            <tr key={hora}>
+                                <td className="p-2 border font-medium text-center bg-gray-50">
+                                    {hora}
                                 </td>
-                            );
-                        })}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+
+                                {diasVisiveis.map(dia => {
+                                    const slot = mapa[dia]?.[hora];
+                                    const permitido = slot?.permitido;
+
+                                    return (
+                                        <td
+                                            key={dia + hora}
+                                            className={`
+                                                p-2 border text-center transition
+                                                ${permitido 
+                                                    ? 'bg-green-200 hover:bg-green-300 cursor-pointer' 
+                                                    : 'bg-red-200 cursor-not-allowed opacity-70'}
+                                            `}
+                                        >
+                                            {slot?.quadras?.length ?? 0}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
