@@ -13,24 +13,22 @@ export default class AgendamentoService{
     async criarNovoAgendamento(dados:NovoAgendamentoDTO){
         const reservas = dados.reservas;
         const quadras = reservas.map((r:NovaReservaDTO) => r.id_quadra);
+        const horarios = reservas.map((h:NovaReservaDTO)=>h.horario);
+
+        const resposta = await this.horario.retornarHorariosPermitidos(horarios);
+
+        const horarioInvalido = resposta.some(h=>!h.permitido);
+
+        if(horarioInvalido) throw new AppError('Hórario indisponível para reserva',403);
+
+        const total = await this.agenda.calcularTotal(quadras);
 
         return await sql.begin(async(tx)=>{
         
-            for(const r of reservas){
-
-                const permitido = await this.horario.horarioPermitido(tx,r.horario);
-
-                if(!permitido) throw new AppError('Hórario inválido para reserva',403);
-            }
-
-            const total = await this.agenda.calcularTotal(tx,quadras);
-
             const id_agendamento = await this.agenda.novoAgendamento(tx,dados,total);
 
-            for(const r of reservas){
-                await this.reserva.criarReserva(tx,id_agendamento,r);
-            }
-
+            await this.reserva.criarReserva(tx,id_agendamento,horarios,quadras);
+            
             return id_agendamento;
         });
     }

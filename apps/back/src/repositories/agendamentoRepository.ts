@@ -4,11 +4,11 @@ import {NovoAgendamentoDTO} from '@app/shared';
 
 export default class AgendamentoRepository{
 
-    async calcularTotal(tx:TransactionSql,idsQuadras:number[]){
-        const [{total}] = await tx`
-            select coalesce(sum(valor), 0) as total
-            from quadras 
-            where id_quadra in ${tx(idsQuadras)}
+    async calcularTotal(idsQuadras:number[]){
+        const [{ total }] = await sql`
+            select coalesce(sum(q.valor), 0) as total
+            from unnest(${idsQuadras}::int[]) as lista(id)
+            join quadras q on q.id_quadra = lista.id
         `;
         return Number(total);
     }

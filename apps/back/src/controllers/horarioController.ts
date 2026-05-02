@@ -32,4 +32,11 @@ export default class HorarioController{
             return res.status(500).json({erro:`Erro interno`});
         }
     }
+
+    async listarHorariosDisponiveis(req:Request, res:Response){
+        
+        const horarios = await this.service.listarHorariosDisponiveisParaReserva();
+
+        return res.status(200).json(horarios);
+    }
 }
