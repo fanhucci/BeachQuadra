@@ -72,6 +72,20 @@ export default function useCadastroReservas(){
         }
     }
 
+    const [horarioSelecionado,setHorarioSelecionado] = useState({});
+
+    function selecionarHorario(e:React.ChangeEvent<HTMLInputElement>){
+        const {name,value} = e.target;
+        //pegar o array com reservas atuais e caso nao tenha um indice igual a este valor(id_quadra,horario)
+        //adicionar ao array, caso contrario remover o indice do array
+
+        setHorarioSelecionado((prev)=>({
+            ...prev,
+            reservas:
+        }))
+    }
+
+
     useEffect(()=>{
         carregarDiasLivres();
     },[]);
@@ -82,6 +96,7 @@ export default function useCadastroReservas(){
         dados,
         diasMeses,
         horarioSemana,
+        horarioSelecionado,
         semanaAnterior,
         proximaSemana,
         salvarReservas

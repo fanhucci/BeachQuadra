@@ -11,8 +11,9 @@ export default function CadastroReservasPage(){
     return (
         <div className="flex-1 w-full h-full flex flex-col bg-white overflow-hidden">
 
-            {/* HEADER - Mantém o tamanho fixo */}
+            
             <div className="p-4 flex justify-between items-center border-b shrink-0">
+                <p>{JSON.stringify(dados)}</p>
                 <button
                     onClick={semanaAnterior}
                     disabled={pagina === 0}
@@ -30,10 +31,10 @@ export default function CadastroReservasPage(){
                 </button>
             </div>
 
-            {/* ÁREA DA TABELA - flex-1 faz este container ocupar todo o espaço restante */}
+           
             <div className="flex-1 w-full p-2 min-h-0"> 
                 
-                {/* h-full aqui força a tabela a esticar/encolher para preencher o container */}
+                
                 <table className="w-full h-full border-separate border-spacing-0 text-xs table-auto">
                     <thead>
                         <tr className="bg-gray-50">
@@ -54,7 +55,6 @@ export default function CadastroReservasPage(){
                     <tbody>
                         {horarioSemana.map((hora) => (
                             <tr key={hora}>
-                                {/* Altura automática baseada no espaço disponível */}
                                 <td className="border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap border-r">
                                     {hora}
                                 </td>
@@ -65,7 +65,9 @@ export default function CadastroReservasPage(){
 
                                     return (
                                         <td key={dia + hora} className="border-b border-l p-0.5">
-                                            <div
+                                            <button
+                                                onClick={()=>salvarReservas()}
+                                                disabled={!permitido}
                                                 className={`
                                                     h-full w-full flex items-center justify-center rounded text-[10px]
                                                     transition-all duration-150
@@ -76,8 +78,8 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {slot?.quadras?.length ?? 0} q.
-                                            </div>
+                                                {slot?.quadras?.length ?? 0} quadras
+                                            </button>
                                         </td>
                                     );
                                 })}
@@ -87,7 +89,6 @@ export default function CadastroReservasPage(){
                 </table>
             </div>
 
-            {/* FOOTER - Tamanho fixo */}
             <div className="p-4 border-t shrink-0">
                 <button
                     onClick={salvarReservas}
