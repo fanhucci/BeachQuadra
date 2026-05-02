@@ -32,9 +32,7 @@ export default function CadastroReservasPage(){
             </div>
 
            
-            <div className="flex-1 w-full p-2 min-h-0"> 
-                <p>{JSON.stringify(dados)}</p>
-                
+            <div className="flex-1 w-full p-2 min-h-0">          
                 <table className="w-full h-full border-separate border-spacing-0 text-xs table-auto">
                     <thead>
                         <tr className="bg-gray-50">

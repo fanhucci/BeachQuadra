@@ -80,10 +80,10 @@ export default function useCadastroReservas(){
         //pegar o array com reservas atuais e caso nao tenha um indice igual a este valor(id_quadra,horario)
         //adicionar ao array, caso contrario remover o indice do array
 
-        setHorarioSelecionado((prev)=>({
-            ...prev,
-            //  reservas:
-        }))
+        // setHorarioSelecionado((prev)=>({
+        //     ...prev,
+        //     //  reservas:
+        // }))
     }
 
 
