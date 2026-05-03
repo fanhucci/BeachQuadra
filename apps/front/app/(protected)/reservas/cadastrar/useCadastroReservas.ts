@@ -1,11 +1,15 @@
 'use client'
 
+import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler"
 import { NovaReservaDTO, NovoAgendamentoDTO } from "@app/shared";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function useCadastroReservas(){
+    const {user} = useUser();
+    const {id} = useParams();
     const [dados, setDados] = useState<any>([]);
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
@@ -17,16 +21,15 @@ export default function useCadastroReservas(){
     });
 
     async function salvarReservas(){
-        console.log(JSON.stringify(horarioSelecionado))
-        // try {
-        //     await apiRequest('/agendamento',{
-        //         method:"POST",
-        //         body:JSON.stringify(horarioSelecionado)
-        //     })
-        //     toast.success('Horarios reservados com sucesso');
-        // } catch (error) {
-        //     toast.error(error instanceof Error? error.message : "Erro inesperado");
-        // }
+        try {
+            await apiRequest(id?`/agendamento/${id}`:`'/agendamento/pessoal'`,{
+                method:"POST",
+                body:JSON.stringify(horarioSelecionado)
+            })
+            toast.success('Horarios reservados com sucesso');
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : "Erro inesperado");
+        }
     }
 
     async function carregarDiasLivres() {
@@ -83,7 +86,7 @@ export default function useCadastroReservas(){
 
     function selecionarHorario(valor){
         const {horario,quadras} = valor;
-        console.log("entrou",valor)
+    
         setHorarioSelecionado((prev)=>{
             const indiceExistente = prev.reservas.findIndex(
                 (r)=> r.horario === horario
@@ -92,7 +95,7 @@ export default function useCadastroReservas(){
             if(indiceExistente!==-1){
                 return{
                     ...prev,
-                    reservas: prev.reservas.filter((_, i) => i !== indiceExistente)
+                    reservas: prev.reservas.filter((_, i) => i !== indiceExistente),
                 }
             }
 
@@ -104,7 +107,8 @@ export default function useCadastroReservas(){
                         id_quadra:quadras[0],
                         horario:horario
                     }
-                ]
+                ],
+
             }
             
         })
@@ -115,7 +119,16 @@ export default function useCadastroReservas(){
         carregarDiasLivres();
     },[]);
 
-   
+    useEffect(()=>{
+        if(user?.id_pessoa && id){
+            setHorarioSelecionado((prev)=>({
+                ...prev,
+                id_pessoa:Number(id),
+                created_by:user?.id_pessoa
+            }))
+        }
+    },[user,id])
+
     return {
         pagina,
         dados,

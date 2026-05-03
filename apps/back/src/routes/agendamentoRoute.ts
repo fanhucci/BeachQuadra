@@ -6,7 +6,8 @@ const router = Router();
 const ctrl = new AgendamentoController();
 const authMiddleware = new AuthMiddleware();
 
-router.post(`/agendamento`, authMiddleware.auth, ctrl.cadastrarNovoAgendamento.bind(ctrl));
+router.post(`/agendamento/pessoal`, authMiddleware.auth, ctrl.cadastrarNovoAgendamentoPessoal.bind(ctrl));
+router.post(`/agendamento/:id`, authMiddleware.auth, ctrl.cadastrarNovoAgendamento.bind(ctrl));
 router.patch(`/agendamento/:id`, authMiddleware.auth, ctrl.alterarStatusAgendamento.bind(ctrl));
 
 export default router;

@@ -7,6 +7,21 @@ export default class AgendamentoController{
     async cadastrarNovoAgendamento(req:Request,res:Response){
         const parse = NovoAgendamentoSchema.safeParse({
             ...req.body,
+            id_pessoa:req.user?.id,
+            created_by:req.user?.id
+        });
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message}) ;
+        
+        const resposta = await this.service.criarNovoAgendamento(parse.data);
+
+        res.status(201).json(resposta);
+    }
+
+    async cadastrarNovoAgendamentoPessoal(req:Request,res:Response){
+        const parse = NovoAgendamentoSchema.safeParse({
+            ...req.body,
+            id_pessoa:req.params.id,
             created_by:req.user?.id
         });
 
