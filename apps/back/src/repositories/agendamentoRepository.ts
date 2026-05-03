@@ -17,7 +17,7 @@ export default class AgendamentoRepository{
         const [{id_agendamento}] = await tx`
             insert into agendamentos
             (id_pessoa, valor_total, created_by)
-            values(${dados.id_pessoa, total, dados.created_by})
+            values(${dados.id_pessoa}, ${total}, ${dados.created_by})
             returning id_agendamento
         `;
         return id_agendamento;
