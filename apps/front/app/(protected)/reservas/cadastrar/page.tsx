@@ -57,7 +57,7 @@ export default function CadastroReservasPage(){
 
                         
                         <div
-                            className="flex-1 grid gap-2"
+                            className="flex-1 grid gap-2 content-start overflow-hidden"
                             style={{
                                 gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)`,
                                 gridTemplateRows: `repeat(${horarioSemana.length}, 1fr)`,
