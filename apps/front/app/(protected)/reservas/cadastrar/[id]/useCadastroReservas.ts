@@ -34,7 +34,7 @@ export default function useCadastroReservas(){
     }
 
     async function carregarDiasLivres() {
-        const slots = await apiRequest(`/horario-disponivel/${tipo}`);
+        const slots = await apiRequest(`/horario-disponivel?tipo=${tipo}`);
         organizarSlots(slots);    
     }
 
@@ -119,6 +119,16 @@ export default function useCadastroReservas(){
     useEffect(()=>{
         carregarDiasLivres();
     },[]);
+
+    useEffect(()=>{
+        if(user?.id_pessoa && id){
+            setHorarioSelecionado((prev)=>({
+                ...prev,
+                id_pessoa:Number(id),
+                created_by:user.id_pessoa
+            }))
+        }
+    },[user,id])
 
     useEffect(()=>{
         if(user?.id_pessoa && id){

@@ -17,7 +17,7 @@ export default class HorarioService{
         return await this.horario.editarHorario(horario);
     }
 
-    async listarHorariosDisponiveisParaReserva(){
+    async listarHorariosDisponiveisParaReserva(tipo:string){
 
         const periodo = gerarGradeDeHorarios(14);
 
@@ -26,7 +26,7 @@ export default class HorarioService{
         const arrayHorarios = horarios.map(r=>r.horario)
         const arrayPermitido = horarios.map(p=>p.permitido)
  
-        const horariosDisponiveis = await this.quadra.listarQuadrasDisponiveis(arrayHorarios, arrayPermitido);
+        const horariosDisponiveis = await this.quadra.listarQuadrasDisponiveis(arrayHorarios, arrayPermitido,tipo);
 
         return horariosDisponiveis;
        

@@ -58,7 +58,7 @@ export default class QuadraRepository {
         return result[0].exists;
     }
 
-    async listarQuadrasDisponiveis(horarios:Date[], permitido:boolean[]){
+    async listarQuadrasDisponiveis(horarios:Date[], permitido:boolean[],tipo:string){
         return await sql`
             with lista_horarios as (
                 select *from unnest(
@@ -75,7 +75,8 @@ export default class QuadraRepository {
                 else (
                     select coalesce(json_agg(q.id_quadra),'[]')
                     from quadras q
-                    where not exists (
+                    where q.tipo = ${tipo} 
+                    and not exists (
                         select 1
                         from reservas r
                         where r.id_quadra = q.id_quadra
