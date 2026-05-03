@@ -59,15 +59,13 @@ export default class QuadraRepository {
     }
 
 async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
-    console.log(JSON.stringify(horarios));
-    
     return await sql`
         with lista_horarios as (
             select 
-                t.horario::timestamptz as horario, 
+                t.horario::timestamptz as horario, -- 1. GARANTE O TIPO TIMESTAMPTZ
                 t.permitido
             from unnest(
-                ${sql.array(horarios)}::timestamptz[],
+                ${sql.array(horarios)}::timestamptz[], -- 2. TIPAGEM EXPLÍCITA NO ARRAY
                 ${sql.array(permitido)}::boolean[]
             ) as t(horario, permitido)
         )
@@ -85,7 +83,8 @@ async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
                         from reservas r
                         where r.id_quadra = q.id_quadra
                         and r.status = 'ativo'
-                        and date_trunc('second', r.horario) = date_trunc('second', h.horario::timestamptz)
+                        -- 3. COMPARAÇÃO USANDO DATE_TRUNC PARA IGNORAR MICROSSEGUNDOS
+                        and date_trunc('second', r.horario) = date_trunc('second', h.horario)
                     )
                 )
             end as quadras
