@@ -4,9 +4,10 @@ import useDetailAgendamento from "./useDetailAgendamento"
 
 export default function AgendamentoDetailPage(){
     const {agendamento} = useDetailAgendamento();
+
     if(!agendamento) return <>Carregando...</>
 
-    const cliente = agendamento[0].cliente;
+    const cliente = agendamento.cliente;
     const responsavel = agendamento.criado_por;
     const reservas = agendamento.reservas;
     
@@ -31,7 +32,7 @@ export default function AgendamentoDetailPage(){
 
                     }
                 </div>
-
+                    {JSON.stringify(agendamento)};
             </div>
         </div>
     )

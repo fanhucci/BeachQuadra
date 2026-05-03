@@ -4,8 +4,8 @@ import {NovoAgendamentoDTO} from '@app/shared';
 
 export default class AgendamentoRepository{
 
-    async listarAgendamentoPorId(id:number){
-        return await sql`
+    async buscarAgendamentoPorId(id:number){
+        const [resultado] = await sql`
             select 
                 a.id_agendamento,
                 (
@@ -48,6 +48,7 @@ export default class AgendamentoRepository{
             from agendamentos a
             where a.id_agendamento = ${id};
         `
+        return resultado;
     }
 
     async calcularTotal(idsQuadras:number[]){

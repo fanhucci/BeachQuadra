@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function useDetailAgendamento(){
     const {id} = useParams();
-    const [agendamento,setAgendamento] = useState({});
+    const [agendamento,setAgendamento] = useState(null);
 
     async function carregarAgendamento(){
         const dados = await apiRequest(`/agendamento/${id}`);
@@ -17,7 +17,7 @@ export default function useDetailAgendamento(){
             carregarAgendamento();
         }
     },[id]);
-    
+
     return{
         agendamento
     }
