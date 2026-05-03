@@ -76,7 +76,7 @@ export default class QuadraRepository {
                     select coalesce(json_agg(q.id_quadra),'[]')
                     from quadras q
                     where q.tipo = ${tipo} 
-                    and q.status
+                    and q.ativo
                     and not exists (
                         select 1
                         from reservas r
