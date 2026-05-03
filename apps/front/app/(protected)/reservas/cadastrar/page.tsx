@@ -9,102 +9,106 @@ export default function CadastroReservasPage(){
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
 
     return (
-        <div className="flex-1 w-full h-full flex flex-col bg-white overflow-hidden">
+        <div className="w-screen h-screen overflow-hidden flex flex-col bg-gray-50">
 
-            
-            <div className="p-4 flex justify-between items-center border-b shrink-0">
-                
+          
+            <div className="px-6 py-4 flex items-center justify-between bg-white border-b shrink-0">
                 <button
                     onClick={semanaAnterior}
                     disabled={pagina === 0}
-                    className="px-4 py-2 rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-30 text-sm"
+                    className="px-3 py-1.5 text-sm rounded-md border bg-white hover:bg-gray-100 disabled:opacity-30"
                 >
                     ← Anterior
                 </button>
-                <h2 className="text-lg font-semibold text-gray-700">Selecionar horário</h2>
+
+                <h2 className="text-base font-semibold text-gray-700">
+                    Selecionar horário
+                </h2>
+
                 <button
                     onClick={proximaSemana}
                     disabled={(pagina + 1) * 7 >= diasMeses.length}
-                    className="px-4 py-2 rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-30 text-sm"
+                    className="px-3 py-1.5 text-sm rounded-md border bg-white hover:bg-gray-100 disabled:opacity-30"
                 >
                     Próxima →
                 </button>
             </div>
 
-           
-            <div className="flex-1 w-full p-2 min-h-0">          
-                <table className="w-full h-full border-separate border-spacing-0 text-xs table-auto">
-                    <thead>
-                        <tr className="bg-gray-50">
-                            {/* <th className="p-1 border-b text-gray-600 font-semibold whitespace-nowrap w-16">
-                                Hora
-                            </th> */}
+            <div className="flex-1 overflow-auto p-4">
+                <div className="min-w-max rounded-xl border bg-white shadow-sm">
+                    <table className="w-full border-separate border-spacing-0 text-xs">
+
+                        <thead className="sticky top-0 z-10 bg-white shadow-sm">
+                            <tr>
                             {diasVisiveis.map((dia, index) => (
-                                <th key={dia} className="p-1 border-b text-center whitespace-nowrap">
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] uppercase text-gray-400">{tableHeaders[index]}</span>
-                                        <span className="font-bold">{dia}</span>
+                                <th
+                                key={dia}
+                                className="px-2 py-3 border-b text-center"
+                                >
+                                    <div className="flex flex-col items-center gap-1">
+                                        <span className="text-[10px] uppercase tracking-wide text-gray-400">
+                                            {tableHeaders[index]}
+                                        </span>
+                                        <span className="text-sm font-semibold text-gray-700">
+                                            {dia}
+                                        </span>
                                     </div>
                                 </th>
                             ))}
-                        </tr>
-                    </thead>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {horarioSemana.map((hora) => (
-                            <tr key={hora}>
-                                {/* <td className="border-b bg-gray-50 text-center font-medium text-gray-700 whitespace-nowrap border-r">
-                                    {hora}
-                                </td> */}
-
+                        <tbody>
+                            {horarioSemana.map((hora) => (
+                            <tr key={hora} className="group">
                                 {diasVisiveis.map((dia) => {
-                                    const slot = dados[dia]?.[hora];
-                                    const permitido = slot?.permitido;
-                                    
-                                    
-                                    const isSelected = horarioSelecionado.reservas.some(
-                                        (r) => r.horario === slot?.horario
-                                    );
+                                const slot = dados[dia]?.[hora];
+                                const permitido = slot?.permitido;
 
-                                    return (
-                                        <td key={dia + hora} className="border-b border-l p-0.5">
-                                            <button
-                                                type="button"
-                                                onClick={() => selecionarHorario(slot)}
-                                                disabled={!permitido}
-                                                className={`
-                                                    h-full w-full flex items-center justify-center rounded text-[10px]
-                                                    transition-all duration-150 font-medium
-                                                    ${
-                                                        isSelected
-                                                            ? "bg-blue-600 text-white shadow-inner" // Estilo SELECIONADO (Azul)
-                                                            : permitido
-                                                                ? "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer" 
-                                                                : "bg-red-50 text-red-300 opacity-50 cursor-not-allowed" 
-                                                    }
-                                                `}
-                                            >
-        
-                                                {isSelected ? 'Remover' : `${hora}`}
-                                            </button>
-                                        </td>
-                                    );
+                                const isSelected = horarioSelecionado.reservas.some(
+                                    (r) => r.horario === slot?.horario
+                                );
+
+                                return (
+                                    <td key={dia + hora} className="p-1">
+                                        <button
+                                            type="button"
+                                            onClick={() => selecionarHorario(slot)}
+                                            disabled={!permitido}
+                                            className={`
+                                            w-full h-9 rounded-lg flex items-center justify-center
+                                            text-[11px] font-medium transition-all duration-150
+                                            border
+                                            ${
+                                                isSelected
+                                                ? "bg-blue-600 text-white border-blue-700 shadow-inner"
+                                                : permitido
+                                                    ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
+                                                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                                            }
+                                            `}
+                                        >
+                                            {hora}
+                                        </button>
+                                    </td>
+                                );
                                 })}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                            ))}
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
 
-            <div className="p-4 border-t shrink-0">
+            <div className="px-6 py-4 bg-white border-t shrink-0">
                 <button
                     onClick={salvarReservas}
-                    className="w-full h-10 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700"
+                    className="w-full h-11 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
                 >
-                    Reservar
+                    Reservar horários selecionados
                 </button>
             </div>
-
         </div>
     );
 }
