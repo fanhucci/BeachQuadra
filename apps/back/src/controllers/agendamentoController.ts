@@ -19,11 +19,13 @@ export default class AgendamentoController{
     }
 
     async cadastrarNovoAgendamentoPessoal(req:Request,res:Response){
-        const parse = NovoAgendamentoSchema.safeParse({
+        const dados = {
             ...req.body,
             id_pessoa:req.params.id,
             created_by:req.user?.id
-        });
+        }
+        console.log(dados)
+        const parse = NovoAgendamentoSchema.safeParse(dados);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message}) ;
         
