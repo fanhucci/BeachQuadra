@@ -7,8 +7,8 @@ export default class AgendamentoController{
     async cadastrarNovoAgendamento(req:Request,res:Response){
         const parse = NovoAgendamentoSchema.safeParse({
             ...req.body,
-            id_pessoa:req.params.id,
-            created_by:req.user?.id
+            id_pessoa:Number(req.params.id),
+            created_by:Number(req.user?.id)
         });
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message}) ;
@@ -21,8 +21,8 @@ export default class AgendamentoController{
     async cadastrarNovoAgendamentoPessoal(req:Request,res:Response){
         const dados = {
             ...req.body,
-            id_pessoa:req.user?.id,
-            created_by:req.user?.id
+            id_pessoa:Number(req.user?.id),
+            created_by:Number(req.user?.id)
         }
         console.log(dados)
         const parse = NovoAgendamentoSchema.safeParse(dados);
