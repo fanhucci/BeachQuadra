@@ -2,7 +2,7 @@
 
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler"
-import { NovaReservaDTO, NovoAgendamentoDTO } from "@app/shared";
+import { NovoAgendamentoDTO } from "@app/shared";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -13,7 +13,8 @@ export default function useCadastroReservas(){
     const [dados, setDados] = useState<any>([]);
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
-    const [pagina, setPagina] = useState<number>(0);
+    const [pagina, setPagina] = useState<number>(0)
+    const [tipo,setTipo] = useState('individual');
     const [horarioSelecionado,setHorarioSelecionado] = useState<NovoAgendamentoDTO>({
         id_pessoa:0,
         reservas:[],
@@ -33,7 +34,7 @@ export default function useCadastroReservas(){
     }
 
     async function carregarDiasLivres() {
-        const slots = await apiRequest(`/horario-disponivel`);
+        const slots = await apiRequest(`/horario-disponivel/${tipo}`);
         organizarSlots(slots);    
     }
 
@@ -138,6 +139,8 @@ export default function useCadastroReservas(){
         semanaAnterior,
         proximaSemana,
         selecionarHorario,
-        salvarReservas
+        salvarReservas,
+        setTipo,
+        tipo
     };
 }

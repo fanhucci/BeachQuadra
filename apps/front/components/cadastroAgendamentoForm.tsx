@@ -2,6 +2,7 @@
 
 import useCadastroReservas from "@/app/(protected)/reservas/cadastrar/useCadastroReservas";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import CustomSwitch from "./customSwitch";
 
 
 type cadastroAgendamentoFormProps = {
@@ -10,7 +11,7 @@ type cadastroAgendamentoFormProps = {
 
 export default function CadastroAgendamentoForm({id}:cadastroAgendamentoFormProps){
     
-    const {dados, diasMeses, horarioSemana, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas} = useCadastroReservas();
+    const {dados, diasMeses, horarioSemana, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas, setTipo, tipo} = useCadastroReservas();
  
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
@@ -108,9 +109,15 @@ export default function CadastroAgendamentoForm({id}:cadastroAgendamentoFormProp
 
             
                 <div className="flex flex-col justify-center b-5 p-2">
-                    <div>
-                        menu?
-                    </div>
+                    
+                    <CustomSwitch 
+                        estadoA={{label: 'Individual', value:'individual'}} 
+                        estadoB={{label:'Duplas', value:'dupla'}} 
+                        name="tipo" 
+                        onChange={(valor) => setTipo(valor)}
+                        selected={tipo}
+                    />
+                    
                     <button
                         onClick={salvarReservas}
                         className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
