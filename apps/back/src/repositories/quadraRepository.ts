@@ -58,40 +58,34 @@ export default class QuadraRepository {
         return result[0].exists;
     }
 
-async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
-    return await sql`
-        with lista_horarios as (
-            select 
-                t.horario::timestamptz as horario,
-                t.permitido
-            from unnest(
-                ${sql.array(horarios)}::timestamptz[],
-                ${sql.array(permitido)}::boolean[]
-            ) as t(horario, permitido)
-        )
+    async listarQuadrasDisponiveis(horarios:Date[], permitido:boolean[]){
+        return await sql`
+            with lista_horarios as (
+                select *from unnest(
+                    ${sql.array(horarios)},
+                    ${sql.array(permitido)}
+                ) as t(horario, permitido)
+            )
 
-        select 
+            select 
             h.horario,
             h.permitido,
             case
                 when not h.permitido then '[]'::json
                 else (
-                    select coalesce(json_agg(q.id_quadra), '[]')
+                    select coalesce(json_agg(q.id_quadra),'[]')
                     from quadras q
-                    where select 
-    h.horario as h_horario, 
-    r.horario as r_horario,
-    pg_typeof(h.horario) as h_tipo,
-    pg_typeof(r.horario) as r_tipo
-from lista_horarios h
-left join reservas r on r.id_quadra = 31 
-  and r.horario = h.horario 
-  and r.status = 'ativo'
-where h.horario = '2026-04-27T07:00:00.000Z'
-                )
+                    where not exists (
+                        select 1
+                        from reservas r
+                        where r.id_quadra = q.id_quadra
+                        and r.horario = h.horario
+                        and r.status = 'ativo'
+                    )
+            )
             end as quadras
-        from lista_horarios h
-    `;
-}
+            from lista_horarios h
+        `;
+    }
 
 }
