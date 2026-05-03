@@ -1,6 +1,6 @@
 'use client'
 
-import { X } from "lucide-react";
+import { Check } from "lucide-react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
@@ -85,7 +85,7 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {isSelected? (<X />) : hora}
+                                                {isSelected? (<Check />) : hora}
                                             </button>
                                         </td>
                                     );
