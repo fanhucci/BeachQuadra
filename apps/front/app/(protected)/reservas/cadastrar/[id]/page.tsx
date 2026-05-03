@@ -86,7 +86,7 @@ export default function CadastroReservasPage(){
                                         ${
                                         isSelected
                                             ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-100"
-                                            : permitido
+                                            : permitido && slot.quadras.length>0
                                             ? "bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100 "
                                             : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
                                         }
