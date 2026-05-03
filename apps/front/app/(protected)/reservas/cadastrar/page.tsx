@@ -79,7 +79,7 @@ export default function CadastroReservasPage(){
                                     onClick={() => selecionarHorario(slot)}
                                     disabled={!permitido}
                                     className={`
-                                        w-full h-full rounded-md text-[14px] font-medium
+                                        h-full aspect-square rounded-md text-[14px] font-medium
                                         flex items-center justify-center
                                         transition border
                                         ${
