@@ -23,6 +23,7 @@ export default class PessoaService{
                 id_pessoa:pessoa.id_pessoa,
                 senha:senhaHash
             })
+            return pessoa
         })
     }
 
