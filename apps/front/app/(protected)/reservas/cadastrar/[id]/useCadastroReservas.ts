@@ -3,13 +3,14 @@
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler"
 import { NovoAgendamentoDTO } from "@app/shared";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function useCadastroReservas(){
     const {user} = useUser();
     const {id} = useParams();
+    const router = useRouter();
     const [dados, setDados] = useState<any>([]);
     const [diasMeses,setDiasMeses] = useState<string[]>([]);
     const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
@@ -30,6 +31,7 @@ export default function useCadastroReservas(){
             toast.success('Horarios reservados com sucesso');
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
+            router.push('/');
         }
     }
 

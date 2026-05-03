@@ -80,7 +80,7 @@ export default function CadastroReservasPage(){
                                     key={dia + hora}
                                     type="button"
                                     onClick={() => selecionarHorario(slot)}
-                                    disabled={!permitido}
+                                    disabled={!permitido || slot.quadras.length===0}
                                     className={`
                                         w-full h-full rounded-md text-[14px] font-medium
                                         flex items-center justify-center
