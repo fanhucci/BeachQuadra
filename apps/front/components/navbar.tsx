@@ -26,7 +26,7 @@ export default function Navbar() {
         <Link href="/" className="text-lg font-semibold tracking-wide text-white">
           BeachQuadra
         </Link>
-
+    
         {user && user.id_cargo > 1 && (
           <div className="flex items-center gap-6 text-sm">
             <Link href="/usuarios" className="hover:text-white transition">
