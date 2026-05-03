@@ -2,7 +2,7 @@ import {z} from 'zod';
 
 export const NovaReservaSchema = z.object({
     id_quadra:z.coerce.number(),
-    horario:z.date()
+    horario:z.coerce.date()
 })
 export type NovaReservaDTO = z.infer<typeof NovaReservaSchema>
 
