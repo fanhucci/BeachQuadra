@@ -35,7 +35,7 @@ export default function CadastroReservasPage(){
             </div>
 
                     
-            <div className="flex flex-row">
+            <div className="flex flex-row flex-1 w-full">
                 <div className="flex-1 flex justify-center px-6 py-4">
                     <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
 
@@ -79,7 +79,7 @@ export default function CadastroReservasPage(){
                                     onClick={() => selecionarHorario(slot)}
                                     disabled={!permitido}
                                     className={`
-                                        w-full h-full rounded-md text-[10px] font-medium
+                                        w-full h-full rounded-md text-[14px] font-medium
                                         flex items-center justify-center
                                         transition border
                                         ${
@@ -99,16 +99,14 @@ export default function CadastroReservasPage(){
                         </div>
                     </div>
                 </div>
-
+                
+                <button
+                    onClick={salvarReservas}
+                    className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                >
+                    Reservar
+                </button>
             
-                <div className="px-8 py-4 bg-white border-t flex justify-end shrink-0">
-                    <button
-                        onClick={salvarReservas}
-                        className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
-                    >
-                        Reservar
-                    </button>
-                </div>
             </div>
         </div>
     );
