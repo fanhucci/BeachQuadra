@@ -34,7 +34,7 @@ export default class HorarioController{
     }
 
     async listarHorariosDisponiveis(req:Request, res:Response){
-        const {tipo} = req.query.tipo
+        const tipo = (req.query.tipo as string) || 'individual';
         const horarios = await this.service.listarHorariosDisponiveisParaReserva(tipo);
 
         return res.status(200).json(horarios);
