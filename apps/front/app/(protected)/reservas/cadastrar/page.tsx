@@ -34,70 +34,68 @@ export default function CadastroReservasPage(){
                 </button>
             </div>
 
-           
-            
-            <div className="flex-1 min-h-0 flex justify-center px-6 py-4">
-                <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm flex flex-col">
+                    
+            <div className="flex-1 flex justify-center px-6 py-4">
+                <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
 
-                    <div className="flex-1 min-h-0 overflow-auto p-4">
-                        <table className="border-separate border-spacing-2 text-xs">
-                            <thead className="sticky top-0 bg-white z-10">
-                                <tr>
-                                    {diasVisiveis.map((dia, index) => (
-                                    <th key={dia} className="pb-3 text-center">
-                                        <div className="flex flex-col items-center">
-                                            <span className="text-[10px] uppercase text-gray-400">
-                                                {tableHeaders[index]}
-                                            </span>
-                                            <span className="text-sm font-semibold text-gray-700">
-                                                {dia}
-                                            </span>
-                                        </div>
-                                    </th>
-                                    ))}
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                            {horarioSemana.map((hora) => (
-                                <tr key={hora}>
-                                {diasVisiveis.map((dia) => {
-                                    const slot = dados[dia]?.[hora];
-                                    const permitido = slot?.permitido;
-                                    const isSelected = horarioSelecionado.reservas.some(
-                                    (r) => r.horario === slot?.horario
-                                    );
-
-                                    return (
-                                        <td key={dia + hora} className="flex justify-center text-center ">
-                                            <button
-                                            type="button"
-                                            onClick={() => selecionarHorario(slot)}
-                                            disabled={!permitido}
-                                            className={`
-                                                w-14 h-14 rounded-md text-[11px] font-medium
-                                                flex items-center justify-center
-                                                border transition
-                                                ${
-                                                isSelected
-                                                    ? "bg-blue-600 text-white border-blue-700"
-                                                    : permitido
-                                                    ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
-                                                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                                                }
-                                            `}
-                                            >
-                                            {isSelected? (<Check size={16}/>): hora}
-                                            </button>
-                                        </td>
-                                    );
-                                })}
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
+                    <div
+                        className="grid gap-2 mb-2 text-center"
+                        style={{ gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)` }}
+                    >
+                        {diasVisiveis.map((dia, index) => (
+                            <div key={dia} className="flex flex-col">
+                            <span className="text-[10px] uppercase text-gray-400">
+                                {tableHeaders[index]}
+                            </span>
+                            <span className="text-sm font-semibold text-gray-700">
+                                {dia}
+                            </span>
+                            </div>
+                        ))}
                     </div>
 
+                    
+                    <div
+                        className="flex-1 grid gap-2"
+                        style={{
+                            gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)`,
+                            gridTemplateRows: `repeat(${horarioSemana.length}, 1fr)`,
+                        }}
+                    >
+                        {horarioSemana.map((hora) =>
+                            diasVisiveis.map((dia) => {
+                            const slot = dados[dia]?.[hora];
+                            const permitido = slot?.permitido;
+
+                            const isSelected = horarioSelecionado.reservas.some(
+                                (r) => r.horario === slot?.horario
+                            );
+
+                            return (
+                                <button
+                                key={dia + hora}
+                                type="button"
+                                onClick={() => selecionarHorario(slot)}
+                                disabled={!permitido}
+                                className={`
+                                    w-full h-full rounded-md text-[10px] font-medium
+                                    flex items-center justify-center
+                                    transition border
+                                    ${
+                                    isSelected
+                                        ? "bg-blue-600 text-white border-blue-700"
+                                        : permitido
+                                        ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
+                                        : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                                    }
+                                `}
+                                >
+                                {isSelected? (<Check size={16}/>) : hora}
+                                </button>
+                            );
+                            })
+                        )}
+                    </div>
                 </div>
             </div>
 
