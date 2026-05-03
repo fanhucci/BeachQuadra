@@ -59,15 +59,13 @@ export default class QuadraRepository {
     }
 
 async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
-    console.log("Exemplo de data enviada:", horarios[0].toISOString());
-console.log("Tipo do objeto:", typeof horarios[0]);
     return await sql`
         with lista_horarios as (
             select 
-                t.horario::timestamptz as horario, -- 1. GARANTE O TIPO TIMESTAMPTZ
+                t.horario::timestamptz as horario,
                 t.permitido
             from unnest(
-                ${sql.array(horarios)}::timestamptz[], -- 2. TIPAGEM EXPLÍCITA NO ARRAY
+                ${sql.array(horarios)}::timestamptz[],
                 ${sql.array(permitido)}::boolean[]
             ) as t(horario, permitido)
         )
@@ -85,8 +83,9 @@ console.log("Tipo do objeto:", typeof horarios[0]);
                         from reservas r
                         where r.id_quadra = q.id_quadra
                         and r.status = 'ativo'
-                        -- 3. COMPARAÇÃO USANDO DATE_TRUNC PARA IGNORAR MICROSSEGUNDOS
-                        and date_trunc('second', r.horario) = date_trunc('second', h.horario)
+                        -- O TRUQUE ESTÁ AQUI:
+                        and date_trunc('second', r.horario AT TIME ZONE 'UTC') = 
+                            date_trunc('second', h.horario AT TIME ZONE 'UTC')
                     )
                 )
             end as quadras
