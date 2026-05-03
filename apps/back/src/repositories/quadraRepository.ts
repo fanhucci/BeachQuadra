@@ -78,15 +78,16 @@ async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
                 else (
                     select coalesce(json_agg(q.id_quadra), '[]')
                     from quadras q
-                    where not exists (
-                        select 1
-                        from reservas r
-                        where r.id_quadra = q.id_quadra
-                        and r.status = 'ativo'
-                        -- O TRUQUE ESTÁ AQUI:
-                        and date_trunc('second', r.horario AT TIME ZONE 'UTC') = 
-                            date_trunc('second', h.horario AT TIME ZONE 'UTC')
-                    )
+                    where select 
+    h.horario as h_horario, 
+    r.horario as r_horario,
+    pg_typeof(h.horario) as h_tipo,
+    pg_typeof(r.horario) as r_tipo
+from lista_horarios h
+left join reservas r on r.id_quadra = 31 
+  and r.horario = h.horario 
+  and r.status = 'ativo'
+where h.horario = '2026-04-27T07:00:00.000Z'
                 )
             end as quadras
         from lista_horarios h
