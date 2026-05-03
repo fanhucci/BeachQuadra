@@ -23,7 +23,7 @@ export default function useCadastroReservas(){
 
     async function salvarReservas(){
         try {
-            await apiRequest(id?`/agendamento/${id}`:`/agendamento/pessoal`,{
+            const agendamento = await apiRequest(`/agendamento/${id}`,{
                 method:"POST",
                 body:JSON.stringify(horarioSelecionado)
             })
@@ -139,6 +139,10 @@ export default function useCadastroReservas(){
             }))
         }
     },[user,id])
+
+    useEffect(()=>{
+        carregarDiasLivres();
+    },[tipo])
 
     return {
         pagina,
