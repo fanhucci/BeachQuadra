@@ -79,7 +79,7 @@ export default class QuadraRepository {
                         select 1
                         from reservas r
                         where r.id_quadra = q.id_quadra
-                        and r.horario = h.horario
+                        and r.horario::timestamptz = h.horario::timestamptz
                         and r.status = 'ativo'
                     )
                 )
