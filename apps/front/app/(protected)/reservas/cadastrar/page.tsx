@@ -1,5 +1,6 @@
 'use client'
 
+import { X } from "lucide-react";
 import useCadastroReservas from "./useCadastroReservas";
 
 export default function CadastroReservasPage(){
@@ -72,7 +73,7 @@ export default function CadastroReservasPage(){
                                                 onClick={() => selecionarHorario(slot)}
                                                 disabled={!permitido}
                                                 className={`
-                                                    w-10 h-10 rounded-md text-[11px] font-medium
+                                                    w-8 h-8 rounded-md text-[11px] font-medium
                                                     flex items-center justify-center
                                                     transition-all border
                                                     ${
@@ -84,7 +85,7 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {isSelected? 'Remover' : hora}
+                                                {isSelected? (<X />) : hora}
                                             </button>
                                         </td>
                                     );
