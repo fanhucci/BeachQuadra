@@ -6,7 +6,7 @@ export default function AgendamentoDetailPage(){
     const {agendamento} = useDetailAgendamento();
     if(!agendamento) return <>Carregando...</>
 
-    const cliente = agendamento.cliente;
+    const cliente = agendamento[0].cliente;
     const responsavel = agendamento.criado_por;
     const reservas = agendamento.reservas;
     
