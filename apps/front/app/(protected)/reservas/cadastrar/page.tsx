@@ -12,7 +12,7 @@ export default function CadastroReservasPage(){
     return (
         <div className="w-screen h-screen flex flex-col bg-gray-50">
 
-            <div className="px-8 py-4 flex items-center justify-between bg-white border-b shrink-0">
+            <div className="px-8 py-4 flex items-center justify-between bg-white border-b shrink-0 ">
                 <button
                     onClick={semanaAnterior}
                     disabled={pagina === 0}
@@ -60,7 +60,7 @@ export default function CadastroReservasPage(){
 
                             <tbody>
                             {horarioSemana.map((hora) => (
-                                <tr key={hora}>
+                                <tr key={hora} className="flex justify-center">
                                 {diasVisiveis.map((dia) => {
                                     const slot = dados[dia]?.[hora];
                                     const permitido = slot?.permitido;
