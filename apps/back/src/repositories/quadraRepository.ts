@@ -59,6 +59,8 @@ export default class QuadraRepository {
     }
 
 async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
+    console.log("Exemplo de data enviada:", horarios[0].toISOString());
+console.log("Tipo do objeto:", typeof horarios[0]);
     return await sql`
         with lista_horarios as (
             select 
