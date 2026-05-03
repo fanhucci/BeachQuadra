@@ -59,6 +59,8 @@ export default class QuadraRepository {
     }
 
 async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
+    console.log(JSON.stringify(horarios));
+    
     return await sql`
         with lista_horarios as (
             select 
