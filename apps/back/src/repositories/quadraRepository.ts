@@ -83,8 +83,7 @@ async listarQuadrasDisponiveis(horarios: Date[], permitido: boolean[]) {
                         from reservas r
                         where r.id_quadra = q.id_quadra
                         and r.status = 'ativo'
-        
-                        and r.horario AT TIME ZONE 'UTC' = h.horario AT TIME ZONE 'UTC'
+                        and date_trunc('second', r.horario) = date_trunc('second', h.horario::timestamptz)
                     )
                 )
             end as quadras
