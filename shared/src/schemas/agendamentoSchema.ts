@@ -1,15 +1,15 @@
 import {z} from 'zod';
 
 export const NovaReservaSchema = z.object({
-    id_quadra:z.number(),
+    id_quadra:z.coerce.number(),
     horario:z.date()
 })
 export type NovaReservaDTO = z.infer<typeof NovaReservaSchema>
 
 export const NovoAgendamentoSchema = z.object({
-    id_pessoa:z.number(),
+    id_pessoa:z.coerce.number(),
     reservas:z.array(NovaReservaSchema).min(1),
-    created_by:z.number()
+    created_by:z.coerce.number()
 })
 export type NovoAgendamentoDTO = z.infer<typeof NovoAgendamentoSchema>;
 
