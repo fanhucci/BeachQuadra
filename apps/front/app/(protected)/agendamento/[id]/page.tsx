@@ -1,5 +1,6 @@
 'use client'
 
+import Campo from "@/components/campo";
 import useDetailAgendamento from "./useDetailAgendamento"
 
 export default function AgendamentoDetailPage(){
@@ -14,25 +15,28 @@ export default function AgendamentoDetailPage(){
     return(
         <div className="flex flex-1 w-full p-2">
             <div className="">
+                <Campo
+                    key={cliente.id_pessoa}
+                    label="Cliente"
+                    valor={cliente.nome}
+                />
+                <Campo
+                    key={responsavel.id_pessoa}
+                    label="Responsavel"
+                    valor={responsavel.nome}
+                />
                 <div>
+                    <p>Reservas</p>
                     {
-                        JSON.stringify(cliente)
-
+                        reservas.mao((r,index)=>{
+                            <Campo
+                            key={index}
+                            label="Horario"
+                            valor={r.horario}
+                            />
+                        })
                     }
                 </div>
-                <div>
-                    {
-                        JSON.stringify(responsavel)
-
-                    }
-                </div>
-                <div>
-                    {
-                        JSON.stringify(reservas)
-
-                    }
-                </div>
-                    {JSON.stringify(agendamento)};
             </div>
         </div>
     )
