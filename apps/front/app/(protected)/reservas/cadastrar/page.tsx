@@ -73,7 +73,7 @@ export default function CadastroReservasPage(){
                                                 onClick={() => selecionarHorario(slot)}
                                                 disabled={!permitido}
                                                 className={`
-                                                    w-8 h-8 rounded-md text-[11px] font-medium
+                                                    w-10 h-10 rounded-md text-[11px] font-medium
                                                     flex items-center justify-center
                                                     transition-all border
                                                     ${
@@ -85,7 +85,7 @@ export default function CadastroReservasPage(){
                                                     }
                                                 `}
                                             >
-                                                {isSelected? (<Check />) : hora}
+                                                {isSelected? (<Check size={16} />) : hora}
                                             </button>
                                         </td>
                                     );
