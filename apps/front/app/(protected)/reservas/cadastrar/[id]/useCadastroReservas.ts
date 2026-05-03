@@ -29,9 +29,9 @@ export default function useCadastroReservas(){
                 body:JSON.stringify(horarioSelecionado)
             })
             toast.success('Horarios reservados com sucesso');
+            router.push(`/agendamento/${agendamento}`);
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
-            router.push('/');
         }
     }
 
