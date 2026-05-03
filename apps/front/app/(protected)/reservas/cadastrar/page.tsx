@@ -57,7 +57,7 @@ export default function CadastroReservasPage(){
 
                         
                         <div
-                            className="flex-1 grid gap-2 content-start overflow-hidden"
+                            className="flex-1 grid gap-2"
                             style={{
                                 gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)`,
                                 gridTemplateRows: `repeat(${horarioSemana.length}, 1fr)`,
@@ -65,35 +65,35 @@ export default function CadastroReservasPage(){
                         >
                             {horarioSemana.map((hora) =>
                                 diasVisiveis.map((dia) => {
-                                    const slot = dados[dia]?.[hora];
-                                    const permitido = slot?.permitido;
+                                const slot = dados[dia]?.[hora];
+                                const permitido = slot?.permitido;
 
-                                    const isSelected = horarioSelecionado.reservas.some(
-                                        (r) => r.horario === slot?.horario
-                                    );
+                                const isSelected = horarioSelecionado.reservas.some(
+                                    (r) => r.horario === slot?.horario
+                                );
 
-                                    return (
-                                        <button
-                                            key={dia + hora}
-                                            type="button"
-                                            onClick={() => selecionarHorario(slot)}
-                                            disabled={!permitido}
-                                            className={`
-                                                w-full aspect-square rounded-lg text-[11px] font-medium
-                                                flex items-center justify-center
-                                                transition border
-                                                ${
-                                                isSelected
-                                                    ? "bg-blue-600 text-white border-blue-700"
-                                                    : permitido
-                                                    ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
-                                                    : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                                                }
-                                            `}
-                                            >
-                                            {isSelected ? <Check size={14}/> : hora}
-                                        </button>
-                                    );
+                                return (
+                                    <button
+                                    key={dia + hora}
+                                    type="button"
+                                    onClick={() => selecionarHorario(slot)}
+                                    disabled={!permitido}
+                                    className={`
+                                        w-full h-full rounded-md text-[14px] font-medium
+                                        flex items-center justify-center
+                                        transition border
+                                        ${
+                                        isSelected
+                                            ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-100"
+                                            : permitido
+                                            ? "bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100 "
+                                            : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                                        }
+                                    `}
+                                    >
+                                    {isSelected? (<Check size={16}/>) : hora}
+                                    </button>
+                                );
                                 })
                             )}
                         </div>
