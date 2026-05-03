@@ -10,7 +10,7 @@ export default function CadastroReservasPage(){
     const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
 
     return (
-        <div className="w-screen h-screen flex flex-col bg-gray-50">
+        <div className="w-full h-full flex flex-col bg-gray-50">
 
             <div className="px-8 py-4 flex items-center justify-between bg-white border-b shrink-0 ">
                 <button
@@ -44,12 +44,12 @@ export default function CadastroReservasPage(){
                     >
                         {diasVisiveis.map((dia, index) => (
                             <div key={dia} className="flex flex-col">
-                            <span className="text-[10px] uppercase text-gray-400">
-                                {tableHeaders[index]}
-                            </span>
-                            <span className="text-sm font-semibold text-gray-700">
-                                {dia}
-                            </span>
+                                <span className="text-[10px] uppercase text-gray-400">
+                                    {tableHeaders[index]}
+                                </span>
+                                <span className="text-sm font-semibold text-gray-700">
+                                    {dia}
+                                </span>
                             </div>
                         ))}
                     </div>
@@ -100,14 +100,14 @@ export default function CadastroReservasPage(){
             </div>
 
             
-            {/* <div className="px-8 py-4 bg-white border-t flex justify-end shrink-0">
+            <div className="px-8 py-4 bg-white border-t flex justify-end shrink-0">
                 <button
                     onClick={salvarReservas}
                     className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
                 >
                     Reservar
                 </button>
-            </div> */}
+            </div>
         </div>
     );
 }
