@@ -1,23 +1,21 @@
 export function gerarGradeDeHorarios(numeroDedias: number): Date[] {
     const horarios: Date[] = [];
     const hoje = new Date();
-    // Zera as horas em UTC
-    hoje.setUTCHours(0, 0, 0, 0);
+    hoje.setHours(0, 0, 0, 0);
 
-    const diaSemana = hoje.getUTCDay(); 
+    const diaSemana = hoje.getDay(); 
     const diferencaParaSegunda = diaSemana === 0 ? 6 : diaSemana - 1;
     
     const inicioDaSemana = new Date(hoje);
-    inicioDaSemana.setUTCDate(hoje.getUTCDate() - diferencaParaSegunda);
+    inicioDaSemana.setDate(hoje.getDate() - diferencaParaSegunda);
 
     for (let d = 0; d < numeroDedias; d++) {
         const dia = new Date(inicioDaSemana);
-        dia.setUTCDate(inicioDaSemana.getUTCDate() + d);
+        dia.setDate(inicioDaSemana.getDate() + d);
 
         for (let hora = 7; hora <= 23; hora++) {
             const horario = new Date(dia);
-            // IMPORTANTE: setUTCHours para garantir que 7h seja 7h UTC
-            horario.setUTCHours(hora, 0, 0, 0);
+            horario.setHours(hora, 0, 0, 0);
             horarios.push(horario);
         }
     }
