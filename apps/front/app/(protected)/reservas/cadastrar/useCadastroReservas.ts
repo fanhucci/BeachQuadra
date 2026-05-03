@@ -22,7 +22,7 @@ export default function useCadastroReservas(){
 
     async function salvarReservas(){
         try {
-            await apiRequest(id?`/agendamento/${id}`:`'/agendamento/pessoal'`,{
+            await apiRequest(id?`/agendamento/${id}`:`/agendamento/pessoal`,{
                 method:"POST",
                 body:JSON.stringify(horarioSelecionado)
             })
