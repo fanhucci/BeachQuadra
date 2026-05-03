@@ -99,14 +99,19 @@ export default function CadastroReservasPage(){
                         </div>
                     </div>
                 </div>
-                
-                <button
-                    onClick={salvarReservas}
-                    className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
-                >
-                    Reservar
-                </button>
+
             
+                <div className="flex flex-col justify-center b-5 p-2">
+                    <div>
+                        menu?
+                    </div>
+                    <button
+                        onClick={salvarReservas}
+                        className="px-6 h-10 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                    >
+                        Reservar
+                    </button>
+                </div>
             </div>
         </div>
     );
