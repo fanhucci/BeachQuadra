@@ -60,7 +60,7 @@ export default function CadastroReservasPage(){
 
                             <tbody>
                             {horarioSemana.map((hora) => (
-                                <tr key={hora} className="flex justify-center">
+                                <tr key={hora}>
                                 {diasVisiveis.map((dia) => {
                                     const slot = dados[dia]?.[hora];
                                     const permitido = slot?.permitido;
@@ -69,7 +69,7 @@ export default function CadastroReservasPage(){
                                     );
 
                                     return (
-                                        <td key={dia + hora} className="text-center">
+                                        <td key={dia + hora} className="flex justify-center text-center ">
                                             <button
                                             type="button"
                                             onClick={() => selecionarHorario(slot)}
