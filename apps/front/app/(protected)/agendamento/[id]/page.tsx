@@ -28,7 +28,7 @@ export default function AgendamentoDetailPage(){
                 <div>
                     <p>Reservas</p>
                     {
-                        reservas.mao((r,index)=>{
+                        reservas.map((r,index)=>{
                             <Campo
                             key={index}
                             label="Horario"
