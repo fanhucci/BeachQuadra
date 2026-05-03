@@ -10,6 +10,10 @@ export default class AgendamentoService{
     private reserva = new ReservaRepository();
     private horario = new HorarioRepository();
 
+    async listarAgendamentoPorId(id:number){
+        return await this.agenda.listarAgendamentoPorId(id);
+    }
+
     async criarNovoAgendamento(dados:NovoAgendamentoDTO){
         const reservas = dados.reservas;
         const quadras = reservas.map((r:NovaReservaDTO) => r.id_quadra);

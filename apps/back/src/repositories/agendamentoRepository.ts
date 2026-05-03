@@ -4,6 +4,52 @@ import {NovoAgendamentoDTO} from '@app/shared';
 
 export default class AgendamentoRepository{
 
+    async listarAgendamentoPorId(id:number){
+        return await sql`
+            select 
+                a.id_agendamento,
+                (
+                    select json_build_object(
+                        'id_pessoa', p.id_pessoa,
+                        'nome', p.nome
+                    )
+                    from pessoas p
+                    where p.id_pessoa = a.id_pessoa
+                ) as cliente,
+                a.status,
+                a.valor_total,
+                (
+                    select json_build_object(
+                        'id_pessoa', p.id_pessoa,
+                        'nome', p.nome,
+                        'cargo', c.id_cargo
+                    )
+                    from pessoas p
+                    join cargos c 
+                    on c.id_cargo = p.id_cargo
+                    where p.id_pessoa = a.created_by
+                ) as criado_por,
+                (
+                    select coalesce(
+                        json_agg(
+                            json_build_object(
+                                'id_reserva', r.id_reserva,
+                                'id_quadra', r.id_quadra,
+                                'valor', r.valor,
+                                'status', r.status,
+                                'horario', r.horario
+                            )
+                        ), 
+                        '[]'::json
+                    )
+                    from reservas r
+                    where r.id_agendamento = a.id_agendamento
+                ) as reservas 
+            from agendamentos a
+            where a.id_agendamento = ${id};
+        `
+    }
+
     async calcularTotal(idsQuadras:number[]){
         const [{ total }] = await sql`
             select coalesce(sum(q.valor), 0) as total
