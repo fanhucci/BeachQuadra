@@ -45,7 +45,7 @@ export default class UsuarioService{
                 id_pessoa:pessoa.id_pessoa,
                 senha:senhaHash
             });
-            return pessoa;
+            return {pessoa};
         })
     }
 
