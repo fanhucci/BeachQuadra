@@ -17,8 +17,8 @@ export type NovoAgendamentoDTO = z.infer<typeof NovoAgendamentoSchema>;
 const statusAgendamentoEnum = z.enum([
     'pendente',
     'confirmado',
+    'concluido',
     'cancelado',
-    'concluido'
 ])
 
 export const AlterarAgendamentoSchema = z.object({

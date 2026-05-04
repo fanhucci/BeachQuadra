@@ -40,7 +40,7 @@ export default class AgendamentoController{
      
         const parse = AlterarAgendamentoSchema.safeParse({
             id_agendamento:Number(req.params.id),
-            status: req.body
+            ...req.body
         });
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message}) ;
