@@ -87,6 +87,7 @@ export default class AgendamentoRepository{
             update agendamentos
             set status = ${status}
             where id_agendamento = ${id_agendamento}
+            returning id_agendamento
         `;
     }
 }
