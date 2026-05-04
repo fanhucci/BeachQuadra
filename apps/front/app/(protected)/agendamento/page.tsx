@@ -4,15 +4,18 @@ import CustomTable from "@/components/customTable";
 import useAgendamento from "./useAgendamento"
 import CustomButtom from "@/components/customButton";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AgendamentosPage(){
     const {agendamentos} = useAgendamento();
+    const router = useRouter();
 
     const tabela = agendamentos.map((d)=>({
         nome:d.nome,
         status:d.status,
         valor:d.valor_total,
-        acoes:(<Link href={`/agendamento/${agendamentos.id_agendamento}`}>Detalhes</Link>)
+        acoes:(
+        <CustomButtom funcao={()=>router.replace(`/agendamento/${agendamentos.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>)
     }))
        
 
