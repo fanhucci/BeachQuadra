@@ -32,7 +32,7 @@ export default function AgendamentosPage(){
                 tabela.length>0?
                     <CustomTable
                         columns={colunas}
-                        data={agendamentos}
+                        data={tabela}
                     />
                 :
                     <p>Nenhum agendamento cadastrado</p>
