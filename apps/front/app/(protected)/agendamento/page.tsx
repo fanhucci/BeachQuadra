@@ -20,7 +20,7 @@ export default function AgendamentosPage(){
         { key: "nome", label: "Cliente" },
         { key: "status", label: "Status" },
         { key: "valor_total", label: "Total" },
-        { key: 'acoes', label: "Açoes"}
+        { key: 'acoes', label: "Ações"}
     ]
     
     return(
