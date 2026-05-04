@@ -22,6 +22,7 @@ export default function useDetailAgendamento(){
                 body:JSON.stringify(status)
             })
             toast.success('Alteração feita com sucesso!');
+            carregarAgendamento();
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
         }

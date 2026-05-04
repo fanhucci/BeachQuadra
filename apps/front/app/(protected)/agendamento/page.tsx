@@ -12,9 +12,12 @@ export default function AgendamentosPage(){
     const tabela = agendamentos.map((d)=>({
         nome:d.nome,
         status:d.status,
-        valor_total:d.valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+        valor_total:d.valor_total,
         acoes:(
-        <CustomButtom funcao={()=>router.replace(`/agendamento/${d.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>)
+            <div className="inline-flex justify-center gap-2">
+                <CustomButtom funcao={()=>router.replace(`/agendamento/${d.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>
+            </div>
+        )
     }))
        
 
