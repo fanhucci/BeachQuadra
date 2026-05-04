@@ -6,6 +6,7 @@ import CustomTable from "@/components/customTable";
 import { apiRequest } from "@/utils/apiHandler";
 import AuthGuard from "@/utils/authGuard";
 import { AlterarPessoaDTO, AlterarPessoaSchema, CriarPessoaDTO, CriarPessoaSchema, ListarPessoaViewDTO } from "@app/shared";
+import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
@@ -89,7 +90,7 @@ export default function UsuarioPage(){
                 ativo: usuario.ativo ? "Ativo" : "Inativo",
                 acoes:(
                     <div className="inline-flex justify-center gap-2">
-                        <CustomButtom funcao={() => abrirEdicao(usuario)} texto="editar" tipo="secundario" />
+                        <CustomButtom funcao={() => abrirEdicao(usuario)} texto={<Pencil />} tipo="secundario" />
                         <CustomButtom funcao={()=>{
                             router.replace(`/usuarios/${usuario.id_pessoa}`);
                         }}
