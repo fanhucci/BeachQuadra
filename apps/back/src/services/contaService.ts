@@ -1,5 +1,5 @@
 
-import { AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO } from "@app/shared";
+import { AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO,ForcarRedefinirSenhaDTO } from "@app/shared";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
 import sql from "../infra/db";
@@ -8,7 +8,6 @@ import redefinirSenhaTemplate from "../infra/email/templates/redefinirSenha";
 import AppError from "../infra/appError";
 import crypto from 'crypto';
 import ResetTokenRepository from "../repositories/resetTokenRepository";
-import bcrypt from "bcrypt";
 import senhaRedefinidaPorAdminTemplate from "../infra/email/templates/resetarSenha";
 
 export default class ContaService{
@@ -66,16 +65,16 @@ export default class ContaService{
         
     }
 
-    async resetarSenhaAdmin(dados){
+    async resetarSenhaAdmin(dados:ForcarRedefinirSenhaDTO){
         const senhaFake = crypto.randomBytes(32).toString('hex');
         const senhaHash = await bcrypt.hash(senhaFake,10)
 
         const usuario = await this.conta.alterarSenhaPorId(dados.id_conta,senhaHash);
 
         if(!usuario) throw new AppError('Erro ao resetar senha',404);
-        
+        console.log(usuario)
         await enviarEmail({
-            to:usuario,
+            to:usuario.email,
             subject:"Reset de senha",
             html:senhaRedefinidaPorAdminTemplate(),
         })
