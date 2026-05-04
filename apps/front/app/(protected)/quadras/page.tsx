@@ -6,6 +6,7 @@ import CustomSwitch from "@/components/customSwitch";
 import CustomTable from "@/components/customTable";
 import { apiRequest } from "@/utils/apiHandler";
 import { AdicionarQuadraDTO, ListarQuadraSchema, QuadraBaseSchema, QuadraDTO } from "@app/shared";
+import { Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -84,7 +85,7 @@ export default function QuadrasPage(){
                     ativo: quadra.ativo ? "Ativo" : "Inativo",
                     ações:(
                         <div className="inline-flex justify-center gap-2">
-                            <CustomButtom funcao={()=>abrirEdicao(quadra)} texto="editar" tipo="secundario" />
+                            <CustomButtom funcao={()=>abrirEdicao(quadra)} texto={<Pencil size={16}/>} tipo="secundario" />
                             {quadra.ativo
                                 ?<CustomButtom funcao={() => excluirQuadra(quadra.id_quadra)} texto="desativar" tipo="danger" />
                                 :<CustomButtom funcao={() => ativarQuadra(quadra.id_quadra)} texto="ativar" tipo="terciario" />
