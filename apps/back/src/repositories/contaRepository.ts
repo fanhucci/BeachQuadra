@@ -55,13 +55,14 @@ export default class ContaRepository{
             inner join pessoas b
             on a.id_pessoa = b.id_pessoa
             where b.email = ${email}
-        `
-        return resposta ?? null
+        `;
+        return resposta ?? null;
     }
     
     async alterarSenhaPorId(id:number,senha:string){
-        return await sql`
-            update contas set senha = ${senha} where id_conta = ${id}
+        const [email] = await sql`
+            update contas set senha = ${senha} where id_conta = ${id} returning email
         `;
+        return email;
     }
 }

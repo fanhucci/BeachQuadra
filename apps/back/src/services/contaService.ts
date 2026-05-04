@@ -8,7 +8,8 @@ import redefinirSenhaTemplate from "../infra/email/templates/redefinirSenha";
 import AppError from "../infra/appError";
 import crypto from 'crypto';
 import ResetTokenRepository from "../repositories/resetTokenRepository";
-
+import bcrypt from "bcrypt";
+import senhaRedefinidaPorAdminTemplate from "../infra/email/templates/resetarSenha";
 
 export default class ContaService{
     private conta = new ContaRepository();
@@ -42,7 +43,6 @@ export default class ContaService{
         return resposta
     }
 
-    
     async resetarSenha(dados: ResetarSenhaDTO){
 
         await this.resetSenha.removerTokensExpirados();
@@ -64,6 +64,21 @@ export default class ContaService{
 
         throw new AppError('Token inválido ou expirado', 400);
         
+    }
+
+    async resetarSenhaAdmin(dados){
+        const senhaFake = crypto.randomBytes(32).toString('hex');
+        const senhaHash = await bcrypt.hash(senhaFake,10)
+
+        const usuario = await this.conta.alterarSenhaPorId(dados.id_conta,senhaHash);
+
+        if(!usuario) throw new AppError('Erro ao resetar senha',404);
+        
+        await enviarEmail({
+            to:usuario,
+            subject:"Reset de senha",
+            html:senhaRedefinidaPorAdminTemplate(),
+        })
     }
 
     async esqueciSenha(dados:EsqueciSenhaDTO){

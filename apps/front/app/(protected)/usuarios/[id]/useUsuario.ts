@@ -70,7 +70,10 @@ export function useUsuario(id:number){
     }
 
     async function redefinirSenha(){
-        alert(`Redefinindo senha de ${id}...`)
+        await apiRequest(`/`,{
+            method:"POST",
+            body:JSON.stringify(usuario?.id_conta)
+        })
     }
 
     useEffect(()=>{
