@@ -18,7 +18,7 @@ export default function useDetailAgendamento(){
     async function alterarStatus(id_agendamento:number){
         try {
             await apiRequest(`/agendamento/${id_agendamento}`,{
-                method:'POST',
+                method:'PATCH',
                 body:JSON.stringify(status)
             })
             toast.success('Alteração feita com sucesso!')

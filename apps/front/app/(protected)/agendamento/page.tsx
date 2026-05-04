@@ -7,10 +7,11 @@ export default function AgendamentosPage(){
     const {agendamentos} = useAgendamento();
 
     const colunas = [
+        { key: "nome", label: "Cliente" },
         { key: "status", label: "Status" },
         { key: "valor_total", label: "Total" },
-        { key: "nome", label: "Usuario" },
     ]
+    
     return(
         <div>
             {
