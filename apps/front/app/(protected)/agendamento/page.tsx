@@ -13,9 +13,9 @@ export default function AgendamentosPage(){
     const tabela = agendamentos.map((d)=>({
         nome:d.nome,
         status:d.status,
-        valor:d.valor_total,
+        valor:d.valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
         acoes:(
-        <CustomButtom funcao={()=>router.replace(`/agendamento/${agendamentos.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>)
+        <CustomButtom funcao={()=>router.replace(`/agendamento/${d.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>)
     }))
        
 
