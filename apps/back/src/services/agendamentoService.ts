@@ -10,6 +10,10 @@ export default class AgendamentoService{
     private reserva = new ReservaRepository();
     private horario = new HorarioRepository();
 
+    async listarAgendamentos(){
+        return await this.agenda.listarAgendamentos();
+    }
+
     async buscarAgendamentoPorId(id:number){
         return await this.agenda.buscarAgendamentoPorId(id);
     }

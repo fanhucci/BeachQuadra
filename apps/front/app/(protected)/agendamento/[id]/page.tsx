@@ -52,6 +52,7 @@ export default function AgendamentoDetailPage(){
                         >
                             <option value="pendente">Pendente</option>
                             <option value="confirmado">Confirmado</option>
+                            <option value="concluido">Concluido</option>
                             <option value="cancelado">Cancelado</option>
                         </select>
 

@@ -4,6 +4,18 @@ import {NovoAgendamentoDTO} from '@app/shared';
 
 export default class AgendamentoRepository{
 
+    async listarAgendamentos(){
+        return await sql`
+            select 
+                a.*,
+                p.nome
+            from agendamentos a
+            join pessoa p
+                on p.id_pessoa = a.id_pessoa
+            order by created_at
+        `;
+    }
+
     async buscarAgendamentoPorId(id:number){
         const [resultado] = await sql`
             select 

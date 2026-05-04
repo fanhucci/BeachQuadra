@@ -2,6 +2,7 @@
 import { apiRequest } from "@/utils/apiHandler"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function useDetailAgendamento(){
     const {id} = useParams();
@@ -15,12 +16,13 @@ export default function useDetailAgendamento(){
 
     async function alterarStatus(id_agendamento:number){
         try {
-            await apiRequest(`/agendamento/:id_agendamento`,{
+            await apiRequest(`/agendamento/${id_agendamento}`,{
                 method:'POST',
                 body:JSON.stringify(status)
             })
+            toast.success('Alteração feita com sucesso!')
         } catch (error) {
-            
+            toast.error(error instanceof Error? error.message : "Erro inesperado");
         }
     }
 

@@ -4,7 +4,14 @@ import { NovoAgendamentoSchema, AlterarAgendamentoSchema} from "@app/shared";
 export default class AgendamentoController{
     private service = new AgendamentoService();
 
-    async buscarAgendamentoPorId (req:Request,res:Response){
+    async listarAgendamentos(req:Request,res:Response){
+       
+        const resposta = await this.service.listarAgendamentos();
+
+        res.status(200).json(resposta);
+    }
+    
+    async buscarAgendamentoPorId(req:Request,res:Response){
         const id = Number(req.params.id);
         
         if(isNaN(id)) return res.status(400).json({erro: 'Erro interno'}) ;
