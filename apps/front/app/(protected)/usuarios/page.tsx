@@ -97,6 +97,12 @@ export default function UsuarioPage(){
                             texto="Detalhes"
                             tipo="terciario" 
                         />
+                        <CustomButtom funcao={()=>{
+                            router.replace(`/reservas/cadastrar/${usuario.id_pessoa}`);
+                        }}
+                            texto="Nova reserva"
+                            tipo="terciario" 
+                        />
                     </div>
                 )
             }))
