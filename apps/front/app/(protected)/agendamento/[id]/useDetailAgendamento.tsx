@@ -7,11 +7,12 @@ import { toast } from "sonner";
 export default function useDetailAgendamento(){
     const {id} = useParams();
     const [agendamento,setAgendamento] = useState(null);
-    const [status,setStatus] = useState('')
+    const [status,setStatus] = useState({status:""})
+
     async function carregarAgendamento(){
         const dados = await apiRequest(`/agendamento/${id}`);
         setAgendamento(dados);
-        setStatus(dados.status);
+        setStatus({status:dados.status});
     }
 
     async function alterarStatus(id_agendamento:number){

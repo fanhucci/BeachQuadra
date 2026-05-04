@@ -46,8 +46,8 @@ export default function AgendamentoDetailPage(){
                     
                     <div className="flex gap-3 items-center">
                         <select
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
+                            value={status.status}
+                            onChange={(e) => setStatus({status:e.target.value})}
                             className="border rounded-md px-3 py-2 bg-white"
                         >
                             <option value="pendente">Pendente</option>
@@ -73,33 +73,33 @@ export default function AgendamentoDetailPage(){
                         <table className="w-full text-sm">
                             <thead className="bg-gray-100 text-gray-600">
                                 <tr>
-                                <th className="p-3 text-left">Quadra</th>
-                                <th className="p-3 text-left">Data</th>
-                                <th className="p-3 text-left">Hora</th>
-                                <th className="p-3 text-left">Valor</th>
-                                <th className="p-3 text-left">Status</th>
+                                    <th className="p-3 text-left">Quadra</th>
+                                    <th className="p-3 text-left">Data</th>
+                                    <th className="p-3 text-left">Hora</th>
+                                    <th className="p-3 text-left">Valor</th>
+                                    <th className="p-3 text-left">Status</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 {reservas.map((r) => {
-                                const data = new Date(r.horario);
+                                    const data = new Date(r.horario);
 
-                                const dia = data.toLocaleDateString('pt-BR');
-                                const hora = data.toLocaleTimeString('pt-BR', {
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                });
+                                    const dia = data.toLocaleDateString('pt-BR');
+                                    const hora = data.toLocaleTimeString('pt-BR', {
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    });
 
-                                return (
-                                    <tr key={r.id_reserva} className="border-t">
-                                    <td className="p-3">Quadra {r.id_quadra}</td>
-                                    <td className="p-3">{dia}</td>
-                                    <td className="p-3">{hora}</td>
-                                    <td className="p-3">R$ {r.valor}</td>
-                                    <td className="p-3 capitalize">{r.status}</td>
-                                    </tr>
-                                );
+                                    return (
+                                        <tr key={r.id_reserva} className="border-t">
+                                            <td className="p-3">Quadra {r.id_quadra}</td>
+                                            <td className="p-3">{dia}</td>
+                                            <td className="p-3">{hora}</td>
+                                            <td className="p-3">R$ {r.valor}</td>
+                                            <td className="p-3 capitalize">{r.status}</td>
+                                        </tr>
+                                    );
                                 })}
                             </tbody>
                         </table>
