@@ -90,7 +90,7 @@ export default function UsuarioPage(){
                 ativo: usuario.ativo ? "Ativo" : "Inativo",
                 acoes:(
                     <div className="inline-flex justify-center gap-2">
-                        <CustomButtom funcao={() => abrirEdicao(usuario)} texto={<Pencil />} tipo="secundario" />
+                        <CustomButtom funcao={() => abrirEdicao(usuario)} texto={(<Pencil size={16} />)} tipo="secundario" />
                         <CustomButtom funcao={()=>{
                             router.replace(`/usuarios/${usuario.id_pessoa}`);
                         }}
