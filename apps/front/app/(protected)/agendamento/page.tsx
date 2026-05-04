@@ -3,7 +3,7 @@
 import CustomTable from "@/components/customTable";
 import useAgendamento from "./useAgendamento"
 import CustomButtom from "@/components/customButton";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 export default function AgendamentosPage(){
     const {agendamentos} = useAgendamento();
@@ -12,7 +12,7 @@ export default function AgendamentosPage(){
         nome:d.nome,
         status:d.status,
         valor:d.valor_total,
-        acoes:(<Link href={`/agendamento/${agendamentos.id_agendamento}`}/>)
+        acoes:(<Link href={`/agendamento/${agendamentos.id_agendamento}`}>Detalhes</Link>)
     }))
        
 
