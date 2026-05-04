@@ -69,12 +69,12 @@ export default class ContaService{
         const senhaFake = crypto.randomBytes(32).toString('hex');
         const senhaHash = await bcrypt.hash(senhaFake,10)
 
-        const usuario = await this.conta.alterarSenhaPorId(dados.id_conta,senhaHash);
+        const {email} = await this.conta.alterarSenhaPorId(dados.id_conta,senhaHash);
 
-        if(!usuario) throw new AppError('Erro ao resetar senha',404);
-        console.log(usuario)
+        if(!email) throw new AppError('Erro ao resetar senha',404);
+        console.log(email)
         await enviarEmail({
-            to:usuario.email,
+            to:email,
             subject:"Reset de senha",
             html:senhaRedefinidaPorAdminTemplate(),
         })
