@@ -7,7 +7,7 @@ export default function useAgendamento(){
     const [agendamentos,setAgendamentos] = useState({});
 
     async function carregarAgendamentos(){
-        const dados = await apiRequest(`/agendamentos`);
+        const dados = await apiRequest(`/agendamento`);
         setAgendamentos(dados);
     }
 
