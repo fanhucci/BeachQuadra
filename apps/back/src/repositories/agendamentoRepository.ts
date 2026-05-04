@@ -10,7 +10,7 @@ export default class AgendamentoRepository{
                 a.*,
                 p.nome
             from agendamentos a
-            join pessoa p
+            join pessoas p
                 on p.id_pessoa = a.id_pessoa
             order by created_at
         `;
