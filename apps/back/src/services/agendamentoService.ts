@@ -46,12 +46,13 @@ export default class AgendamentoService{
 
         return await sql.begin(async(tx)=>{
 
-            await this.agenda.alterarStatusAgendamento(tx,id_agendamento,status);
+            const resultado = await this.agenda.alterarStatusAgendamento(tx,id_agendamento,status);
 
             if (status === 'cancelado'){
                 await this.reserva.cancelarReservas(tx,id_agendamento);
             }
 
+            return resultado;
         })
     }
 }
