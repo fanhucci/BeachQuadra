@@ -31,7 +31,10 @@ export default class AgendamentoController{
 
     async alterarStatusAgendamento(req:Request,res:Response){
      
-        const parse = AlterarAgendamentoSchema.safeParse(req.body);
+        const parse = AlterarAgendamentoSchema.safeParse({
+            id_agendamento:Number(req.params.id),
+            status: req.body
+        });
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message}) ;
         
