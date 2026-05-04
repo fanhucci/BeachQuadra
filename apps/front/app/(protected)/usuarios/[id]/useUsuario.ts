@@ -70,9 +70,9 @@ export function useUsuario(id:number){
     }
 
     async function redefinirSenha(){
-        await apiRequest(`/`,{
+        await apiRequest(`/contas/resetar-senha-admin`,{
             method:"POST",
-            body:JSON.stringify(usuario?.id_conta)
+            body:JSON.stringify({id_conta:usuario?.id_conta})
         })
     }
 
