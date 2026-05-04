@@ -60,9 +60,9 @@ export default class ContaRepository{
     }
     
     async alterarSenhaPorId(id:number,senha:string){
-        const [email] = await sql`
-            update contas set senha = ${senha} where id_conta = ${id} returning email
+        const [resposta] = await sql`
+            update contas set senha = ${senha} where id_conta = ${id} returning *
         `;
-        return email;
+        return resposta;
     }
 }
