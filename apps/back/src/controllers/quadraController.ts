@@ -16,6 +16,15 @@ export default class QuadraController{
         res.json(usuarios);
        
     }
+    
+    async listarReservasPorQuadra(req:Request, res:Response){
+
+        const id = Number(req.params.id);
+
+        const resposta = await this.service.listarReservasPorQuadra(id);
+
+        return res.status(200).json(resposta);
+    }
 
     async adicionarQuadra(req:Request, res:Response){
     

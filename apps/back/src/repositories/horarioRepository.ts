@@ -1,6 +1,5 @@
 import { EditarHorarioDTO } from '@app/shared';
 import sql from "../infra/db";
-import { TransactionSql } from 'postgres';
 
 export default class HorarioRepository {
     //precisa ser alterada 

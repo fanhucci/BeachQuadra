@@ -35,4 +35,8 @@ export default class QuadraService{
     async ativarQuadra(id:number){
         return await this.repo.ativarQuadra(id);
     }
+
+    async listarReservasPorQuadra(id:number){
+        return await this.repo.listarReservasPorQuadra(id);
+    }
 }
