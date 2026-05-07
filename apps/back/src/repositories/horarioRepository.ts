@@ -32,7 +32,7 @@ export default class HorarioRepository {
         return await sql`
             select
                 (select json_agg(h) from horario_funcionamento h) as horario,
-                (select json_agg(d) from dias_bloqueados d) as bloqueios  
+                coalesce((select json_agg(d) from dias_bloqueados d),'[]'::json) as bloqueios  
         `;
     }
 
