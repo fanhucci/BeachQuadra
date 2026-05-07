@@ -42,7 +42,7 @@ export default function HorarioPage(){
         }
     }
 
-    const semanaHeder = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+    const semanaHeder = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
     return (
         <div className="p-10">
