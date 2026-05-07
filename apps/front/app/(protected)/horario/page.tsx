@@ -23,7 +23,7 @@ export default function HorarioPage(){
     async function listarHorario(){
         try {
             const data = await apiRequest("/horario");
-            setHorario(data);  
+            setHorario(data.horario);  
         } catch (error) {
             
         }
