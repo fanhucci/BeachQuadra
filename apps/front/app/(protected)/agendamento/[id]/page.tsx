@@ -85,12 +85,18 @@ export default function AgendamentoDetailPage(){
                                 {reservas.map((r) => {
                                     const data = new Date(r.horario);
 
-                                    const dia = data.toLocaleDateString('pt-BR');
-                                    const hora = data.toLocaleTimeString('pt-BR', {
-                                        hour: '2-digit',
-                                        minute: '2-digit'
+                                    const dia = data.toLocaleDateString('pt-BR',{
+                                         hour: '2-digit', 
+                                        minute: '2-digit',
+                                        hour12: false ,
+                                        timeZone: 'UTC'
                                     });
-
+                                    const hora = data.toLocaleTimeString('pt-BR', {
+                                        hour: '2-digit', 
+                                        minute: '2-digit',
+                                        hour12: false ,
+                                        timeZone: 'UTC'
+                                    });
                                     return (
                                         <tr key={r.id_reserva} className="border-t">
                                             <td className="p-3">Quadra {r.id_quadra}</td>
