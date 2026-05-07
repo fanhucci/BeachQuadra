@@ -38,6 +38,9 @@ export default function Navbar() {
             <Link href="/agendamento" className="hover:text-white transition">
               Agendamentos
             </Link>
+            <Link href="/horario" className="hover:text-white transition">
+              Horario
+            </Link>
           </div>
         )}
       </div>

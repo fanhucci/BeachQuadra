@@ -28,9 +28,12 @@ export default class HorarioRepository {
         });
     }
 
-    //precisa ser alterada
     async listarHorario() {
-        return await sql`select * from horario_funcionamento order by id_horario`;
+        return await sql`
+            select
+                (select json_agg(h) from horario_funcionamento h) as horario,
+                (select json_agg(d) from dias_bloqueados d) as bloqueios  
+        `;
     }
 
     async retornarHorariosPermitidos(horarios: Date[]) {
