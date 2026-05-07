@@ -29,11 +29,12 @@ export default class HorarioRepository {
     }
 
     async listarHorario() {
-        return await sql`
+        const [data] = await sql`
             select
                 (select json_agg(h) from horario_funcionamento h) as horario,
                 coalesce((select json_agg(d) from dias_bloqueados d),'[]'::json) as bloqueios  
         `;
+        return data;
     }
 
     async retornarHorariosPermitidos(horarios: Date[]) {
