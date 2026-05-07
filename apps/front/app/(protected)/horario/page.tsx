@@ -42,6 +42,7 @@ export default function HorarioPage(){
         }
     }
 
+    const semanaHeder = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
 
     return (
         <div className="p-10">
@@ -58,7 +59,7 @@ export default function HorarioPage(){
                     <div className="p-4 border-r">Horário</div>
                     {horario.map(h => (
                         <div key={h.id_horario} className="p-4 border-r text-center">
-                        {h.dia_semana}
+                        {semanaHeder[h.dia_semana]}
                         </div>
                     ))}
                     </div>
