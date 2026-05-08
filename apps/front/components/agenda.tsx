@@ -76,18 +76,22 @@ function Slot({
     avaliable,
     isBlocked,
     isSelected,
+    hasAgendamento
 }:{ 
     title:string,
     action?:()=>void,
     avaliable:boolean,
     isBlocked:boolean,
     isSelected:boolean,
+    hasAgendamento:boolean,
 }){
+    const desativado = isBlocked || (!avaliable && hasAgendamento);
+
     return(
         <button
             type="button"
             onClick={action}
-            disabled={isBlocked}
+            disabled={desativado}
             className={` 
                     w-full h-full rounded-md text-[14px] font-medium
                     flex items-center justify-center
