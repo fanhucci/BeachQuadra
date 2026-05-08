@@ -9,42 +9,6 @@ import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } fro
 
 export default function HorarioPage(){
 
-    // const [horario,setHorario] = useState([]);
-
-    // const handleMudarCampo = (index, campo, valor) => {
-    //     setHorario(prev => {
-    //         const novoArray = [...prev];
-    //         novoArray[index] = { ...novoArray[index], [campo]: valor };
-    //         return novoArray;
-    //     });
-    // };
-
-    // useEffect(()=>{
-    //     listarHorario();
-    // },[])
-
-    // async function listarHorario(){
-    //     try {
-    //         const data = await apiRequest("/horario");
-    //         console.log(JSON.stringify(data))
-    //         setHorario(data.horario);  
-    //     } catch (error) {
-            
-    //     }
-    // }
-
-    // async function salvarHorario() {
-    //     try {
-    //         const resultado = await apiRequest("/horario",{
-    //             method:"PUT",
-    //             body:JSON.stringify(horario)
-    //         });
-    //         toast.success("Novo horário salvo");
-    //     } catch (error) {
-            
-    //     }
-    // }
-
     const {loading, horario, bloqueios, handleChange, salvarHorario} = useHorario();
 
     const semanaHeder = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
@@ -123,7 +87,7 @@ export default function HorarioPage(){
 
             <button 
                 onClick={salvarHorario}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors shadow-md shadow-blue-200"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors shadow-sm shadow-blue-200"
             >
                 <Save size={18} />
                 Salvar Configurações
@@ -132,6 +96,7 @@ export default function HorarioPage(){
 
 
         <section className="space-y-6">
+
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4">
                 <div className="flex items-center gap-2">
                     <CalendarOff className="text-red-500" size={28} />
@@ -200,3 +165,4 @@ export default function HorarioPage(){
         </div>
     );
 }
+
