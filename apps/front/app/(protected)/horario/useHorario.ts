@@ -12,10 +12,16 @@ interface HorarioDia {
     ativo: boolean;
 }
 
+interface Bloqueio {
+    id_bloqueio:number;
+    inicio_bloqueio:Date;
+    fim_bloqueio:Date;
+    motivo:string;
+}
 export default function useHorario(){
     const [loading,setLoading] = useState(false);
     const [horario, setHorario] = useState<HorarioDia[]>([]);
-    const [bloqueios,setBloqueios] = useState([]);
+    const [bloqueios,setBloqueios] = useState<Bloqueio[]>([]);
 
     async function carregarHorario(){
         try {
@@ -35,7 +41,7 @@ export default function useHorario(){
     async function salvarHorario(){
         try {
             await apiRequest(`/horario`,{
-                method:"PATCH",
+                method:"PUT",
                 body:JSON.stringify(horario)
             })
             toast.success('Horário atualizado.');
