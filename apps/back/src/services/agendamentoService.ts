@@ -23,7 +23,7 @@ export default class AgendamentoService{
         const quadras = reservas.map((r:NovaReservaDTO) => r.id_quadra);
         const horarios = reservas.map((h:NovaReservaDTO)=>h.horario);
 
-        const resposta = await this.horario.retornarHorariosPermitidos(horarios);
+        const resposta = await this.horario.validarHorarios(horarios);
 
         const horarioInvalido = resposta.some(h=>!h.permitido);
 

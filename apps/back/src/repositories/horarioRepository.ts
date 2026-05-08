@@ -36,6 +36,22 @@ export default class HorarioRepository {
         return data;
     }
 
+    async validarHorarios(horarios: Date[]) {
+        return await sql`
+            select 
+                unnest(${sql.array(horarios)}::timestamptz[]) as horario,
+                exists (
+                    select 1 FROM horario_funcionamento hf
+                    where hf.ativo = true
+                    and hf.dia_semana = extract(dow from h.horario)
+                    and (h.horario)::time >= hf.horario_abertura
+                    and (h.horario)::time + interval '1 hour' <= hf.horario_fechamento
+                ) as permitido
+            from (select unnest(${sql.array(horarios)}::timestamptz[]) as horario) as h
+        `;
+        
+    }
+
     async retornarHorariosPermitidos(dataInicio:Date, id_quadra?:number, tipo?:string) {
         return await sql`
             with lista_horarios as (
