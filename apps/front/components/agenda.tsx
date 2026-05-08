@@ -46,7 +46,7 @@ export default function Agenda({
             >
                 {dados.map((slot) => {
                     const temReserva = slot.id_agendamento !==null;
-                    const isAvailable = idQuadraEspecifica 
+                    const avaliable = idQuadraEspecifica 
                         ? !temReserva && slot.permitido
                         : slot.disponivel.length > 0;
 
@@ -57,8 +57,8 @@ export default function Agenda({
                         <div key={slot.horario} className="h-10">
                             <Slot 
                                 title={horaFormatada}
-                                isBlocked={!slot.permitido}
-                                isAvaliable={isAvailable}
+                                isBlocked={!!slot.permitido}
+                                isAvaliable={avaliable}
                                 hasAgendamento={slot.id_agendamento}
                                 isSelected={isSelected}
                                 action={() => aoSelecionar?.(slot)}
