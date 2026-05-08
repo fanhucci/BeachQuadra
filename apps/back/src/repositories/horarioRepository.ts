@@ -84,6 +84,7 @@ export default class HorarioRepository {
                         and h.horario::time >= hf.horario_abertura::time
                         and h.horario::time + interval '1 hour' <= hf.horario_fechamento::time
                     )
+                    and h.horario > now() + interval '1 hour'
                 )as permitido,
                 (
                     select 

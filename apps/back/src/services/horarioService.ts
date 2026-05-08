@@ -1,7 +1,7 @@
 
 import { EditarHorarioDTO } from "@app/shared";
 import HorarioRepository from "../repositories/horarioRepository";
-import QuadraRepository from "../repositories/quadraRepository";
+
 
 export default class HorarioService{
 
