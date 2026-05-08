@@ -81,10 +81,10 @@ export default class HorarioRepository {
                     select 
                         r.id_agendamento 
                     from reservas r 
-                    where r.id_quadra = ${id_quadra ?? null}
+                    where r.id_quadra = ${id_quadra ?? null}::int
                     and r.horario = h.horario
                     and r.status != 'cancelado'
-                    and ${id_quadra ?? null} is not null
+                    and ${id_quadra ?? null}::int is not null
                     limit 1
                     
                 )as id_agendamento,
@@ -93,8 +93,8 @@ export default class HorarioRepository {
                         coalesce(json_agg(q.id_quadra),'[]'::json)
                     from quadras q
                     where q.ativo = true
-                    and(${tipo ?? null}::text is null or q.tipo = ${tipo ?? null})
-                    and (${id_quadra ?? null}::int is null or q.id_quadra = ${id_quadra ?? null})
+                    and(${tipo ?? null}::text is null or q.tipo = ${tipo ?? null}::text)
+                    and (${id_quadra ?? null}::int is null or q.id_quadra = ${id_quadra ?? null}::int)
                     and not exists(
                         select 
                             1 
