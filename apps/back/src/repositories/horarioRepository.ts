@@ -45,9 +45,9 @@ export default class HorarioRepository {
                         1 
                     FROM horario_funcionamento hf
                     where hf.ativo = true
-                    and hf.dia_semana = extract(dow from h.horario at time zone 'America/Sao_Paulo')
-                    and (h.horario at time zone 'America/Sao_Paulo')::time >= hf.horario_abertura::time
-                    and (h.horario at time zone 'America/Sao_Paulo')::time + interval '1 hour' <= hf.horario_fechamento::time
+                    and hf.dia_semana = extract(dow from h.horario)
+                    and (h.horario)::time >= hf.horario_abertura::time
+                    and (h.horario)::time + interval '1 hour' <= hf.horario_fechamento::time
                 ) as permitido
             from unnest(${sql.array(horarios)}::timestamptz[])as h(horario)
         `;
