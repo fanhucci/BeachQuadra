@@ -3,12 +3,12 @@
 import useCadastroReservas from "@/app/(protected)/reservas/cadastrar/[id]/useCadastroReservas";
 import Agenda from "@/components/agenda";
 import CustomSwitch from "@/components/customSwitch";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 
 export default function CadastroReservasPage(){
 
-    const {dados, diasMeses, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas, setTipo, tipo} = useCadastroReservas();
+    const {tipo, dados,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas, setTipo} = useCadastroReservas();
  
     return (
         <div className="w-full h-full flex flex-col bg-gray-50">
@@ -36,74 +36,14 @@ export default function CadastroReservasPage(){
                     
             <div className="flex flex-row flex-1 w-full">
                 <div className="flex-1 flex justify-center px-6 py-4">
-                {/*     <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
-
-                        <div
-                            className="grid gap-2 mb-2 text-center"
-                            style={{ gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)` }}
-                        >
-                            {diasVisiveis.map((dia, index) => (
-                                <div key={dia} className="flex flex-col">
-                                    <span className="text-[10px] uppercase text-gray-400">
-                                        {tableHeaders[index]}
-                                    </span>
-                                    <span className="text-sm font-semibold text-gray-700">
-                                        {dia}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-
-                        
-                        <div
-                            className="flex-1 grid gap-2"
-                            style={{
-                                gridTemplateColumns: `repeat(${diasVisiveis.length}, 1fr)`,
-                                gridTemplateRows: `repeat(${horarioSemana.length}, 1fr)`,
-                            }}
-                        >
-                            {horarioSemana.map((hora) =>
-                                diasVisiveis.map((dia) => {
-                                const slot = dados[dia]?.[hora];
-                                const permitido = slot?.permitido;
-
-                                const isSelected = horarioSelecionado.reservas.some(
-                                    (r) => r.horario === slot?.horario
-                                );
-
-                                return (
-                                    <button
-                                    key={dia + hora}
-                                    type="button"
-                                    onClick={() => selecionarHorario(slot)}
-                                    disabled={!permitido || slot.quadras.length===0}
-                                    className={`
-                                        w-full h-full rounded-md text-[14px] font-medium
-                                        flex items-center justify-center
-                                        transition border
-                                        ${
-                                        isSelected
-                                            ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-100"
-                                            : permitido && slot.quadras.length>0
-                                            ? "bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100 "
-                                            : "bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                                        }
-                                    `}
-                                    >
-                                    {isSelected? (<Check size={16}/>) : hora}
-                                    </button>
-                                );
-                                })
-                            )}
-                        </div>
-                    </div>*/}
+                    <Agenda
+                        dados={dados}
+                        aoSelecionar={selecionarHorario}
+                        selecionados={horarioSelecionado.reservas}
+                    />
                 </div> 
 
-                <Agenda
-                    dados={dados}
-                    aoSelecionar={selecionarHorario}
-                    selecionados={horarioSelecionado.reservas}
-                />
+                
 
             
                 <div className="flex flex-col justify-center b-5 p-2">

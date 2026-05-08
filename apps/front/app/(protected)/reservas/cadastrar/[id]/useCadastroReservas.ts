@@ -19,9 +19,7 @@ export default function useCadastroReservas(){
     const {id} = useParams();
     const router = useRouter();
     const [dados, setDados] = useState<any>([]);
-    const [diasMeses,setDiasMeses] = useState<string[]>([]);
-    const [horarioSemana,setHorarioSemana] = useState<string[]>([]);
-    const [pagina, setPagina] = useState<number>(0)
+
     const [tipo,setTipo] = useState('individual');
     const [horarioSelecionado,setHorarioSelecionado] = useState<NovoAgendamentoDTO>({
         id_pessoa:0,
@@ -49,37 +47,6 @@ export default function useCadastroReservas(){
         setDados(slots);
     }
 
-    function organizarSlots(slots:any[]) {
-        const mapa:any = {};
-        const diasSet = new Set<string>();
-        const horasSet = new Set<string>();
-
-        for (const s of slots) {
-            const data = new Date(s.horario);
-
-            const dia = data.toLocaleDateString('pt-BR', { 
-                day: '2-digit', 
-                month: '2-digit', 
-                year: 'numeric',
-                timeZone: 'UTC'
-            });
-            const hora = data.toLocaleTimeString('pt-BR', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: false ,
-                timeZone: 'UTC'
-            });
-            diasSet.add(dia);
-            horasSet.add(hora);
-
-            if (!mapa[dia]) mapa[dia] = {};
-            mapa[dia][hora] = s;
-        }
-        setDados(mapa);
-        setDiasMeses(Array.from(diasSet));
-        setHorarioSemana(Array.from(horasSet));
-    }
-
 
     
     function proximaSemana(){
@@ -89,37 +56,40 @@ export default function useCadastroReservas(){
     }
     
     function semanaAnterior(){
-        if (segundaFeira<data) {
-            const semanaAnterior = new Date(data);
-            semanaAnterior.setDate(semanaAnterior.getDate()-7);
-            setData(semanaAnterior);
+        const novaData = new Date(data);
+        if (novaData.getTime()>=segundaFeira.getTime()) {
+            setData(novaData);
         }
     }
 
     
 
-    function selecionarHorario(valor){
-        const {horario,quadras} = valor;
+    const selecionarHorario = (slot) => {
     
         setHorarioSelecionado((prev)=>{
-            const indiceExistente = prev.reservas.findIndex(
-                (r)=> r.horario === horario
+
+            const indiceExistente = prev.reservas.find(
+                (r)=> r.horario === slot.horario
             ) 
             
-            if(indiceExistente!==-1){
+            if(indiceExistente){
                 return{
                     ...prev,
-                    reservas: prev.reservas.filter((_, i) => i !== indiceExistente),
+                    reservas: prev.reservas.filter(r=>r.horario !== slot.horario),
                 }
             }
+
+            const id_quadra = slot.disponivel[0];
+
+            if(!id_quadra) return prev;
 
             return {
                 ...prev,
                 reservas:[
                     ...prev.reservas,
                     {
-                        id_quadra:quadras[0],
-                        horario:horario
+                        id_quadra,
+                        horario:slot.horario
                     }
                 ],
 
@@ -128,20 +98,6 @@ export default function useCadastroReservas(){
         })
     }
 
-
-    useEffect(()=>{
-        carregarDiasLivres();
-    },[]);
-
-    useEffect(()=>{
-        if(user?.id_pessoa && id){
-            setHorarioSelecionado((prev)=>({
-                ...prev,
-                id_pessoa:Number(id),
-                created_by:user.id_pessoa
-            }))
-        }
-    },[user,id])
 
     useEffect(()=>{
         if(user?.id_pessoa && id){
@@ -158,16 +114,13 @@ export default function useCadastroReservas(){
     },[tipo,data])
 
     return {
-        pagina,
+        tipo,
         dados,
-        diasMeses,
-        horarioSemana,
         horarioSelecionado,
         semanaAnterior,
         proximaSemana,
         selecionarHorario,
         salvarReservas,
         setTipo,
-        tipo
     };
 }
