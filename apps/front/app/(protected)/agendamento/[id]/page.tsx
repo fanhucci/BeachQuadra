@@ -86,9 +86,6 @@ export default function AgendamentoDetailPage(){
                                     const data = new Date(r.horario);
 
                                     const dia = data.toLocaleDateString('pt-BR',{
-                                         hour: '2-digit', 
-                                        minute: '2-digit',
-                                        hour12: false ,
                                         timeZone: 'UTC'
                                     });
                                     const hora = data.toLocaleTimeString('pt-BR', {

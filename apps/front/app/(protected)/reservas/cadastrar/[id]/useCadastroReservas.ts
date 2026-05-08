@@ -19,7 +19,6 @@ export default function useCadastroReservas(){
     const {id} = useParams();
     const router = useRouter();
     const [dados, setDados] = useState<any>([]);
-
     const [tipo,setTipo] = useState('individual');
     const [horarioSelecionado,setHorarioSelecionado] = useState<NovoAgendamentoDTO>({
         id_pessoa:0,
@@ -49,14 +48,15 @@ export default function useCadastroReservas(){
 
 
     
-    function proximaSemana(){
+    const proximaSemana = ()=>{
         const proximaSemana = new Date(data);
         proximaSemana.setDate(proximaSemana.getDate()+7);
         setData(proximaSemana);
     }
     
-    function semanaAnterior(){
+    const semanaAnterior = ()=>{
         const novaData = new Date(data);
+        novaData.setDate(novaData.getDate()-7)
         if (novaData.getTime()>=segundaFeira.getTime()) {
             setData(novaData);
         }
