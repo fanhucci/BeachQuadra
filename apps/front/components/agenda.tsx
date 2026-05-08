@@ -18,14 +18,25 @@ export default function Agenda({
 
             <div className="grid grid-cols-7 gap-2 mb-2 text-center ">
                 {tableHeaders.map((label) => (
-                    <span key={label} className="text-[10px] uppercase text-gray-400 font-bold">
-                        {label}
-                    </span>
+                    <div className="flex flex-col">
+                        <span key={label} className="text-[10px] uppercase text-gray-400 font-bold">
+                            {label}
+                        </span>
+                        <span>
+                          
+                        </span>
+                    </div>
                 ))}
             </div>
 
   
-            <div className="grid grid-cols-7 gap-2">
+            <div 
+                className="grid grid-flow-col gap-2"
+                style={{
+                    gridTemplateColumns: 'repeat(7, 1fr)',
+                    gridTemplateRows: 'repeat(17, minmax(0, 1fr))'
+                }}
+            >
                 {dados.map((slot) => {
   
                     const isAvailable = idQuadraEspecifica 
