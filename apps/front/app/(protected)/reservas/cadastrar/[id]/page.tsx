@@ -16,7 +16,6 @@ export default function CadastroReservasPage(){
             <div className="px-8 py-4 flex items-center justify-between bg-white border-b shrink-0 ">
                 <button
                     onClick={semanaAnterior}
-                    disabled={pagina === 0}
                     className="px-3 py-1.5 text-sm rounded-md border bg-white hover:bg-gray-100 disabled:opacity-30"
                 >
                     <ArrowLeft /> Ant.
@@ -28,7 +27,6 @@ export default function CadastroReservasPage(){
 
                 <button
                     onClick={proximaSemana}
-                    disabled={(pagina + 1) * 7 >= diasMeses.length}
                     className="px-3 py-1.5 text-sm rounded-md border bg-white hover:bg-gray-100 disabled:opacity-30"
                 >
                     Próx. <ArrowRight />
@@ -37,8 +35,8 @@ export default function CadastroReservasPage(){
 
                     
             <div className="flex flex-row flex-1 w-full">
-                {/* <div className="flex-1 flex justify-center px-6 py-4">
-                    <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
+                <div className="flex-1 flex justify-center px-6 py-4">
+                {/*     <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
 
                         <div
                             className="grid gap-2 mb-2 text-center"
@@ -98,8 +96,8 @@ export default function CadastroReservasPage(){
                                 })
                             )}
                         </div>
-                    </div>
-                </div> */}
+                    </div>*/}
+                </div> 
 
                 <Agenda
                     dados={dados}
