@@ -57,12 +57,13 @@ export default function HorarioPage(){
         <div className="p-6 max-w-6xl mx-auto space-y-12">
         
         <section className="space-y-6">
+
             <div className="flex items-center gap-2 border-b pb-4">
                 <Clock className="text-blue-600" size={28} />
                 <h2 className="text-2xl font-bold text-gray-800">Horários de Funcionamento</h2>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-7">
                 {horario.map((h) => (
                     <div
                     key={h.id_horario}
