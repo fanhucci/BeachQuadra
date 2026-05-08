@@ -92,22 +92,22 @@ export default function HorarioPage(){
                     {h.ativo ? (
                         <div className="space-y-3">
                             <div className="flex flex-wrap items-center gap-2">
-                                <div className="flex-1 text-center">
+                                <div className="flex-1">
                                     <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Inicio</p>
                                     <input
                                         type="time"
                                         value={h.horario_abertura}
                                         onChange={(e) => handleChange(e)}
-                                        className="w-full border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>
-                                <div className="flex-1 text-center">
+                                <div className="flex-1">
                                     <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Fim</p>
                                     <input
                                         type="time"
                                         value={h.horario_fechamento}
                                         onChange={(e) => handleChange(e)}
-                                        className="w-full border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>
                             </div>
