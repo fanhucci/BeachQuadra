@@ -54,7 +54,7 @@ export default function QuadraDetailPage(){
                         {quadra.reservas.map((r) => (
                         <tr key={r.id_reserva} className="border-t hover:bg-gray-50">
                             <td className="p-3">{r.horario}</td>
-                            <td className="p-3">R$ {r.valor.toFixed(2)}</td>
+                            <td className="p-3">{r.valor}</td>
 
                             <td className="p-3 text-center">
                             <span
