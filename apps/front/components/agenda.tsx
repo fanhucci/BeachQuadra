@@ -20,7 +20,7 @@ export default function Agenda({
                 {tableHeaders.map((label, index) => {
                     const slotDoDia = dados[index * 17]; 
                     const diaMes = slotDoDia 
-                        ? `${new Date(slotDoDia.horario).getUTCDate()}/${new Date(slotDoDia.horario).getUTCMonth()}`
+                        ? `${new Date(slotDoDia.horario).toLocaleDateString('pt-br',{timeZone:'utc'})}`
                         : "";
 
                     return (
@@ -34,7 +34,7 @@ export default function Agenda({
                         </div>
                     );
                 })}
-        </div>
+            </div>
 
   
             <div 
@@ -45,9 +45,9 @@ export default function Agenda({
                 }}
             >
                 {dados.map((slot) => {
-  
+                    const temReserva = slot.id_agendamento !==null;
                     const isAvailable = idQuadraEspecifica 
-                        ? slot.disponivel.includes(idQuadraEspecifica)
+                        ? !temReserva && slot.permitido
                         : slot.disponivel.length > 0;
 
                     const isSelected = selecionados.some(s => s.horario === slot.horario);
