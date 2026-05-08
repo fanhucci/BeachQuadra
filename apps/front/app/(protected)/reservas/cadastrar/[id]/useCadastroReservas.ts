@@ -9,7 +9,12 @@ import { toast } from "sonner";
 
 export default function useCadastroReservas(){
     const hoje = new Date();
-    hoje.setHours(0,0,0,0);
+    hoje.setHours(0, 0, 0, 0);
+    const diaSemana = hoje.getDay(); 
+    const diferencaParaSegunda = diaSemana === 0 ? 6 : diaSemana - 1;
+    const segundaFeira = new Date(hoje);
+    segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
+
     const {user} = useUser();
     const {id} = useParams();
     const router = useRouter();
@@ -24,7 +29,7 @@ export default function useCadastroReservas(){
         created_by:0
     });
 
-    const [data,setData] = useState(new Date(hoje));
+    const [data,setData] = useState(new Date(segundaFeira));
 
     async function salvarReservas(){
         try {
@@ -84,7 +89,7 @@ export default function useCadastroReservas(){
     }
     
     function semanaAnterior(){
-        if (hoje<=data) {
+        if (segundaFeira<data) {
             const semanaAnterior = new Date(data);
             semanaAnterior.setDate(semanaAnterior.getDate()-7);
             setData(semanaAnterior);
