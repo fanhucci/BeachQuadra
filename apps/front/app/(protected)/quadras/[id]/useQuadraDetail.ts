@@ -23,7 +23,7 @@ export default function useQuadraDetail(){
         try {
             setLoading(true);
 
-            const dados = await apiRequest(`/quadras/${idQuadra}`);
+            const dados = await apiRequest(`/horario-disponivel/${idQuadra}`);
 
             setQuadra(dados);
 
@@ -44,6 +44,6 @@ export default function useQuadraDetail(){
 
     return{
         loading,
-        quadra
+        quadra,
     }
 }
