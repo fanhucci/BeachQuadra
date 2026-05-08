@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 export default function useCadastroReservas(){
     const hoje = new Date();
+    hoje.setHours(0,0,0,0);
     const {user} = useUser();
     const {id} = useParams();
     const router = useRouter();
