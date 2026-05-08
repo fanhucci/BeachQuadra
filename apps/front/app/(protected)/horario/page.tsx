@@ -67,7 +67,7 @@ export default function HorarioPage(){
                             >
                             <div className="flex items-center justify-between">
                                 <h3 className="font-medium text-lg">
-                                    {dias[h.dia_semana]}
+                                    {semanaHeder[h.dia_semana]}
                                 </h3>
 
                                 <input
