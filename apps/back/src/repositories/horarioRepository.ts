@@ -103,7 +103,11 @@ export default class HorarioRepository {
                         coalesce(json_agg(q.id_quadra),'[]'::json)
                     from quadras q
                     where q.ativo = true
-                    and h.horario > (now() at time zone 'America/Sao_Paulo')::timestamptz + interval '1 hour'
+                    and(
+                        ${id_quadra ?? null}::int is not null
+                        or h.horario > (now() at time zone 'America/Sao_Paulo')::timestamptz + interval '1 hour'
+                    )
+                    
                     and(${tipo ?? null}::text is null or q.tipo = ${tipo ?? null}::text)
                     and (${id_quadra ?? null}::int is null or q.id_quadra = ${id_quadra ?? null}::int)
                     and not exists(
