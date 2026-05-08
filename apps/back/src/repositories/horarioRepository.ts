@@ -97,6 +97,3 @@ export default class HorarioRepository {
 
 }
 
-//select unnest(${sql.array(horarios, 1184)}) as horario
-//
-//select unnest(${sql.array(horarios)}::timestamptz[]) as horario

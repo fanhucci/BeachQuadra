@@ -10,6 +10,7 @@ const authMiddleware = new AuthMiddleware();
 
 router.get(`/horario`,authMiddleware.auth, ctrl.listarHorario.bind(ctrl));
 router.get(`/horario-disponivel`, authMiddleware.auth, ctrl.listarHorariosDisponiveis.bind(ctrl));
+router.get(`/horario-disponivel/:id`, authMiddleware.auth, ctrl.listarAgendaDeQuadraPorId.bind(ctrl));
 router.put(`/horario`,authMiddleware.auth, ctrl.editarHorario.bind(ctrl));
 
 

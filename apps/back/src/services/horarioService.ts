@@ -20,4 +20,8 @@ export default class HorarioService{
         return await this.horario.retornarHorariosPermitidos(data, undefined, tipo);
  
     }
+
+    async listarAgendaDeQuadraPorId(id:number, data:Date){
+        return await this.horario.retornarHorariosPermitidos(data, id, undefined);
+    }
 }
