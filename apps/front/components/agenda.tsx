@@ -20,7 +20,7 @@ export default function Agenda({
                 {tableHeaders.map((label, index) => {
                     const slotDoDia = dados[index * 17]; 
                     const diaMes = slotDoDia 
-                        ? new Date(slotDoDia.horario).getUTCDate() 
+                        ? `${new Date(slotDoDia.horario).getUTCDate()}/${new Date(slotDoDia.horario).getUTCMonth()}`
                         : "";
 
                     return (
