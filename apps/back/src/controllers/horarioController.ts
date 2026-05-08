@@ -38,22 +38,27 @@ export default class HorarioController{
         
         const parse = AgendaHorarioSchema.safeParse(req.body);
 
-        if(!parse.success) return res.status(400).json({erro: parse.error.message})
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const horarios = await this.service.listarHorariosDisponiveisParaReserva(parse.data,tipo);
+        const {data} = parse.data;
+
+        const horarios = await this.service.listarHorariosDisponiveisParaReserva(data,tipo);
 
         return res.status(200).json(horarios);
     }
 
     async listarAgendaDeQuadraPorId(req:Request, res:Response){
         const idQuadra = Number(req.params.id);
+
         if(isNaN(idQuadra)) return res.status(400).json({erro: 'ID inválido'});
 
         const parse = AgendaHorarioSchema.safeParse(req.body);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
-        const horarios = await this.service.listarAgendaDeQuadraPorId(idQuadra,parse.data);
+        const {data} = parse.data;
+
+        const horarios = await this.service.listarAgendaDeQuadraPorId(idQuadra,data);
 
         return res.status(200).json(horarios);
     }
