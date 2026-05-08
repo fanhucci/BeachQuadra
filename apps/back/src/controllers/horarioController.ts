@@ -1,6 +1,7 @@
 import { listaEditarHorarioSchema, AgendaHorarioSchema } from '@app/shared';
 import { Request, Response } from 'express';
 import HorarioService from '../services/horarioService';
+import { date } from 'zod';
 
 export default class HorarioController{
     private service = new HorarioService();
@@ -34,13 +35,12 @@ export default class HorarioController{
     }
 
     async listarHorariosDisponiveis(req:Request, res:Response){
+        const queryData = req.query.data as string;
+        const data = (queryData && !isNaN(Date.parse(queryData))) 
+            ? new Date(queryData) 
+            : new Date();
+
         const tipo = (req.query.tipo as string) || 'individual';
-        
-        const parse = AgendaHorarioSchema.safeParse(req.body);
-
-        if(!parse.success) return res.status(400).json({erro: parse.error.message});
-
-        const {data} = parse.data;
 
         const horarios = await this.service.listarHorariosDisponiveisParaReserva(data,tipo);
 
@@ -49,14 +49,14 @@ export default class HorarioController{
 
     async listarAgendaDeQuadraPorId(req:Request, res:Response){
         const idQuadra = Number(req.params.id);
-
+      
         if(isNaN(idQuadra)) return res.status(400).json({erro: 'ID inválido'});
 
-        const parse = AgendaHorarioSchema.safeParse(req.body);
+        const queryData = req.query.data as string;
+        const data = (queryData && !isNaN(Date.parse(queryData))) 
+            ? new Date(queryData) 
+            : new Date();
 
-        if(!parse.success) return res.status(400).json({erro: parse.error.message})
-
-        const {data} = parse.data;
 
         const horarios = await this.service.listarAgendaDeQuadraPorId(idQuadra,data);
 
