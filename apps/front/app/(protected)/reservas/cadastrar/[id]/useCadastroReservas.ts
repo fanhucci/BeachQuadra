@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function useCadastroReservas(){
+    const hoje = new Date();
     const {user} = useUser();
     const {id} = useParams();
     const router = useRouter();
@@ -21,6 +22,8 @@ export default function useCadastroReservas(){
         reservas:[],
         created_by:0
     });
+
+    const [data,setData] = useState(new Date(hoje));
 
     async function salvarReservas(){
         try {
@@ -36,8 +39,8 @@ export default function useCadastroReservas(){
     }
 
     async function carregarDiasLivres() {
-        const slots = await apiRequest(`/horario-disponivel?tipo=${tipo}`);
-        organizarSlots(slots);    
+        const slots = await apiRequest(`/horario-disponivel?=data=${}?tipo=${tipo}`);
+        setDados(slots);
     }
 
     function organizarSlots(slots:any[]) {
@@ -74,14 +77,16 @@ export default function useCadastroReservas(){
 
     
     function proximaSemana(){
-        if ((pagina + 1) * 7 < diasMeses.length) {
-            setPagina(p => p + 1);
-        }
+        const proximaSemana = new Date(data);
+        proximaSemana.setDate(proximaSemana.getDate()+7);
+        setData(proximaSemana);
     }
     
     function semanaAnterior(){
-        if (pagina > 0) {
-            setPagina(p => p - 1);
+        if (hoje>data) {
+            const semanaAnterior = new Date(data);
+            semanaAnterior.setDate(semanaAnterior.getDate()-7);
+            setData(semanaAnterior);
         }
     }
 
@@ -144,7 +149,7 @@ export default function useCadastroReservas(){
 
     useEffect(()=>{
         carregarDiasLivres();
-    },[tipo])
+    },[tipo,data])
 
     return {
         pagina,

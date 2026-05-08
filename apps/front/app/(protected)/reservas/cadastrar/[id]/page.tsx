@@ -8,11 +8,8 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
 export default function CadastroReservasPage(){
 
-    const {dados, diasMeses, horarioSemana, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas, setTipo, tipo} = useCadastroReservas();
+    const {dados, diasMeses, pagina,horarioSelecionado, semanaAnterior, proximaSemana, selecionarHorario, salvarReservas, setTipo, tipo} = useCadastroReservas();
  
-    const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-    const diasVisiveis = diasMeses.slice(pagina * 7, pagina * 7 + 7);
-
     return (
         <div className="w-full h-full flex flex-col bg-gray-50">
 
