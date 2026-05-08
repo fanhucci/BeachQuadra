@@ -28,7 +28,7 @@ export default function useQuadra(){
         }
     }
 
-    function handleChange(e){
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = e.target;
 
         setFormData((prev)=>({
@@ -44,5 +44,7 @@ export default function useQuadra(){
     return{
         loading,
         quadras,
+
+        handleChange,
     }
 }
