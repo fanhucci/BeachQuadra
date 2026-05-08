@@ -61,7 +61,7 @@ export default function Agenda({
                                 isAvaliable={avaliable}
                                 hasAgendamento={!!slot.id_agendamento}
                                 isSelected={isSelected}
-                                action={() => aoSelecionar?.(slot)}
+                                action={(temReserva || !idQuadraEspecifica) ? () => aoSelecionar?.(slot) : undefined}
                             />
                         </div>
                     );
