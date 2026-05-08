@@ -86,7 +86,7 @@ function Slot({
     isSelected:boolean,
     hasAgendamento:boolean,
 }){
-    const desativado = isBlocked || (!isAvaliable && hasAgendamento);
+    const desativado = isBlocked || (!isAvaliable && !hasAgendamento);
 
     return(
         <button
@@ -105,7 +105,7 @@ function Slot({
                                 :isAvaliable
                                     ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
                                     :hasAgendamento
-                                        ?"bg-yellow-200 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-100"
+                                        ?"bg-yellow-100 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-100"
                                         :"bg-red-50 text-red-700 border-red-200 cursor-not-allowed hover:bg-red-100"
                     }
             `}
