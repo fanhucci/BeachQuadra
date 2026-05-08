@@ -29,8 +29,8 @@ export default function Agenda({
                 {dados.map((slot) => {
   
                     const isAvailable = idQuadraEspecifica 
-                        ? slot.quadras_disponiveis.includes(idQuadraEspecifica)
-                        : slot.quadras_disponiveis.length > 0;
+                        ? slot.disponivel.includes(idQuadraEspecifica)
+                        : slot.disponivel.length > 0;
 
                     const isSelected = selecionados.some(s => s.horario === slot.horario);
                     const horaFormatada = new Date(slot.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone:"utc" });
