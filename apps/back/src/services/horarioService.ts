@@ -16,7 +16,6 @@ export default class HorarioService{
     }
 
     async listarHorariosDisponiveisParaReserva(data:Date, tipo:string){
-
         return await this.horario.retornarHorariosPermitidos(data, undefined, tipo);
  
     }

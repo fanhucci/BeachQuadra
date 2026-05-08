@@ -35,7 +35,7 @@ export default class HorarioController{
     }
 
     async listarHorariosDisponiveis(req:Request, res:Response){
-        console.log(req.query)
+        
         const queryData = req.query.data as string;
         const data = (queryData && !isNaN(Date.parse(queryData))) 
             ? new Date(queryData) 

@@ -52,7 +52,15 @@ export default class HorarioRepository {
         
     }
 
-    async retornarHorariosPermitidos(dataInicio:Date, id_quadra?:number, tipo?:string) {
+    async retornarHorariosPermitidos(data:Date, id_quadra?:number, tipo?:string) {
+
+        const dataInicio = new Date(data);
+        const dia = dataInicio.getUTCDay();
+        const diff = dataInicio.getUTCDate() - dia + (dia === 0 ? -6 : 1);
+        
+        dataInicio.setUTCDate(diff);
+        dataInicio.setUTCHours(0, 0, 0, 0);
+
         return await sql`
             with lista_horarios as (
                 select generate_series(
