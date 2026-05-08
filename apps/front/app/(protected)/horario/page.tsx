@@ -11,7 +11,7 @@ export default function HorarioPage(){
 
     const {loading, horario, bloqueios, handleChange, salvarHorario} = useHorario();
 
-    const semanaHeder = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+    const semanaHeder = ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
     if(loading) return <LoadingSpinner/>
 
@@ -62,7 +62,7 @@ export default function HorarioPage(){
                                     <input
                                         type="time"
                                         value={h.horario_abertura}
-                                        onChange={(e) => handleChange(h.id_horario, 'horario_abertura', e.target.value)}
+                                        onBlur={(e) => handleChange(h.id_horario, 'horario_abertura', e.target.value)}
                                         className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>
@@ -71,7 +71,7 @@ export default function HorarioPage(){
                                     <input
                                         type="time"
                                         value={h.horario_fechamento}
-                                        onChange={(e) => (h.id_horario, 'horario_fechamento', e.target.value)}
+                                        onBlur={(e) => (h.id_horario, 'horario_fechamento', e.target.value)}
                                         className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>
