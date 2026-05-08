@@ -101,7 +101,6 @@ export default function HorarioPage(){
                                         className="w-full border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>
-                                <div className="mt-5 text-gray-300">—</div>
                                 <div className="flex-1">
                                     <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Fim</p>
                                     <input
