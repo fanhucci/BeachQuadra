@@ -93,16 +93,16 @@ export default class QuadraRepository {
 
     async listarReservasPorQuadra(id_quadra:number){
         return await sql`
-            select (
+            select 
                 q.*,
                 (
                     select coalesce(json_agg(r),'[]'::json) 
                     from reservas r 
                     where r.id_quadra = q.id_quadra
-                ) as reservas,
-                from quadras q
-                where q.id_quadra = ${id_quadra}
-            )
+                ) as reservas
+            from quadras q
+            where q.id_quadra = ${id_quadra}
+            
         `;
     }
 

@@ -1,4 +1,4 @@
-const base_url = process.env.NEXT_PUBLIC_BACK_URL || `achou nao em` ;
+const base_url = process.env.NEXT_PUBLIC_BACK_URL;
 
 export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
@@ -19,7 +19,7 @@ export async function apiRequest(endpoint: string, options: RequestInit = {}) {
         : null;
 
     if (!response.ok) {
-        throw new Error(data?.erro || `Erro HTTP ${response.status}, ${base_url}`);
+        throw new Error(data?.erro || `Erro HTTP ${response.status}`);
     }
 
     return data;
