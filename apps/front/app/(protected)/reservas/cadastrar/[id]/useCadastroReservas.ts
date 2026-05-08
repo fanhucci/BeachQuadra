@@ -39,7 +39,7 @@ export default function useCadastroReservas(){
     }
 
     async function carregarDiasLivres() {
-        const slots = await apiRequest(`/horario-disponivel?=data=${}?tipo=${tipo}`);
+        const slots = await apiRequest(`/horario-disponivel?=data=${data.toUTCString()}?tipo=${tipo}`);
         setDados(slots);
     }
 
@@ -83,7 +83,7 @@ export default function useCadastroReservas(){
     }
     
     function semanaAnterior(){
-        if (hoje>data) {
+        if (hoje<=data) {
             const semanaAnterior = new Date(data);
             semanaAnterior.setDate(semanaAnterior.getDate()-7);
             setData(semanaAnterior);
