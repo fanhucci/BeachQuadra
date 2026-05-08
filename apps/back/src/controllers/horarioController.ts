@@ -1,4 +1,4 @@
-import { listaEditarHorarioSchema } from '@app/shared';
+import { listaEditarHorarioSchema, AgendaHorarioSchema } from '@app/shared';
 import { Request, Response } from 'express';
 import HorarioService from '../services/horarioService';
 
@@ -36,7 +36,7 @@ export default class HorarioController{
     async listarHorariosDisponiveis(req:Request, res:Response){
         const tipo = (req.query.tipo as string) || 'individual';
         
-        const parse = .safeParse(req.body);
+        const parse = AgendaHorarioSchema.safeParse(req.body);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 

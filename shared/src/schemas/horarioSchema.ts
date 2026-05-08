@@ -23,3 +23,7 @@ export const NovoBloqueioSchema = z.object({
     motivo:z.string()
 });
 export type NovoBloqueioDTO = z.infer<typeof NovoBloqueioSchema>;
+
+export const AgendaHorarioSchema = z.object({
+    data:z.string().datetime().transform((val)=>new Date(val))
+})
