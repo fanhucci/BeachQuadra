@@ -59,6 +59,7 @@ export default function Agenda({
                                 title={horaFormatada}
                                 isBlocked={!slot.permitido}
                                 avaliable={isAvailable}
+                                hasAgendamento={slot.id_agendamento}
                                 isSelected={isSelected}
                                 action={() => aoSelecionar?.(slot)}
                             />
