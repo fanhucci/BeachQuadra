@@ -91,9 +91,9 @@ export default function HorarioPage(){
 
                     {h.ativo ? (
                         <div className="space-y-3">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                                 <div className="flex-1">
-                                    <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Abertura</p>
+                                    <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Inicio</p>
                                     <input
                                         type="time"
                                         value={h.horario_abertura}
@@ -103,7 +103,7 @@ export default function HorarioPage(){
                                 </div>
                                 <div className="mt-5 text-gray-300">—</div>
                                 <div className="flex-1">
-                                    <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Fechamento</p>
+                                    <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Fim</p>
                                     <input
                                         type="time"
                                         value={h.horario_fechamento}
