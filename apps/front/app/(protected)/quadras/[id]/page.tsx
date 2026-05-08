@@ -20,6 +20,7 @@ export default function QuadraDetailPage(){
                         Detalhe da Quadra
                     </h1>
                 </div>
+                <p>{JSON.stringify(quadra)}</p>
 
                 <div className="grid grid-cols-5 gap-4 p-6 border-b text-sm">
                 <Info label="Nome" value={quadra.nome} />
