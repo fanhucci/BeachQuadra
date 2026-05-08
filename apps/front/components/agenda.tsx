@@ -58,7 +58,7 @@ export default function Agenda({
                             <Slot 
                                 title={horaFormatada}
                                 isBlocked={!slot.permitido}
-                                avaliable={isAvailable}
+                                isAvaliable={isAvailable}
                                 hasAgendamento={slot.id_agendamento}
                                 isSelected={isSelected}
                                 action={() => aoSelecionar?.(slot)}
@@ -74,19 +74,19 @@ export default function Agenda({
 function Slot({
     title,
     action,
-    avaliable,
+    isAvaliable,
     isBlocked,
     isSelected,
     hasAgendamento
 }:{ 
     title:string,
     action?:()=>void,
-    avaliable:boolean,
+    isAvaliable:boolean,
     isBlocked:boolean,
     isSelected:boolean,
     hasAgendamento:boolean,
 }){
-    const desativado = isBlocked || (!avaliable && hasAgendamento);
+    const desativado = isBlocked || (!isAvaliable && hasAgendamento);
 
     return(
         <button
@@ -98,12 +98,12 @@ function Slot({
                     flex items-center justify-center
                     transition border
                     ${
-                        isSelected
-                            ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-500"
-                            : isBlocked
-                                ?"bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                                : avaliable
-                                    ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
+                        isBlocked
+                            ?"bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                            :isAvaliable
+                                ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
+                                :hasAgendamento
+                                    ?"bg-yellow-50 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-100"
                                     :"bg-red-50 text-red-700 border-red-200 cursor-not-allowed hover:bg-red-100"
                     }
             `}
