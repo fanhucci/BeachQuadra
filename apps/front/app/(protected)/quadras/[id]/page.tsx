@@ -24,7 +24,7 @@ export default function QuadraDetailPage(){
                 <div className="grid grid-cols-5 gap-4 p-6 border-b text-sm">
                 <Info label="Nome" value={quadra.nome} />
                 <Info label="Tipo" value={quadra.tipo} />
-                <Info label="Valor/Hora" value={`R$ ${quadra.valor.toFixed(2)}`} />
+                <Info label="Valor/Hora" value={`R$ ${quadra.valor}`} />
                 <Status label="Ativa" ok={quadra.ativo} />
                 <Status label="Disponível" ok={quadra.status} />
                 </div>
