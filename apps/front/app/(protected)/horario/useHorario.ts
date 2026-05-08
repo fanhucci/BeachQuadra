@@ -4,9 +4,17 @@ import { apiRequest } from "@/utils/apiHandler";
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
+interface HorarioDia {
+    id_horario: number;
+    dia_semana: number;
+    horario_abertura: string;
+    horario_fechamento: string;
+    ativo: boolean;
+}
+
 export default function useHorario(){
     const [loading,setLoading] = useState(false);
-    const [horario,setHorario]= useState(null);
+    const [horario, setHorario] = useState<HorarioDia[]>([]);
     const [bloqueios,setBloqueios] = useState([]);
 
     async function carregarHorario(){
@@ -37,14 +45,13 @@ export default function useHorario(){
         }
     }
 
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        const {name, value} = e.target;
-
-        setHorario((prev)=>({
-            ...prev,
-            [name]:value
-        }))
-    }
+    const handleChange = (id: number, campo: keyof HorarioDia, valor: string | boolean) => {
+        setHorario((prev) => 
+            prev.map((item) => 
+                item.id_horario === id ? { ...item, [campo]: valor } : item
+            )
+        );
+    };
 
     useEffect(()=>{
         carregarHorario();
