@@ -1,6 +1,7 @@
 'use client'
 
 import useCadastroReservas from "@/app/(protected)/reservas/cadastrar/[id]/useCadastroReservas";
+import Agenda from "@/components/agenda";
 import CustomSwitch from "@/components/customSwitch";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
@@ -39,7 +40,7 @@ export default function CadastroReservasPage(){
 
                     
             <div className="flex flex-row flex-1 w-full">
-                <div className="flex-1 flex justify-center px-6 py-4">
+                {/* <div className="flex-1 flex justify-center px-6 py-4">
                     <div className="w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3 flex flex-col">
 
                         <div
@@ -101,7 +102,13 @@ export default function CadastroReservasPage(){
                             )}
                         </div>
                     </div>
-                </div>
+                </div> */}
+
+                <Agenda
+                    dados={dados}
+                    aoSelecionar={selecionarHorario}
+                    selecionados={horarioSelecionado.reservas}
+                />
 
             
                 <div className="flex flex-col justify-center b-5 p-2">
