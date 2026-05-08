@@ -50,7 +50,7 @@ export default function HorarioPage(){
 
     if(loading) return <LoadingSpinner/>
 
-    if(!horario || !bloqueios) return <p>Erro ao renderizar pagina</p>
+    if(!horario) return <p>Erro ao renderizar pagina</p>
 
     return (
         <div className="p-6 space-y-10">

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export default function useHorario(){
     const [loading,setLoading] = useState(false);
-    const [horario,setHorario]= useState({});
+    const [horario,setHorario]= useState(null);
     const [bloqueios,setBloqueios] = useState([]);
 
     async function carregarHorario(){
