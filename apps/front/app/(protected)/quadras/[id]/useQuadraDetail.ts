@@ -24,7 +24,7 @@ export default function useQuadraDetail(){
         try {
             setLoading(true);
 
-            const dados = await apiRequest(`/horario-disponivel/${idQuadra}?data=2026-05-04T03:00:00.000Z`);
+            const dados = await apiRequest(`/horario-disponivel/${idQuadra}`);
 
             setQuadra(dados);
 
