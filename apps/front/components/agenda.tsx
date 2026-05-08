@@ -1,0 +1,91 @@
+import { Check } from "lucide-react";
+
+export default function Agenda({
+    dados, 
+    idQuadraEspecifica,
+    selecionados = [],
+    aoSelecionar
+}: {
+    dados: any[],
+    idQuadraEspecifica?: number,
+    selecionados?: any[],
+    aoSelecionar?: (slot: any) => void
+}) {
+    const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+
+    return (
+        <div className="flex-1 flex flex-col w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3">
+
+            <div className="grid grid-cols-7 gap-2 mb-2 text-center">
+                {tableHeaders.map((label) => (
+                    <span key={label} className="text-[10px] uppercase text-gray-400 font-bold">
+                        {label}
+                    </span>
+                ))}
+            </div>
+
+  
+            <div className="grid grid-cols-7 gap-2">
+                {dados.map((slot) => {
+  
+                    const isAvailable = idQuadraEspecifica 
+                        ? slot.quadras_disponiveis.includes(idQuadraEspecifica)
+                        : slot.quadras_disponiveis.length > 0;
+
+                    const isSelected = selecionados.some(s => s.horario === slot.horario);
+                    const horaFormatada = new Date(slot.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone:"utc" });
+
+                    return (
+                        <div key={slot.horario} className="h-10">
+                            <Slot 
+                                title={horaFormatada}
+                                isBlocked={!slot.permitido}
+                                avaliable={isAvailable}
+                                isSelected={isSelected}
+                                action={() => aoSelecionar?.(slot)}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
+function Slot({
+    title,
+    action,
+    avaliable,
+    isBlocked,
+    isSelected,
+}:{ 
+    title:string,
+    action?:()=>void,
+    avaliable:boolean,
+    isBlocked:boolean,
+    isSelected:boolean,
+}){
+    return(
+        <button
+            type="button"
+            onClick={action}
+            disabled={isBlocked}
+            className={` 
+                    w-full h-full rounded-md text-[14px] font-medium
+                    flex items-center justify-center
+                    transition border
+                    ${
+                        isSelected
+                            ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-500"
+                            : isBlocked
+                                ?"bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                                : avaliable
+                                    ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
+                                    :"bg-red-50 text-red-700 border-red-200 cursor-not-allowed hover:bg-red-100"
+                    }
+            `}
+        >
+            {isSelected? (<Check size={16}/>) : title}
+        </button>
+    )
+}

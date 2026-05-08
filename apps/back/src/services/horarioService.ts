@@ -1,14 +1,12 @@
 
 import { EditarHorarioDTO } from "@app/shared";
 import HorarioRepository from "../repositories/horarioRepository";
-import { gerarGradeDeHorarios } from "../infra/gerarHorarios";
 import QuadraRepository from "../repositories/quadraRepository";
 
 export default class HorarioService{
 
     private horario = new HorarioRepository();
-    private quadra = new QuadraRepository();
-    
+
     async listarHorario(){
         return await this.horario.listarHorario();
     }
@@ -17,18 +15,9 @@ export default class HorarioService{
         return await this.horario.editarHorario(horario);
     }
 
-    async listarHorariosDisponiveisParaReserva(tipo:string){
+    async listarHorariosDisponiveisParaReserva(data:Date, tipo:string){
 
-        const periodo = gerarGradeDeHorarios(14);
-
-        const horarios = await this.horario.retornarHorariosPermitidos(periodo);
-
-        const arrayHorarios = horarios.map(r=>r.horario)
-        const arrayPermitido = horarios.map(p=>p.permitido)
+        return await this.horario.retornarHorariosPermitidos(data, undefined, tipo);
  
-        const horariosDisponiveis = await this.quadra.listarQuadrasDisponiveis(arrayHorarios, arrayPermitido,tipo);
-
-        return horariosDisponiveis;
-       
     }
 }

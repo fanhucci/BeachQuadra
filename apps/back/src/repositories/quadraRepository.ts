@@ -1,7 +1,6 @@
 
 import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
 import sql from "../infra/db";
-import { TransactionSql } from "postgres";
 
 export default class QuadraRepository {
 
@@ -56,55 +55,6 @@ export default class QuadraRepository {
         `;
 
         return result[0].exists;
-    }
-
-    async listarQuadrasDisponiveis(horarios:Date[], permitido:boolean[],tipo:string){
-        return await sql`
-            with lista_horarios as (
-                select *from unnest(
-                    ${sql.array(horarios)},
-                    ${sql.array(permitido)}
-                ) as t(horario, permitido)
-            )
-
-            select 
-            h.horario,
-            h.permitido,
-            case
-                when not h.permitido then '[]'::json
-                else (
-                    select coalesce(json_agg(q.id_quadra),'[]')
-                    from quadras q
-                    where q.tipo = ${tipo} 
-                    and q.status
-                    and q.ativo
-                    and not exists (
-                        select 1
-                        from reservas r
-                        where r.id_quadra = q.id_quadra
-                        and r.horario = h.horario
-                        and r.status = 'ativo'
-                    )
-            )
-            end as quadras
-            from lista_horarios h
-        `;
-    }
-
-    async listarReservasPorQuadra(id_quadra:number){
-        const [resultado] = await sql`
-            select 
-                q.*,
-                (
-                    select coalesce(json_agg(r),'[]'::json) 
-                    from reservas r 
-                    where r.id_quadra = q.id_quadra
-                ) as reservas
-            from quadras q
-            where q.id_quadra = ${id_quadra}
-            
-        `;
-        return resultado ?? null
     }
 
 }

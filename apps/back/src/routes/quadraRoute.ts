@@ -9,7 +9,6 @@ const ctrl = new QuadraController();
 const authMiddleware = new AuthMiddleware();
 
 router.get(`/quadras`, authMiddleware.auth, ctrl.listarQuadras.bind(ctrl));
-router.get(`/quadras/:id`, authMiddleware.auth, ctrl.listarReservasPorQuadra.bind(ctrl));
 router.post(`/quadras`, authMiddleware.auth, ctrl.adicionarQuadra.bind(ctrl));
 router.put(`/quadras/:id`, authMiddleware.auth, ctrl.editarQuadra.bind(ctrl));
 router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.ativarQuadra.bind(ctrl));

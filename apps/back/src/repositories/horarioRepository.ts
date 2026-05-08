@@ -36,10 +36,14 @@ export default class HorarioRepository {
         return data;
     }
 
-    async retornarHorariosPermitidos(horarios: Date[]) {
+    async retornarHorariosPermitidos(dataInicio:Date, id_quadra?:number, tipo?:string) {
         return await sql`
             with lista_horarios as (
-                select unnest(${sql.array(horarios)}::timestamptz[]) as horario
+                select generate_series(
+                    ${dataInicio}::timestamptz,
+                    ${dataInicio}::timestamptz + interval '6 days 23 hours',
+                    interval '1 hour'
+                )as horario
             )
             select
                 h.horario,
@@ -56,11 +60,41 @@ export default class HorarioRepository {
                         and h.horario::time >= hf.horario_abertura::time
                         and h.horario::time + interval '1 hour' <= hf.horario_fechamento::time
                     )
-                ) as permitido
+                )as permitido,
+                (
+                    select 
+                        r.id_agendamento 
+                    from reservas r 
+                    where r.id_quadra = ${id_quadra ?? null}
+                    and r.horario = h.horario
+                    and r.status != 'cancelado'
+                    and ${id_quadra ?? null} is not null
+                    limit 1
+                    
+                )as id_agendamento,
+                (
+                    select 
+                        coalesce(json_agg(q.id_quadra),'[]'::json)
+                    from quadras q
+                    where q.ativo = true
+                    and(${tipo ?? null}::text is null or q.tipo = ${tipo ?? null})
+                    and (${id_quadra ?? null}::int is null or q.id_quadra = ${id_quadra ?? null})
+                    and not exists(
+                        select 
+                            1 
+                        from reservas r
+                        where r.id_quadra = q.id_quadra
+                        and r.horario = h.horario
+                        and r.status != 'cancelado'
+                    )
+                )as disponivel
+
             from lista_horarios h
+            where extract(hour from h.horario) between 7 and 23
             order by h.horario;
         `;
     }
+
 }
 
 //select unnest(${sql.array(horarios, 1184)}) as horario
