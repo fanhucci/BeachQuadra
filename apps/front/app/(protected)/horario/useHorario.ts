@@ -35,7 +35,7 @@ export default function useHorario(){
     async function salvarHorario(){
         try {
             await apiRequest(`/horario`,{
-                method:"POST",
+                method:"PATCH",
                 body:JSON.stringify(horario)
             })
             toast.success('Horário atualizado.');
