@@ -16,18 +16,25 @@ export default function Agenda({
     return (
         <div className="flex-1 flex flex-col w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3">
 
-            <div className="grid grid-cols-7 gap-2 mb-2 text-center ">
-                {tableHeaders.map((label) => (
-                    <div className="flex flex-col">
-                        <span key={label} className="text-[10px] uppercase text-gray-400 font-bold">
-                            {label}
-                        </span>
-                        <span>
-                          
-                        </span>
-                    </div>
-                ))}
-            </div>
+           <div className="grid grid-cols-7 gap-2 mb-2 text-center ">
+                {tableHeaders.map((label, index) => {
+                    const slotDoDia = dados[index * 17]; 
+                    const diaMes = slotDoDia 
+                        ? new Date(slotDoDia.horario).getUTCDate() 
+                        : "";
+
+                    return (
+                        <div key={label} className="flex flex-col">
+                            <span className="text-[10px] uppercase text-gray-400 font-bold">
+                                {label}
+                            </span>
+                            <span className="text-sm font-semibold text-gray-700">
+                                {diaMes}
+                            </span>
+                        </div>
+                    );
+                })}
+        </div>
 
   
             <div 
