@@ -23,7 +23,7 @@ export default function useQuadraDetail(){
         try {
             setLoading(true);
 
-            const dados = await apiRequest(`quadras/${idQuadra}`);
+            const dados = await apiRequest(`/quadras/${idQuadra}`);
 
             setQuadra(dados);
 
