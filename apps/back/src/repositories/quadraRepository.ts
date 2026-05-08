@@ -92,7 +92,7 @@ export default class QuadraRepository {
     }
 
     async listarReservasPorQuadra(id_quadra:number){
-        return await sql`
+        const [resultado] = await sql`
             select 
                 q.*,
                 (
@@ -104,6 +104,7 @@ export default class QuadraRepository {
             where q.id_quadra = ${id_quadra}
             
         `;
+        return resultado ?? null
     }
 
 }
