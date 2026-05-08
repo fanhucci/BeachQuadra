@@ -39,7 +39,7 @@ export default function useCadastroReservas(){
     }
 
     async function carregarDiasLivres() {
-        const slots = await apiRequest(`/horario-disponivel?=data${data.toUTCString()}&?tipo=${tipo}`);
+        const slots = await apiRequest(`/horario-disponivel?data=${data.toUTCString()}&?tipo=${tipo}`);
         setDados(slots);
     }
 
