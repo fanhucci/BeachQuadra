@@ -57,9 +57,9 @@ export default function Agenda({
                         <div key={slot.horario} className="h-10">
                             <Slot 
                                 title={horaFormatada}
-                                isBlocked={!!slot.permitido}
+                                isBlocked={!slot.permitido}
                                 isAvaliable={avaliable}
-                                hasAgendamento={slot.id_agendamento}
+                                hasAgendamento={!!slot.id_agendamento}
                                 isSelected={isSelected}
                                 action={() => aoSelecionar?.(slot)}
                             />
@@ -98,13 +98,15 @@ function Slot({
                     flex items-center justify-center
                     transition border
                     ${
-                        isBlocked
-                            ?"bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
-                            :isAvaliable
-                                ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
-                                :hasAgendamento
-                                    ?"bg-yellow-200 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-100"
-                                    :"bg-red-50 text-red-700 border-red-200 cursor-not-allowed hover:bg-red-100"
+                        isSelected
+                            ? "bg-blue-600 text-white border-blue-700 cursor-pointer hover:bg-blue-500"
+                            :isBlocked
+                                ?"bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed"
+                                :isAvaliable
+                                    ?"bg-green-50 text-green-700 border-green-200 cursor-pointer hover:bg-green-100"
+                                    :hasAgendamento
+                                        ?"bg-yellow-200 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-100"
+                                        :"bg-red-50 text-red-700 border-red-200 cursor-not-allowed hover:bg-red-100"
                     }
             `}
         >
