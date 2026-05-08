@@ -45,5 +45,6 @@ export default function useQuadraDetail(){
     return{
         loading,
         quadra,
+        id
     }
 }
