@@ -20,7 +20,7 @@ export default function Agenda({
                 {tableHeaders.map((label, index) => {
                     const slotDoDia = dados[index * 17]; 
                     const diaMes = slotDoDia 
-                        ? `${new Date(slotDoDia.horario).toLocaleDateString('pt-br',{timeZone:'utc'})}`
+                        ? `${new Date(slotDoDia.horario).toLocaleDateString('pt-br',{ day:'2-digit', month:'2-digit', timeZone:'utc'})}`
                         : "";
 
                     return (

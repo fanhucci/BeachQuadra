@@ -1,7 +1,7 @@
 'use client'
 
 import { apiRequest } from "@/utils/apiHandler";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
@@ -9,6 +9,7 @@ export default function useQuadraDetail(){
     const {id} = useParams();
     const [loading,setLoading] = useState(false);
     const [quadra,setQuadra] = useState(null);
+    const router = useRouter();
 
 
     async function carregarDados(){
@@ -36,6 +37,10 @@ export default function useQuadraDetail(){
         }
     }
 
+    const mostrarAgendamento = (slot)=>{
+        router.push(`/agendamento/${slot.id_agendamento}`);
+    }
+
     useEffect(()=>{
         if(id){
             carregarDados();
@@ -45,6 +50,7 @@ export default function useQuadraDetail(){
     return{
         loading,
         quadra,
-        id
+        id,
+        mostrarAgendamento
     }
 }
