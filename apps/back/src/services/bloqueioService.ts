@@ -13,7 +13,6 @@ export default class BloqueioService {
             }
             return true;
         })
-
     }
 
     async deletarBloqueio(ids:number[]){

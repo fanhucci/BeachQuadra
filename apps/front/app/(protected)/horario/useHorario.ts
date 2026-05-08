@@ -18,6 +18,7 @@ interface Bloqueio {
     fim_bloqueio:Date;
     motivo:string;
 }
+
 export default function useHorario(){
     const [loading,setLoading] = useState(false);
     const [horario, setHorario] = useState<HorarioDia[]>([]);
@@ -31,7 +32,7 @@ export default function useHorario(){
             setBloqueios(dados.bloqueios);
         } 
         catch (error) {
-            toast.error(error instanceof Error? error.message : 'Erro interno');
+            toast.error(error instanceof Error? error.message : 'Erro carregando horário');
         }
         finally{
             setLoading(false);
@@ -47,7 +48,19 @@ export default function useHorario(){
             toast.success('Horário atualizado.');
         } 
         catch (error) {
-            toast.error(error instanceof Error? error.message : 'Erro interno');
+            toast.error(error instanceof Error? error.message : 'Erro salvando horário');
+        }
+    }
+
+    async function novoBloqueio(){
+        try {
+            await apiRequest('/',{
+                method:"POST",
+                body:JSON.stringify(bloqueios)
+            })    
+        } 
+        catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao adicionar bloqueio');
         }
     }
 
