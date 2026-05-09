@@ -148,7 +148,7 @@ export default function HorarioPage(){
                                         <div className="flex items-center gap-2 text-sm text-gray-600">
                                             <CalendarDays size={14} className="text-gray-400" />
                                             <span className="font-mono">
-                                                {new Date(b.inicio_bloqueio).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}
+                                                {new Date(b.inicio_bloqueio).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short', timeZone:"utc" })}
                                             </span>
                                             <span className="text-gray-300">|</span>
                                             <span className="font-mono">
