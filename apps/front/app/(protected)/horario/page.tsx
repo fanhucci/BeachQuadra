@@ -26,6 +26,8 @@ export default function HorarioPage(){
     if(loading) return <LoadingSpinner/>
 
     if(!horario) return <p>Erro ao renderizar pagina</p>
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0)
 
     return (
         <div className="p-6 max-w-6xl mx-auto space-y-12">
@@ -101,7 +103,7 @@ export default function HorarioPage(){
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors shadow-sm shadow-blue-200"
                 >
                     <Save size={18} />
-                    {loading? "Salvando..." : "Salvar Configurações"}
+                    "Salvar Configurações"
                 </button>
             </section>
 
@@ -203,20 +205,18 @@ export default function HorarioPage(){
                         </div>
 
                         <div className="grid grid-cols-1 gap-4">
+                            
                             <div className="flex flex-col gap-1">
                                 <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                                     Início do Bloqueio
                                 </label>
-                               <input
+                                <input
                                     type="datetime-local"
                                     name="inicio_bloqueio"
                                     value={formData.inicio_bloqueio}
                                     onChange={handleChangeBloqueio}
-                                    className="w-full border border-gray-200 rounded-xl p-3 text-sm 
-                                            outline-none focus:ring-2 focus:ring-blue-500 
-                                            appearance-none cursor-pointer
-                                            [&::-webkit-calendar-picker-indicator]:opacity-50 
-                                            [&::-webkit-calendar-picker-indicator]:hover:opacity-100"
+                                    min={hoje.toISOString().slice(0, 16)}
+                                    className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm"
                                 />
                             </div>
 
@@ -248,7 +248,7 @@ export default function HorarioPage(){
                             disabled={loading}
                             className="flex-1 px-4 py-3 font-semibold text-white bg-red-600 rounded-xl hover:bg-red-700 transition-colors shadow-md shadow-red-100 disabled:opacity-50"
                         >
-                            {loading ? 'Salvando...' : 'Bloquear Horário'}
+                            Bloquear Horário
                         </button>
                     </div>
                 </div>

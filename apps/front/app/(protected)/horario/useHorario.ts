@@ -48,7 +48,6 @@ export default function useHorario(){
 
     async function salvarHorario(){
         try {
-            setLoading(true);
             await apiRequest(`/horario`,{
                 method:"PUT",
                 body:JSON.stringify(horario)
@@ -58,14 +57,11 @@ export default function useHorario(){
         catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro salvando horário');
         }
-        finally{
-            setLoading(false)
-        }
+
     }
 
     async function salvarBloqueio(){
         try {
-            setLoading(true);
             await apiRequest(`/bloqueio`,{
                 method:"POST",
                 body:JSON.stringify(formData)
@@ -76,9 +72,6 @@ export default function useHorario(){
         } 
         catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro ao adicionar bloqueio');
-        }
-        finally{
-            setLoading(false);
         }
     }
 
