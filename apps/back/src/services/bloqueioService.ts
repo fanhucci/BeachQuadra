@@ -1,27 +1,17 @@
-import sql from "../infra/db";
 import {NovoBloqueioDTO} from '@app/shared';
 import BloqueioRepository from "../repositories/bloqueioRepository";
 
 export default class BloqueioService {
     private bloqueio = new BloqueioRepository();
 
-    async criarNovoBloqueio(dados:NovoBloqueioDTO[]){
-        await sql.begin(async(tx)=>{
+    async criarNovoBloqueio(dados:NovoBloqueioDTO){
 
-            for(const dia of dados){
-                await this.bloqueio.bloquearNovoDia(tx,dia);
-            }
-            return true;
-        })
+        return await this.bloqueio.bloquearNovoDia(dados);
+
     }
 
-    async deletarBloqueio(ids:number[]){
-        await sql.begin(async(tx)=>{
+    async deletarBloqueio(id:number){
 
-            for(const id of ids){
-                await this.bloqueio.deletarBloqueio(tx,id);
-            }
-            return true;
-        })
+        return await this.bloqueio.deletarBloqueio(id);
     }
 }

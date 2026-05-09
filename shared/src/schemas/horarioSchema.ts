@@ -18,8 +18,8 @@ export type EditarHorarioDTO = z.infer<typeof editarHorarioSchema>;
 export const listaEditarHorarioSchema = z.array(editarHorarioSchema);
 
 export const NovoBloqueioSchema = z.object({
-    inicio:z.string(),
-    fim:z.date(),
+    inicio_bloqueio:z.string().datetime().transform((val)=>new Date(val)),
+    fim_bloqueio:z.string().datetime().transform((val)=>new Date(val)),
     motivo:z.string()
 });
 export type NovoBloqueioDTO = z.infer<typeof NovoBloqueioSchema>;

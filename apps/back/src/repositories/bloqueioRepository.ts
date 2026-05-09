@@ -1,10 +1,9 @@
-import { TransactionSql } from "postgres";
 import {NovoBloqueioDTO} from "@app/shared";
 import sql from "../infra/db";
 
 export default class BloqueioRepository{
-    async bloquearNovoDia(tx:TransactionSql,dados:NovoBloqueioDTO){
-        return await tx`
+    async bloquearNovoDia(dados:NovoBloqueioDTO){
+        return await sql`
             insert into dias_bloqueados
             (motivo,inicio_bloqueio,fim_bloqueio)
             values(${dados.motivo,dados.inicio,dados.fim})
@@ -12,8 +11,8 @@ export default class BloqueioRepository{
         `;
     }
 
-    async deletarBloqueio(tx:TransactionSql,id_bloqueio:number){
-        return await tx`
+    async deletarBloqueio(id_bloqueio:number){
+        return await sql`
             delete from dias_bloqueados
             where id_bloqueio = ${id_bloqueio}
         `
