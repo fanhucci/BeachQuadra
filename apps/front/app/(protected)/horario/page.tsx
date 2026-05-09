@@ -7,7 +7,19 @@ import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } fro
 
 export default function HorarioPage(){
 
-    const {loading, horario, bloqueios, handleChange, salvarHorario, salvarBloqueio, removerBloqueio, toggleModal, modalBloqueio} = useHorario();
+    const {
+        loading,
+        horario,
+        bloqueios,
+        handleChange,
+        salvarHorario,
+        salvarBloqueio,
+        removerBloqueio,
+        toggleModal,
+        handleChangeBloqueio,
+        formData,
+        modalBloqueio
+    } = useHorario();
 
     const semanaHeder = ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
@@ -168,8 +180,74 @@ export default function HorarioPage(){
                 aberta={modalBloqueio}
                 fechar={toggleModal}
             >
-                <>
-                </>
+                <div className="space-y-6">
+  
+                    <div>
+                        <h3 className="text-xl font-bold text-gray-800">Novo Bloqueio</h3>
+                        <p className="text-sm text-gray-500">Impeça novos agendamentos em um período específico.</p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex flex-col gap-1">
+                            <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                            Motivo do Bloqueio
+                            </label>
+                            <input
+                            type="text"
+                            name="motivo"
+                            value={formData.motivo}
+                            onChange={handleChangeBloqueio}
+                            placeholder="Ex: Manutenção, Feriado, Torneio..."
+                            className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                    Início do Bloqueio
+                                </label>
+                                <input
+                                    type="datetime-local"
+                                    name="inicio_bloqueio"
+                                    value={formData.inicio_bloqueio}
+                                    onChange={handleChangeBloqueio}
+                                    className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                    Fim do Bloqueio
+                                </label>
+                                <input
+                                    type="datetime-local"
+                                    name="fim_bloqueio"
+                                    value={formData.fim_bloqueio}
+                                    onChange={handleChangeBloqueio}
+                                    className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div className="flex items-center gap-3 pt-2">
+                        <button
+                            onClick={toggleModal}
+                            className="flex-1 px-4 py-3 font-semibold text-gray-500 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            onClick={salvarBloqueio}
+                            disabled={loading}
+                            className="flex-1 px-4 py-3 font-semibold text-white bg-red-600 rounded-xl hover:bg-red-700 transition-colors shadow-md shadow-red-100 disabled:opacity-50"
+                        >
+                            {loading ? 'Salvando...' : 'Bloquear Horário'}
+                        </button>
+                    </div>
+                </div>
             </CustomModal>
         </div>
     );

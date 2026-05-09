@@ -13,6 +13,7 @@ export const QuadraBaseSchema = z.object({
         .number()
         .positive("Valor precisa ser positivo")
         .min(1,"Valor precisa ser maior que 0")
+        .max(9999999,"Valor maximo atingido")
 });
 
 export const ListarQuadraSchema = QuadraBaseSchema.extend({
