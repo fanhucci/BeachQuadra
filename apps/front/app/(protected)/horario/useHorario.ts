@@ -61,10 +61,33 @@ export default function useHorario(){
     }
 
     async function salvarBloqueio(){
+        const inicio = new Date(`${formData.inicio_bloqueio}Z`);
+        const fim = new Date(`${formData.fim_bloqueio}Z`);
+
+        if (isNaN(inicio.getTime()) || isNaN(fim.getTime())) {
+            toast.error("Selecione as datas de início e fim completamente.");
+            return;
+        }
+
+        if (fim <= inicio) {
+            toast.error("O horário de término deve ser maior que o de início.");
+            return;
+        }
+
+        if (!formData.motivo.trim()) {
+            toast.error("O motivo do bloqueio é obrigatório.");
+            return;
+        }
+
         try {
+            const payload = {
+                ...formData,
+                inicio_bloqueio:inicio.toISOString(),
+                fim_bloqueio:fim.toISOString()
+            }
             await apiRequest(`/bloqueio`,{
                 method:"POST",
-                body:JSON.stringify(formData)
+                body:JSON.stringify(payload)
             })    
             toast.success('Bloqueio salvo.');
             toggleModal();
