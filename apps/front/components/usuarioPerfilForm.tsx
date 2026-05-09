@@ -111,7 +111,7 @@ export default function UsuarioPerfilForm({
                                         id="cpf"
                                         name="cpf"
                                         type="text"
-                                        value={formData.cpf}
+                                        value={cpfMask(formData.cpf)}
                                         onChange={handleChange}
                                         className={`
                                         border rounded-lg h-10 px-3
@@ -162,7 +162,7 @@ export default function UsuarioPerfilForm({
                                         id="telefone"
                                         name="telefone"
                                         type="text"
-                                        value={formData.telefone}
+                                        value={telefoneMask(formData.telefone)}
                                         onChange={handleChange}
                                         className={`
                                         border rounded-lg h-10 px-3
