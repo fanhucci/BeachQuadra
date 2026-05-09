@@ -5,6 +5,7 @@ import CustomModal from "@/components/customModal";
 import CustomSwitch from "@/components/customSwitch";
 import CustomTable from "@/components/customTable";
 import { apiRequest } from "@/utils/apiHandler";
+import { dinheiroMask } from "@/utils/mascaras";
 import { AdicionarQuadraDTO, ListarQuadraSchema, QuadraBaseSchema, QuadraDTO } from "@app/shared";
 import { Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -41,6 +42,7 @@ export default function QuadrasPage(){
 
     const handleChange = (e) =>{
         const {id,value} = e.target;
+
 
         setFormData(prev=>({
             ...prev,
@@ -80,7 +82,7 @@ export default function QuadrasPage(){
             const tabela = data.map((quadra:QuadraDTO)=>({
                     nome: quadra.nome,
                     tipo: quadra.tipo,
-                    valor: quadra.valor,
+                    valor: dinheiroMask(quadra.valor),
                     status:quadra.status ? "Disponível": "Indisponível",
                     ativo: quadra.ativo ? "Ativo" : "Inativo",
                     ações:(
