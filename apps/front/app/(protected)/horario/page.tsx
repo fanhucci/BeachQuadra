@@ -102,7 +102,9 @@ export default function HorarioPage(){
                         <h2 className="text-2xl font-bold text-gray-800">Bloqueios de Datas</h2>
                     </div>
 
-                    <button className="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold px-4 py-2 rounded-xl transition-all">
+                    <button className="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold px-4 py-2 rounded-xl transition-all"
+                        onClick={toggleModal}
+                    >
                         <Plus size={18} />
                         Novo Bloqueio
                     </button>
