@@ -49,9 +49,17 @@ export default function UsuarioPage(){
     const handleChange = (e) =>{
         const {id,value} = e.target;
 
+        let valorLimpo = value;
+
+        if(id === 'cpf' || id === 'telefone'){
+            valorLimpo = value.replace(/\D/g, '');
+            valorLimpo = valorLimpo.slice(0, 11);
+
+        }
+
         setFormData(prev=>({
             ...prev,
-            [id]:value
+            [id]:valorLimpo
         }))
     }
 
