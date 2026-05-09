@@ -152,7 +152,7 @@ export default function HorarioPage(){
                                             </span>
                                             <span className="text-gray-300">|</span>
                                             <span className="font-mono">
-                                                {new Date(b.fim_bloqueio).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}
+                                                {new Date(b.fim_bloqueio).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short', timeZone:"utc" })}
                                             </span>
                                         </div>
                                     </td>
