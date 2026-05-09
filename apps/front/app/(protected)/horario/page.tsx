@@ -1,8 +1,5 @@
 'use client'
-import CustomButtom from "@/components/customButton";
-import { apiRequest } from "@/utils/apiHandler";
-import { useEffect, useState } from "react"
-import { toast } from "sonner";
+
 import useHorario from "./useHorario";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } from "lucide-react";
@@ -61,7 +58,7 @@ export default function HorarioPage(){
                                     <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Inicio</p>
                                     <input
                                         type="time"
-                                        value={h.horario_abertura}
+                                        defaultValue={h.horario_abertura}
                                         onBlur={(e) => handleChange(h.id_horario, 'horario_abertura', e.target.value)}
                                         className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
@@ -70,8 +67,8 @@ export default function HorarioPage(){
                                     <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Fim</p>
                                     <input
                                         type="time"
-                                        value={h.horario_fechamento}
-                                        onBlur={(e) => (h.id_horario, 'horario_fechamento', e.target.value)}
+                                        defaultValue={h.horario_fechamento}
+                                        onBlur={(e) => handleChange(h.id_horario, 'horario_fechamento', e.target.value)}
                                         className="w-full text-center border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                                     />
                                 </div>

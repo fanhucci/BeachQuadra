@@ -52,7 +52,7 @@ export default function useHorario(){
         }
     }
 
-    async function novoBloqueio(){
+    async function salvarBloqueio(){
         try {
             await apiRequest('/',{
                 method:"POST",
