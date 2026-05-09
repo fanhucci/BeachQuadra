@@ -101,7 +101,7 @@ export default function HorarioPage(){
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors shadow-sm shadow-blue-200"
                 >
                     <Save size={18} />
-                    Salvar Configurações
+                    {loading? "Salvando..." : "Salvar Configurações"}
                 </button>
             </section>
 
@@ -207,12 +207,16 @@ export default function HorarioPage(){
                                 <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                                     Início do Bloqueio
                                 </label>
-                                <input
+                               <input
                                     type="datetime-local"
                                     name="inicio_bloqueio"
                                     value={formData.inicio_bloqueio}
                                     onChange={handleChangeBloqueio}
-                                    className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm"
+                                    className="w-full border border-gray-200 rounded-xl p-3 text-sm 
+                                            outline-none focus:ring-2 focus:ring-blue-500 
+                                            appearance-none cursor-pointer
+                                            [&::-webkit-calendar-picker-indicator]:opacity-50 
+                                            [&::-webkit-calendar-picker-indicator]:hover:opacity-100"
                                 />
                             </div>
 
