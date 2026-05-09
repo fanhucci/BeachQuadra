@@ -5,6 +5,7 @@ import CustomModal from "@/components/customModal";
 import CustomTable from "@/components/customTable";
 import { apiRequest } from "@/utils/apiHandler";
 import AuthGuard from "@/utils/authGuard";
+import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { AlterarPessoaDTO, AlterarPessoaSchema, CriarPessoaDTO, CriarPessoaSchema, ListarPessoaViewDTO } from "@app/shared";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -83,9 +84,9 @@ export default function UsuarioPage(){
             const data = await apiRequest(`/usuarios?${params.toString()}`);
             const tabela = data.map((usuario:ListarPessoaViewDTO)=>({
                 nome:usuario.nome,
-                cpf:usuario.cpf,
+                cpf:cpfMask(usuario.cpf),
                 email:usuario.email,
-                telefone:usuario.telefone,
+                telefone:telefoneMask(usuario.telefone),
                 cargo:usuario.cargo,
                 ativo: usuario.ativo ? "Ativo" : "Inativo",
                 acoes:(

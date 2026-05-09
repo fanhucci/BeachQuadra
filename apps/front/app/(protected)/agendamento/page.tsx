@@ -4,6 +4,7 @@ import CustomTable from "@/components/customTable";
 import useAgendamento from "./useAgendamento"
 import CustomButtom from "@/components/customButton";
 import { useRouter } from "next/navigation";
+import { dinheiroMask } from "@/utils/mascaras";
 
 export default function AgendamentosPage(){
     const {agendamentos} = useAgendamento();
@@ -12,7 +13,7 @@ export default function AgendamentosPage(){
     const tabela = agendamentos.map((d)=>({
         nome:d.nome,
         status:d.status,
-        valor_total:d.valor_total,
+        valor_total:dinheiroMask(d.valor_total),
         acoes:(
             <div className="inline-flex justify-center gap-2">
                 <CustomButtom funcao={()=>router.replace(`/agendamento/${d.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>

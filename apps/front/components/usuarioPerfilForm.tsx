@@ -3,6 +3,7 @@ import Campo from "./campo";
 import { AleterarSenhaErro, AlterarPessoaErros } from "@/app/(protected)/perfil/usePerfil";
 import CustomModal from "./customModal";
 import CustomButtom from "./customButton";
+import { cpfMask, telefoneMask } from "@/utils/mascaras";
 
 export type Permissions = {
   canEdit: boolean;
@@ -225,9 +226,9 @@ export default function UsuarioPerfilForm({
                         :  
                         (<div>
                             <Campo label="Nome" valor={usuario.nome} />
-                            <Campo label="CPF" valor={usuario.cpf} />
+                            <Campo label="CPF" valor={cpfMask(usuario.cpf)} />
                             <Campo label="Email" valor={usuario.email} />
-                            <Campo label="Telefone" valor={usuario.telefone} />
+                            <Campo label="Telefone" valor={telefoneMask(usuario.telefone)} />
                             <Campo label="Cargo" valor={usuario.cargo} />
                         </div>)
                     }
