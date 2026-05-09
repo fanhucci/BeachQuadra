@@ -251,7 +251,7 @@ export default function HorarioPage(){
                             disabled={loading}
                             className="flex-1 px-4 py-3 font-semibold text-white bg-red-600 rounded-xl hover:bg-red-700 transition-colors shadow-md shadow-red-100 disabled:opacity-50"
                         >
-                            Bloquear Horário
+                            Bloquear
                         </button>
                     </div>
                 </div>
