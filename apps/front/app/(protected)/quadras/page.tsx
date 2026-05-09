@@ -43,10 +43,15 @@ export default function QuadrasPage(){
     const handleChange = (e) =>{
         const {id,value} = e.target;
 
+        let valorLimpo = value;
+
+        if(id === 'valor'){
+            valorLimpo = value.replace(/\D/g, '');
+        }
 
         setFormData(prev=>({
             ...prev,
-            [id]:value
+            [id]:valorLimpo
         }))
     }
 
@@ -280,7 +285,7 @@ export default function QuadrasPage(){
             
                     <div className="flex flex-col">
                         <label htmlFor="valor" className="text-gray-700  mb-1">Valor:</label>
-                        <input id="valor" value={formData.valor} onChange={handleChange} 
+                        <input id="valor" value={dinheiroMask(formData.valor)} onChange={handleChange} 
                         className={`
                         border rounded-lg h-10 px-3
                         focus:outline-none focus:ring-2 focus:ring-blue-400
