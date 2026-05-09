@@ -20,9 +20,16 @@ interface Bloqueio {
 }
 
 export default function useHorario(){
+    const estadoInicial = {
+        inicio_bloqueio:"",
+        fim_bloqueio:"",
+        motivo:""
+    }
     const [loading,setLoading] = useState(false);
     const [horario, setHorario] = useState<HorarioDia[]>([]);
     const [bloqueios,setBloqueios] = useState<Bloqueio[]>([]);
+    const [modalBloqueio,setModalBloqueio] = useState(false);
+    const [formData,setFormData] = useState(estadoInicial)
 
     async function carregarHorario(){
         try {
@@ -54,14 +61,49 @@ export default function useHorario(){
 
     async function salvarBloqueio(){
         try {
-            await apiRequest('/',{
+            await apiRequest(`/bloqueio`,{
                 method:"POST",
-                body:JSON.stringify(bloqueios)
+                body:JSON.stringify(formData)
             })    
+            toast.success('Bloqueio salvo.');
+            fecharModal();
+            await carregarHorario();
         } 
         catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro ao adicionar bloqueio');
         }
+    }
+
+    async function removerBloqueio(id:number){
+        try {
+            await apiRequest(`/bloqueio/${id}`,{
+                method:"DELETE",
+            })    
+            toast.success('Bloqueio removido');
+            await carregarHorario();
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao remover bloqueio');
+        }
+    }
+
+    const toggleModal = ()=>{
+
+        setModalBloqueio(prev=>{
+            const novoEstado = !prev;
+
+            if(novoEstado===false) setFormData(estadoInicial);
+            
+            return novoEstado
+        });
+    }
+
+    const handleChangeBloqueio = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        const {name, value} = e.target;
+
+        setFormData((prev)=>({
+            ...prev,
+            [name]:value
+        }))
     }
 
     const handleChange = (id: number, campo: keyof HorarioDia, valor: string | boolean) => {
@@ -81,6 +123,12 @@ export default function useHorario(){
         horario,
         bloqueios,
         handleChange,
-        salvarHorario
+        salvarHorario,
+        salvarBloqueio,
+        removerBloqueio,
+        toggleModal,
+        handleChangeBloqueio,
+        formData,
+        modalBloqueio
     }
 }
