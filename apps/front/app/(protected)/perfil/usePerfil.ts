@@ -29,12 +29,18 @@ export default function usePerfil(){
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
+        let valorLimpo = value;
+
+        if(name === 'cpf' || name === 'telefone'){
+            valorLimpo = value.replace(/\D/g, '');
+            valorLimpo = valorLimpo.slice(0, 11);
+        }
         setFormData(prev => {
             if (!prev) return prev;
 
             return {
                 ...prev,
-                [name]: value,
+                [name]: valorLimpo,
             };
         });
     }

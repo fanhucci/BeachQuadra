@@ -29,7 +29,7 @@ export default function AgendamentoDetailPage(){
 
                     <div className="flex flex-col items-end">
                         <span className="text-sm text-gray-500">Valor total</span>
-                        <span className="text-lg font-semibold text-gray-800">R$ {dinheiroMask(agendamento.valor_total)} </span>
+                        <span className="text-lg font-semibold text-gray-800">{dinheiroMask(agendamento.valor_total)} </span>
                     </div>
                 </div>
 
