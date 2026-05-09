@@ -7,7 +7,7 @@ export default class BloqueioRepository{
             insert into dias_bloqueados
             (motivo,inicio_bloqueio,fim_bloqueio)
             values(${dados.motivo,dados.inicio_bloqueio,dados.fim_bloqueio})
-            returninig id_bloqueio
+            returning id_bloqueio
         `;
     }
 
