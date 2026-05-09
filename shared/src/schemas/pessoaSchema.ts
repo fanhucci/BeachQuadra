@@ -4,7 +4,7 @@ export const CriarPessoaSchema = z.object({
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres"),
     cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/),
     email: z.string().email("E-mail inválido"),
-    telefone: z.string().min(11,"Telefone inválido").regex(/^\d+$/),
+    telefone: z.string().length(11,"Telefone inválido").regex(/^\d+$/),
     id_cargo: z.coerce.number().min(1,"Selecione um cargo"),  
 })
 
@@ -44,7 +44,7 @@ export const AlterarPessoaSchema = z.object({
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres").optional(),
     cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/," Formato inválido").optional(),
     email: z.string().email("E-mail inválido").optional(),
-    telefone: z.string().min(11,"Telefone inválido").regex(/^\d+$/," Formato inválido").optional(),
+    telefone: z.string().length(11,"Telefone inválido").regex(/^\d+$/," Formato inválido").optional(),
     id_cargo: z.coerce.number().min(1,"Selecione um cargo").optional(),  
     ativo:z.boolean().optional()
 })
