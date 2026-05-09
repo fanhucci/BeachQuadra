@@ -157,7 +157,10 @@ export default function HorarioPage(){
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <button className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
+                                        <button 
+                                            onClick={()=>removerBloqueio(b.id_bloqueio)}
+                                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                                        >
                                             <Trash2 size={18} />
                                         </button>
                                     </td>
