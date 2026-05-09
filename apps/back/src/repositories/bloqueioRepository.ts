@@ -6,7 +6,7 @@ export default class BloqueioRepository{
         return await sql`
             insert into dias_bloqueados
             (motivo,inicio_bloqueio,fim_bloqueio)
-            values(${dados.motivo,dados.inicio_bloqueio,dados.fim_bloqueio})
+            values(${dados.motivo},${dados.inicio_bloqueio},${dados.fim_bloqueio})
             returning id_bloqueio
         `;
     }
