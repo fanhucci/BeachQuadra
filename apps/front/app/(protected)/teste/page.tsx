@@ -1,3 +1,5 @@
+'use client'
+
 import CustomTableTeste from "@/components/teste";
 import useQuadra from "../quadras/useQuadra";
 import LoadingSpinner from "@/components/LoadingSpinner";
