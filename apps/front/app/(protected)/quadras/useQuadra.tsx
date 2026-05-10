@@ -38,7 +38,7 @@ export default function useQuadra(){
     const [formData,setFormData] = useState<Quadra>(estadoInicial);
     const [erros,setErros] = useState<Partial<Record<keyof Quadra, string>>>({});
     const [modalOn,setModalOn] = useState<boolean>(false);
-
+    const [editionOn,setEditionOn] = useState<boolean>(false);
 
     async function carregarQuadras() {
 
@@ -111,6 +111,9 @@ export default function useQuadra(){
         catch(error){
             toast.error(error instanceof Error? error.message : 'Erro ao editar quadra');
         }
+        finally{
+            setEditionOn(false)
+        }
     }
 
     async function desativarQuadra(id:number){
@@ -142,7 +145,10 @@ export default function useQuadra(){
 
         let valorLimpo = value;
 
-        if(name === 'valor') valorLimpo = value.replace(/\D/g, '');
+        if(name === 'valor') {
+            valorLimpo = value.replace(/\D/g, '');
+            valorLimpo.slice(0,7)
+        }
 
         setFormData((prev)=>({
             ...prev,
@@ -152,6 +158,7 @@ export default function useQuadra(){
 
     const abrirEdicao = (quadra:Quadra) =>{
         setFormData(quadra);
+        setEditionOn(true)
         setModalOn(true);
     }
 
@@ -164,6 +171,7 @@ export default function useQuadra(){
     const fecharModal = () =>{
         setFormData(estadoInicial);
         setModalOn(false);
+        setEditionOn(false);
         setErros({});
     }
 
@@ -207,11 +215,13 @@ export default function useQuadra(){
         formData,
         erros,
         modalOn,
+        editionOn,
         handleChange,
         setFiltros,
         adicionarQuadra,
         editarQuadra,
         abrirModal,
         fecharModal,
+        
     }
 }

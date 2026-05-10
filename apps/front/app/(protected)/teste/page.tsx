@@ -17,6 +17,7 @@ export default function TestePage(){
         formData,
         erros,
         modalOn,
+        editionOn,
         handleChange,
         setFiltros,
         adicionarQuadra,
@@ -61,7 +62,11 @@ export default function TestePage(){
        
 
                 <button onClick={fecharModal}>Cancelar</button>
-                <button onClick={adicionarQuadra}>Adicionar</button>
+                {
+                    editionOn
+                        ? <button onClick={editarQuadra}>Editar</button>
+                        : <button onClick={adicionarQuadra}>Adicionar</button>
+                }
             </CustomModal>
         </div>
 
