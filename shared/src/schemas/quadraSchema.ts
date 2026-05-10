@@ -1,5 +1,30 @@
 import {z} from "zod";
 
+const tiposQuadraEnum = [
+    "individual",
+    "duplas"
+] as const;
+
+export const NovaQuadraSchema = z.object({
+    nome:z.string().min(4,'Mínimo de 4 caractéres').max(30,'Máximo de 30 caractéres'),
+    tipo:z.enum(tiposQuadraEnum),
+    status:z.boolean(),
+    valor:z.coerce.number().min(1,"Valor mínimo: R$ 0,01").max(9999999,"Valor máximo: R$ 99.999,99")
+})
+
+export const QuadraSchema = NovaQuadraSchema.extend({
+    id_quadra:z.coerce.number().int(),
+    ativo:z.boolean()
+})
+
+export const EditarQuadraSchema = QuadraSchema.partial().extend({
+    id_quadra:z.coerce.number().int()
+});
+
+export type Quadra = z.infer<typeof QuadraSchema>;
+export type NovaQuadra = z.infer<typeof NovaQuadraSchema>;
+export type EditarQuadra = z.infer<typeof EditarQuadraSchema>;
+
 export const QuadraBaseSchema = z.object({
     nome:z
         .string()

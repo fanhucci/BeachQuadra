@@ -4,7 +4,7 @@ import { apiRequest } from "@/utils/apiHandler";
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
-interface HorarioDia {
+type HorarioDia = {
     id_horario: number;
     dia_semana: number;
     horario_abertura: string;
@@ -12,7 +12,7 @@ interface HorarioDia {
     ativo: boolean;
 }
 
-interface Bloqueio {
+type Bloqueio = {
     id_bloqueio:number;
     inicio_bloqueio:Date;
     fim_bloqueio:Date;
@@ -28,8 +28,8 @@ export default function useHorario(){
     const [loading,setLoading] = useState(false);
     const [horario, setHorario] = useState<HorarioDia[]>([]);
     const [bloqueios,setBloqueios] = useState<Bloqueio[]>([]);
-    const [modalBloqueio,setModalBloqueio] = useState(false);
-    const [formData,setFormData] = useState(estadoInicial)
+    const [modalBloqueio,setModalBloqueio] = useState<boolean>(false);
+    const [formData,setFormData] = useState(estadoInicial);
 
     async function carregarHorario(){
         try {
