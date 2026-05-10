@@ -147,7 +147,7 @@ export default function useQuadra(){
 
         if(name === 'valor') {
             valorLimpo = value.replace(/\D/g, '');
-            valorLimpo.slice(0,7)
+            valorLimpo = valorLimpo.slice(0,7)
         }
 
         setFormData((prev)=>({
