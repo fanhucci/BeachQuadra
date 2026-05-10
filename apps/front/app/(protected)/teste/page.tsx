@@ -1,5 +1,5 @@
 import CustomTableTeste from "@/components/teste";
-import useQuadra from "../useQuadra";
+import useQuadra from "../quadras/useQuadra";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CustomModal from "@/components/customModal";
 import CustomInput from "@/components/customInput";
