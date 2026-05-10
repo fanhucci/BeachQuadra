@@ -5,6 +5,7 @@ import useQuadra from "../quadras/useQuadra";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CustomModal from "@/components/customModal";
 import CustomInput from "@/components/customInput";
+import { dinheiroMask } from "@/utils/mascaras";
 
 export default function TestePage(){
 
@@ -52,7 +53,7 @@ export default function TestePage(){
                     label="Valor"
                     name="valor"
                     onChange={(e)=>handleChange(e)}
-                    value={formData.valor}
+                    value={dinheiroMask(formData.valor)}
                     erro={erros.valor}
                     type="text"
                 />
