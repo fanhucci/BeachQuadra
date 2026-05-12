@@ -180,7 +180,7 @@ export default function usePageCrud<
 
     useEffect(()=>{
         carregar();
-    },[]);
+    },[filtro]);
 
     return{
         loading,
