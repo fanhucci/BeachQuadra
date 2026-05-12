@@ -1,5 +1,11 @@
 import {z} from 'zod';
 
+const tiposPesquisaEnum = [
+    'nome',
+    'cpf',
+    'email'
+] as const;
+
 export const NovoUsuarioSchema = z.object({
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres"),
     cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/),
@@ -10,16 +16,25 @@ export const NovoUsuarioSchema = z.object({
 })
 
 export const UsuarioSchema = NovoUsuarioSchema.extend({
-    id_pessoa:z.coerce.number().int()
-})
+    id_pessoa:z.coerce.number().int(),
+    ativo:z.boolean()
+}).omit({senha:true})
 
 export const EditarUsuarioSchema = NovoUsuarioSchema.partial().extend({
     id_pessoa:z.coerce.number().int()
+}).omit({senha:true})
+
+export const UsuarioSearchSchema = z.object({
+    search:z.string().optional,
+    tipo:z.enum(tiposPesquisaEnum),
+    id_cargo:z.coerce.number().int().optional,
+    ativo:z.boolean().optional()
 })
 
 export type Usuario = z.infer<typeof UsuarioSchema>;
 export type NovoUsuario = z.infer<typeof NovoUsuarioSchema>;
 export type EditarUsuario = z.infer<typeof EditarUsuarioSchema>;
+export type UsuarioSearch = z.infer<typeof UsuarioSearchSchema>;
 
 export const CadastrarUsuarioSchema = z.object({
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres"),

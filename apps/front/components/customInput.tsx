@@ -30,7 +30,7 @@ export default function CustomInput({
                 placeholder={placeholder}
                 name={name}
                 type={type}
-                value={value}
+                value={value ?? ''}
                 onChange={onChange}
                 className={`
                 border rounded-lg h-11 px-3 text-sm
