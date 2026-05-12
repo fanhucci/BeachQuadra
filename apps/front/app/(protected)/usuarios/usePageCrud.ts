@@ -8,8 +8,8 @@ import { ZodType } from 'zod';
 
 export default function usePageCrud<
     T,
-    SCreate extends ZodType<any>,
-    SUpdate extends ZodType<any>
+    SCreate extends ZodType<any> = ZodType<any>, 
+    SUpdate extends ZodType<any> = ZodType<any>
 >({
     endpoint,
     criarSchema,

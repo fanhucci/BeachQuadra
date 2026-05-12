@@ -32,7 +32,7 @@ export default function TestePage(){
         abrirModal,
         fecharModal
         
-    } = usePageCrud({
+    } = usePageCrud<Quadra>({
         endpoint:'quadras',
         criarSchema:NovaQuadraSchema,
         editarSchema:EditarQuadraSchema
