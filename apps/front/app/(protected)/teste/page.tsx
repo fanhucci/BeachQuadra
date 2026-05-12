@@ -85,8 +85,8 @@ export default function TestePage(){
                 <CustomInput
                     label="Nome"
                     name="nome"
-                    onChange={(e)=>handleChange(e)}
-                    value={formData.nome}
+                    onChange={handleChange}
+                    value={formData.nome ?? ''}
                     erro={erros.nome}
                     type="text"
                 />
@@ -95,8 +95,8 @@ export default function TestePage(){
                 <CustomInput
                     label="Valor"
                     name="valor"
-                    onChange={(e)=>handleChange(e)}
-                    value={dinheiroMask(formData.valor)}
+                    onChange={handleChange}
+                    value={dinheiroMask(formData.valor ?? 0)}
                     erro={erros.valor}
                     type="text"
                 />
