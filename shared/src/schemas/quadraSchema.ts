@@ -21,11 +21,33 @@ export const EditarQuadraSchema = QuadraSchema.partial().extend({
     id_quadra:z.coerce.number().int()
 });
 
+export const QuadraSearchSchema = z.object({
+    search: z.string().optional(),
+    tipo: z.enum(tiposQuadraEnum).optional(),
+    status: z
+    .string()
+    .optional()
+    .transform((val) => {
+        if (val === undefined) return undefined;
+        if (val === "true") return true;
+        if (val === "false") return false;
+        return undefined;
+    }),
+    ativo: z
+    .string()
+    .optional()
+    .transform((val) => {
+        if (val === undefined) return undefined;
+        if (val === "true") return true;
+        if (val === "false") return false;
+        return undefined;
+    })
+})
+
 export type Quadra = z.infer<typeof QuadraSchema>;
 export type NovaQuadra = z.infer<typeof NovaQuadraSchema>;
 export type EditarQuadra = z.infer<typeof EditarQuadraSchema>;
-
-
+export type QuadraSearch = z.infer<typeof QuadraSearchSchema>;
 
 
 export const QuadraBaseSchema = z.object({

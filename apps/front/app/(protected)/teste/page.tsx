@@ -5,11 +5,20 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import CustomModal from "@/components/customModal";
 import CustomInput from "@/components/customInput";
 import { dinheiroMask } from "@/utils/mascaras";
-import usePageCrud from "../usuarios/usePageCrud";
-import { Quadra, NovaQuadraSchema, EditarQuadraSchema } from "@app/shared";
+import usePageCrud from "../../../hooksGenericos/usePageCrud";
+import { Quadra, NovaQuadraSchema, EditarQuadraSchema, QuadraSearch } from "@app/shared";
 import { useMemo } from "react";
+import useFilter from "@/hooksGenericos/useFilter";
+import CustomButtom from "@/components/customButton";
 
 export default function TestePage(){
+
+    const {queryString ,filters, handleFilters} = useFilter<QuadraSearch>({
+        search:'',
+        tipo:undefined,
+        status:true,
+        ativo:true
+    });
 
     const {
         loading,
@@ -36,7 +45,8 @@ export default function TestePage(){
         endpoint:'quadras',
         criarSchema:NovaQuadraSchema,
         editarSchema:EditarQuadraSchema,
-        idKey:"id_quadra"
+        idKey:"id_quadra",
+        filtro:queryString
     });
 
 
@@ -73,7 +83,73 @@ export default function TestePage(){
 
     return(
         <div>
-            <button onClick={abrirModal}>abrir modal</button>
+            <div className="flex items-center justify-between">
+                                    
+                <h1 className="text-xl font-semibold text-gray-800">Quadras</h1>
+                        
+                    <CustomButtom
+                        funcao={() => abrirModal}
+                        texto="Nova Quadra"
+                        tipo="terciario"
+                    />
+                </div>
+                        
+                <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:
+                            
+                        <div className="flex flex-wrap items-center gap-3 bg-white ">
+                            <input
+                                className="flex-1 min-w-[200px] border border-gray-200 rounded-lg px-3 h-10 text-sm
+                                focus:outline-none focus:ring-2
+                                transition"
+                                type="text"
+                                placeholder="Pesquisar quadra..."
+                                value={filters.search}
+                                onChange={handleFilters}
+                            />
+            
+                            <select
+                                className="border border-gray-200 rounded-lg px-3 h-10 text-sm bg-white
+                                focus:outline-none focus:ring-2
+                                transition"
+                                value={filters.tipo}
+                                onChange={handleFilters}
+                            >
+                                <option value="">Todos tipos</option>
+                                <option value="dupla">Dupla</option>
+                                <option value="individual">Individual</option>
+                 
+                            </select>
+            
+                            <select
+                                className="border border-gray-200 rounded-lg px-3 h-10 text-sm bg-white
+                                focus:outline-none focus:ring-2
+                                transition"
+                                value={filters.status}
+                                onChange={handleFilters}
+                            >
+                                <option value="">Todos status</option>
+                                <option value="true">Disponível</option>
+                                <option value="false">Indisponível</option>
+                 
+                            </select>
+            
+                            <select
+                                className="border border-gray-200 rounded-lg px-3 h-10 text-sm bg-white
+                                focus:outline-none focus:ring-2 
+                                transition"
+                                value={filters.ativo}
+                                onChange={handleFilters}
+                            >
+                                <option value="">Todos</option>
+                                <option value="true">Ativos</option>
+                                <option value="false">Inativos</option>
+                            </select>
+                        </div>
+            
+                    </div>
+                </div>
+   
             <CustomTableTeste
                 columns={columns}
                 data={dados}        

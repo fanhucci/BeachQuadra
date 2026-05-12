@@ -14,12 +14,14 @@ export default function usePageCrud<
     endpoint,
     criarSchema,
     editarSchema,
-    idKey
+    idKey,
+    filtro
 }:{
     endpoint:string;
     criarSchema:SCreate;
     editarSchema:SUpdate;
     idKey:string;
+    filtro?:string;
 }){
     const [loading,setLoading] = useState<boolean>(false);
     const [buttonLoading,setButtonLoading] = useState<boolean>(false);
@@ -34,7 +36,7 @@ export default function usePageCrud<
     async function carregar(){
         try {
             setLoading(true);
-            const resposta = await apiRequest(`/${endpoint}`);
+            const resposta = await apiRequest(`/${endpoint}${filtro}`);
             setDados(resposta);
         } catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro ao carregar dados.');
