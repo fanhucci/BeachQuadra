@@ -25,7 +25,7 @@ export const EditarUsuarioSchema = NovoUsuarioSchema.partial().extend({
 }).omit({senha:true})
 
 export const UsuarioSearchSchema = z.object({
-    search:z.string().optional,
+    search:z.string().optional(),
     tipo:z.enum(tiposPesquisaEnum),
     id_cargo:z.coerce.number().int().optional,
     ativo:z.boolean().optional()
