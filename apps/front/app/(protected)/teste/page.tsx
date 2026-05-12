@@ -104,6 +104,7 @@ export default function TestePage(){
                                 transition"
                                 type="text"
                                 placeholder="Pesquisar quadra..."
+                                name="search"
                                 value={filters.search}
                                 onChange={handleFilters}
                             />
@@ -113,6 +114,7 @@ export default function TestePage(){
                                 focus:outline-none focus:ring-2
                                 transition"
                                 value={filters.tipo}
+                                name="tipo"
                                 onChange={handleFilters}
                             >
                                 <option value="">Todos tipos</option>
@@ -126,6 +128,7 @@ export default function TestePage(){
                                 focus:outline-none focus:ring-2
                                 transition"
                                 value={filters.status}
+                                name="status"
                                 onChange={handleFilters}
                             >
                                 <option value="">Todos status</option>
@@ -139,6 +142,7 @@ export default function TestePage(){
                                 focus:outline-none focus:ring-2 
                                 transition"
                                 value={filters.ativo}
+                                name="ativo"
                                 onChange={handleFilters}
                             >
                                 <option value="">Todos</option>
