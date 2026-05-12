@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 export default function useFilter<F extends object>(valoresIniciais:F){
 
-    const [filters,setFilters] = useState<F>({});
+    const [filters,setFilters] = useState<F>(valoresIniciais);
 
     const queryString = useMemo(() => {
         const params = new URLSearchParams();
