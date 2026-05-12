@@ -16,7 +16,7 @@ export default function UsuariosPage(){
         ativo:true
     });
 
-    const {loading,dados,editar,ativar,desativar} = usePageCrud<Usuario>({
+    const {loading,dados, abrirEdicao,ativar,desativar} = usePageCrud<Usuario>({
         idKey:'id_pessoa',
         endpoint:'usuarios',
         filtro: queryString,
@@ -25,7 +25,7 @@ export default function UsuariosPage(){
     });
 
     const {colunas} = useUsuariosTable({
-        editar:editar,
+        editar:abrirEdicao,
         ativar:ativar,
         desativar:desativar
     });
