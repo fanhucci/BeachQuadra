@@ -24,7 +24,7 @@ export default function useQuadra(){
     }
 
     const estadoInicial:Quadra = {
-        id_quadra:0,
+        id:0,
         nome:"",
         tipo:"individual",
         status:true,
@@ -95,7 +95,7 @@ export default function useQuadra(){
             return;
         }
 
-        const id = parse.data.id_quadra;
+        const id = parse.data.id;
 
         try{
             await apiRequest(`/quadras/${id}`,{
@@ -195,8 +195,8 @@ export default function useQuadra(){
                 <div className="flex gap-2">
                     <button onClick={() => abrirEdicao(quadra)}>Editar</button>
                     {quadra.ativo 
-                        ? <button onClick={() => desativarQuadra(quadra.id_quadra)}>Desativar</button>
-                        : <button onClick={() => ativarQuadra(quadra.id_quadra)}>Ativar</button>
+                        ? <button onClick={() => desativarQuadra(quadra.id)}>Desativar</button>
+                        : <button onClick={() => ativarQuadra(quadra.id)}>Ativar</button>
                     }
                 </div>
             )

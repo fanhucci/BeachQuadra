@@ -25,7 +25,7 @@ export default function useHorario(){
         fim_bloqueio:"",
         motivo:""
     }
-    const [loading,setLoading] = useState(false);
+    const [loading,setLoading] = useState<boolean>(false);
     const [horario, setHorario] = useState<HorarioDia[]>([]);
     const [bloqueios,setBloqueios] = useState<Bloqueio[]>([]);
     const [modalBloqueio,setModalBloqueio] = useState<boolean>(false);
@@ -146,13 +146,13 @@ export default function useHorario(){
         loading,
         horario,
         bloqueios,
+        formData,
+        modalBloqueio,
         handleChange,
         salvarHorario,
         salvarBloqueio,
         removerBloqueio,
         toggleModal,
         handleChangeBloqueio,
-        formData,
-        modalBloqueio
     }
 }

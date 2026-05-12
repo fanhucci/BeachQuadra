@@ -1,14 +1,22 @@
 'use client'
 
 import { apiRequest } from "@/utils/apiHandler";
+import { Quadra } from "@app/shared";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
+export type Slot = {
+    id_agendamento:number;
+    horario:Date;
+    permitido:boolean;
+    quadras:number[];
+}
+
 export default function useQuadraDetail(){
     const {id} = useParams();
-    const [loading,setLoading] = useState(false);
-    const [quadra,setQuadra] = useState(null);
+    const [loading,setLoading] = useState<boolean>(false);
+    const [quadra,setQuadra] = useState<Quadra|null>(null);
     const router = useRouter();
 
 
@@ -37,7 +45,7 @@ export default function useQuadraDetail(){
         }
     }
 
-    const mostrarAgendamento = (slot)=>{
+    const mostrarAgendamento = (slot:Slot)=>{
         router.push(`/agendamento/${slot.id_agendamento}`);
     }
 
