@@ -78,9 +78,6 @@ export default function TestePage(){
             }
         ], [dados]);
 
-    if(loading) return <LoadingSpinner/>
-
-
     return(
         <div>
             <div className="flex items-center justify-between">
@@ -153,11 +150,16 @@ export default function TestePage(){
             
                     </div>
                 </div>
-   
-            <CustomTableTeste
-                columns={columns}
-                data={dados}        
-            />
+        
+            {
+                loading
+                ?   <LoadingSpinner/>
+                :   <CustomTableTeste
+                        columns={columns}
+                        data={dados}        
+                    />
+            }
+            
 
             <CustomModal
                 aberta={modalOn}
