@@ -31,7 +31,7 @@ export default function UsuariosPage(){
     });
 
     return(
-        <main className="flex flex-1 w-full">
+        <main className="flex flex-col flex-1 w-full">
 
             <div>
                 header
