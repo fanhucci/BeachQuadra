@@ -63,7 +63,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                         //className="!py-2 !px-3"
                     >
                         <CalendarPlus size={18} />
-                        <span className="hidden xl:inline">Nova Reserva</span>
+                        <span className="hidden xl:inline">Reserva</span>
                     </LinkButton>
 
                     <SubmitButtom 
@@ -78,6 +78,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                     {usuario.ativo ? (
                         <SubmitButtom 
                             onClick={() => acoes.desativar(usuario.id_pessoa)}
+                            estilo='perigo'
                             //className="text-red-500 hover:bg-red-50 p-2 rounded-md"
                             title="Desativar"
                         >
@@ -86,6 +87,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                         ) : (
                         <SubmitButtom 
                             onClick={() => acoes.ativar(usuario.id_pessoa)}
+                            estilo="secundario"
                             //className="text-green-500 hover:bg-green-50 p-2 rounded-md"
                             title="Ativar"
                         >
