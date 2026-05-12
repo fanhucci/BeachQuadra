@@ -19,7 +19,7 @@ interface CustomTableProps<T> {
 export default function CustomTable<T>({
   data,
   columns,
-  isLoading
+  isLoading,
 }: CustomTableProps<T>) {
   return (
     <div className="relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all">
@@ -27,7 +27,7 @@ export default function CustomTable<T>({
 
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
         </div>
       )}
 

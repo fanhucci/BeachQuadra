@@ -16,7 +16,7 @@ export default function UsuariosPage(){
         ativo:true
     });
 
-    const {dados,editar,ativar,desativar} = usePageCrud<Usuario>({
+    const {loading,dados,editar,ativar,desativar} = usePageCrud<Usuario>({
         idKey:'id_pessoa',
         endpoint:'usuarios',
         filtro: queryString,
@@ -42,6 +42,8 @@ export default function UsuariosPage(){
             <CustomTable
                 columns={colunas}
                 data={dados}
+                isLoading={loading}
+                
             />
 
             {/* <CustomModal>

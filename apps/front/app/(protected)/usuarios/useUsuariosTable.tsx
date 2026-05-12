@@ -22,27 +22,27 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
     }
 
     const colunas = useMemo(()=>[
-        { key: "nome", label: "Nome" },
+        { key: "nome", label: "Nome", align: "left" },
         { 
-            key: "cpf", label: "CPF",
+            key: "cpf", label: "CPF", align: "right",
             render:(value:string)=>(cpfMask(value))
         },
-        { key: "email", label: "E-mail"},
+        { key: "email", label: "E-mail" , align: "left"},
         { 
-            key: "telefone", label: "Telefone",
+            key: "telefone", label: "Telefone", align: "right",
             render:(value:string)=>(telefoneMask(value))
         },
         {
-            key:'id_cargo', label:"Cargo",
+            key:'id_cargo', label:"Cargo" , align: "left",
             render:(value:number)=>cargos[value]
         },
         { 
-            key:"ativo", label: "Conta",
+            key:"ativo", label: "Conta", align: "left",
             render:(value:boolean)=>value? 'Ativa' : 'Inativa'
             
         },
         { 
-            key: "ações", label: "Ações",
+            key: "ações", label: "Ações", align: "center",
             render:(_:any, usuario:Usuario)=>(
                 <div className="felx gap-2">
                     <SubmitButtom 
