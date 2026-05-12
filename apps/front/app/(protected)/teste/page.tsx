@@ -108,11 +108,11 @@ export default function TestePage(){
                 {
                     editionOn
                         ? <button
-       
-                            onClick={editar}>Editar</button>
+                            disabled={buttonLoading} 
+                            onClick={editar}>Editar {JSON.stringify(buttonLoading)}</button>
                         : <button 
-       
-                            onClick={adicionar}>Adicionar</button>
+                            disabled={buttonLoading} 
+                            onClick={adicionar}>Adicionar {JSON.stringify(buttonLoading)}</button>
                 }
             </CustomModal>
         </div>
