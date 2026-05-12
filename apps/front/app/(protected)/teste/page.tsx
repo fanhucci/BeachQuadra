@@ -35,7 +35,8 @@ export default function TestePage(){
     } = usePageCrud<Quadra>({
         endpoint:'quadras',
         criarSchema:NovaQuadraSchema,
-        editarSchema:EditarQuadraSchema
+        editarSchema:EditarQuadraSchema,
+        idKey:"id_quadra"
     });
 
 
@@ -59,8 +60,8 @@ export default function TestePage(){
                     <div className="flex gap-2">
                         <button onClick={() => abrirEdicao(quadra)}>Editar</button>
                         {quadra.ativo 
-                            ? <button onClick={() => ativar(quadra.id)}>Desativar</button>
-                            : <button onClick={() => desativar(quadra.id)}>Ativar</button>
+                            ? <button onClick={() => ativar(quadra.id_quadra)}>Desativar</button>
+                            : <button onClick={() => desativar(quadra.id_quadra)}>Ativar</button>
                         }
                     </div>
                 )

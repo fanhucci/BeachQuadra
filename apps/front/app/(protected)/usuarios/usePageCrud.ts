@@ -13,11 +13,13 @@ export default function usePageCrud<
 >({
     endpoint,
     criarSchema,
-    editarSchema
+    editarSchema,
+    idKey
 }:{
     endpoint:string;
     criarSchema:SCreate;
     editarSchema:SUpdate;
+    idKey:string;
 }){
     const [loading,setLoading] = useState<boolean>(false);
     const [buttonLoading,setButtonLoading] = useState<boolean>(false);
@@ -79,7 +81,7 @@ export default function usePageCrud<
             return;
         }
 
-        const id = parse.data.id;
+        const id = parse.data[idKey];
 
         try {
             setButtonLoading(true);

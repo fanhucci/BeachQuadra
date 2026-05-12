@@ -10,11 +10,11 @@ export const NovoUsuarioSchema = z.object({
 })
 
 export const UsuarioSchema = NovoUsuarioSchema.extend({
-    id:z.coerce.number().int()
+    id_pessoa:z.coerce.number().int()
 })
 
 export const EditarUsuarioSchema = NovoUsuarioSchema.partial().extend({
-    id:z.coerce.number().int()
+    id_pessoa:z.coerce.number().int()
 })
 
 export type Usuario = z.infer<typeof UsuarioSchema>;

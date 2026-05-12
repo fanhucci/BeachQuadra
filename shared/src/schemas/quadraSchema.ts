@@ -13,12 +13,12 @@ export const NovaQuadraSchema = z.object({
 })
 
 export const QuadraSchema = NovaQuadraSchema.extend({
-    id:z.coerce.number().int(),
+    id_quadra:z.coerce.number().int(),
     ativo:z.boolean()
 })
 
 export const EditarQuadraSchema = QuadraSchema.partial().extend({
-    id:z.coerce.number().int()
+    id_quadra:z.coerce.number().int()
 });
 
 export type Quadra = z.infer<typeof QuadraSchema>;
