@@ -28,7 +28,15 @@ export const UsuarioSearchSchema = z.object({
     search:z.string().optional(),
     tipo:z.enum(tiposPesquisaEnum),
     id_cargo:z.coerce.number().int().optional(),
-    ativo:z.boolean().optional()
+    ativo: z
+    .string()
+    .optional()
+    .transform((val) => {
+        if (val === undefined) return undefined;
+        if (val === "true") return true;
+        if (val === "false") return false;
+        return undefined;
+    })
 })
 
 export type Usuario = z.infer<typeof UsuarioSchema>;
