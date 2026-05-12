@@ -38,7 +38,6 @@ export default function UsuariosPage(){
             </div>
 
             <div>Filtros</div>
-
             <CustomTable
                 columns={colunas}
                 data={dados}
