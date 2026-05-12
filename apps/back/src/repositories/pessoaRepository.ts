@@ -56,8 +56,7 @@ export default class PessoaRepository {
     }
 
     async listarUsuarios(filtro: UsuarioSearch) {
-
-        const mapaColunas:Record<string,string> = {
+        const mapaColunas: Record<string, string> = {
             'nome': "a.nome",
             'cpf': "a.cpf",
             'email': "a.email"
@@ -65,38 +64,35 @@ export default class PessoaRepository {
 
         const coluna = mapaColunas[filtro.tipo];
 
-        let where = sql`where true`;
-
-        if (filtro.search && coluna) {
-            where = sql`${where} and ${sql.unsafe(coluna)} like ${'%' + filtro.search + '%'}`;
-        }
-
-        if (filtro.id_cargo !== undefined) {
-            where = sql`${where} and a.id_cargo = ${filtro.id_cargo}`;
-        }
-
-        if (filtro.ativo !== undefined) {
-            where = sql`${where} and a.ativo = ${filtro.ativo}`;
-        }
-
-        return await sql`
+        const query = sql`
             select 
-            a.id_pessoa, 
-            b.id_conta, 
-            a.nome, 
-            a.cpf, 
-            a.email, 
-            a.telefone, 
-            c.id_cargo,
-            c.nome as cargo, 
-            a.ativo
+                a.id_pessoa, 
+                b.id_conta, 
+                a.nome, 
+                a.cpf, 
+                a.email, 
+                a.telefone, 
+                c.id_cargo,
+                c.nome as cargo, 
+                a.ativo
             from pessoas a
             left join contas b on a.id_pessoa = b.id_pessoa
             inner join cargos c on a.id_cargo = c.id_cargo
-            ${where}
+            where true
+            ${filtro.search && coluna 
+                ? sql`and ${sql.unsafe(coluna)} ilike ${'%' + filtro.search + '%'}` 
+                : sql``}
+            ${filtro.id_cargo !== undefined 
+                ? sql`and a.id_cargo = ${filtro.id_cargo}` 
+                : sql``}
+            ${filtro.ativo !== undefined 
+                ? sql`and a.ativo = ${filtro.ativo}` 
+                : sql``}
             order by a.id_pessoa
         `;
-    }
+
+    return await query;
+}
 
     async listarUsuarioPorId(id:number){
         const [usuario] = await sql`
