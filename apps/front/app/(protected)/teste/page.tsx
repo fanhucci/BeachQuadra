@@ -108,10 +108,10 @@ export default function TestePage(){
                 {
                     editionOn
                         ? <button
-                            disabled={!buttonLoading} 
+                            disabled={buttonLoading} 
                             onClick={editar}>Editar</button>
                         : <button 
-                            disabled={!buttonLoading} 
+                            disabled={buttonLoading} 
                             onClick={adicionar}>Adicionar</button>
                 }
             </CustomModal>
