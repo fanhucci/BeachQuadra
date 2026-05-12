@@ -45,7 +45,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
         { 
             key: "ações", label: "Ações",
             render:(_:any, usuario:Usuario)=>(
-                <div className="felx gap-2">
+                <div className="flex gap-2">
                     <SubmitButtom 
                         estilo="primario"
                         onClick={() => acoes.editar(usuario)}
