@@ -43,9 +43,9 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
             
         },
         { 
-            key: "ações", label: "Ações",
+            key: "ações", label: "Ações", align:'center',
             render: (_:any, usuario:Usuario) => (
-                <div className="flex items-center gap-2">
+                <div className="flex justify-around gap-2">
     
                     <SubmitButtom 
                         onClick={() => acoes.editar(usuario)}
