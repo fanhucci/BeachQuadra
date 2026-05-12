@@ -88,7 +88,7 @@ export default function TestePage(){
                 <h1 className="text-xl font-semibold text-gray-800">Quadras</h1>
                         
                     <CustomButtom
-                        funcao={() => abrirModal}
+                        funcao={abrirModal}
                         texto="Nova Quadra"
                         tipo="terciario"
                     />
