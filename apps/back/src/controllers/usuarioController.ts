@@ -1,4 +1,4 @@
-import { PessoaQuerySchema, CadastrarUsuarioSchema  } from "@app/shared";
+import { UsuarioSearchSchema, CadastrarUsuarioSchema  } from "@app/shared";
 import { Request, Response } from 'express';
 import UsuarioService from "../services/usuarioService";
 
@@ -7,7 +7,7 @@ export default class UsuarioController{
 
     async listarUsuarios(req:Request, res:Response){
 
-        const parse = PessoaQuerySchema.safeParse(req.query);
+        const parse = UsuarioSearchSchema.safeParse(req.query);
             
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
     

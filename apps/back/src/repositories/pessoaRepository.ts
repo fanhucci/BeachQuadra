@@ -57,10 +57,10 @@ export default class PessoaRepository {
 
     async listarUsuarios(filtro: PessoaQueryDTO) {
 
-        const mapaColunas:Record<number,string> = {
-            1: "a.nome",
-            2: "a.cpf",
-            3: "a.email"
+        const mapaColunas:Record<string,string> = {
+            'nome': "a.nome",
+            'cpf': "a.cpf",
+            'email': "a.email"
         };
 
         const coluna = mapaColunas[filtro.tipo];

@@ -1,4 +1,4 @@
-import { PessoaQueryDTO, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
+import { UsuarioSearchSchema, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
@@ -8,7 +8,7 @@ export default class UsuarioService{
     private pessoa = new PessoaRepository();
     private conta = new ContaRepository();
     
-    async listarUsuarios(filtro:PessoaQueryDTO){
+    async listarUsuarios(filtro:UsuarioSearchSchema){
         return await this.pessoa.listarUsuarios(filtro);
     }
 
