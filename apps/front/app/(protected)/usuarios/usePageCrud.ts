@@ -45,6 +45,7 @@ export default function usePageCrud<
     }
 
     async function adicionar() {
+        setButtonLoading(true);
 
         const parse = criarSchema.safeParse(formData);
 
@@ -54,7 +55,7 @@ export default function usePageCrud<
         }
 
         try {
-            setButtonLoading(true);
+            
 
             await apiRequest(`/${endpoint}`,{
                 method:"POST",
@@ -73,7 +74,8 @@ export default function usePageCrud<
     }
 
     async function editar(){
-
+        setButtonLoading(true);
+        
         const parse = editarSchema.safeParse(formData);
 
         if(!parse.success){
@@ -84,7 +86,7 @@ export default function usePageCrud<
         const id = parse.data[idKey];
 
         try {
-            setButtonLoading(true);
+            
 
             await apiRequest(`/${endpoint}/${id}`,{
                 method:"PATCH",
