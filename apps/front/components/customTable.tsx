@@ -3,7 +3,7 @@
 import React from "react";
 import { Inbox } from "lucide-react";
 
-interface Column<T> {
+export interface Column<T> {
   key: keyof T | string;
   label: string;
   render?: (value: any, record: T) => React.ReactNode;

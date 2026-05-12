@@ -16,7 +16,28 @@ export default function UsuariosPage(){
         ativo:true
     });
 
-    const {loading,dados, abrirEdicao,ativar,desativar} = usePageCrud<Usuario>({
+    const {
+        loading,
+        buttonLoading,
+
+        dados,
+        formData,
+        erros,
+
+        modalOn,
+        editionOn,
+
+        adicionar,
+        editar,
+        ativar,
+        desativar,
+
+        handleChange,
+        abrirEdicao,
+        abrirModal,
+        fecharModal
+
+    } = usePageCrud<Usuario>({
         idKey:'id_pessoa',
         endpoint:'usuarios',
         filtro: queryString,
@@ -38,6 +59,7 @@ export default function UsuariosPage(){
             </div>
 
             <div>Filtros</div>
+
             <CustomTable
                 columns={colunas}
                 data={dados}
@@ -45,9 +67,38 @@ export default function UsuariosPage(){
                 
             />
 
-            {/* <CustomModal>
+            <CustomModal
+                titulo={
+                    editionOn
+                    ? 'Editar'
+                    : 'Cadastrar'
+                }
+                estado={modalOn}
+                fechar={fecharModal}
 
-            </CustomModal> */}
+                botoes={[
+                    {
+                        label:'Cancelar',
+                        estilo:'secundario',
+                        onClick:fecharModal,
+                        isLoading:buttonLoading
+                    },
+                    {
+                        label:editionOn
+                            ? 'Editar'
+                            : 'Cadastrar',
+                        estilo:'primario',
+                        onClick:editionOn
+                            ? editar
+                            : adicionar,
+                        isLoading:buttonLoading
+                    },
+
+                ]}
+
+            >
+                teste
+            </CustomModal>
 
         </main>
     );

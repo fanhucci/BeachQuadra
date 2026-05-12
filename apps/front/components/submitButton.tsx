@@ -1,18 +1,18 @@
 import React from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
-interface SubmitButtomProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface SubmitButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     estilo?:'primario'| 'secundario'| 'fantasma' | 'perigo';
     isLoading?:boolean;
 }
 
-export default function SubmitButtom({
+export default function SubmitButton({
     children,
     estilo = 'secundario',
     className,
     isLoading = false,
     ...props
-}:SubmitButtomProps){
+}:SubmitButtonProps){
     const variantes = {
         'primario': "bg-blue-600 text-white hover:bg-blue-700 shadow-sm",
         'secundario': "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50",

@@ -1,10 +1,10 @@
 'use client'
+import { Column } from "@/components/customTable";
 import LinkButton from "@/components/linkButton";
-import SubmitButtom from "@/components/submitButton";
+import SubmitButton from "@/components/submitButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { Usuario } from "@app/shared";
-import { CalendarPlus, Info, Pencil, Plus, Trash, UserCheck, UserMinus, UserSearch } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { CalendarPlus,Pencil, UserCheck, UserMinus, UserSearch } from "lucide-react";
 import { useMemo } from "react";
 
 type AcoesUsuario = {
@@ -14,7 +14,6 @@ type AcoesUsuario = {
 }
 
 export default function useUsuariosTable(acoes:AcoesUsuario){
-    const router = useRouter();
 
     const cargos: Record<number,string> = {
         1:'Cliente',
@@ -22,7 +21,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
         3:'Administrador'
     }
 
-    const colunas = useMemo(()=>[
+    const colunas = useMemo<Column<Usuario>[]>(()=>[
         { key: "nome", label: "Nome" },
         { 
             key: "cpf", label: "CPF",
@@ -43,14 +42,13 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
             
         },
         { 
-            key: "ações", label: "Ações", align:'center',
+            key: "ações", label: "Ações", align:"center",
             render: (_:any, usuario:Usuario) => (
                 <div className="flex justify-center gap-2">
     
                     <LinkButton 
                         href={`/usuarios/${usuario.id_pessoa}`} 
                         estilo="fantasma"
-                        className="!p-2" 
                     >
                         <UserSearch size={18} />
                         <span className="hidden lg:inline">Perfil</span>
@@ -60,39 +58,36 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                     <LinkButton 
                         href={`/reservas/cadastrar/${usuario.id_pessoa}`} 
                         estilo="primario"
-                        className="!py-2 !px-3"
                     >
                         <CalendarPlus size={18} />
                         <span className="hidden xl:inline">Reserva</span>
                     </LinkButton>
 
-                    <SubmitButtom 
+                    <SubmitButton 
                         onClick={() => acoes.editar(usuario)}
                         estilo="secundario"
-                        className="text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors"
                         title="Editar Usuário"
                     >
                         <Pencil size={18} />
-                    </SubmitButtom>
+                    </SubmitButton>
 
                     {usuario.ativo ? (
-                        <SubmitButtom 
+                        <SubmitButton 
                             onClick={() => acoes.desativar(usuario.id_pessoa)}
                             estilo='perigo'
-                            className="text-red-500 hover:bg-red-50 p-2 rounded-md"
                             title="Desativar"
                         >
                             <UserMinus size={18} />
-                        </SubmitButtom>
+                        </SubmitButton>
                         ) : (
-                        <SubmitButtom 
+                        <SubmitButton 
                             onClick={() => acoes.ativar(usuario.id_pessoa)}
                             estilo="secundario"
                             className="text-green-500 hover:bg-green-50 p-2 rounded-md"
                             title="Ativar"
                         >
                             <UserCheck size={18} />
-                        </SubmitButtom>
+                        </SubmitButton>
                     )}
                 </div>
             )
