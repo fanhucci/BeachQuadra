@@ -50,17 +50,17 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                     <LinkButton 
                         href={`/usuarios/${usuario.id_pessoa}`} 
                         estilo="fantasma"
-                        //className="!p-2" 
+                        className="!p-2" 
                     >
                         <UserSearch size={18} />
-                        <span className="hidden lg:inline">Detalhes</span>
+                        <span className="hidden lg:inline">Perfil</span>
                     </LinkButton>
 
 
                     <LinkButton 
                         href={`/reservas/cadastrar/${usuario.id_pessoa}`} 
                         estilo="primario"
-                        //className="!py-2 !px-3"
+                        className="!py-2 !px-3"
                     >
                         <CalendarPlus size={18} />
                         <span className="hidden xl:inline">Reserva</span>
@@ -69,7 +69,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                     <SubmitButtom 
                         onClick={() => acoes.editar(usuario)}
                         estilo="secundario"
-                        //className="text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors"
+                        className="text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors"
                         title="Editar Usuário"
                     >
                         <Pencil size={18} />
@@ -79,7 +79,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                         <SubmitButtom 
                             onClick={() => acoes.desativar(usuario.id_pessoa)}
                             estilo='perigo'
-                            //className="text-red-500 hover:bg-red-50 p-2 rounded-md"
+                            className="text-red-500 hover:bg-red-50 p-2 rounded-md"
                             title="Desativar"
                         >
                             <UserMinus size={18} />
@@ -88,7 +88,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                         <SubmitButtom 
                             onClick={() => acoes.ativar(usuario.id_pessoa)}
                             estilo="secundario"
-                            //className="text-green-500 hover:bg-green-50 p-2 rounded-md"
+                            className="text-green-500 hover:bg-green-50 p-2 rounded-md"
                             title="Ativar"
                         >
                             <UserCheck size={18} />
