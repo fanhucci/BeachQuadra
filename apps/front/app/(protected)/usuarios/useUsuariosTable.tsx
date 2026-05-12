@@ -43,7 +43,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
             
         },
         { 
-            key: "ações", label: "Ações",
+            key: "ações", label: "Ações", align:"center",
             render:(_:any, usuario:Usuario)=>(
                 <div className="flex gap-2">
                     <SubmitButtom 
