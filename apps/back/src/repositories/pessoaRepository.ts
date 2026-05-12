@@ -1,5 +1,5 @@
 
-import { AlterarPessoaDTO, CriarPessoaDTO, PessoaQueryDTO,EsqueciSenhaDTO } from "@app/shared";
+import { AlterarPessoaDTO, CriarPessoaDTO, UsuarioSearch,EsqueciSenhaDTO } from "@app/shared";
 import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
 
@@ -55,7 +55,7 @@ export default class PessoaRepository {
         `, valores);
     }
 
-    async listarUsuarios(filtro: PessoaQueryDTO) {
+    async listarUsuarios(filtro: UsuarioSearch) {
 
         const mapaColunas:Record<string,string> = {
             'nome': "a.nome",
