@@ -2,6 +2,7 @@
 import SubmitButtom from "@/components/submitButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { Usuario } from "@app/shared";
+import { Info, Pencil, Plus, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -48,21 +49,21 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                         estilo="primario"
                         onClick={() => acoes.editar(usuario)}
                     >
-                        Editar
+                        Editar <Pencil />
                     </SubmitButtom>
                     {
                         usuario.ativo
                         ?<SubmitButtom
                             estilo="perigo"
-                            onClick={() => acoes.desativar(usuario.id_pessoa)}>Desativar</SubmitButtom>
+                            onClick={() => acoes.desativar(usuario.id_pessoa)}>Desativar <Trash /></SubmitButtom>
                         :<SubmitButtom 
                             estilo="secundario"    
                             onClick={() => acoes.ativar(usuario.id_pessoa)}>Ativar</SubmitButtom>
                     }
 
                     
-                    <SubmitButtom estilo="secundario" onClick={()=>router.push(`/usuarios/${usuario.id_pessoa}`)}>Detalhes</SubmitButtom>
-                    <SubmitButtom estilo="perigo" onClick={()=>router.push(`/reservas/cadastrar/${usuario.id_pessoa}`)}>Nova reserva</SubmitButtom>
+                    <SubmitButtom estilo="secundario" onClick={()=>router.push(`/usuarios/${usuario.id_pessoa}`)}>Detalhes <Info /></SubmitButtom>
+                    <SubmitButtom estilo="perigo" onClick={()=>router.push(`/reservas/cadastrar/${usuario.id_pessoa}`)}>Nova reserva <Plus /></SubmitButtom>
                 </div>
             )
         },
