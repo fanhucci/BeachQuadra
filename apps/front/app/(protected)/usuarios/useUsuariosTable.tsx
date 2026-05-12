@@ -45,20 +45,24 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
             render:(_:any, usuario:Usuario)=>(
                 <div className="felx gap-2">
                     <SubmitButtom 
-                        
+                        estilo="primario"
                         onClick={() => acoes.editar(usuario)}
                     >
                         Editar
                     </SubmitButtom>
                     {
                         usuario.ativo
-                        ?<SubmitButtom onClick={() => acoes.desativar(usuario.id_pessoa)}>Desativar</SubmitButtom>
-                        :<SubmitButtom onClick={() => acoes.ativar(usuario.id_pessoa)}>Ativar</SubmitButtom>
+                        ?<SubmitButtom
+                            estilo="perigo"
+                            onClick={() => acoes.desativar(usuario.id_pessoa)}>Desativar</SubmitButtom>
+                        :<SubmitButtom 
+                            estilo="secundario"    
+                            onClick={() => acoes.ativar(usuario.id_pessoa)}>Ativar</SubmitButtom>
                     }
 
                     
-                    <SubmitButtom onClick={()=>router.push(`/usuarios/${usuario.id_pessoa}`)}>Detalhes</SubmitButtom>
-                    <SubmitButtom onClick={()=>router.push(`/reservas/cadastrar/${usuario.id_pessoa}`)}>Nova reserva</SubmitButtom>
+                    <SubmitButtom estilo="secundario" onClick={()=>router.push(`/usuarios/${usuario.id_pessoa}`)}>Detalhes</SubmitButtom>
+                    <SubmitButtom estilo="perigo" onClick={()=>router.push(`/reservas/cadastrar/${usuario.id_pessoa}`)}>Nova reserva</SubmitButtom>
                 </div>
             )
         },
