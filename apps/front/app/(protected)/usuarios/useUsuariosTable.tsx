@@ -1,4 +1,5 @@
 'use client'
+import LinkButton from "@/components/linkButton";
 import SubmitButtom from "@/components/submitButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { Usuario } from "@app/shared";
@@ -61,9 +62,17 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
                             onClick={() => acoes.ativar(usuario.id_pessoa)}>Ativar</SubmitButtom>
                     }
 
-                    
-                    <SubmitButtom estilo="secundario" onClick={()=>router.push(`/usuarios/${usuario.id_pessoa}`)}>Detalhes <Info /></SubmitButtom>
-                    <SubmitButtom estilo="perigo" onClick={()=>router.push(`/reservas/cadastrar/${usuario.id_pessoa}`)}>Nova reserva <Plus /></SubmitButtom>
+                    <LinkButton
+                        href={`/usuarios/${usuario.id_pessoa}`}    
+                    >
+                        <Info/> Perfil
+                    </LinkButton>
+                    <LinkButton
+                        href={`/reservas/cadastrar/${usuario.id_pessoa}`}
+                        estilo="primario"
+                    >
+                        <Plus/> Nova Reserva
+                    </LinkButton>
                 </div>
             )
         },
