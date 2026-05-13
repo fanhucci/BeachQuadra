@@ -105,7 +105,32 @@ export default function UsuariosPage(){
                 ]}
 
             >
-                <CustomInput
+                <UsuarioForm
+                    formData={formData}
+                    erros={erros}
+                    handleChange={handleChange}
+                />
+            </CustomModal>
+
+        </main>
+    );
+}
+
+
+interface UsuarioFormProps{
+    formData:Partial<Usuario>;
+    erros:Partial<Record<keyof Usuario, string>>;
+    handleChange:(e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>void;
+}
+
+function UsuarioForm({
+    formData,
+    erros,
+    handleChange,
+}:UsuarioFormProps){
+    return(
+        <div className="flex flex-col gap-3">
+              <CustomInput
                     label="Nome"
                     name="nome"
                     onChange={handleChange}
@@ -172,8 +197,6 @@ export default function UsuariosPage(){
                         </p>
                     )}
                 </div>
-            </CustomModal>
-
-        </main>
+        </div >
     );
 }
