@@ -4,14 +4,12 @@ import CustomSelect from "../customSelect";
 import CustomInput from "../customInput";
 
 const opcoesTipo = [
-    {value:"", label:"Todas"},
     { value:"individual", label: 'Indivídual' },
-    { value:"dupla", label: 'Duplas' },
+    { value:"duplas", label: 'Duplas' },
     
 ];
 
 const opcoesStatus = [
-    {value:"", label:"Ambos"},
     {value:"true", label:"Ativa"},
     {value:"false", label:"Inativa"},
 ];

@@ -6,15 +6,15 @@ const tiposQuadraEnum = [
 ] as const;
 
 export const NovaQuadraSchema = z.object({
-    nome:z.string('Nome inválido').min(4,'Mínimo de 4 caractéres').max(30,'Máximo de 30 caractéres'),
-    tipo:z.enum(tiposQuadraEnum),
-    status:z.boolean(),
-    valor:z.coerce.number('Valor inválido').int('Valor inválido').min(1,"Valor mínimo: R$ 0,01").max(9999999,"Valor máximo: R$ 99.999,99")
+    nome:z.string('Nome inválido.').min(4,'Mínimo de 4 caractéres').max(30,'Máximo de 30 caractéres'),
+    tipo:z.enum(tiposQuadraEnum,'Tipo inválido.'),
+    status:z.coerce.boolean('Valor inváldo.'),
+    valor:z.coerce.number('Valor inválido.').int('Valor inválido').min(1,"Valor mínimo: R$ 0,01").max(9999999,"Valor máximo: R$ 99.999,99")
 })
 
 export const QuadraSchema = NovaQuadraSchema.extend({
     id_quadra:z.coerce.number().int(),
-    ativo:z.boolean()
+    ativo:z.coerce.boolean()
 })
 
 export const EditarQuadraSchema = QuadraSchema.partial().extend({
