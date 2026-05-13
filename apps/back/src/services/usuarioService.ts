@@ -1,8 +1,9 @@
-import { UsuarioSearch, NovoUsuario, EditarUsuario } from "@app/shared";
+import { UsuarioSearch, NovoUsuario, NovoUsuarioProprio, EditarUsuario } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
+import crypto from 'crypto';
 
 export default class UsuarioService{
     private pessoa = new PessoaRepository();
@@ -35,7 +36,7 @@ export default class UsuarioService{
         return resposta;
     }
 
-    async adicionarUsuario (dados:NovoUsuario ){
+    async adicionarUsuarioProprio (dados:NovoUsuarioProprio ){
         return await sql.begin(async (tx)=>{
             const [pessoa] = await this.pessoa.adicionarPessoa(tx, dados);
 
@@ -46,6 +47,21 @@ export default class UsuarioService{
                 senha:senhaHash
             });
             return pessoa;
+        })
+    }
+
+    async adicionarUsuario(dados:NovoUsuario){
+        return await sql.begin(async (tx)=>{
+            const [pessoa] = await this.pessoa.adicionarPessoa(tx,dados);
+
+            const senhaFake = crypto.randomBytes(32).toString('hex');
+            const senhaHash = await bcrypt.hash(senhaFake,10)
+
+            await this.conta.adicionarConta(tx,{
+                id_pessoa:pessoa.id_pessoa,
+                senha:senhaHash
+            })
+            return pessoa
         })
     }
     
