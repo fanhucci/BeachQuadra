@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import { Loader2 } from "lucide-react";
 
 interface SubmitButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     estilo?:'primario'| 'secundario'| 'fantasma' | 'perigo';
@@ -34,7 +34,7 @@ export default function SubmitButton({
         >
             {
                 isLoading
-                ? <LoadingSpinner/>
+                ? <Loader2 className="animate-spin" size={18} />
                 :children
             }
         </button>
