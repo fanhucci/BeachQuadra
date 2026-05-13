@@ -70,7 +70,7 @@ export default function UsuariosPage(){
             <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
                 <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
                     
-                    <div className="flex flex-row items-center gap-3 bg-white ">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
                         <CustomInput
                             name="search"
                             onChange={handleFilters}
@@ -78,51 +78,53 @@ export default function UsuariosPage(){
                             type="text"
                         />
 
-                        <CustomSelect
-                            name="tipo"
-                            options={[
-                                {value:'nome',label:'Nome'},
-                                {value:'cpf',label:'CPF'},
-                                {value:'email',label:'E-mail'},
-                            ]}
-                            value={filters.tipo}
-                            onChange={(name, val) => {
-                                handleFilters({
-                                    target: { name, value: val }
-                                } as any);
-                            }}                
-                        />
+                        <div className="col-span-3">
+                            <CustomSelect
+                                name="tipo"
+                                options={[
+                                    {value:'nome',label:'Nome'},
+                                    {value:'cpf',label:'CPF'},
+                                    {value:'email',label:'E-mail'},
+                                ]}
+                                value={filters.tipo}
+                                onChange={(name, val) => {
+                                    handleFilters({
+                                        target: { name, value: val }
+                                    } as any);
+                                }}                
+                            />
 
-                        <CustomSelect
-                            name="id_cargo"
-                            options={[
-                                { value:"", label:'Todos'},
-                                { value: "1", label: 'Cliente' },
-                                { value: "2", label: 'Funcionário' },
-                                { value: "3", label: 'Administrador' }
-                            ]}
-                            value={filters.id_cargo ?? ""}
-                            onChange={(name, val) => {
-                                handleFilters({
-                                    target: { name, value: val }
-                                } as any);
-                            }}                
-                        />
+                            <CustomSelect
+                                name="id_cargo"
+                                options={[
+                                    { value:"", label:'Todos'},
+                                    { value: "1", label: 'Cliente' },
+                                    { value: "2", label: 'Funcionário' },
+                                    { value: "3", label: 'Administrador' }
+                                ]}
+                                value={filters.id_cargo ?? ""}
+                                onChange={(name, val) => {
+                                    handleFilters({
+                                        target: { name, value: val }
+                                    } as any);
+                                }}                
+                            />
 
-                        <CustomSelect
-                            name="ativo"
-                            options={[
-                                { value:"", label:'Todos'},
-                                { value: "true", label: 'Ativos' },
-                                { value: "false", label: 'Desativados' },
-                            ]}
-                            value={filters.ativo ?? ""}
-                            onChange={(name, val) => {
-                                handleFilters({
-                                    target: { name, value: val }
-                                } as any);
-                            }}                
-                        />
+                            <CustomSelect
+                                name="ativo"
+                                options={[
+                                    { value:"", label:'Todos'},
+                                    { value: "true", label: 'Ativos' },
+                                    { value: "false", label: 'Desativados' },
+                                ]}
+                                value={filters.ativo ?? ""}
+                                onChange={(name, val) => {
+                                    handleFilters({
+                                        target: { name, value: val }
+                                    } as any);
+                                }}                
+                            />
+                        </div>
 
                     </div>
 
