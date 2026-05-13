@@ -157,7 +157,7 @@ export default function usePageCrud<
         setModalOn(true);
     }
 
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>{
         const {name, value} = e.target;
         let valorLimpo = value;
 

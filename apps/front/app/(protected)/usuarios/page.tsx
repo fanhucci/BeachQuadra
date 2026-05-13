@@ -8,6 +8,7 @@ import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "
 import useUsuariosTable from "./useUsuariosTable";
 import SubmitButton from "@/components/submitButton";
 import { Plus } from "lucide-react";
+import CustomInput from "@/components/customInput";
 
 
 export default function UsuariosPage(){
@@ -104,7 +105,73 @@ export default function UsuariosPage(){
                 ]}
 
             >
-                teste
+                <CustomInput
+                    label="Nome"
+                    name="nome"
+                    onChange={handleChange}
+                    value={formData.nome}
+                    erro={erros.nome}
+                    type="text"
+                />
+
+                <CustomInput
+                    label="CPF"
+                    name="cpf"
+                    onChange={handleChange}
+                    value={formData.cpf}
+                    erro={erros.cpf}
+                    type="text"
+                />
+
+                <CustomInput
+                    label="E-mail"
+                    name="email"
+                    onChange={handleChange}
+                    value={formData.email}
+                    erro={erros.email}
+                    type="text"
+                />
+
+                <CustomInput
+                    label="Telefone"
+                    name="telefone"
+                    onChange={handleChange}
+                    value={formData.telefone}
+                    erro={erros.telefone}
+                    type="text"
+                />
+
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="id_cargo" className="text-sm text-gray-600">
+                        Cargo
+                    </label>
+                
+                    <select
+                        id="id_cargo"
+                        name="id_cargo"
+                        value={formData.id_cargo}
+                        onChange={handleChange}
+                        className={`
+                        border rounded-lg h-10 px-3 bg-white
+                        focus:outline-none focus:ring-2 focus:ring-blue-400
+                        transition
+                        ${erros.id_cargo ? "border-red-500 focus:ring-red-400" : "border-gray-300"}
+                        `}
+                    >
+                        <option value="0" disabled>
+                            Selecione um cargo...
+                        </option>
+                        <option value={1}>Cliente</option>
+                        <option value={2}>Funcionário</option>
+                        <option value={3}>Administrador</option>
+                    </select>
+                
+                    {erros.id_cargo && (
+                        <p className="text-xs text-red-500">
+                            {erros.id_cargo}
+                        </p>
+                    )}
+                </div>
             </CustomModal>
 
         </main>

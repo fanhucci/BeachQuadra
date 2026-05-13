@@ -4,7 +4,7 @@ type InputProps = {
   label: string;
   placeholder?: string;
   name: string;
-  value: string | number;
+  value?: string | number;
   erro?: string;
   type?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,7 +14,7 @@ export default function CustomInput({
     label,
     placeholder,
     name,
-    value,
+    value = '',
     erro,
     type = "text",
     onChange,
