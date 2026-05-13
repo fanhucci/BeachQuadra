@@ -63,7 +63,7 @@ export default class UsuarioController{
     }
 
     async ativarUsuario(req:Request, res:Response){
-        const id = Number(req.user?.id);
+        const id = Number(req.params.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
 
@@ -74,7 +74,7 @@ export default class UsuarioController{
     }
 
     async desativarUsuario(req:Request, res:Response){
-        const id = Number(req.user?.id);
+        const id = Number(req.params.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
 
