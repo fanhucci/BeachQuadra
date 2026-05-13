@@ -1,5 +1,5 @@
 
-import { NovaQuadra, EditarQuadra, QuadraSearch } from "@app/shared";
+import { QuadraSearch, NovaQuadra, EditarQuadra } from "@app/shared";
 import sql from "../infra/db";
 
 export default class QuadraRepository {
@@ -33,34 +33,20 @@ export default class QuadraRepository {
     }
 
     async editarQuadra(quadra:EditarQuadra){
-        const campos: string[] = [];
-        const valores: any[] = [];
+        const {id_quadra, ...dados} = quadra;
 
-        if(quadra.nome!==undefined){
-            valores.push(quadra.nome)
-            campos.push(`nome = $${valores.length}`);
-        }
-        if(quadra.tipo!==undefined){
-            valores.push(quadra.tipo)
-            campos.push(`tipo = $${valores.length}`);
-        }
-        if(quadra.status!==undefined){
-            valores.push(quadra.status)
-            campos.push(`status = $${valores.length}`);
-        }
-        if(quadra.valor!==undefined){
-            valores.push(quadra.valor)
-            campos.push(`valor = $${valores.length}`);
-        }
+        const dadosParaAtualizar = Object.fromEntries(
+            Object.entries(dados).filter(([_, v]) => v !== undefined)
+        );
 
-        valores.push(quadra.id_quadra);
+        if(Object.keys(dadosParaAtualizar).length === 0 ) return;
 
-        return await sql.unsafe(`
+        return await sql`
             update quadras 
-            set ${campos.join(", ")}
-            where id_quadra = $${valores.length} 
+            set ${sql(dadosParaAtualizar)}
+            where id_quadra = $${id_quadra} 
             returning *
-        `,valores);
+        `;
     }
 
     async ativarQuadra(id:number){
@@ -70,18 +56,5 @@ export default class QuadraRepository {
     async desativarQuadra(id:number){
         return await sql`update quadras set ativo = false where id_quadra = ${id}`;
     } 
-
-    async quadraExistente(nome:string, id?:number){
-        const result = await sql`
-            select exists(
-            select 1
-            from quadras
-            where nome = ${nome}
-            ${id? sql`and id_quadra != ${id}` : sql``}
-            )
-        `;
-
-        return result[0].exists;
-    }
 
 }

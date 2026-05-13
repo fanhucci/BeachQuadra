@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import QuadraService from '../services/quadraService';
-import { QuadraSearchSchema, NovaQuadraSchema, EditarQuadraSchema} from '@app/shared';
+import { QuadraSearchSchema, NovaQuadraSchema, EditarQuadraSchema } from "@app/shared";
 
 
 export default class QuadraController{
