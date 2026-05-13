@@ -57,9 +57,9 @@ export default function UsuariosPage(){
 
     return(
         <main className="flex flex-col flex-1 p-6 gap-4">
-            
-            <div className="flex items-center gap-2 border-b pb-4">
-                <div>
+
+            <div className="flex items-center justify-between gap-2 border-b pb-4">
+                <div className="flex flex-row gap-2">
                     <Users className="text-blue-600" size={28}/>
                     <h2 className="text-2xl font-bold text-gray-800">Usuários</h2>
                 </div>
