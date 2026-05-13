@@ -17,7 +17,7 @@ export const QuadraSchema = NovaQuadraSchema.extend({
     ativo:z.coerce.boolean()
 })
 
-export const EditarQuadraSchema = QuadraSchema.partial().extend({
+export const EditarQuadraSchema = NovaQuadraSchema.partial().extend({
     id_quadra:z.coerce.number().int()
 });
 
