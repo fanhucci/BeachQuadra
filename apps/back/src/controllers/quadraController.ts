@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
 import QuadraService from '../services/quadraService';
-import { QuadraQuerySchema, QuadraBaseSchema, ListarQuadraSchema} from '@app/shared';
+import { QuadraSearchSchema, NovaQuadraSchema, EditarQuadraSchema} from '@app/shared';
 
 
 export default class QuadraController{
     private service = new QuadraService();
 
     async listarQuadras(req:Request, res:Response){
-        const parse = QuadraQuerySchema.safeParse(req.query);
+        
+        const parse = QuadraSearchSchema.safeParse(req.query);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
@@ -19,7 +20,7 @@ export default class QuadraController{
 
     async adicionarQuadra(req:Request, res:Response){
     
-        const parse = QuadraBaseSchema.safeParse(req.body);
+        const parse = NovaQuadraSchema.safeParse(req.body);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
             
@@ -31,7 +32,7 @@ export default class QuadraController{
 
     async editarQuadra(req:Request,res:Response){
             console.log('reqBODY: ',req.body);
-        const parse = ListarQuadraSchema.safeParse({
+        const parse = EditarQuadraSchema.safeParse({
             id_quadra:Number(req.params.id),
             ...req.body
         });

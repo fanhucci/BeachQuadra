@@ -10,8 +10,8 @@ const authMiddleware = new AuthMiddleware();
 
 router.get(`/quadras`, authMiddleware.auth, ctrl.listarQuadras.bind(ctrl));
 router.post(`/quadras`, authMiddleware.auth, ctrl.adicionarQuadra.bind(ctrl));
-router.put(`/quadras/:id`, authMiddleware.auth, ctrl.editarQuadra.bind(ctrl));
-router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.ativarQuadra.bind(ctrl));
-router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.desativarQuadra.bind(ctrl));
+router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.editarQuadra.bind(ctrl));
+router.patch(`/quadras/:id/ativar`, authMiddleware.auth, ctrl.ativarQuadra.bind(ctrl));
+router.patch(`/quadras/:id/desativar`, authMiddleware.auth, ctrl.desativarQuadra.bind(ctrl));
 
 export default router;
