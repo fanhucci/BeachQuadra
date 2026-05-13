@@ -70,8 +70,8 @@ export default function UsuariosPage(){
             <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
                 <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
                     
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
-                    <div className="col-span-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 items-end">
+                    <div className="col-span-1 md:col-span-3">
                         <CustomInput 
                             label="Pesquisar"
                             placeholder="Pesquisa..."
