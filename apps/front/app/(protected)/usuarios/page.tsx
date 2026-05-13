@@ -96,7 +96,7 @@ export default function UsuariosPage(){
                         />
                     </div>
                     <CustomSelect 
-                        label="Tipo"
+                        label="Categoria"
                         name="tipo"
                         options={[
                             {value:"nome", label:"Nome"},
