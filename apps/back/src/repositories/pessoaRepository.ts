@@ -1,16 +1,21 @@
 
-import { AlterarPessoaDTO, CriarPessoaDTO, UsuarioSearch,EsqueciSenhaDTO } from "@app/shared";
+import { EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
 import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
 
 export default class PessoaRepository {
 
-    async adicionarPessoa(executor:sqlExecutor,dados:CriarPessoaDTO){
-        return await executor`insert into pessoas (nome, cpf, telefone, email, id_cargo) values (${dados.nome},${dados.cpf},${dados.telefone}, ${dados.email}, ${dados.id_cargo}) returning *`;
+    async adicionarPessoa(executor:sqlExecutor,dados:NovoUsuario){
+        return await executor`
+            insert into pessoas 
+            (nome, cpf, telefone, email, id_cargo) 
+            values (${dados.nome},${dados.cpf},${dados.telefone}, ${dados.email}, ${dados.id_cargo}) 
+            returning *
+        `;
     }
 
 
-    async editarPessoa(dados: AlterarPessoaDTO) {
+    async editarPessoa(dados: EditarUsuario) {
   
         const campos: string[] = [];
         const valores: any[] = [];
@@ -40,10 +45,6 @@ export default class PessoaRepository {
             campos.push(`id_cargo = $${valores.length}`);
         }
 
-        if (dados.ativo !== undefined) {
-            valores.push(dados.ativo);
-            campos.push(`ativo = $${valores.length}`);
-        }
 
         valores.push(dados.id_pessoa);
 
@@ -91,8 +92,8 @@ export default class PessoaRepository {
             order by a.id_pessoa
         `;
 
-    return await query;
-}
+        return await query;
+    }
 
     async listarUsuarioPorId(id:number){
         const [usuario] = await sql`
@@ -116,6 +117,22 @@ export default class PessoaRepository {
 
     async alterarStatus(id:number,status:boolean){
         return await sql`update pessoas set ativo = ${status} where id_pessoa = ${id}`;
+    }
+
+    async ativarPessoa(id:number){
+        return await sql`
+            update pessoas
+            set ativo = true
+            where id_pessoa = ${id}
+        `;
+    }
+
+    async desativarPessoa(id:number){
+        return await sql`
+            update pessoas
+            set ativo = false
+            where id_pessoa = ${id}
+        `;
     }
 
 

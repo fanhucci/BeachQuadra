@@ -1,10 +1,10 @@
-import { UsuarioSearch, CadastrarUsuarioDTO ,ListarPessoaDTO, CriarContaDTO } from "@app/shared";
+import { UsuarioSearch, NovoUsuario, EditarUsuario } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
-export default class UsuarioService{
 
+export default class UsuarioService{
     private pessoa = new PessoaRepository();
     private conta = new ContaRepository();
     
@@ -35,7 +35,7 @@ export default class UsuarioService{
         return resposta;
     }
 
-    async cadastrarUsuario (dados:CadastrarUsuarioDTO ){
+    async adicionarUsuario (dados:NovoUsuario ){
         return await sql.begin(async (tx)=>{
             const [pessoa] = await this.pessoa.adicionarPessoa(tx, dados);
 
@@ -47,6 +47,18 @@ export default class UsuarioService{
             });
             return pessoa;
         })
+    }
+    
+    async editarUsuario(dados:EditarUsuario){
+        return await this.pessoa.editarPessoa(dados);
+    }
+
+    async ativarUsuario(id:number){
+        return await this.pessoa.ativarPessoa(id);
+    }
+
+    async desativarUsuario(id:number){
+        return await this.pessoa.desativarPessoa(id);
     }
 
 }

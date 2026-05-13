@@ -1,4 +1,4 @@
-import { UsuarioSearchSchema, CadastrarUsuarioSchema  } from "@app/shared";
+import { UsuarioSearchSchema, NovoUsuarioSchema, EditarUsuarioSchema  } from "@app/shared";
 import { Request, Response } from 'express';
 import UsuarioService from "../services/usuarioService";
 
@@ -40,16 +40,50 @@ export default class UsuarioController{
         res.json(usuario);
     }
 
-    async cadastrarUsuario(req:Request, res:Response){
-        const parse = CadastrarUsuarioSchema.safeParse(req.body);
+    async adicionarUsuario(req:Request, res:Response){
+        const parse = NovoUsuarioSchema.safeParse(req.body);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const resposta = await this.service.cadastrarUsuario(parse.data);
+        const resposta = await this.service.adicionarUsuario(parse.data);
 
         return res.status(201).json(resposta);
        
     }
+
+    async editarUsuario(req:Request, res:Response){
+        const parse = EditarUsuarioSchema.safeParse(req.body);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+
+        const resposta = await this.service.editarUsuario(parse.data);
+
+        return res.status(201).json(resposta);
+       
+    }
+
+    async ativarUsuario(req:Request, res:Response){
+        const id = Number(req.user?.id);
+
+        if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
+
+        const resposta = await this.service.ativarUsuario(id);
+
+        return res.status(201).json(resposta);
+       
+    }
+
+    async desativarUsuario(req:Request, res:Response){
+        const id = Number(req.user?.id);
+
+        if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
+
+        const resposta = await this.service.desativarUsuario(id);
+
+        return res.status(201).json(resposta);
+       
+    }
+
 
 
 
