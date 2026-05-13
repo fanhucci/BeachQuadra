@@ -57,7 +57,7 @@ export default function UsuariosFiltrosForm({
                 label="Cargo"
                 name="id_cargo"
                 options={opcoesCargo}
-                value={types.id_cargo ?? ''}
+                value={String(types.id_cargo)}
                 onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
             />
 
@@ -65,7 +65,7 @@ export default function UsuariosFiltrosForm({
                 label="Conta"
                 name="ativo"
                 options={opcoesAtivo}
-                value={types.ativo ?? ''}
+                value={String(types.ativo)}
                 onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
             />
         </div>

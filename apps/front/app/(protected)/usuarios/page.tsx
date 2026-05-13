@@ -61,7 +61,7 @@ export default function UsuariosPage(){
             <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
                 <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
-                        <Users className="text-blue-600" size={24} />
+                        <Users className="text-blue-600" size={28} />
                     </div>
                     <div>
                         <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Usuários</h2>
