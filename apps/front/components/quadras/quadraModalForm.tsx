@@ -9,11 +9,6 @@ const opcoesTipo = [
     
 ];
 
-const opcoesStatus = [
-    {value:"true", label:"Ativa"},
-    {value:"false", label:"Inativa"},
-];
-
 
 interface QuadraModalFormProps{
     formData:Partial<Quadra>;
@@ -29,42 +24,28 @@ export default function QuadraModalForm({
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
             
-                <CustomSelect
-                    label="Categoria"
-                    name="tipo"
-                    options={opcoesTipo}
-                    value={formData.tipo || ""}
-                    erro={erros.tipo}
-                    onChange={(name, val) => {
-                        handleChange({
-                            target: { name, value: val }
-                        } as any);
-                    }}
-                />
-
-                <CustomSelect
-                    label="Status"
-                    name="status"
-                    options={opcoesStatus}
-                    value={String(formData.status)}
-                    erro={erros.status}
-                    onChange={(name, val) => {
-                        handleChange({
-                            target: { name, value: val }
-                        } as any);
-                    }}
-                />
-       
+            <CustomSelect
+                label="Categoria"
+                name="tipo"
+                options={opcoesTipo}
+                value={formData.tipo || ""}
+                erro={erros.tipo}
+                onChange={(name, val) => {
+                    handleChange({
+                        target: { name, value: val }
+                    } as any);
+                }}
+            />
 
             
-                <CustomInput
-                    label="Nome"
-                    name="nome"
-                    onChange={handleChange}
-                    value={formData.nome}
-                    erro={erros.nome}
-                    type="text"
-                />
+            <CustomInput
+                label="Nome"
+                name="nome"
+                onChange={handleChange}
+                value={formData.nome}
+                erro={erros.nome}
+                type="text"
+            />
            
 
             <CustomInput
