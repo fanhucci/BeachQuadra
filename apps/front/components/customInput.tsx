@@ -1,5 +1,5 @@
 import { cpfMask, dinheiroMask, telefoneMask } from "@/utils/mascaras";
-import React from "react";
+import React, { useMemo } from "react";
 
 type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
 
@@ -23,22 +23,16 @@ export default function CustomInput({
     onChange,
 }: InputProps) {
 
-    const masks:Record<string,(val:string)=>string> = {
-        cpf:(val:string)=>cpfMask(val),
-        tel:(val:string)=>telefoneMask(val),
-        money: (val:string)=>(dinheiroMask(val))
-    }
+    const valorFormatado = useMemo(()=>{
+        const valorEmString = String(value);
 
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        if (type === "cpf") return cpfMask(valorEmString);
+        if (type === "tel") return telefoneMask(valorEmString);
+        if (type === "money") return dinheiroMask(valorEmString);
         
-        const maskFn = masks[type];
+        return value;
 
-        if(maskFn){
-            e.target.value = maskFn(e.target.value);
-        }
-
-        onChange(e);
-    }
+    },[value,type]);
 
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -50,11 +44,10 @@ export default function CustomInput({
                 id={name}
                 placeholder={placeholder}
                 name={name}
-
                 type={type === "password" ? "password" : "text"}
                 inputMode={type === "cpf" || type === "tel" || type === "number" ? "numeric" : "text"}
-                value={value}
-                onChange={handleChange}
+                value={valorFormatado}
+                onChange={onChange}
                 className={`
                     border rounded-lg h-10 px-3 text-sm transition-all duration-200
                     focus:outline-none focus:ring-2
