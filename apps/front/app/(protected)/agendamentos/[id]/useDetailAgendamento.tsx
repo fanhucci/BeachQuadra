@@ -10,7 +10,7 @@ export default function useDetailAgendamento(){
     const [status,setStatus] = useState({status:""})
 
     async function carregarAgendamento(){
-        const dados = await apiRequest(`/agendamento/${id}`);
+        const dados = await apiRequest(`/agendamentos/${id}`);
         setAgendamento(dados);
         setStatus({status:dados.status});
     }
