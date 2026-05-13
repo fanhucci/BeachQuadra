@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link href="/quadras" className="hover:text-white transition">
               Quadras
             </Link>
-            <Link href="/agendamento" className="hover:text-white transition">
+            <Link href="/agendamentos" className="hover:text-white transition">
               Agendamentos
             </Link>
             <Link href="/horario" className="hover:text-white transition">

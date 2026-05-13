@@ -17,7 +17,7 @@ export default function useDetailAgendamento(){
 
     async function alterarStatus(id_agendamento:number){
         try {
-            await apiRequest(`/agendamento/${id_agendamento}`,{
+            await apiRequest(`/agendamentos/${id_agendamento}`,{
                 method:'PATCH',
                 body:JSON.stringify(status)
             })
