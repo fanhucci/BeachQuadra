@@ -12,6 +12,6 @@ router.get(`/quadras`, authMiddleware.auth, ctrl.listarQuadras.bind(ctrl));
 router.post(`/quadras`, authMiddleware.auth, ctrl.adicionarQuadra.bind(ctrl));
 router.put(`/quadras/:id`, authMiddleware.auth, ctrl.editarQuadra.bind(ctrl));
 router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.ativarQuadra.bind(ctrl));
-router.delete(`/quadras/:id`, authMiddleware.auth, ctrl.excluirQuadra.bind(ctrl));
+router.patch(`/quadras/:id`, authMiddleware.auth, ctrl.desativarQuadra.bind(ctrl));
 
 export default router;

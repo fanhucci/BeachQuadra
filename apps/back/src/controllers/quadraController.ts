@@ -35,7 +35,8 @@ export default class QuadraController{
             id_quadra:Number(req.params.id),
             ...req.body
         });
-
+        console.log(req.body);
+        console.log(parse.data)
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
         const resposta = await this.service.editarQuadra(parse.data);
@@ -44,7 +45,7 @@ export default class QuadraController{
 
     }
 
-    async excluirQuadra(req:Request, res:Response){
+    async desativarQuadra(req:Request, res:Response){
 
         const id = Number(req.params.id);
 
