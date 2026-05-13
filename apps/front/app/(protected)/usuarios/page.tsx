@@ -70,65 +70,43 @@ export default function UsuariosPage(){
             <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
                 <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
-                        <div className="flex flex-row r gap-2">
-                            <CustomInput
-                                name="search"
-                                onChange={handleFilters}
-                                value={filters.search}
-                                type="text"
-                            />
-                        </div>
-
-                        <div className="flex flex-row gap-2">
-                            <CustomSelect
-                                name="tipo"
-                                options={[
-                                    {value:'nome',label:'Nome'},
-                                    {value:'cpf',label:'CPF'},
-                                    {value:'email',label:'E-mail'},
-                                ]}
-                                value={filters.tipo}
-                                onChange={(name, val) => {
-                                    handleFilters({
-                                        target: { name, value: val }
-                                    } as any);
-                                }}                
-                            />
-
-                            <CustomSelect
-                                name="id_cargo"
-                                options={[
-                                    { value:"", label:'Todos'},
-                                    { value: "1", label: 'Cliente' },
-                                    { value: "2", label: 'Funcionário' },
-                                    { value: "3", label: 'Administrador' }
-                                ]}
-                                value={filters.id_cargo ?? ""}
-                                onChange={(name, val) => {
-                                    handleFilters({
-                                        target: { name, value: val }
-                                    } as any);
-                                }}                
-                            />
-
-                            <CustomSelect
-                                name="ativo"
-                                options={[
-                                    { value:"", label:'Todos'},
-                                    { value: "true", label: 'Ativos' },
-                                    { value: "false", label: 'Desativados' },
-                                ]}
-                                value={filters.ativo ?? ""}
-                                onChange={(name, val) => {
-                                    handleFilters({
-                                        target: { name, value: val }
-                                    } as any);
-                                }}                
-                            />
-                        </div>
-
-                    </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
+                    <CustomInput 
+                        label="Pesquisar"
+                        name="search"
+                        onChange={handleFilters}
+                        value={filters.search}
+                    />
+                    <CustomSelect 
+                        label="Tipo"
+                        name="tipo"
+                        options={[
+                            {value:"nome", label:"Nome"},
+                            {value:"cpf", label:"CPF"},
+                            {value:"email", label:"E-mail"},
+                        ]}
+                        value={filters.tipo}
+                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
+                    />
+                    <CustomSelect 
+                        label="Cargo"
+                        name="id_cargo"
+                        options={[{value:"", label:"Todos"},...opcoesCargo]}
+                        value={filters.id_cargo}
+                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
+                    />
+                    <CustomSelect 
+                        label="Status"
+                        name="ativo"
+                        options={[
+                            {value:"", label:"Todos"},
+                            {value:"true", label:"Ativados"},
+                            {value:"false", label:"Desativados"},
+                        ]}
+                        value={filters.ativo}
+                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
+                    />
+                </div>
 
             </div>
 
