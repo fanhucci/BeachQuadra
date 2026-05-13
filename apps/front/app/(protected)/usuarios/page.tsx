@@ -120,7 +120,7 @@ export default function UsuariosPage(){
                     onChange={handleChange}
                     value={formData.cpf}
                     erro={erros.cpf}
-                    type="text"
+                    type="cpf"
                 />
 
                 <CustomInput
@@ -129,7 +129,7 @@ export default function UsuariosPage(){
                     onChange={handleChange}
                     value={formData.email}
                     erro={erros.email}
-                    type="text"
+                    type="email"
                 />
 
                 <CustomInput
@@ -138,7 +138,7 @@ export default function UsuariosPage(){
                     onChange={handleChange}
                     value={formData.telefone}
                     erro={erros.telefone}
-                    type="text"
+                    type="tel"
                 />
 
                 <div className="flex flex-col gap-1">
