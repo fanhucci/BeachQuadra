@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
 
 type InputProps = {
-    label: string;
+    label?: string;
     placeholder?: string;
     name: string;
     value?: string | number;
@@ -36,9 +36,11 @@ export default function CustomInput({
 
     return (
         <div className="flex flex-col gap-1 w-full">
-            <label htmlFor={name} className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
-                {label}
-            </label>
+           {label &&(
+                <label htmlFor={name} className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
+                    {label}
+                </label>
+           )}
 
             <input
                 id={name}

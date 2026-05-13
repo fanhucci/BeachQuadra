@@ -9,7 +9,7 @@ type Option = {
 };
 
 type SelectProps = {
-    label: string;
+    label?: string;
     name: string;
     value: string | number;
     options: Option[];
@@ -36,9 +36,11 @@ export default function CustomSelect({ label, name, value, options, erro, onChan
 
     return (
         <div className="flex flex-col gap-1.5 w-full relative" ref={containerRef}>
-            <label className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
-                {label}
-            </label>
+            {label &&(
+                <label className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
+                    {label}
+                </label>
+            )}
 
             <button
                 type="button"

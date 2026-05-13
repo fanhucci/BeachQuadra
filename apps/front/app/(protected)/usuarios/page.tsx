@@ -67,13 +67,71 @@ export default function UsuariosPage(){
                 </SubmitButton>
             </div>
 
-            <div>Filtros</div>
+            <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
+                    
+                    <div className="flex flex-wrap items-center gap-3 bg-white ">
+                        <CustomInput
+                            name="search"
+                            onChange={handleFilters}
+                            value={filters.search}
+                            type="text"
+                        />
+
+                        <CustomSelect
+                            name="tipo"
+                            options={[
+                                {value:1,label:'Nome'},
+                                {value:2,label:'CPF'},
+                                {value:3,label:'E-mail'},
+                            ]}
+                            value={filters.tipo}
+                            onChange={(name, val) => {
+                                handleFilters({
+                                    target: { name, value: val }
+                                } as any);
+                            }}                
+                        />
+
+                        <CustomSelect
+                            name="id_cargo"
+                            options={[
+                                { value:"", label:'Todos'},
+                                { value: "1", label: 'Cliente' },
+                                { value: "2", label: 'Funcionário' },
+                                { value: "3", label: 'Administrador' }
+                            ]}
+                            value={filters.id_cargo ?? ""}
+                            onChange={(name, val) => {
+                                handleFilters({
+                                    target: { name, value: val }
+                                } as any);
+                            }}                
+                        />
+
+                        <CustomSelect
+                            name="ativo"
+                            options={[
+                                { value:"", label:'Todos'},
+                                { value: "true", label: 'Ativos' },
+                                { value: "false", label: 'Desativados' },
+                            ]}
+                            value={filters.ativo ?? ""}
+                            onChange={(name, val) => {
+                                handleFilters({
+                                    target: { name, value: val }
+                                } as any);
+                            }}                
+                        />
+
+                    </div>
+
+            </div>
 
             <CustomTable
                 columns={colunas}
                 data={dados}
                 isLoading={loading}
-                
             />
 
             <CustomModal
@@ -149,39 +207,8 @@ function UsuarioForm({
                         } as any);
                     }}
                 />
-                {/* <div className="flex flex-col gap-1">
-                    <label htmlFor="id_cargo" className="text-sm text-gray-600">
-                        Cargo
-                    </label>
-                
-                    <select
-                        id="id_cargo"
-                        name="id_cargo"
-                        value={formData.id_cargo}
-                        onChange={handleChange}
-                        className={`
-                        border rounded-lg h-10 px-3 bg-white
-                        focus:outline-none focus:ring-2 focus:ring-blue-400
-                        transition
-                        ${erros.id_cargo ? "border-red-500 focus:ring-red-400" : "border-gray-300"}
-                        `}
-                    >
-                        <option value="0" disabled>
-                            Selecione um cargo...
-                        </option>
-                        <option value={1}>Cliente</option>
-                        <option value={2}>Funcionário</option>
-                        <option value={3}>Administrador</option>
-                    </select>
-                
-                    {erros.id_cargo && (
-                        <p className="text-xs text-red-500">
-                            {erros.id_cargo}
-                        </p>
-                    )}
-                </div> */}
             </div>
-            
+
             <div className="md:col-span-2"> 
                 <CustomInput
                     label="Nome"
