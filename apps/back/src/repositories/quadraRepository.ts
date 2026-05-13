@@ -1,26 +1,27 @@
 
-import { AdicionarQuadraDTO, QuadraDTO, QuadraQueryDTO } from "@app/shared";
+import { NovaQuadra, EditarQuadra, QuadraSearch } from "@app/shared";
 import sql from "../infra/db";
 
 export default class QuadraRepository {
 
-    async adicionarQuadra(quadra:AdicionarQuadraDTO){
+    async adicionarQuadra(quadra:NovaQuadra){
         return await sql`insert into quadras (nome,tipo,status,valor) values (${quadra.nome},${quadra.tipo},${quadra.status}, ${quadra.valor}) returning *`;
     }
-
-    async excluirQuadra(id:number){
-        return await sql`update quadras set ativo = false where id_quadra = ${id}`;
-    } 
 
     async ativarQuadra(id:number){
         return await sql`update quadras set ativo = true where id_quadra = ${id}`;
     } 
 
-    async editarQuadra(quadra:QuadraDTO){
+    async desativarQuadra(id:number){
+        return await sql`update quadras set ativo = false where id_quadra = ${id}`;
+    } 
+
+
+    async editarQuadra(quadra:EditarQuadra){
         return await sql`update quadras set nome = ${quadra.nome}, tipo = ${quadra.tipo}, status = ${quadra.status}, valor = ${quadra.valor} where id_quadra = ${quadra.id_quadra} returning *`;
     }
 
-    async listarQuadras(filtro:QuadraQueryDTO){
+    async listarQuadras(filtro:QuadraSearch){
         return await sql`select * from quadras 
             where 1=1
 

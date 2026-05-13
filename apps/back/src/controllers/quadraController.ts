@@ -7,7 +7,7 @@ export default class QuadraController{
     private service = new QuadraService();
 
     async listarQuadras(req:Request, res:Response){
-        
+
         const parse = QuadraSearchSchema.safeParse(req.query);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
@@ -52,7 +52,7 @@ export default class QuadraController{
 
         if(Number.isNaN(id)) return res.status(400).json({erro:"Id inválido"});
 
-        const resposta = await this.service.excluirQuadra(id);
+        const resposta = await this.service.desativarQuadra(id);
 
         return res.status(200).json(resposta);
 
