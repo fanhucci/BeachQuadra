@@ -67,7 +67,7 @@ export default function UsuariosPage(){
                 </SubmitButton>
             </div>
 
-            <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div className="flex gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
                 <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
                     
                     <div className="flex flex-wrap items-center gap-3 bg-white ">
