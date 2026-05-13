@@ -33,7 +33,7 @@ export default function CustomModal({
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
             
-            <div className={`bg-white rounded-xl shadow-2xl w-full max-w-${size} overflow-visible animate-in fade-in zoom-in duration-200`}>
+            <div className={`bg-white rounded-xl shadow-2xl w-full max-w-${size} overflow-y-auto animate-in fade-in zoom-in duration-200`}>
                 
        
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
