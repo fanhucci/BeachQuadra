@@ -24,7 +24,7 @@ export default function useAgendamentoTable(){
                 <div className="flex justify-center gap-2">
     
                     <LinkButton 
-                        href={`/usuarios/${age.id_agendamento}`} 
+                        href={`/agendamentos/${age.id_agendamento}`} 
                         estilo="fantasma"
                     >
                         <UserSearch size={18} />
