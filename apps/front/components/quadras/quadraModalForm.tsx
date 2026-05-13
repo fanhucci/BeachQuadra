@@ -14,11 +14,6 @@ const opcoesStatus = [
     {value:"false", label:"Inativa"},
 ];
 
-const opcoesAtivo = [
-    {value:"", label:"Ambos"},
-    {value:"true", label:"Ativa"},
-    {value:"false", label:"Inativa"},
-];
 
 interface QuadraModalFormProps{
     formData:Partial<Quadra>;

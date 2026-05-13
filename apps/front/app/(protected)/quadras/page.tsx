@@ -6,7 +6,7 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarQuadraSchema, NovaQuadraSchema, Quadra, QuadraSearch } from "@app/shared";
 import SubmitButton from "@/components/submitButton";
-import { Plus, Users } from "lucide-react";
+import { Plus, SquareChartGantt } from "lucide-react";
 import useQuadrasTable from "@/components/quadras/useQuadrasTable";
 import QuadrasFiltrosForm from "@/components/quadras/quadrasFiltrosForm";
 import QuadraModalForm from "@/components/quadras/quadraModalForm";
@@ -62,7 +62,7 @@ export default function QuadrasPage(){
             <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
                 <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
-                        <Users className="text-blue-600" size={28} />
+                        <SquareChartGantt className="text-blue-600" size={28} />
                     </div>
                     <div>
                         <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Quadras</h2>

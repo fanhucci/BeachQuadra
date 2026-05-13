@@ -4,7 +4,7 @@ import LinkButton from "@/components/linkButton";
 import SubmitButton from "@/components/submitButton";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Quadra } from "@app/shared";
-import { Pencil, UserCheck, UserMinus } from "lucide-react";
+import { Pencil, RotateCcw, Trash } from "lucide-react";
 import { useMemo } from "react";
 
 type AcoesQuadra = {
@@ -58,7 +58,7 @@ export default function useQuadrasTable(acoes:AcoesQuadra){
                             estilo='perigo'
                             title="Desativar"
                         >
-                            <UserMinus size={18} />
+                            <Trash size={18} />
                         </SubmitButton>
                         ) : (
                         <SubmitButton 
@@ -67,7 +67,7 @@ export default function useQuadrasTable(acoes:AcoesQuadra){
                             className="text-green-500 hover:bg-green-50 p-2 rounded-md"
                             title="Ativar"
                         >
-                            <UserCheck size={18} />
+                            <RotateCcw size={18} />
                         </SubmitButton>
                     )}
                 </div>
