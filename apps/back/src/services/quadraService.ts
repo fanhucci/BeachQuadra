@@ -1,5 +1,4 @@
 
-import AppError from "../infra/appError";
 import QuadraRepository from "../repositories/quadraRepository";
 import { QuadraSearch, NovaQuadra, EditarQuadra } from "@app/shared";
 
@@ -12,19 +11,10 @@ export default class QuadraService{
     }
 
     async adicionarQuadra(quadra:NovaQuadra){
-        const existe = await this.repo.quadraExistente(quadra.nome);
-
-        if(existe) throw new AppError("Quadra já existe!",409);
-
         return await this.repo.adicionarQuadra(quadra);
     }
 
     async editarQuadra(quadra:EditarQuadra){
-
-        const existe = await this.repo.quadraExistente(quadra.nome, quadra.id_quadra);
-
-        if(existe) throw new AppError("Quadra já existe!",409);
-
         return await this.repo.editarQuadra(quadra);
     }
 
