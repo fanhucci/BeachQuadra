@@ -1,52 +1,106 @@
 'use client'
 
 import CustomTable from "@/components/customTable";
-import useAgendamento from "./useAgendamento"
-import CustomButtom from "@/components/customButton";
-import { useRouter } from "next/navigation";
-import { dinheiroMask } from "@/utils/mascaras";
+import useFilter from "@/hooksGenericos/useFilter";
+import usePageCrud from "@/hooksGenericos/usePageCrud";
+import { Agendamento, AgendamentoSearch, EditarAgendamentoSchema, NovoAgendamentoSchema} from "@app/shared";
+import SubmitButton from "@/components/submitButton";
+import { Plus, SquareChartGantt } from "lucide-react";
+
+import useAgendamentoTable from "@/components/agendamentos/useAgendamentoTable";
+import AgendamentosFiltrosForm from "@/components/agendamentos/AgendamentosFiltrosForm";
+
+
 
 export default function AgendamentosPage(){
-    const {agendamentos} = useAgendamento();
-    const router = useRouter();
+    const {queryString, filters, handleFilters, limparFiltros} = useFilter<AgendamentoSearch>({
+        search:'',
+        status:'pendente',
+        periodo:''
+    });
 
-    const tabela = agendamentos.map((d)=>({
-        nome:d.nome,
-        status:d.status,
-        valor_total:dinheiroMask(d.valor_total),
-        acoes:(
-            <div className="inline-flex justify-center gap-2">
-                <CustomButtom funcao={()=>router.replace(`/agendamento/${d.id_agendamento}`)} texto="Detalhes" tipo="secundario"/>
-            </div>
-        )
-    }))
-       
+    const {
+        loading,
+        buttonLoading,
 
-    const colunas = [
-        { key: "nome", label: "Cliente" },
-        { key: "status", label: "Status" },
-        { key: "valor_total", label: "Total" },
-        { key: 'acoes', label: "Ações"}
-    ]
-    
+        dados,
+        formData,
+        erros,
+
+        modalOn,
+        editionOn,
+
+        adicionar,
+        editar,
+        ativar,
+        desativar,
+
+        handleChange,
+        abrirEdicao,
+        abrirModal,
+        fecharModal
+
+    } = usePageCrud<Agendamento>({
+        idKey:'id_agendamento',
+        endpoint:'agendamentos',
+        filtro: queryString,
+        criarSchema: NovoAgendamentoSchema,
+        editarSchema: EditarAgendamentoSchema
+    });
+
+    const {colunas} = useAgendamentoTable();
+
     return(
-        <div className="flex flex-col flex-1 p-6 gap-4">
-            <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
-                <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
-                    
-             
+        <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
 
-            </div>
-            {
-                tabela.length>0?
-                    <CustomTable
-                        columns={colunas}
-                        data={tabela}
-                    />
-                :
-                    <p>Nenhum agendamento cadastrado</p>
-            }
-        </div>
-    )
+            <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
+                <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                        <SquareChartGantt className="text-blue-600" size={28} />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Agendamentos</h2>
+                        <p className="text-sm text-gray-500">Visualize e gerencie os agendamentos do sistema</p>
+                    </div>
+                </div>
+                
+                <SubmitButton estilo="primario" onClick={abrirModal}>
+                    <Plus size={20} />
+                    <span>Novo Agendamento</span>
+                </SubmitButton>
+            </header>
+
+
+
+            <section className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-4">
+
+                <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Busca Avançada</h3>
+                    <SubmitButton
+                        estilo="fantasma"
+                        className="text-xs text-red-500 hover:text-red-600 h-8"
+                        onClick={limparFiltros}
+                    >
+                        Resetar Filtros
+                    </SubmitButton>
+                </div>
+                    
+                <AgendamentosFiltrosForm
+                    types={filters}
+                    handle={handleFilters}
+                />
+
+            </section>
+
+            <section className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <CustomTable
+                    columns={colunas}
+                    data={dados}
+                    isLoading={loading}
+                />
+            </section>
+
+        </main>
+    );
 }
 

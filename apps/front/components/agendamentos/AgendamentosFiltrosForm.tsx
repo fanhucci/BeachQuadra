@@ -1,17 +1,17 @@
 'use client'
 
-import { UsuarioSearch } from "@app/shared";
+import { AgendamentoSearch } from "@app/shared";
 import CustomInput from "../customInput";
 import CustomSelect from "../customSelect";
 
-interface UsuariosFiltrosProps {
-    types:UsuarioSearch;
+interface AgendamentosFiltrosProps {
+    types:AgendamentoSearch;
     handle:(e:React.ChangeEvent<HTMLInputElement>)=>void;
 }
-export default function UsuariosFiltrosForm({
+export default function AgendamentosFiltrosForm({
     types,
     handle
-}:UsuariosFiltrosProps){
+}:AgendamentosFiltrosProps){
 
     const opcoesTipo = [
         {value:"nome", label:"Nome"},
@@ -45,29 +45,6 @@ export default function UsuariosFiltrosForm({
                 />
             </div>
 
-            <CustomSelect 
-                label="Categoria"
-                name="tipo"
-                options={opcoesTipo}
-                value={types.tipo}
-                onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
-            />
-
-            <CustomSelect 
-                label="Cargo"
-                name="id_cargo"
-                options={opcoesCargo}
-                value={String(types.id_cargo)}
-                onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
-            />
-
-            <CustomSelect 
-                label="Conta"
-                name="ativo"
-                options={opcoesAtivo}
-                value={String(types.ativo)}
-                onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
-            />
         </div>
     )
 }
