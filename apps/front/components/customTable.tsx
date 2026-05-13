@@ -5,7 +5,7 @@ import { Inbox } from "lucide-react";
 
 export interface Column<T> {
   key: keyof T | string;
-  label: string;
+  label: React.ReactNode;
   render?: (value: any, record: T) => React.ReactNode;
   align?: "left" | "center" | "right"; 
 }

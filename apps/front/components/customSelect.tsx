@@ -5,11 +5,11 @@ import { ChevronDown } from "lucide-react";
 
 type Option = {
     value: string | number;
-    label: string;
+    label: React.ReactNode;
 };
 
 type SelectProps = {
-    label?: string;
+    label?: React.ReactNode;
     name: string;
     value: string | number;
     options: Option[];

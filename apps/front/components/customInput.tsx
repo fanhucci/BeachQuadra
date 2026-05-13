@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
 
 type InputProps = {
-    label?: string;
+    label?: React.ReactNode;
     placeholder?: string;
     name: string;
     value?: string | number;
@@ -51,7 +51,7 @@ export default function CustomInput({
                 value={valorFormatado}
                 onChange={onChange}
                 className={`
-                    border rounded-lg h-14 px-3 text-base transition-all duration-200
+                    border rounded-lg h-12 px-3 text-base transition-all duration-200
                     focus:outline-none focus:ring-2
                     ${erro 
                         ? "border-red-400 focus:ring-red-100 bg-red-50/10" 
