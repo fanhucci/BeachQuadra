@@ -73,6 +73,7 @@ export default function UsuariosPage(){
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
                     <CustomInput 
                         label="Pesquisar"
+                        placeholder="Pesquisa..."
                         name="search"
                         onChange={handleFilters}
                         value={filters.search}
@@ -96,12 +97,12 @@ export default function UsuariosPage(){
                         onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
                     />
                     <CustomSelect 
-                        label="Status"
+                        label="Conta"
                         name="ativo"
                         options={[
-                            {value:"", label:"Todos"},
-                            {value:"true", label:"Ativados"},
-                            {value:"false", label:"Desativados"},
+                            {value:"", label:"Ambos"},
+                            {value:"true", label:"Ativa"},
+                            {value:"false", label:"Inativa"},
                         ]}
                         value={filters.ativo}
                         onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
