@@ -129,8 +129,10 @@ function UsuarioForm({
     handleChange,
 }:UsuarioFormProps){
     return(
-        <div className="flex flex-col gap-3">
-              <CustomInput
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
+
+            <div className="md:col-span-2"> 
+                <CustomInput
                     label="Nome"
                     name="nome"
                     onChange={handleChange}
@@ -138,16 +140,28 @@ function UsuarioForm({
                     erro={erros.nome}
                     type="text"
                 />
+            </div>
 
-                <CustomInput
-                    label="CPF"
-                    name="cpf"
-                    onChange={handleChange}
-                    value={formData.cpf}
-                    erro={erros.cpf}
-                    type="cpf"
-                />
+            <CustomInput
+                label="CPF"
+                name="cpf"
+                onChange={handleChange}
+                value={formData.cpf}
+                erro={erros.cpf}
+                type="cpf"
+            />
 
+            <CustomInput
+                label="Telefone"
+                name="telefone"
+                onChange={handleChange}
+                value={formData.telefone}
+                erro={erros.telefone}
+                type="tel"
+            />
+
+
+            <div className="md:col-span-2">
                 <CustomInput
                     label="E-mail"
                     name="email"
@@ -156,16 +170,9 @@ function UsuarioForm({
                     erro={erros.email}
                     type="email"
                 />
-
-                <CustomInput
-                    label="Telefone"
-                    name="telefone"
-                    onChange={handleChange}
-                    value={formData.telefone}
-                    erro={erros.telefone}
-                    type="tel"
-                />
-
+            </div>
+                
+            <div className="md:col-span-2">
                 <div className="flex flex-col gap-1">
                     <label htmlFor="id_cargo" className="text-sm text-gray-600">
                         Cargo
@@ -197,6 +204,7 @@ function UsuarioForm({
                         </p>
                     )}
                 </div>
+            </div>
         </div >
     );
 }
