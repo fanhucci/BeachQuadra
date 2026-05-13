@@ -67,7 +67,7 @@ export default function AgendamentosPage(){
                 
                 <LinkButton 
                     estilo="primario"
-                    href={'/reservas/cadastrar'}>
+                    href={'/reservas/cadastrar/'}>
                     <Plus size={20} />
                     <span>Novo Agendamento</span>
                 </LinkButton>
