@@ -1,0 +1,88 @@
+'use client'
+import { Quadra } from "@app/shared";
+import CustomSelect from "../customSelect";
+import CustomInput from "../customInput";
+
+const opcoesTipo = [
+    {value:"", label:"Todas"},
+    { value:"individual", label: 'Indivídual' },
+    { value:"dupla", label: 'Duplas' },
+    
+];
+
+const opcoesStatus = [
+    {value:"", label:"Ambos"},
+    {value:"true", label:"Ativa"},
+    {value:"false", label:"Inativa"},
+];
+
+const opcoesAtivo = [
+    {value:"", label:"Ambos"},
+    {value:"true", label:"Ativa"},
+    {value:"false", label:"Inativa"},
+];
+
+interface QuadraModalFormProps{
+    formData:Partial<Quadra>;
+    erros:Partial<Record<keyof Quadra, string>>;
+    handleChange:(e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>void;
+}
+
+export default function QuadraModalForm({
+    formData,
+    erros,
+    handleChange,
+}:QuadraModalFormProps){
+    return(
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
+            <div className="md:col-span-2">
+                <CustomSelect
+                    label="Categoria"
+                    name="tipo"
+                    options={opcoesTipo}
+                    value={formData.tipo || ""}
+                    erro={erros.tipo}
+                    onChange={(name, val) => {
+                        handleChange({
+                            target: { name, value: val }
+                        } as any);
+                    }}
+                />
+
+                <CustomSelect
+                    label="Status"
+                    name="status"
+                    options={opcoesStatus}
+                    value={String(formData.status)}
+                    erro={erros.status}
+                    onChange={(name, val) => {
+                        handleChange({
+                            target: { name, value: val }
+                        } as any);
+                    }}
+                />
+            </div>
+
+            <div className="md:col-span-2"> 
+                <CustomInput
+                    label="Nome"
+                    name="nome"
+                    onChange={handleChange}
+                    value={formData.nome}
+                    erro={erros.nome}
+                    type="text"
+                />
+            </div>
+
+            <CustomInput
+                label="valor"
+                name="valor"
+                onChange={handleChange}
+                value={formData.valor}
+                erro={erros.valor}
+                type="money"
+            />
+            
+        </div >
+    );
+}
