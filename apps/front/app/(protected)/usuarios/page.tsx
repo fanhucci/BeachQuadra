@@ -81,9 +81,9 @@ export default function UsuariosPage(){
                         <CustomSelect
                             name="tipo"
                             options={[
-                                {value:1,label:'Nome'},
-                                {value:2,label:'CPF'},
-                                {value:3,label:'E-mail'},
+                                {value:'nome',label:'Nome'},
+                                {value:'cpf',label:'CPF'},
+                                {value:'email',label:'E-mail'},
                             ]}
                             value={filters.tipo}
                             onChange={(name, val) => {
