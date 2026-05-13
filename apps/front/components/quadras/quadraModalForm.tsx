@@ -35,7 +35,7 @@ export default function QuadraModalForm({
 }:QuadraModalFormProps){
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
-            <div className="md:col-span-2">
+            
                 <CustomSelect
                     label="Categoria"
                     name="tipo"
@@ -61,9 +61,9 @@ export default function QuadraModalForm({
                         } as any);
                     }}
                 />
-            </div>
+       
 
-            <div className="md:col-span-2"> 
+            
                 <CustomInput
                     label="Nome"
                     name="nome"
@@ -72,7 +72,7 @@ export default function QuadraModalForm({
                     erro={erros.nome}
                     type="text"
                 />
-            </div>
+           
 
             <CustomInput
                 label="valor"
