@@ -105,7 +105,6 @@ export default function UsuariosPage(){
                 ]}
 
             >
-                {JSON.stringify(erros)}
                 <CustomInput
                     label="Nome"
                     name="nome"

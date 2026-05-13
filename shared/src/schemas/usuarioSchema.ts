@@ -6,23 +6,25 @@ const tiposPesquisaEnum = [
     'email'
 ] as const;
 
-export const NovoUsuarioSchema = z.object({
+export const NovoUsuarioProprioSchema = z.object({
     nome: z.string('Nome inválido.').min(4,"Nome precisa ter no minimo 4 caracteres"),
     cpf: z.string('CPF inválido.').length(11,"CPF Inválido").regex(/^\d+$/),
-    email: z.string('-Email inválido.').email("E-mail inválido"),
+    email: z.string('E-mail inválido.').email("E-mail inválido"),
     telefone: z.string('Telefone inválido.').min(9,"Telefone inválido").regex(/^\d+$/),
     id_cargo: z.coerce.number('Cargo inválido.').default(1),
     senha:z.string('Senha inválida.').min(6, "Senha deve ter pelo menos 6 caracteres. ")  
 })
 
+export const NovoUsuarioSchema = NovoUsuarioProprioSchema.omit({senha:true})
+
 export const UsuarioSchema = NovoUsuarioSchema.extend({
     id_pessoa:z.coerce.number().int(),
     ativo:z.boolean()
-}).omit({senha:true})
+})
 
 export const EditarUsuarioSchema = NovoUsuarioSchema.partial().extend({
     id_pessoa:z.coerce.number().int()
-}).omit({senha:true})
+})
 
 export const UsuarioSearchSchema = z.object({
     search:z.string().optional(),
@@ -41,6 +43,7 @@ export const UsuarioSearchSchema = z.object({
 
 export type Usuario = z.infer<typeof UsuarioSchema>;
 export type NovoUsuario = z.infer<typeof NovoUsuarioSchema>;
+export type NovoUsuarioProprio = z.infer<typeof NovoUsuarioProprioSchema>;
 export type EditarUsuario = z.infer<typeof EditarUsuarioSchema>;
 export type UsuarioSearch = z.infer<typeof UsuarioSearchSchema>;
 
