@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AgendamentoService from "../services/agendamentoService";
-import { NovoAgendamentoSchema, AlterarAgendamentoSchema} from "@app/shared";
+import { NovoAgendamentoSchema, EditarAgendamentoSchema} from "@app/shared";
 export default class AgendamentoController{
     private service = new AgendamentoService();
 
@@ -38,7 +38,7 @@ export default class AgendamentoController{
 
     async alterarStatusAgendamento(req:Request,res:Response){
      
-        const parse = AlterarAgendamentoSchema.safeParse({
+        const parse = EditarAgendamentoSchema.safeParse({
             id_agendamento:Number(req.params.id),
             ...req.body
         });

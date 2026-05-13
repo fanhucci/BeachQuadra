@@ -3,7 +3,7 @@ import sql from "../infra/db";
 import AgendamentoRepository from "../repositories/agendamentoRepository";
 import HorarioRepository from "../repositories/horarioRepository";
 import ReservaRepository from "../repositories/reservasRepository";
-import {NovoAgendamentoDTO, AlterarAgendamentoDTO, NovaReservaDTO } from '@app/shared';
+import {NovoAgendamento, EditarAgendamento, NovaReserva } from '@app/shared';
 
 export default class AgendamentoService{
     private agenda = new AgendamentoRepository();
@@ -18,10 +18,10 @@ export default class AgendamentoService{
         return await this.agenda.buscarAgendamentoPorId(id);
     }
 
-    async criarNovoAgendamento(dados:NovoAgendamentoDTO){
+    async criarNovoAgendamento(dados:NovoAgendamento){
         const reservas = dados.reservas;
-        const quadras = reservas.map((r:NovaReservaDTO) => r.id_quadra);
-        const horarios = reservas.map((h:NovaReservaDTO)=>h.horario);
+        const quadras = reservas.map((r:NovaReserva) => r.id_quadra);
+        const horarios = reservas.map((h:NovaReserva)=>h.horario);
 
         const resposta = await this.horario.validarHorarios(horarios);
 
@@ -41,7 +41,7 @@ export default class AgendamentoService{
         });
     }
 
-    async alterarStatusAgendamento(dados:AlterarAgendamentoDTO){
+    async alterarStatusAgendamento(dados:EditarAgendamento){
         const {id_agendamento, status} = dados;
 
         return await sql.begin(async(tx)=>{

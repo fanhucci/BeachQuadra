@@ -1,6 +1,6 @@
 import { TransactionSql } from "postgres";
 import sql from "../infra/db";
-import {NovoAgendamentoDTO} from '@app/shared';
+import {NovoAgendamento} from '@app/shared';
 
 export default class AgendamentoRepository{
 
@@ -72,7 +72,7 @@ export default class AgendamentoRepository{
         return Number(total);
     }
 
-    async novoAgendamento(tx:TransactionSql,dados:NovoAgendamentoDTO,total:number){
+    async novoAgendamento(tx:TransactionSql,dados:NovoAgendamento,total:number){
         const [{id_agendamento}] = await tx`
             insert into agendamentos
             (id_pessoa, valor_total, created_by)
