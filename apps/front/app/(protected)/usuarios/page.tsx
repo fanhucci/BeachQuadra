@@ -7,7 +7,7 @@ import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "@app/shared";
 import useUsuariosTable from "./useUsuariosTable";
 import SubmitButton from "@/components/submitButton";
-import { Plus } from "lucide-react";
+import { Plus, Users } from "lucide-react";
 import CustomInput from "@/components/customInput";
 import CustomSelect from "@/components/customSelect";
 
@@ -57,8 +57,12 @@ export default function UsuariosPage(){
 
     return(
         <main className="flex flex-col flex-1 p-6 gap-4">
-
-            <div>
+            
+            <div className="flex items-center gap-2 border-b pb-4">
+                <div>
+                    <Users className="text-blue-600" size={28}/>
+                    <h2 className="text-2xl font-bold text-gray-800">Usuários</h2>
+                </div>
                 <SubmitButton
                     estilo="primario"
                     onClick={abrirModal}
@@ -66,6 +70,8 @@ export default function UsuariosPage(){
                     <Plus /> Novo Usuário
                 </SubmitButton>
             </div>
+
+
 
             <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
                 <div className="flex justify-between p-3">
