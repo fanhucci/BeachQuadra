@@ -78,7 +78,7 @@ export default function UsuariosPage(){
                             type="text"
                         />
 
-                        <div className="col-span-3">
+                        <div className="">
                             <CustomSelect
                                 name="tipo"
                                 options={[
