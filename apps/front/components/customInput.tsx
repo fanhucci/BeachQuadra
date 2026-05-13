@@ -4,23 +4,23 @@ import React from "react";
 type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
 
 type InputProps = {
-  label: string;
-  placeholder?: string;
-  name: string;
-  value?: string | number;
-  erro?: string;
-  type?: InputVariant;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    label: string;
+    placeholder?: string;
+    name: string;
+    value?: string | number;
+    erro?: string;
+    type?: InputVariant;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function CustomInput({
-  label,
-  placeholder,
-  name,
-  value = "",
-  erro,
-  type = "text",
-  onChange,
+    label,
+    placeholder,
+    name,
+    type = "text",
+    value = type === 'number' || type === 'money'? '0':"",
+    erro,
+    onChange,
 }: InputProps) {
 
     const masks:Record<string,(val:string)=>string> = {
@@ -53,7 +53,7 @@ export default function CustomInput({
 
                 type={type === "password" ? "password" : "text"}
                 inputMode={type === "cpf" || type === "tel" || type === "number" ? "numeric" : "text"}
-                value={value ?? ""}
+                value={value}
                 onChange={handleChange}
                 className={`
                     border rounded-lg h-10 px-3 text-sm transition-all duration-200
