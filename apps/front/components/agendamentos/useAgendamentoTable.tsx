@@ -1,10 +1,9 @@
 'use client'
 import { Column } from "@/components/customTable";
 import LinkButton from "@/components/linkButton";
-import SubmitButton from "@/components/submitButton";
-import { cpfMask, dinheiroMask, telefoneMask } from "@/utils/mascaras";
-import { Agendamento, Usuario } from "@app/shared";
-import { CalendarPlus,Pencil, UserCheck, UserMinus, UserSearch } from "lucide-react";
+import { dinheiroMask } from "@/utils/mascaras";
+import { Agendamento } from "@app/shared";
+import { BookSearch } from "lucide-react";
 import { useMemo } from "react";
 
 
@@ -27,7 +26,7 @@ export default function useAgendamentoTable(){
                         href={`/agendamentos/${age.id_agendamento}`} 
                         estilo="fantasma"
                     >
-                        <UserSearch size={18} />
+                        <BookSearch size={18} />
                         <span className="hidden lg:inline">Detalhes</span>
                     </LinkButton>
 

@@ -5,10 +5,11 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { Agendamento, AgendamentoSearch, EditarAgendamentoSchema, NovoAgendamentoSchema} from "@app/shared";
 import SubmitButton from "@/components/submitButton";
-import { Plus, SquareChartGantt } from "lucide-react";
+import { Contact, Plus } from "lucide-react";
 
 import useAgendamentoTable from "@/components/agendamentos/useAgendamentoTable";
 import AgendamentosFiltrosForm from "@/components/agendamentos/AgendamentosFiltrosForm";
+import LinkButton from "@/components/linkButton";
 
 
 
@@ -56,7 +57,7 @@ export default function AgendamentosPage(){
             <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
                 <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
-                        <SquareChartGantt className="text-blue-600" size={28} />
+                        <Contact className="text-blue-600" size={28} />
                     </div>
                     <div>
                         <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Agendamentos</h2>
@@ -64,10 +65,12 @@ export default function AgendamentosPage(){
                     </div>
                 </div>
                 
-                <SubmitButton estilo="primario" onClick={abrirModal}>
+                <LinkButton 
+                    estilo="primario"
+                    href={'/reservas/cadastrar'}>
                     <Plus size={20} />
                     <span>Novo Agendamento</span>
-                </SubmitButton>
+                </LinkButton>
             </header>
 
 
