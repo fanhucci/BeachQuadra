@@ -5,11 +5,11 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "@app/shared";
-import useUsuariosTable from "./useUsuariosTable";
+import useUsuariosTable from "../../../components/usuarios/useUsuariosTable";
 import SubmitButton from "@/components/submitButton";
 import { Plus, Users } from "lucide-react";
-import CustomInput from "@/components/customInput";
-import CustomSelect from "@/components/customSelect";
+import UsuarioModalForm from "@/components/usuarios/usuarioModalForm";
+import UsuariosFiltrosForm from "@/components/usuarios/usuariosFiltrosForm";
 
 
 export default function UsuariosPage(){
@@ -56,83 +56,54 @@ export default function UsuariosPage(){
     });
 
     return(
-        <main className="flex flex-col flex-1 p-6 gap-4">
+        <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
 
-            <div className="flex items-center justify-between gap-2 border-b pb-4">
-                <div className="flex flex-row gap-2">
-                    <Users className="text-blue-600" size={28}/>
-                    <h2 className="text-2xl font-bold text-gray-800">Usuários</h2>
+            <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
+                <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-50 rounded-lg">
+                        <Users className="text-blue-600" size={24} />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Usuários</h2>
+                        <p className="text-sm text-gray-500">Visualize e gerencie os acessos do sistema</p>
+                    </div>
                 </div>
-                <SubmitButton
-                    estilo="primario"
-                    onClick={abrirModal}
-                >
-                    <Plus /> Novo Usuário
+                
+                <SubmitButton estilo="primario" onClick={abrirModal}>
+                    <Plus size={20} />
+                    <span>Novo Usuário</span>
                 </SubmitButton>
-            </div>
+            </header>
 
 
 
-            <div className="flex flex-col gap-2 p-4 rounded-xl border border-gray-200 shadow-sm">
-                <div className="flex justify-between p-3">
-                    <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
+            <section className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-4">
+
+                <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Busca Avançada</h3>
                     <SubmitButton
                         estilo="fantasma"
-                        isLoading={buttonLoading}
+                        className="text-xs text-red-500 hover:text-red-600 h-8"
                         onClick={limparFiltros}
                     >
-                        Limpar 
+                        Resetar Filtros
                     </SubmitButton>
                 </div>
                     
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 items-end">
-                    <div className="col-span-1 md:col-span-3">
-                        <CustomInput 
-                            label="Pesquisar"
-                            placeholder="Pesquisa..."
-                            name="search"
-                            onChange={handleFilters}
-                            value={filters.search}
-                        />
-                    </div>
-                    <CustomSelect 
-                        label="Categoria"
-                        name="tipo"
-                        options={[
-                            {value:"nome", label:"Nome"},
-                            {value:"cpf", label:"CPF"},
-                            {value:"email", label:"E-mail"},
-                        ]}
-                        value={filters.tipo}
-                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
-                    />
-                    <CustomSelect 
-                        label="Cargo"
-                        name="id_cargo"
-                        options={[{value:"", label:"Todos"},...opcoesCargo]}
-                        value={filters.id_cargo}
-                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
-                    />
-                    <CustomSelect 
-                        label="Conta"
-                        name="ativo"
-                        options={[
-                            {value:"", label:"Ambos"},
-                            {value:"true", label:"Ativa"},
-                            {value:"false", label:"Inativa"},
-                        ]}
-                        value={filters.ativo}
-                        onChange={(n, v) => handleFilters({target: {name: n, value: v}} as any)}
-                    />
-                </div>
+                <UsuariosFiltrosForm
+                    types={filters}
+                    handle={handleFilters}
+                />
 
-            </div>
+            </section>
 
-            <CustomTable
-                columns={colunas}
-                data={dados}
-                isLoading={loading}
-            />
+            <section className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <CustomTable
+                    columns={colunas}
+                    data={dados}
+                    isLoading={loading}
+                />
+            </section>
 
             <CustomModal
                 titulo={
@@ -162,9 +133,8 @@ export default function UsuariosPage(){
                     },
 
                 ]}
-
             >
-                <UsuarioForm
+                <UsuarioModalForm
                     formData={formData}
                     erros={erros}
                     handleChange={handleChange}
@@ -175,82 +145,3 @@ export default function UsuariosPage(){
     );
 }
 
-const opcoesCargo = [
-    { value: 1, label: 'Cliente' },
-    { value: 2, label: 'Funcionário' },
-    { value: 3, label: 'Administrador' }
-];
-
-interface UsuarioFormProps{
-    formData:Partial<Usuario>;
-    erros:Partial<Record<keyof Usuario, string>>;
-    handleChange:(e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>void;
-}
-
-function UsuarioForm({
-    formData,
-    erros,
-    handleChange,
-}:UsuarioFormProps){
-    return(
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
-            <div className="md:col-span-2">
-                <CustomSelect
-                    label="Cargo"
-                    name="id_cargo"
-                    options={opcoesCargo}
-                    value={formData.id_cargo || ""}
-                    erro={erros.id_cargo}
-                    onChange={(name, val) => {
-                        handleChange({
-                            target: { name, value: val }
-                        } as any);
-                    }}
-                />
-            </div>
-
-            <div className="md:col-span-2"> 
-                <CustomInput
-                    label="Nome"
-                    name="nome"
-                    onChange={handleChange}
-                    value={formData.nome}
-                    erro={erros.nome}
-                    type="text"
-                />
-            </div>
-
-            <CustomInput
-                label="CPF"
-                name="cpf"
-                onChange={handleChange}
-                value={formData.cpf}
-                erro={erros.cpf}
-                type="cpf"
-            />
-
-            <CustomInput
-                label="Telefone"
-                name="telefone"
-                onChange={handleChange}
-                value={formData.telefone}
-                erro={erros.telefone}
-                type="tel"
-            />
-
-
-            <div className="md:col-span-2">
-                <CustomInput
-                    label="E-mail"
-                    name="email"
-                    onChange={handleChange}
-                    value={formData.email}
-                    erro={erros.email}
-                    type="email"
-                />
-            </div>
-                
-            
-        </div >
-    );
-}

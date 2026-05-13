@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
 
 type InputProps = {
-    label?: React.ReactNode;
+    label?: string;
     placeholder?: string;
     name: string;
     value?: string | number;

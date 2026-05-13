@@ -4,7 +4,7 @@ import LinkButton from "@/components/linkButton";
 import SubmitButton from "@/components/submitButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { Usuario } from "@app/shared";
-import { AtSign, CalendarPlus,IdCard,Pencil, Phone, UserCheck, UserMinus, UserSearch } from "lucide-react";
+import { CalendarPlus,Pencil, UserCheck, UserMinus, UserSearch } from "lucide-react";
 import { useMemo } from "react";
 
 type AcoesUsuario = {
@@ -24,12 +24,12 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
     const colunas = useMemo<Column<Usuario>[]>(()=>[
         { key: "nome", label: "Nome" },
         { 
-            key: "cpf", label: `${<IdCard />} CPF`,
+            key: "cpf", label: "CPF",
             render:(value:string)=>(cpfMask(value))
         },
-        { key: "email", label: `${<AtSign />}E-mail`},
+        { key: "email", label: "E-mail"},
         { 
-            key: "telefone", label: `${<Phone />} Telefone`,
+            key: "telefone", label: "Telefone",
             render:(value:string)=>(telefoneMask(value))
         },
         {
