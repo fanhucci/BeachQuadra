@@ -136,48 +136,6 @@ function UsuarioForm({
 }:UsuarioFormProps){
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
-
-            <div className="md:col-span-2"> 
-                <CustomInput
-                    label="Nome"
-                    name="nome"
-                    onChange={handleChange}
-                    value={formData.nome}
-                    erro={erros.nome}
-                    type="text"
-                />
-            </div>
-
-            <CustomInput
-                label="CPF"
-                name="cpf"
-                onChange={handleChange}
-                value={formData.cpf}
-                erro={erros.cpf}
-                type="cpf"
-            />
-
-            <CustomInput
-                label="Telefone"
-                name="telefone"
-                onChange={handleChange}
-                value={formData.telefone}
-                erro={erros.telefone}
-                type="tel"
-            />
-
-
-            <div className="md:col-span-2">
-                <CustomInput
-                    label="E-mail"
-                    name="email"
-                    onChange={handleChange}
-                    value={formData.email}
-                    erro={erros.email}
-                    type="email"
-                />
-            </div>
-                
             <div className="md:col-span-2">
                 <CustomSelect
                     label="Cargo"
@@ -223,6 +181,49 @@ function UsuarioForm({
                     )}
                 </div> */}
             </div>
+            
+            <div className="md:col-span-2"> 
+                <CustomInput
+                    label="Nome"
+                    name="nome"
+                    onChange={handleChange}
+                    value={formData.nome}
+                    erro={erros.nome}
+                    type="text"
+                />
+            </div>
+
+            <CustomInput
+                label="CPF"
+                name="cpf"
+                onChange={handleChange}
+                value={formData.cpf}
+                erro={erros.cpf}
+                type="cpf"
+            />
+
+            <CustomInput
+                label="Telefone"
+                name="telefone"
+                onChange={handleChange}
+                value={formData.telefone}
+                erro={erros.telefone}
+                type="tel"
+            />
+
+
+            <div className="md:col-span-2">
+                <CustomInput
+                    label="E-mail"
+                    name="email"
+                    onChange={handleChange}
+                    value={formData.email}
+                    erro={erros.email}
+                    type="email"
+                />
+            </div>
+                
+            
         </div >
     );
 }
