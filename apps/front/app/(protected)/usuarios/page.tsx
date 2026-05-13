@@ -9,6 +9,7 @@ import useUsuariosTable from "./useUsuariosTable";
 import SubmitButton from "@/components/submitButton";
 import { Plus } from "lucide-react";
 import CustomInput from "@/components/customInput";
+import CustomSelect from "@/components/customSelect";
 
 
 export default function UsuariosPage(){
@@ -116,6 +117,11 @@ export default function UsuariosPage(){
     );
 }
 
+const opcoesCargo = [
+    { value: 1, label: 'Cliente' },
+    { value: 2, label: 'Funcionário' },
+    { value: 3, label: 'Administrador' }
+];
 
 interface UsuarioFormProps{
     formData:Partial<Usuario>;
@@ -172,8 +178,20 @@ function UsuarioForm({
                 />
             </div>
                 
-            <div className="">
-                <div className="flex flex-col gap-1">
+            <div className="md:col-span-2">
+                <CustomSelect
+                    label="Cargo"
+                    name="id_cargo"
+                    options={opcoesCargo}
+                    value={formData.id_cargo || ""}
+                    erro={erros.id_cargo}
+                    onChange={(name, val) => {
+                        handleChange({
+                            target: { name, value: val }
+                        } as any);
+                    }}
+                />
+                {/* <div className="flex flex-col gap-1">
                     <label htmlFor="id_cargo" className="text-sm text-gray-600">
                         Cargo
                     </label>
@@ -203,7 +221,7 @@ function UsuarioForm({
                             {erros.id_cargo}
                         </p>
                     )}
-                </div>
+                </div> */}
             </div>
         </div >
     );
