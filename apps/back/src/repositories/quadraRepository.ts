@@ -32,8 +32,6 @@ export default class QuadraRepository {
         return await sql`insert into quadras (nome,tipo,status,valor) values (${quadra.nome},${quadra.tipo},${quadra.status}, ${quadra.valor}) returning *`;
     }
 
-    
-
     async editarQuadra(quadra:EditarQuadra){
         const campos: string[] = [];
         const valores: any[] = [];
@@ -65,7 +63,6 @@ export default class QuadraRepository {
         `,valores);
     }
 
-    
     async ativarQuadra(id:number){
         return await sql`update quadras set ativo = true where id_quadra = ${id}`;
     } 
@@ -73,51 +70,6 @@ export default class QuadraRepository {
     async desativarQuadra(id:number){
         return await sql`update quadras set ativo = false where id_quadra = ${id}`;
     } 
-
-    async editarPessoa(dados: AlterarPessoaDTO) {
-  
-        const campos: string[] = [];
-        const valores: any[] = [];
-
-        if (dados.nome !== undefined) {
-            valores.push(dados.nome);
-            campos.push(`nome = $${valores.length}`);
-        }
-
-        if (dados.cpf !== undefined) {
-            valores.push(dados.cpf);
-            campos.push(`cpf = $${valores.length}`);
-        }
-
-        if (dados.telefone !== undefined) {
-            valores.push(dados.telefone);
-            campos.push(`telefone = $${valores.length}`);
-        }
-
-        if (dados.email !== undefined) {
-            valores.push(dados.email);
-            campos.push(`email = $${valores.length}`);
-        }
-
-        if (dados.id_cargo !== undefined) {
-            valores.push(dados.id_cargo);
-            campos.push(`id_cargo = $${valores.length}`);
-        }
-
-        if (dados.ativo !== undefined) {
-            valores.push(dados.ativo);
-            campos.push(`ativo = $${valores.length}`);
-        }
-
-        valores.push(dados.id_pessoa);
-
-        return await sql.unsafe(`
-            update pessoas
-            set ${campos.join(", ")}
-            where id_pessoa = $${valores.length}
-            returning *
-        `, valores);
-    }
 
     async quadraExistente(nome:string, id?:number){
         const result = await sql`
