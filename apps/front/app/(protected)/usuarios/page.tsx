@@ -172,7 +172,7 @@ function UsuarioForm({
                 />
             </div>
                 
-            <div className="md:col-span-2">
+            <div className="">
                 <div className="flex flex-col gap-1">
                     <label htmlFor="id_cargo" className="text-sm text-gray-600">
                         Cargo
