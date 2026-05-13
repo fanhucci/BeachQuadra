@@ -6,6 +6,8 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "@app/shared";
 import useUsuariosTable from "./useUsuariosTable";
+import SubmitButton from "@/components/submitButton";
+import { Plus } from "lucide-react";
 
 
 export default function UsuariosPage(){
@@ -55,7 +57,12 @@ export default function UsuariosPage(){
         <main className="flex flex-col flex-1 p-6 gap-4">
 
             <div>
-                header
+                <SubmitButton
+                    estilo="primario"
+                    onClick={abrirModal}
+                >
+                    <Plus /> Novo Usuário
+                </SubmitButton>
             </div>
 
             <div>Filtros</div>
