@@ -32,7 +32,7 @@ export default function CustomSelect({ label, name, value, options, erro, onChan
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const selectedOption = options.find(opt => opt.value === String(value));
+    const selectedOption = options.find(opt => String(opt.value) === String(value));
 
     return (
         <div className="flex flex-col gap-1.5 w-full relative" ref={containerRef}>

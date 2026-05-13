@@ -36,7 +36,7 @@ export default function CustomInput({
 
     return (
         <div className="flex flex-col gap-1 w-full">
-            <label htmlFor={name} className="text-[13px] mb-1 font-medium text-gray-500 uppercase tracking-wide px-1">
+            <label htmlFor={name} className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
                 {label}
             </label>
 
