@@ -30,13 +30,13 @@ export default class QuadraController{
     }
 
     async editarQuadra(req:Request,res:Response){
-        
+            console.log('reqBODY: ',req.body);
         const parse = ListarQuadraSchema.safeParse({
             id_quadra:Number(req.params.id),
             ...req.body
         });
-        console.log(req.body);
-        console.log(parse.data)
+        
+        console.log('parseData:', parse.data)
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
         const resposta = await this.service.editarQuadra(parse.data);
