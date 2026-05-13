@@ -71,14 +71,14 @@ export default function UsuariosPage(){
                 <div className="flex items-center gap-2 text-xs text-gray-500">Filtros:</div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
-                        <CustomInput
-                            name="search"
-                            onChange={handleFilters}
-                            value={filters.search}
-                            type="text"
-                        />
-
-                        <div className="">
+                        <div className="flex flex-row gap-3">
+                            <CustomInput
+                                name="search"
+                                onChange={handleFilters}
+                                value={filters.search}
+                                type="text"
+                            />
+                            
                             <CustomSelect
                                 name="tipo"
                                 options={[
@@ -93,7 +93,10 @@ export default function UsuariosPage(){
                                     } as any);
                                 }}                
                             />
+                        </div>
 
+                        <div className="flex flex-row gap-3">
+                            
                             <CustomSelect
                                 name="id_cargo"
                                 options={[
