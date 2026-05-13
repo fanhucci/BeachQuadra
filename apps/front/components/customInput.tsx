@@ -36,7 +36,7 @@ export default function CustomInput({
 
     return (
         <div className="flex flex-col gap-1 w-full">
-            <label htmlFor={name} className="text-[12px] font-medium text-gray-500 uppercase tracking-wide px-1">
+            <label htmlFor={name} className="text-[13px] mb-1 font-medium text-gray-500 uppercase tracking-wide px-1">
                 {label}
             </label>
 
@@ -49,7 +49,7 @@ export default function CustomInput({
                 value={valorFormatado}
                 onChange={onChange}
                 className={`
-                    border rounded-lg h-10 px-3 text-sm transition-all duration-200
+                    border rounded-lg h-14 px-3 text-base transition-all duration-200
                     focus:outline-none focus:ring-2
                     ${erro 
                         ? "border-red-400 focus:ring-red-100 bg-red-50/10" 
