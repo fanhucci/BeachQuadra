@@ -7,12 +7,12 @@ const tiposPesquisaEnum = [
 ] as const;
 
 export const NovoUsuarioSchema = z.object({
-    nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres"),
-    cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/),
-    email: z.string().email("E-mail inválido"),
-    telefone: z.string().min(9,"Telefone inválido").regex(/^\d+$/),
-    id_cargo: z.coerce.number().default(1),
-    senha:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. ")  
+    nome: z.string('Nome inválido.').min(4,"Nome precisa ter no minimo 4 caracteres"),
+    cpf: z.string('CPF inválido.').length(11,"CPF Inválido").regex(/^\d+$/),
+    email: z.string('-Email inválido.').email("E-mail inválido"),
+    telefone: z.string('Telefone inválido.').min(9,"Telefone inválido").regex(/^\d+$/),
+    id_cargo: z.coerce.number('Cargo inválido.').default(1),
+    senha:z.string('Senha inválida.').min(6, "Senha deve ter pelo menos 6 caracteres. ")  
 })
 
 export const UsuarioSchema = NovoUsuarioSchema.extend({
