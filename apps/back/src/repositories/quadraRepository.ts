@@ -29,7 +29,12 @@ export default class QuadraRepository {
     }
 
     async adicionarQuadra(quadra:NovaQuadra){
-        return await sql`insert into quadras (nome,tipo,status,valor) values (${quadra.nome},${quadra.tipo},${quadra.status}, ${quadra.valor}) returning *`;
+        return await sql`
+            insert into quadras 
+            (nome,tipo,status,valor) 
+            values (${quadra.nome},${quadra.tipo},${quadra.status}, ${quadra.valor}) 
+            returning *
+        `;
     }
 
     async editarQuadra(quadra:EditarQuadra){
@@ -44,17 +49,25 @@ export default class QuadraRepository {
         return await sql`
             update quadras 
             set ${sql(dadosParaAtualizar)}
-            where id_quadra = $${id_quadra} 
+            where id_quadra = ${id_quadra} 
             returning *
         `;
     }
 
     async ativarQuadra(id:number){
-        return await sql`update quadras set ativo = true where id_quadra = ${id}`;
+        return await sql`
+            update quadras 
+            set ativo = true 
+            where id_quadra = ${id}
+        `;
     } 
 
     async desativarQuadra(id:number){
-        return await sql`update quadras set ativo = false where id_quadra = ${id}`;
+        return await sql`
+            update quadras 
+            set ativo = false 
+            where id_quadra = ${id}
+        `;
     } 
 
 }
