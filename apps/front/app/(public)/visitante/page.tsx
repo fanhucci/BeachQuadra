@@ -5,7 +5,7 @@ import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/Agen
 export default function VisitantePage(){
     return(
         <AgendamentoFormComponent
-            context="funcionario"
+            context="visitante"
         />
     )
 }
