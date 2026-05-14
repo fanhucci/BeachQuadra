@@ -194,7 +194,7 @@ function SalvarAgendamentoForm({
                         </>
                     )
                     
-                    :contexto === 'cliente' 
+                    :contexto === 'cliente' && cliente 
                     ?(
                         <>
                             <Campo
@@ -207,9 +207,10 @@ function SalvarAgendamentoForm({
                         <>
                             <CustomInput
                                 label="Cliente"
-                                name=""
+                                name="nome"
                                 onChange={(r)=>(r)}
                                 placeholder="Pesquisar"
+                                value={cliente.nome ?? ''}
                                 type="text"
                             />
                         </>)
