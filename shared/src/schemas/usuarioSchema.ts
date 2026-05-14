@@ -47,6 +47,22 @@ export type NovoUsuarioProprio = z.infer<typeof NovoUsuarioProprioSchema>;
 export type EditarUsuario = z.infer<typeof EditarUsuarioSchema>;
 export type UsuarioSearch = z.infer<typeof UsuarioSearchSchema>;
 
+export const PerfilSchema = z.object({
+    usuario:UsuarioSchema.extend({
+        cargo:z.string()
+    }),
+    permissions:z.object({
+        canEdit:z.coerce.boolean(),
+        canChangePassword:z.coerce.boolean(),
+        canResetPassword:z.coerce.boolean(),
+        canActivateAccount:z.coerce.boolean(),
+        canDeactivateAccount:z.coerce.boolean(),
+        canDelete:z.coerce.boolean()
+    })
+})
+
+export type Perfil = z.infer<typeof PerfilSchema>;
+
 export const CadastrarUsuarioSchema = z.object({
     nome: z.string().min(4,"Nome precisa ter no minimo 4 caracteres"),
     cpf: z.string().length(11,"CPF Inválido").regex(/^\d+$/),

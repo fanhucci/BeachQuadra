@@ -3,15 +3,11 @@
 import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/AgendamentoForm"
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
-import { Usuario } from "@app/shared";
+import { Perfil, Usuario } from "@app/shared";
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
-interface Perfil {
-    usuario:Usuario;
-    permissions:{};
-}
 export default function AgendarPage(){
     const {user} = useUser();
     const router = useRouter();
