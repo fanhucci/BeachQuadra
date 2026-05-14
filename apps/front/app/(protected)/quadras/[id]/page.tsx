@@ -6,9 +6,8 @@ import Agenda from "@/components/agenda";
 
 export default function QuadraDetailPage(){
 
-    const {loading, quadra,id, mostrarAgendamento} = useQuadraDetail();   
+    const { quadra,id, mostrarAgendamento} = useQuadraDetail();   
 
-    if(loading) return <LoadingSpinner/>
 
     if(!quadra) return <p>Quadra não encontrada</p>
 

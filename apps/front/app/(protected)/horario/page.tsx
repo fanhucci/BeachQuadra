@@ -5,8 +5,6 @@ import CustomModal from "@/components/customModal";
 import useHorario from "./useHorario";
 
 import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } from "lucide-react";
-import LoadingSpinner from "@/components/loadingSpinner";
-
 
 
 export default function HorarioPage(){
@@ -27,7 +25,6 @@ export default function HorarioPage(){
 
     const semanaHeder = ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
-    if(loading) return <LoadingSpinner/>
 
     if(!horario) return <p>Erro ao renderizar pagina</p>
     const hoje = new Date();
