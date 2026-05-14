@@ -179,10 +179,20 @@ function SalvarAgendamentoForm({
                 botoes={[
                     {
                         label:'Cancelar',
-                        estilo:'primario',
+                        estilo:'secundario',
                         onClick:fecharModal
                     },
-                    
+                    contexto === 'visitante'
+                    ?{
+                        label:'Confirmar',
+                        estilo:'primario',
+                        href:'/login'
+                    }
+                    :{
+                        label:'Confirmar',
+                        estilo:'primario',
+                        onClick:salvar
+                    }
                 ]}
             >
                 teste
