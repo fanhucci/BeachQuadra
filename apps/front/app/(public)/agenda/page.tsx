@@ -28,7 +28,7 @@ export default function AgendaPage(){
 
     return(
         <div className="flex flex-col flex-1 h-full items-center">
-            <div className="w-[80%]">
+            <div className="w-[90%] justify-around">
                 <div className="flex flex-row justify-between p-2">
                     <SubmitButton 
                         estilo="secundario"
@@ -50,7 +50,7 @@ export default function AgendaPage(){
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                    <div className="flex flex-col w-80">
+                    <div className="flex flex-col w-[30%]">
                         <div className="flex-1 flex-wrap">
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                                 Selecionados ({horarioSelecionado.length})
