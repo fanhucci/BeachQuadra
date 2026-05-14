@@ -28,7 +28,7 @@ export default function AgendaPage(){
 
     return(
         <div className="flex flex-col flex-1 h-full items-center">
-            <div className="w-[90%] justify-around">
+            <div className="w-[80%] justify-around">
                 <div className="flex flex-row justify-between p-2">
                     <SubmitButton 
                         estilo="secundario"
