@@ -8,11 +8,15 @@ import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
+interface Perfil {
+    usuario:Usuario;
+    permissions:{};
+}
 export default function AgendarPage(){
     const {user} = useUser();
     const router = useRouter();
 
-    const [perfil,setPerfil] = useState<Usuario|null>(null);
+    const [perfil,setPerfil] = useState<Perfil|null>(null);
     const [loading,setLoading] = useState<boolean>(true);
 
     async function pegarUsuario(id:number){
@@ -49,7 +53,7 @@ export default function AgendarPage(){
     return(
         <AgendamentoFormComponent
             context="cliente"
-            clientePreSelecionado={perfil}
+            clientePreSelecionado={perfil.usuario}
         />
     )
 }
