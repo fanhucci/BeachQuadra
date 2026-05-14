@@ -50,23 +50,31 @@ export default function AgendaPage(){
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                    <div className="">
-                        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
-                            Selecionados ({horarioSelecionado.length})
-                        </h3>
-                        
-                        <div className="flex flex-wrap gap-2">
-                            {horariosOrdenados.map(r => (
-                                <SelectedSlotButton
-                                    key={r.horario.toString()}
-                                    horario={r.horario}
-                                    remover={() => removerHorarioSelecionado(r)}
-                                />
-                            ))}
+                    <div className="flex flex-col">
+                        <div className="flex-1">
+                            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                Selecionados ({horarioSelecionado.length})
+                            </h3>
                             
-                            {horarioSelecionado.length === 0 && (
-                                <p className="text-sm text-gray-400 italic">Nenhum horário selecionado</p>
-                            )}
+                            <div className="flex flex-wrap gap-2">
+                                {horariosOrdenados.map(r => (
+                                    <SelectedSlotButton
+                                        key={r.horario.toString()}
+                                        horario={r.horario}
+                                        remover={() => removerHorarioSelecionado(r)}
+                                    />
+                                ))}
+                                
+                                {horarioSelecionado.length === 0 && (
+                                    <p className="text-sm text-gray-400 italic">Nenhum horário selecionado</p>
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex-1">
+
+                        </div>
+                        <div className="flex-1">
+
                         </div>
                     </div>
                 </section>
