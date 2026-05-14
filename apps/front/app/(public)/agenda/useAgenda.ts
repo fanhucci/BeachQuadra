@@ -14,7 +14,6 @@ export default function useAgenda(){
     const segundaFeira = new Date(hoje);
     segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
 
-    const router = useRouter();
 
     const [dados, setDados] = useState<any>([]);
     const [tipo,setTipo] = useState('individual');
@@ -46,14 +45,14 @@ export default function useAgenda(){
     
         setHorarioSelecionado((prev)=>{
 
-            const indiceExistente = prev.reservas.find(
+            const indiceExistente = prev.find(
                 (r)=> r.horario === slot.horario
             ) 
             
             if(indiceExistente){
                 return{
                     ...prev,
-                    reservas: prev.reservas.filter(r=>r.horario !== slot.horario),
+                    reservas: prev.filter(r=>r.horario !== slot.horario),
                 }
             }
 
@@ -64,7 +63,7 @@ export default function useAgenda(){
             return {
                 ...prev,
                 reservas:[
-                    ...prev.reservas,
+                    ...prev,
                     {
                         id_quadra,
                         horario:slot.horario
@@ -75,7 +74,7 @@ export default function useAgenda(){
             
         })
     }
-
+ 
     const proximaSemana = ()=>{
         const proximaSemana = new Date(data);
 
