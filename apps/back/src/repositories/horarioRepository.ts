@@ -105,7 +105,7 @@ export default class HorarioRepository {
                     where q.ativo = true
                     and(
                         ${id_quadra ?? null}::int is not null
-                        or h.horario > (now() at time zone 'America/Sao_Paulo')::timestamptz + interval '1 hour'
+                        or h.horario > now()::timestamptz + interval '1 hour'
                     )
                     
                     and(${tipo ?? null}::text is null or q.tipo = ${tipo ?? null}::text)
