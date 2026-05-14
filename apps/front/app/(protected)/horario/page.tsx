@@ -3,8 +3,11 @@
 
 import CustomModal from "@/components/customModal";
 import useHorario from "./useHorario";
-import LoadingSpinner from "@/components/loadingSpinner";
+
 import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } from "lucide-react";
+import LoadingSpinner from "@/components/loadingSpinner";
+
+
 
 export default function HorarioPage(){
 
