@@ -87,7 +87,7 @@ export default function AgendamentoFormComponent({
                                 estadoA={{label:'Individual', value:'individual'}}
                                 estadoB={{label:'Duplas', value:'duplas'}}
                                 name="tipo"
-                                selected={'individual'}
+                                selected={tipo}
                                 onChange={(e)=>setTipo(e.value)}
                             />
                             <SalvarAgendamentoForm 
