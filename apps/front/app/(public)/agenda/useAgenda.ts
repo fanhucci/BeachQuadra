@@ -2,12 +2,13 @@
 
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler"
-import { NovoAgendamento } from "@app/shared";
+import { NovaReserva, NovoAgendamento } from "@app/shared";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-export default function useCadastroReservas(){
+export default function useAgenda(){
+
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
     const diaSemana = hoje.getDay(); 
@@ -15,54 +16,33 @@ export default function useCadastroReservas(){
     const segundaFeira = new Date(hoje);
     segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
 
-    const {user} = useUser();
-    const {id} = useParams();
     const router = useRouter();
+
     const [dados, setDados] = useState<any>([]);
     const [tipo,setTipo] = useState('individual');
-    const [horarioSelecionado,setHorarioSelecionado] = useState<NovoAgendamento>({
-        id_pessoa:0,
-        reservas:[],
-        created_by:0
-    });
+    const [horarioSelecionado,setHorarioSelecionado] = useState<NovaReserva[]>([]);
 
     const [data,setData] = useState(new Date(segundaFeira));
 
-    async function salvarReservas(){
-        try {
-            const agendamento = await apiRequest(`/agendamento/${id}`,{
-                method:"POST",
-                body:JSON.stringify(horarioSelecionado)
-            })
-            toast.success('Horarios reservados com sucesso');
-            router.push(`/agendamento/${agendamento}`);
-        } catch (error) {
-            toast.error(error instanceof Error? error.message : "Erro inesperado");
-        }
-    }
+    // async function salvarReservas(){
+    //     //verificar se está  logado
+    //     try {
+    //         const agendamento = await apiRequest(`/agendamento/${id}`,{
+    //             method:"POST",
+    //             body:JSON.stringify(horarioSelecionado)
+    //         })
+    //         toast.success('Horarios reservados com sucesso');
+    //         router.push(`/agendamento/${agendamento}`);
+    //     } catch (error) {
+    //         toast.error(error instanceof Error? error.message : "Erro inesperado");
+    //     }
+    // }
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
         setDados(slots);
     }
 
-
-    
-    const proximaSemana = ()=>{
-        const proximaSemana = new Date(data);
-        proximaSemana.setDate(proximaSemana.getDate()+7);
-        setData(proximaSemana);
-    }
-    
-    const semanaAnterior = ()=>{
-        const novaData = new Date(data);
-        novaData.setDate(novaData.getDate()-7)
-        if (novaData.getTime()>=segundaFeira.getTime()) {
-            setData(novaData);
-        }
-    }
-
-    
 
     const selecionarHorario = (slot) => {
     
@@ -98,27 +78,34 @@ export default function useCadastroReservas(){
         })
     }
 
+    const proximaSemana = ()=>{
+        const proximaSemana = new Date(data);
 
-    useEffect(()=>{
-        if(user?.id_pessoa && id){
-            setHorarioSelecionado((prev)=>({
-                ...prev,
-                id_pessoa:Number(id),
-                created_by:user?.id_pessoa
-            }))
+        proximaSemana.setDate(proximaSemana.getDate()+7);
+
+        setData(proximaSemana);
+    }
+    
+    const semanaAnterior = ()=>{
+        const novaData = new Date(data);
+
+        novaData.setDate(novaData.getDate()-7)
+
+        if (novaData.getTime()>=segundaFeira.getTime()) {
+            setData(novaData);
         }
-    },[user,id])
+    }
+
+
 
     useEffect(()=>{
         carregarDiasLivres();
     },[tipo,data])
 
     return {
-        tipo,
         dados,
         horarioSelecionado,
-        semanaAnterior,
-        proximaSemana,
+        tipo,
         selecionarHorario,
         salvarReservas,
         setTipo,

@@ -1,7 +1,7 @@
 'use client'
 import { Quadra } from "@app/shared";
-import CustomSelect from "../customSelect";
-import CustomInput from "../customInput";
+import CustomSelect from "../inputsComponents/customSelect";
+import CustomInput from "../inputsComponents/customInput";
 
 const opcoesTipo = [
     { value:"individual", label: 'Indivídual' },

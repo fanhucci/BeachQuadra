@@ -1,6 +1,6 @@
 'use client'
 
-import CustomInput from "@/components/customInput";
+import CustomInput from "@/components/inputsComponents/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { ResetarSenhaDTO, ResetarSenhaSchema } from "@app/shared";

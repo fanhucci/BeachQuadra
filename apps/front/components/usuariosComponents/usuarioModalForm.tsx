@@ -1,7 +1,7 @@
 'use client'
 import { Usuario } from "@app/shared";
-import CustomSelect from "../customSelect";
-import CustomInput from "../customInput";
+import CustomSelect from "../inputsComponents/customSelect";
+import CustomInput from "../inputsComponents/customInput";
 
 const opcoesCargo = [
     { value: 1, label: 'Cliente' },

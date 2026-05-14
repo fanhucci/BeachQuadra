@@ -1,8 +1,8 @@
 'use client'
 
 import { UsuarioSearch } from "@app/shared";
-import CustomInput from "../customInput";
-import CustomSelect from "../customSelect";
+import CustomInput from "../inputsComponents/customInput";
+import CustomSelect from "../inputsComponents/customSelect";
 
 interface UsuariosFiltrosProps {
     types:UsuarioSearch;

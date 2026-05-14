@@ -1,6 +1,6 @@
 'use client'
 import { Column } from "@/components/customTable";
-import LinkButton from "@/components/linkButton";
+import LinkButton from "@/components/inputsComponents/linkButton";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Agendamento } from "@app/shared";
 import { BookSearch } from "lucide-react";

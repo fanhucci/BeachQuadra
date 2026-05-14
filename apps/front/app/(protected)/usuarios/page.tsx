@@ -5,11 +5,11 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "@app/shared";
-import useUsuariosTable from "../../../components/usuarios/useUsuariosTable";
-import SubmitButton from "@/components/submitButton";
+import useUsuariosTable from "../../../components/usuariosComponents/useUsuariosTable";
+import SubmitButton from "@/components/inputsComponents/submitButton";
 import { Plus, Users } from "lucide-react";
-import UsuarioModalForm from "@/components/usuarios/usuarioModalForm";
-import UsuariosFiltrosForm from "@/components/usuarios/usuariosFiltrosForm";
+import UsuarioModalForm from "@/components/usuariosComponents/usuarioModalForm";
+import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";
 
 
 export default function UsuariosPage(){

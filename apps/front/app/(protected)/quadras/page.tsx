@@ -5,11 +5,11 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarQuadraSchema, NovaQuadraSchema, Quadra, QuadraSearch } from "@app/shared";
-import SubmitButton from "@/components/submitButton";
+import SubmitButton from "@/components/inputsComponents/submitButton";
 import { Plus, SquareChartGantt } from "lucide-react";
-import useQuadrasTable from "@/components/quadras/useQuadrasTable";
-import QuadrasFiltrosForm from "@/components/quadras/quadrasFiltrosForm";
-import QuadraModalForm from "@/components/quadras/quadraModalForm";
+import useQuadrasTable from "@/components/quadrasComponents/useQuadrasTable";
+import QuadrasFiltrosForm from "@/components/quadrasComponents/quadrasFiltrosForm";
+import QuadraModalForm from "@/components/quadrasComponents/quadraModalForm";
 
 
 
