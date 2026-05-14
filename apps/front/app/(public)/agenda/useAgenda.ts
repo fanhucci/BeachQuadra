@@ -1,9 +1,17 @@
 'use client'
 
 import { apiRequest } from "@/utils/apiHandler"
-import { NovaReserva } from "@app/shared";
-import { useRouter } from "next/navigation";
+import { NovaReserva, Quadra } from "@app/shared";
 import { useEffect, useState } from "react";
+
+type SlotHorario = {
+    horario:Date;
+    permitido:boolean;
+    id_agendamento?:number;
+    disponivel:number[];
+}
+
+type TiposQuadra = 'individual'|'duplas';
 
 export default function useAgenda(){
 
@@ -14,26 +22,12 @@ export default function useAgenda(){
     const segundaFeira = new Date(hoje);
     segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
 
+    const [data,setData] = useState<Date>(new Date(segundaFeira));
 
-    const [dados, setDados] = useState<any>([]);
-    const [tipo,setTipo] = useState('individual');
+    const [dados, setDados] = useState<SlotHorario[]>([]);
+    const [tipo,setTipo] = useState<TiposQuadra>('individual');
     const [horarioSelecionado,setHorarioSelecionado] = useState<NovaReserva[]>([]);
-
-    const [data,setData] = useState(new Date(segundaFeira));
-
-    // async function salvarReservas(){
-    //     //verificar se está  logado
-    //     try {
-    //         const agendamento = await apiRequest(`/agendamento/${id}`,{
-    //             method:"POST",
-    //             body:JSON.stringify(horarioSelecionado)
-    //         })
-    //         toast.success('Horarios reservados com sucesso');
-    //         router.push(`/agendamento/${agendamento}`);
-    //     } catch (error) {
-    //         toast.error(error instanceof Error? error.message : "Erro inesperado");
-    //     }
-    // }
+    
 
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
@@ -41,36 +35,29 @@ export default function useAgenda(){
     }
 
 
-    const selecionarHorario = (slot) => {
+    const selecionarHorario = (slot:SlotHorario) => {
     
         setHorarioSelecionado((prev)=>{
 
-            const indiceExistente = prev.find(
-                (r)=> r.horario === slot.horario
+            const jaSelecionado = prev.find(
+                (r)=> new Date(r.horario).getTime() === new Date(slot.horario).getTime()
             ) 
             
-            if(indiceExistente){
-                return{
-                    ...prev,
-                    reservas: prev.filter(r=>r.horario !== slot.horario),
-                }
+            if(jaSelecionado){
+                return prev.filter(r => new Date(r.horario).getTime() !== new Date(slot.horario).getTime());
             }
 
             const id_quadra = slot.disponivel[0];
 
             if(!id_quadra) return prev;
 
-            return {
+            return[
                 ...prev,
-                reservas:[
-                    ...prev,
-                    {
-                        id_quadra,
-                        horario:slot.horario
-                    }
-                ],
-
-            }
+                {
+                    id_quadra,
+                    horario:slot.horario
+                }
+            ]
             
         })
     }
