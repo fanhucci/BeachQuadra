@@ -3,6 +3,7 @@
 import Agenda from "@/components/agenda"
 import useAgenda from "./useAgenda";
 import SubmitButton from "@/components/buttonComponents/submitButton";
+import { X } from "lucide-react";
 
 export default function AgendaPage(){
 
@@ -15,6 +16,7 @@ export default function AgendaPage(){
         selecionarHorario,
         //salvarReservas,
         setTipo,
+        removerHorarioSelecionado
     } = useAgenda();
 
     return(
@@ -43,9 +45,10 @@ export default function AgendaPage(){
                 <div>
                     {
                         horarioSelecionado.map(r=>(
-                            <>
-                                { new Date(r.horario).toLocaleString('pt-br',{timeZone:'utc'})}
-                            </>
+                            <SelectedSlotButton
+                                horario={r.horario}
+                                remover={()=>removerHorarioSelecionado(r)}
+                            />
                         ))
                     }
                 </div>
@@ -53,4 +56,33 @@ export default function AgendaPage(){
         
         </>
     )
+}
+
+type SelectedSlotButtonProps = {
+    horario:Date;
+    remover:()=>void;
+}
+
+function SelectedSlotButton({
+    horario,
+    remover
+}:SelectedSlotButtonProps){
+    return(
+        <SubmitButton
+            estilo="fantasma"
+            onClick={remover}
+        >
+            {
+                new Date(horario).toLocaleString('pt-br',{
+                    day:'2-digit',
+                    month:'2-digit',
+                    hour:'2-digit',
+                    minute:'2-digit',
+                    timeZone:'utc'
+                }) 
+            }
+            <X size={10} />
+        </SubmitButton>
+    )
+   
 }

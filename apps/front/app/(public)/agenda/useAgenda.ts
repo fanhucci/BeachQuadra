@@ -61,6 +61,13 @@ export default function useAgenda(){
             
         })
     }
+
+    const removerHorarioSelecionado = (slotHorario:NovaReserva)=>{
+        setHorarioSelecionado((prev)=>{
+            return prev.filter(r => new Date(r.horario).getTime() !== new Date(slotHorario.horario).getTime());
+        })
+    }
+
  
     const proximaSemana = ()=>{
         const proximaSemana = new Date(data);
@@ -95,5 +102,7 @@ export default function useAgenda(){
         proximaSemana,
         semanaAnterior,
         setTipo,
+        removerHorarioSelecionado
+
     };
 }
