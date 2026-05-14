@@ -18,7 +18,7 @@ export default function HomePage() {
         </p>
 
         <Link
-          href={"/visitantes"}
+          href={"/visitante"}
           className="mt-10 bg-white text-[#1F4E6B] px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:scale-105 transition"
         >
           Fazer minha reserva
@@ -94,7 +94,7 @@ export default function HomePage() {
         </h2>
 
         <Link
-          href={"/visitantes"}
+          href={"/visitante"}
           className="bg-white text-[#1F4E6B] px-12 py-5 rounded-full font-bold text-lg shadow-lg hover:scale-105 transition"
         >
           Reservar agora
