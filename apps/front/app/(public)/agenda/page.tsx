@@ -27,7 +27,7 @@ export default function AgendaPage(){
     }, [horarioSelecionado]);
 
     return(
-        <>
+        <div className="flex flex-1 w-full bg-blue-500">
             <div className="flex flex-row justify-between p-2">
                 <SubmitButton 
                     estilo="secundario"
@@ -49,7 +49,7 @@ export default function AgendaPage(){
                     aoSelecionar={selecionarHorario}
                     selecionados={horarioSelecionado}
                 />
-                <div>
+                <div className="">
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                         Selecionados ({horarioSelecionado.length})
                     </h3>
@@ -69,8 +69,7 @@ export default function AgendaPage(){
                     </div>
                 </div>
             </section>
-        
-        </>
+        </div>
     )
 }
 
@@ -87,20 +86,18 @@ function SelectedSlotButton({
         <SubmitButton
             estilo="fantasma"
             onClick={remover}
-            className="bg-red-50 hover:bg-red-100 border border-red-100 text-red-600 rounded-full"
+            className="bg-red-50 hover:bg-red-100 border border-red-100 text-red-600 rounded-full px-3 py-1 gap-2 flex items-center w-fit h-auto min-h-0"
         >
-            <span className="text-xs font-medium">
-            {
-                new Date(horario).toLocaleString('pt-br',{
-                    day:'2-digit',
-                    month:'2-digit',
-                    hour:'2-digit',
-                    minute:'2-digit',
-                    timeZone:'utc'
-                }) 
-            }
+            <span className="text-[10px] leading-none font-semibold uppercase tracking-tight">
+                {new Date(horario).toLocaleString('pt-br', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZone: 'utc'
+                })}
             </span>
-            <X size={10} />
+            <X size={12} strokeWidth={3} />
         </SubmitButton>
     )
    
