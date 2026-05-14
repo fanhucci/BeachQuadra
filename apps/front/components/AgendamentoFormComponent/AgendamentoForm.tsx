@@ -7,6 +7,7 @@ import LinkButton from "@/components/buttonComponents/linkButton";
 import { Usuario } from "@app/shared";
 import Agenda from "../agenda";
 import useAgenda from "./useAgenda";
+import CustomModal from "../customModal";
 
 export default function AgendamentoFormComponent({context}:{context:'visitante'|'cliente'|'funcionario'}){
 
@@ -128,6 +129,7 @@ function SalvarAgendamentoForm({
 
     const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado ?? null);
 
+    const [modalOn,setModalOn] = useState<boolean>(false);
 
 
     return(
@@ -158,12 +160,19 @@ function SalvarAgendamentoForm({
                     <>
                     <SubmitButton
                         estilo="primario"
-                        onClick={()=>salvar}
+                        onClick={()=>setModalOn(true)}
                     >
                         <span>Salvar</span>
                     </SubmitButton>
                     </>
             }
+            <CustomModal
+                estado={modalOn}
+                fechar={()=>setModalOn(false)}
+                titulo="teste"
+            >
+                teste
+            </CustomModal>
         </div>
     )
 }
