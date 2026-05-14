@@ -59,7 +59,7 @@ export default function AgendamentoFormComponent({context}:{context:'visitante'|
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
                             
-                            <div className="flex flex-wrap overflow-y-scroll justify-center gap-2">
+                            <div className="flex flex-wrap justify-center gap-2">
                                 {horariosOrdenados.map(r => (
                                     <SelectedSlotButton
                                         key={r.horario.toString()}
@@ -131,6 +131,12 @@ function SalvarAgendamentoForm({
 
     const [modalOn,setModalOn] = useState<boolean>(false);
 
+    const abrirModal = ()=>{
+        setModalOn(true)
+    }
+    const fecharModal = ()=>{
+        setModalOn(false);
+    }
 
     return(
         <div className="flex flex-col justify-center items-center">
@@ -160,7 +166,7 @@ function SalvarAgendamentoForm({
                     <>
                     <SubmitButton
                         estilo="primario"
-                        onClick={()=>setModalOn(true)}
+                        onClick={abrirModal}
                     >
                         <span>Salvar</span>
                     </SubmitButton>
@@ -168,8 +174,16 @@ function SalvarAgendamentoForm({
             }
             <CustomModal
                 estado={modalOn}
-                fechar={()=>setModalOn(false)}
+                fechar={fecharModal}
                 titulo="teste"
+                botoes={[
+                    {
+                        label:'Cancelar',
+                        estilo:'primario',
+                        onClick:fecharModal
+                    },
+                    
+                ]}
             >
                 teste
             </CustomModal>
