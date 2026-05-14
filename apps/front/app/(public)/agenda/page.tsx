@@ -50,7 +50,7 @@ export default function AgendaPage(){
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                    <div className="flex flex-col">
+                    <div className="flex flex-col w-80">
                         <div className="flex-1 flex-wrap">
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                                 Selecionados ({horarioSelecionado.length})
