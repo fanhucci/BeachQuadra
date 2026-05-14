@@ -54,7 +54,7 @@ export default function QuadrasFiltrosForm({
             />
 
             <CustomSelect 
-                label="Cargo"
+                label="Status"
                 name="status"
                 options={opcoesStatus}
                 value={String(types.status)}
@@ -62,7 +62,7 @@ export default function QuadrasFiltrosForm({
             />
 
             <CustomSelect 
-                label="Conta"
+                label="Ativo"
                 name="ativo"
                 options={opcoesAtivo}
                 value={String(types.ativo)}

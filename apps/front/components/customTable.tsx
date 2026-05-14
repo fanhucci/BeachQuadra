@@ -50,7 +50,7 @@ export default function CustomTable<T>({
             {data.map((row, rowIndex) => (
               <tr 
                 key={rowIndex} 
-                className="group hover:bg-orange-50/30 transition-colors duration-150"
+                className="group hover:bg-blue-50/30 transition-colors duration-150"
               >
                 {columns.map((col) => (
                   <td 
