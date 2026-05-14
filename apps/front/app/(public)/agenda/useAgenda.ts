@@ -32,8 +32,11 @@ export default function useAgenda(){
     async function carregarDiasLivres() {
         const slots = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
         setDados(slots);
-    }
+    }   
 
+    async function salvarReservas() {
+        
+    }
 
     const selecionarHorario = (slot:SlotHorario) => {
     
@@ -99,7 +102,7 @@ export default function useAgenda(){
         horarioSelecionado,
         tipo,
         selecionarHorario,
-        //salvarReservas,
+        salvarReservas,
         proximaSemana,
         semanaAnterior,
         setTipo,

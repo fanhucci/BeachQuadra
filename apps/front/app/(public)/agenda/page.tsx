@@ -15,7 +15,7 @@ export default function AgendaPage(){
         semanaAnterior,
         proximaSemana,
         selecionarHorario,
-        //salvarReservas,
+        salvarReservas,
         setTipo,
         removerHorarioSelecionado
     } = useAgenda();
@@ -27,7 +27,7 @@ export default function AgendaPage(){
     }, [horarioSelecionado]);
 
     return(
-        <div className="flex flex-col flex-1 h-full items-center bg-blue-500">
+        <div className="flex flex-col flex-1 h-full items-center">
             <div className="w-[80%]">
                 <div className="flex flex-row justify-between p-2">
                     <SubmitButton 
@@ -51,7 +51,7 @@ export default function AgendaPage(){
                         selecionados={horarioSelecionado}
                     />
                     <div className="flex flex-col">
-                        <div className="flex-1">
+                        <div className="flex-1/3">
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
@@ -71,10 +71,12 @@ export default function AgendaPage(){
                             </div>
                         </div>
                         <div className="flex-1">
-
-                        </div>
-                        <div className="flex-1">
-
+                            <SubmitButton
+                                estilo="primario"
+                                onClick={salvarReservas}
+                            >
+                                Salvar
+                            </SubmitButton>
                         </div>
                     </div>
                 </section>
