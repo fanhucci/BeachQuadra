@@ -67,7 +67,7 @@ export default function AgendamentosPage(){
                 
                 <LinkButton 
                     estilo="primario"
-                    href={'/usuarios/agendar'}>
+                    href={'/usuarios/agendar/'}>
                     <Plus size={20} />
                     <span>Novo Agendamento</span>
                 </LinkButton>
