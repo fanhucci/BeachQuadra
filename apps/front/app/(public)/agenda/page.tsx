@@ -42,7 +42,7 @@ export default function AgendaPage(){
                     aoSelecionar={selecionarHorario}
                     selecionados={horarioSelecionado}
                 />
-                <div className="grid-cols-5 gap-4 p-4">
+                <div className="grid grid-cols-5 gap-4 p-4">
                     {
                         horarioSelecionado.map(r=>(
                             <SelectedSlotButton
@@ -71,7 +71,7 @@ function SelectedSlotButton({
         <SubmitButton
             estilo="fantasma"
             onClick={remover}
-            className="bg-red-300 text-red-500 rounded-2xl"
+            className="bg-red-200 text-red-400 rounded-3xl p-2"
         >
             {
                 new Date(horario).toLocaleString('pt-br',{
