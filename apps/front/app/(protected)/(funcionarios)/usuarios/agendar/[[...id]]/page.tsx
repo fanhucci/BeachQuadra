@@ -28,15 +28,20 @@ export default function AgendarClientePage(){
     }
     
     useEffect(()=>{
-        const idInvalido = isNaN(Number(id));
-            
-        if(!idInvalido){ 
-           pegarUsuario(Number(id));
+        const idNumerico = Number(id);
+        const temIdNaUrl = id !== undefined && id !== null && id !== "";
+        const idValido = !isNaN(idNumerico) && temIdNaUrl;
+
+        if(idValido){ 
+           pegarUsuario(idNumerico);
         }
-    },[id])
+        else{
+            setLoading(false);
+        }
+    },[id,pegarUsuario])
     
     if(loading){
-            return (<>Carregando...</>)
+        return (<>Carregando...</>)
     }
     
     if(!perfil){
