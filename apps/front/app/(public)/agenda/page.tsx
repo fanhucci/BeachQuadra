@@ -54,7 +54,7 @@ export default function AgendaPage(){
                         Selecionados ({horarioSelecionado.length})
                     </h3>
                     
-                    <div className="flex flex-wrap lg:flex-col gap-2">
+                    <div className="flex flex-wrap gap-2">
                         {horariosOrdenados.map(r => (
                             <SelectedSlotButton
                                 key={r.horario.toString()}
