@@ -210,7 +210,7 @@ function SalvarAgendamentoForm({
                                 name="nome"
                                 onChange={(r)=>(r)}
                                 placeholder="Pesquisar"
-                                value={cliente.nome ?? ''}
+                                value={cliente?.nome ?? ''}
                                 type="text"
                             />
                         </>)
