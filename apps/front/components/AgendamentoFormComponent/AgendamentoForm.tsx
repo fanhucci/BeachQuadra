@@ -11,7 +11,13 @@ import CustomModal from "../customModal";
 import CustomInput from "../inputsComponents/customInput";
 import Campo from "../inputsComponents/campo";
 
-export default function AgendamentoFormComponent({context}:{context:'visitante'|'cliente'|'funcionario'}){
+export default function AgendamentoFormComponent({
+    context, 
+    clientePreSelecionado
+}:{
+    context:'visitante'|'cliente'|'funcionario'
+    clientePreSelecionado:Usuario;
+}){
 
     const {
         tipo,
@@ -78,6 +84,7 @@ export default function AgendamentoFormComponent({context}:{context:'visitante'|
                         <div className="flex-1/3 items-center">
                             <SalvarAgendamentoForm 
                                 contexto={context}
+                                clientePreSelecionado={clientePreSelecionado}
                                 salvar={salvarReservas}
                             />
                         </div>
@@ -183,7 +190,7 @@ function SalvarAgendamentoForm({
                         </>
                     )
                     
-                    :contexto === 'cliente'
+                    :contexto === 'cliente' 
                     ?(
                         <>
                             <Campo
