@@ -27,48 +27,50 @@ export default function AgendaPage(){
     }, [horarioSelecionado]);
 
     return(
-        <div className="flex flex-col flex-1 w-[70%] bg-blue-500">
-            <div className="flex flex-row justify-between p-2">
-                <SubmitButton 
-                    estilo="secundario"
-                    onClick={semanaAnterior}
-                >
-                    Voltar
-                </SubmitButton>
+        <div className="flex flex-col flex-1 h-full items-center bg-blue-500">
+            <div className="w-[80%]">
+                <div className="flex flex-row justify-between p-2">
+                    <SubmitButton 
+                        estilo="secundario"
+                        onClick={semanaAnterior}
+                    >
+                        Voltar
+                    </SubmitButton>
 
-                <SubmitButton 
-                    estilo="secundario"
-                    onClick={proximaSemana}
-                >
-                    Avançar
-                </SubmitButton>
-            </div>
-            <section className="flex flex-row flex-1 gap-4">
-                <Agenda
-                    dados={dados}
-                    aoSelecionar={selecionarHorario}
-                    selecionados={horarioSelecionado}
-                />
-                <div className="">
-                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
-                        Selecionados ({horarioSelecionado.length})
-                    </h3>
-                    
-                    <div className="flex flex-wrap gap-2">
-                        {horariosOrdenados.map(r => (
-                            <SelectedSlotButton
-                                key={r.horario.toString()}
-                                horario={r.horario}
-                                remover={() => removerHorarioSelecionado(r)}
-                            />
-                        ))}
-                        
-                        {horarioSelecionado.length === 0 && (
-                            <p className="text-sm text-gray-400 italic">Nenhum horário selecionado</p>
-                        )}
-                    </div>
+                    <SubmitButton 
+                        estilo="secundario"
+                        onClick={proximaSemana}
+                    >
+                        Avançar
+                    </SubmitButton>
                 </div>
-            </section>
+                <section className="flex flex-row flex-1 gap-4">
+                    <Agenda
+                        dados={dados}
+                        aoSelecionar={selecionarHorario}
+                        selecionados={horarioSelecionado}
+                    />
+                    <div className="">
+                        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+                            Selecionados ({horarioSelecionado.length})
+                        </h3>
+                        
+                        <div className="flex flex-wrap gap-2">
+                            {horariosOrdenados.map(r => (
+                                <SelectedSlotButton
+                                    key={r.horario.toString()}
+                                    horario={r.horario}
+                                    remover={() => removerHorarioSelecionado(r)}
+                                />
+                            ))}
+                            
+                            {horarioSelecionado.length === 0 && (
+                                <p className="text-sm text-gray-400 italic">Nenhum horário selecionado</p>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     )
 }
