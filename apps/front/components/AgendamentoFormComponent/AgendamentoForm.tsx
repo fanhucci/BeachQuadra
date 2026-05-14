@@ -140,38 +140,15 @@ function SalvarAgendamentoForm({
 
     return(
         <div className="flex flex-col justify-center items-center">
-
-            {
-                contexto === 'funcionario' && (
-                    <>
-                        funcionario
-                    </>
-                )
-            }
-
-            {
-                contexto === 'visitante'
-                ?   
-                    <>
-                        <LinkButton
-                            estilo="primario"
-                            href={`/login?callback=/agenda`}
-                        >
-                            <span>
-                                Salvar
-                            </span>
-                        </LinkButton>
-                    </>
-                :
-                    <>
+            <>
                     <SubmitButton
                         estilo="primario"
                         onClick={abrirModal}
                     >
-                        <span>Salvar</span>
+                        <span>Continuar</span>
                     </SubmitButton>
-                    </>
-            }
+            </>
+    
             <CustomModal
                 estado={modalOn}
                 fechar={fecharModal}
