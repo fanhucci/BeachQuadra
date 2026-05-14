@@ -2,6 +2,7 @@
 
 import Agenda from "@/components/agenda"
 import useAgenda from "./useAgenda";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 
 export default function AgendaPage(){
 
@@ -18,6 +19,21 @@ export default function AgendaPage(){
 
     return(
         <>
+            <div className="flex flex-row justify-between p-2">
+                <SubmitButton 
+                    estilo="secundario"
+                    onClick={semanaAnterior}
+                >
+                    Voltar
+                </SubmitButton>
+                
+                <SubmitButton 
+                    estilo="secundario"
+                    onClick={proximaSemana}
+                >
+                    Avançar
+                </SubmitButton>
+            </div>
             <Agenda
                 dados={dados}
                 aoSelecionar={selecionarHorario}

@@ -1,11 +1,9 @@
 'use client'
 
-import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler"
-import { NovaReserva, NovoAgendamento } from "@app/shared";
-import { useParams, useRouter } from "next/navigation";
+import { NovaReserva } from "@app/shared";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 export default function useAgenda(){
 
