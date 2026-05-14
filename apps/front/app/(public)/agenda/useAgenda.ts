@@ -107,7 +107,9 @@ export default function useAgenda(){
         horarioSelecionado,
         tipo,
         selecionarHorario,
-        salvarReservas,
+        //salvarReservas,
+        proximaSemana,
+        semanaAnterior,
         setTipo,
     };
 }

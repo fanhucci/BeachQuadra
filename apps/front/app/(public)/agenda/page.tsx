@@ -12,7 +12,7 @@ export default function AgendaPage(){
         semanaAnterior,
         proximaSemana,
         selecionarHorario,
-        salvarReservas,
+        //salvarReservas,
         setTipo,
     } = useAgenda();
 
@@ -21,7 +21,7 @@ export default function AgendaPage(){
             <Agenda
                 dados={dados}
                 aoSelecionar={selecionarHorario}
-                selecionados={horarioSelecionado.reservas}
+                selecionados={horarioSelecionado}
             />
         
         </>
