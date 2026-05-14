@@ -51,7 +51,7 @@ export default function AgendaPage(){
                         selecionados={horarioSelecionado}
                     />
                     <div className="flex flex-col">
-                        <div className="flex-1/3">
+                        <div className="flex-1 flex-wrap">
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
@@ -70,7 +70,7 @@ export default function AgendaPage(){
                                 )}
                             </div>
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1/3 items-center">
                             <SubmitButton
                                 estilo="primario"
                                 onClick={salvarReservas}
