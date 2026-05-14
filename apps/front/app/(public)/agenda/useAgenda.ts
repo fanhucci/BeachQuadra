@@ -43,6 +43,7 @@ export default function useAgenda(){
                 (r)=> new Date(r.horario).getTime() === new Date(slot.horario).getTime()
             ) 
             
+            
             if(jaSelecionado){
                 return prev.filter(r => new Date(r.horario).getTime() !== new Date(slot.horario).getTime());
             }
