@@ -59,7 +59,7 @@ export default function AgendamentoFormComponent({context}:{context:'visitante'|
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
                             
-                            <div className="flex flex-wrap overflow-y-auto justify-center gap-2">
+                            <div className="flex flex-wrap overflow-y-scroll justify-center gap-2">
                                 {horariosOrdenados.map(r => (
                                     <SelectedSlotButton
                                         key={r.horario.toString()}
