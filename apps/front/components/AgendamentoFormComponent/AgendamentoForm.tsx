@@ -10,6 +10,7 @@ import useAgenda from "./useAgenda";
 import CustomModal from "../customModal";
 import CustomInput from "../inputsComponents/customInput";
 import Campo from "../inputsComponents/campo";
+import CustomSwitch from "../inputsComponents/customSwitch";
 
 export default function AgendamentoFormComponent({
     context, 
@@ -82,6 +83,12 @@ export default function AgendamentoFormComponent({
                             </div>
                         </div>
                         <div className="flex-1/3 items-center">
+                            <CustomSwitch
+                                estadoA={{label:'Individual', value:'individual'}}
+                                estadoB={{label:'Duplas', value:'duplas'}}
+                                name="tipo"
+                                selected={'individual'}
+                            />
                             <SalvarAgendamentoForm 
                                 contexto={context}
                                 clientePreSelecionado={clientePreSelecionado}
@@ -163,6 +170,7 @@ function SalvarAgendamentoForm({
             </>
     
             <CustomModal
+                size="2xl"
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="teste"
