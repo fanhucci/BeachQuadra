@@ -4,9 +4,12 @@ import Agenda from "@/components/agenda"
 import useAgenda from "./useAgenda";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { X } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import CustomInput from "@/components/inputsComponents/customInput";
+import LinkButton from "@/components/buttonComponents/linkButton";
+import { Usuario } from "@app/shared";
 
-export default function AgendaPage(){
+export default function AgendaPage({context}:{context:'visitante'|'cliente'|'funcionario'}){
 
     const {
         tipo,
@@ -71,12 +74,10 @@ export default function AgendaPage(){
                             </div>
                         </div>
                         <div className="flex-1/3 items-center">
-                            <SubmitButton
-                                estilo="primario"
-                                onClick={salvarReservas}
-                            >
-                                Salvar
-                            </SubmitButton>
+                            <SalvarAgendamentoForm 
+                                contexto={context}
+                                salvar={salvarReservas}
+                            />
                         </div>
                     </div>
                 </section>
@@ -87,7 +88,7 @@ export default function AgendaPage(){
 
 type SelectedSlotButtonProps = {
     horario:Date;
-    remover:()=>void;
+    remover?:()=>void;
 }
 
 function SelectedSlotButton({
@@ -112,4 +113,58 @@ function SelectedSlotButton({
         </SubmitButton>
     )
    
+}
+
+type SalvarAgendamentoFormProps = {
+    contexto: "visitante" | "cliente" | "funcionario";
+    clientePreSelecionado?:Usuario;
+    salvar:()=>void;
+}
+
+function SalvarAgendamentoForm({
+    contexto,
+    clientePreSelecionado,
+    salvar,
+}:SalvarAgendamentoFormProps){
+
+    const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado ?? null);
+
+
+
+    return(
+        <div className="flex flex-col justify-center items-center">
+
+            {
+                contexto === 'funcionario' && (
+                    <>
+                        funcionario
+                    </>
+                )
+            }
+
+            {
+                contexto === 'visitante'
+                ?   
+                    <>
+                        <LinkButton
+                            estilo="primario"
+                            href={`/login?callback=/agenda`}
+                        >
+                            <span>
+                                Salvar
+                            </span>
+                        </LinkButton>
+                    </>
+                :
+                    <>
+                    <SubmitButton
+                        estilo="primario"
+                        onClick={()=>salvar}
+                    >
+                        <span>Salvar</span>
+                    </SubmitButton>
+                    </>
+            }
+        </div>
+    )
 }
