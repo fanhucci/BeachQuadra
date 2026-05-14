@@ -46,7 +46,7 @@ export default function Agenda({
             >
                 {dados.map((slot) => {
                     const temReserva = slot.id_agendamento !==null;
-                    const isPassado = new Date(`${slot.horario}Z`) < new Date();
+                    const isPassado = new Date(slot.horario).getTime() < new Date().getTime();
 
                     const blocked = idQuadraEspecifica 
                         ? !slot.permitido 
