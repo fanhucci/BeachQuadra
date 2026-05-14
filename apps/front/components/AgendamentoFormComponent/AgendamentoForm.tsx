@@ -1,15 +1,14 @@
 'use client'
 
-import Agenda from "@/components/agenda"
-import useAgenda from "./useAgenda";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { X } from "lucide-react";
 import { useMemo, useState } from "react";
-import CustomInput from "@/components/inputsComponents/customInput";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import { Usuario } from "@app/shared";
+import Agenda from "../agenda";
+import useAgenda from "./useAgenda";
 
-export default function AgendaPage({context}:{context:'visitante'|'cliente'|'funcionario'}){
+export default function AgendamentoFormComponent({context}:{context:'visitante'|'cliente'|'funcionario'}){
 
     const {
         tipo,

@@ -1,6 +1,6 @@
 import { ListarPessoaViewDTO } from "@app/shared";
 import Campo from "./inputsComponents/campo";
-import { AleterarSenhaErro, AlterarPessoaErros } from "@/app/(protected)/perfil/usePerfil";
+import { AleterarSenhaErro, AlterarPessoaErros } from "@/app/(protected)/(cliente)/perfil/usePerfil";
 
 import CustomButtom from "./buttonComponents/customButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";

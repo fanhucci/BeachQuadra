@@ -2,7 +2,7 @@
 
 import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/AgendamentoForm"
 
-export default function VisitantePage(){
+export default function AgendarClientePage(){
     return(
         <AgendamentoFormComponent
             context="funcionario"
