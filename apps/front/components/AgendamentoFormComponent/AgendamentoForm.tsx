@@ -151,7 +151,7 @@ function SalvarAgendamentoForm({
         <div className="flex flex-col justify-center items-center">
             <>
                 {
-                    JSON.stringify(clientePreSelecionado.nome)
+                    JSON.stringify(clientePreSelecionado)
                 }
                     <SubmitButton
                         estilo="primario"
