@@ -56,7 +56,7 @@ export default function useUsuariosTable(acoes:AcoesUsuario){
 
 
                     <LinkButton 
-                        href={`/reservas/cadastrar/${usuario.id_pessoa}`} 
+                        href={`/usuarios/agendar/${usuario.id_pessoa}`} 
                         estilo="primario"
                     >
                         <CalendarPlus size={18} />
