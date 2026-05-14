@@ -28,7 +28,7 @@ export default function AgendaPage(){
 
     return(
         <div className="flex flex-col flex-1 h-full items-center">
-            <div className="w-[80%] justify-around">
+            <div className="w-[80%] justify">
                 <div className="flex flex-row justify-between p-2">
                     <SubmitButton 
                         estilo="secundario"
@@ -52,11 +52,11 @@ export default function AgendaPage(){
                     />
                     <div className="flex flex-col w-[30%]">
                         <div className="flex-1 flex-wrap">
-                            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+                            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
                             
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap justify-center gap-2">
                                 {horariosOrdenados.map(r => (
                                     <SelectedSlotButton
                                         key={r.horario.toString()}
