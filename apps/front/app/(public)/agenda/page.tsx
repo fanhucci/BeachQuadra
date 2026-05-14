@@ -71,7 +71,7 @@ function SelectedSlotButton({
         <SubmitButton
             estilo="fantasma"
             onClick={remover}
-            className="bg-red-200 text-red-400 rounded-3xl p-2"
+            className="bg-red-200 text-red-400 rounded-3xl"
         >
             {
                 new Date(horario).toLocaleString('pt-br',{
