@@ -1,6 +1,6 @@
 'use client'
 
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/loadingSpinner";
 import useQuadraDetail from "./useQuadraDetail"
 import Agenda from "@/components/agenda";
 

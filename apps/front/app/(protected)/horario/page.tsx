@@ -1,8 +1,9 @@
 'use client'
 
+
 import CustomModal from "@/components/customModal";
 import useHorario from "./useHorario";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/loadingSpinner";
 import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } from "lucide-react";
 
 export default function HorarioPage(){
@@ -182,7 +183,8 @@ export default function HorarioPage(){
             </section>
 
             <CustomModal
-                aberta={modalBloqueio}
+                titulo="Bloquear"
+                estado={modalBloqueio}
                 fechar={toggleModal}
             >
                 <div className="space-y-6">

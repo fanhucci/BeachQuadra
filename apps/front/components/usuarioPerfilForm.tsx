@@ -1,5 +1,5 @@
 import { ListarPessoaViewDTO } from "@app/shared";
-import Campo from "./InputsComponents/campo";
+import Campo from "./inputsComponents/campo";
 import { AleterarSenhaErro, AlterarPessoaErros } from "@/app/(protected)/perfil/usePerfil";
 
 import CustomButtom from "./buttonComponents/customButton";

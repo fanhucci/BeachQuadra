@@ -2,7 +2,7 @@
 
 import useCadastroReservas from "@/app/(protected)/reservas/cadastrar/[id]/useCadastroReservas";
 import Agenda from "@/components/agenda";
-import CustomSwitch from "@/components/InputsComponents/customSwitch";
+import CustomSwitch from "@/components/inputsComponents/customSwitch";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 

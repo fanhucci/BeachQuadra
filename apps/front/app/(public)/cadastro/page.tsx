@@ -1,5 +1,5 @@
 'use client'
-import CustomInput from "@/components/InputsComponents/customInput";
+import CustomInput from "@/components/inputsComponents/customInput";
 import useCadastro from "./useCadastro"
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";

@@ -1,8 +1,8 @@
 'use client'
 
 import { QuadraSearch } from "@app/shared";
-import CustomInput from "../InputsComponents/customInput";
-import CustomSelect from "../InputsComponents/customSelect";
+import CustomInput from "../inputsComponents/customInput";
+import CustomSelect from "../inputsComponents/customSelect";
 
 interface QuadrasFiltrosProps {
     types:QuadraSearch;
