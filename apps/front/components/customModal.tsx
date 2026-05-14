@@ -1,6 +1,6 @@
 import React from "react";
-import LinkButton from "./linkButton";
-import SubmitButton from "./submitButton";
+import LinkButton from "./buttonComponents/linkButton";
+import SubmitButton from "./buttonComponents/submitButton";
 
 type BotaoModal = {
     label: string;

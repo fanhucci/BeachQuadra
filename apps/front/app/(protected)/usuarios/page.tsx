@@ -6,7 +6,7 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarUsuarioSchema, NovoUsuarioSchema, Usuario, UsuarioSearch } from "@app/shared";
 import useUsuariosTable from "../../../components/usuariosComponents/useUsuariosTable";
-import SubmitButton from "@/components/inputsComponents/submitButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Plus, Users } from "lucide-react";
 import UsuarioModalForm from "@/components/usuariosComponents/usuarioModalForm";
 import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";

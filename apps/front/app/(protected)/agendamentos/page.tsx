@@ -4,12 +4,12 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { Agendamento, AgendamentoSearch, EditarAgendamentoSchema, NovoAgendamentoSchema} from "@app/shared";
-import SubmitButton from "@/components/inputsComponents/submitButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Contact, Plus } from "lucide-react";
 
 import useAgendamentoTable from "@/components/agendamentosComponents/useAgendamentoTable";
 import AgendamentosFiltrosForm from "@/components/agendamentosComponents/AgendamentosFiltrosForm";
-import LinkButton from "@/components/inputsComponents/linkButton";
+import LinkButton from "@/components/buttonComponents/linkButton";
 
 
 

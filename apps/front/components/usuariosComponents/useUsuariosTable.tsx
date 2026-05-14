@@ -1,7 +1,7 @@
 'use client'
 import { Column } from "@/components/customTable";
-import LinkButton from "@/components/inputsComponents/linkButton";
-import SubmitButton from "@/components/inputsComponents/submitButton";
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import { Usuario } from "@app/shared";
 import { CalendarPlus,Pencil, UserCheck, UserMinus, UserSearch } from "lucide-react";

@@ -1,9 +1,10 @@
 import { ListarPessoaViewDTO } from "@app/shared";
-import Campo from "./inputsComponents/campo";
+import Campo from "./InputsComponents/campo";
 import { AleterarSenhaErro, AlterarPessoaErros } from "@/app/(protected)/perfil/usePerfil";
-import CustomModal from "./customModal";
-import CustomButtom from "./inputsComponents/customButton";
+
+import CustomButtom from "./buttonComponents/customButton";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
+import CustomModal from "./customModal";
 
 export type Permissions = {
   canEdit: boolean;

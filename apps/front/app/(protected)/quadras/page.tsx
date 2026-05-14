@@ -5,7 +5,7 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarQuadraSchema, NovaQuadraSchema, Quadra, QuadraSearch } from "@app/shared";
-import SubmitButton from "@/components/inputsComponents/submitButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Plus, SquareChartGantt } from "lucide-react";
 import useQuadrasTable from "@/components/quadrasComponents/useQuadrasTable";
 import QuadrasFiltrosForm from "@/components/quadrasComponents/quadrasFiltrosForm";

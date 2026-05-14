@@ -1,7 +1,7 @@
 'use client'
 import { Column } from "@/components/customTable";
-import LinkButton from "@/components/inputsComponents/linkButton";
-import SubmitButton from "@/components/inputsComponents/submitButton";
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Quadra } from "@app/shared";
 import { Pencil, RotateCcw, Trash } from "lucide-react";
