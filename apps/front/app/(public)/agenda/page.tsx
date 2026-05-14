@@ -27,7 +27,7 @@ export default function AgendaPage(){
     }, [horarioSelecionado]);
 
     return(
-        <div className="flex flex-1 h-full bg-blue-500">
+        <div className="flex flex-col flex-1 h-full bg-blue-500">
             <div className="flex flex-row justify-between p-2">
                 <SubmitButton 
                     estilo="secundario"
@@ -87,7 +87,7 @@ function SelectedSlotButton({
             estilo="pilula"
             onClick={remover}
         >
-            <span className="text-[10px] leading-none font-semibold uppercase tracking-tight">
+            <span className="leading-none">
                 {new Date(horario).toLocaleString('pt-br', {
                     day: '2-digit',
                     month: '2-digit',
