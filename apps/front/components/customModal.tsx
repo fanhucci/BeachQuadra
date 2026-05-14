@@ -8,6 +8,7 @@ type BotaoModal = {
     href?: string;
     estilo?: 'primario' | 'secundario' | 'fantasma' | 'perigo';
     isLoading?: boolean;
+    disabled?:boolean;
 }
 
 type ModalTypes = {
@@ -60,7 +61,7 @@ export default function CustomModal({
                                     {btn.label}
                                 </LinkButton>
                             ) : (
-                                <SubmitButton key={index} onClick={btn.onClick} estilo={btn.estilo} isLoading={btn.isLoading}>
+                                <SubmitButton key={index} onClick={btn.onClick} estilo={btn.estilo} isLoading={btn.isLoading} disabled={btn.disabled}>
                                     {btn.label}
                                 </SubmitButton>
                             )

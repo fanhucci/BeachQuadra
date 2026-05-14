@@ -8,6 +8,8 @@ import { Usuario } from "@app/shared";
 import Agenda from "../agenda";
 import useAgenda from "./useAgenda";
 import CustomModal from "../customModal";
+import CustomInput from "../inputsComponents/customInput";
+import Campo from "../inputsComponents/campo";
 
 export default function AgendamentoFormComponent({context}:{context:'visitante'|'cliente'|'funcionario'}){
 
@@ -168,11 +170,40 @@ function SalvarAgendamentoForm({
                     :{
                         label:'Confirmar',
                         estilo:'primario',
-                        onClick:salvar
+                        onClick:salvar,
+                        disabled:cliente? true : false,
                     }
                 ]}
             >
-                teste
+                {
+                    contexto === 'visitante'
+                    ?(
+                        <>
+                            aguarde
+                        </>
+                    )
+                    
+                    :contexto === 'cliente'
+                    ?(
+                        <>
+                            <Campo
+                                label="Cliente"
+                                valor={cliente.nome}
+                            />
+                        </>
+                    )
+                    : (
+                        <>
+                            <CustomInput
+                                label="Cliente"
+                                name=""
+                                onChange={(r)=>(r)}
+                                placeholder="Pesquisar"
+                                type="text"
+                            />
+                        </>)
+                }
+
             </CustomModal>
         </div>
     )
