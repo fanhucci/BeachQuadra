@@ -26,7 +26,7 @@ export default function AgendaPage(){
                 >
                     Voltar
                 </SubmitButton>
-                
+
                 <SubmitButton 
                     estilo="secundario"
                     onClick={proximaSemana}
@@ -34,11 +34,22 @@ export default function AgendaPage(){
                     Avançar
                 </SubmitButton>
             </div>
-            <Agenda
-                dados={dados}
-                aoSelecionar={selecionarHorario}
-                selecionados={horarioSelecionado}
-            />
+            <section className=" flex flex-row flex-1 gap-4">
+                <Agenda
+                    dados={dados}
+                    aoSelecionar={selecionarHorario}
+                    selecionados={horarioSelecionado}
+                />
+                <div>
+                    {
+                        horarioSelecionado.map(r=>(
+                            <>
+                                { new Date(r.horario).toLocaleString('pt-br',{timeZone:'utc'})}
+                            </>
+                        ))
+                    }
+                </div>
+            </section>
         
         </>
     )
