@@ -45,10 +45,13 @@ export default function Agenda({
                 }}
             >
                 {dados.map((slot) => {
-                    const temReserva = slot.id_agendamento !==null;
-                    console.log( `1:${slot.horario} , 2:${new Date()}`)
-                    const isPassado = new Date(slot.horario) < new Date();
+                    const str = slot.horario; 
+                    const dataSemFuso = new Date(str.split('Z')[0]); 
 
+                    const isPassado = dataSemFuso.getTime() < new Date().getTime();
+
+                    const temReserva = slot.id_agendamento !==null;
+  
                     const blocked = idQuadraEspecifica 
                         ? !slot.permitido 
                         : (!slot.permitido || isPassado);
