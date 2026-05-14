@@ -27,7 +27,7 @@ export default function AgendaPage(){
     }, [horarioSelecionado]);
 
     return(
-        <div className="flex flex-col flex-1 h-full bg-blue-500">
+        <div className="flex flex-col flex-1 w-[70%] bg-blue-500">
             <div className="flex flex-row justify-between p-2">
                 <SubmitButton 
                     estilo="secundario"
