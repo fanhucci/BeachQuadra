@@ -48,7 +48,7 @@ export default function Agenda({
                     const str = slot.horario; 
                     const dataSemFuso = new Date(str.split('Z')[0]); 
                     const agora = new Date();
-                    console.log(`1: ${dataSemFuso} - time ${dataSemFuso.getTime()} | 2: ${agora} - time ${agora.getTime()}`)
+        
                     const isPassado = dataSemFuso.getTime() < agora.getTime();
 
                     const temReserva = slot.id_agendamento !==null;

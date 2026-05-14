@@ -4,7 +4,7 @@ import SubmitButton from "@/components/buttonComponents/submitButton";
 import { X } from "lucide-react";
 import { useMemo, useState } from "react";
 import LinkButton from "@/components/buttonComponents/linkButton";
-import { Usuario } from "@app/shared";
+import { NovaReserva, Usuario } from "@app/shared";
 import Agenda from "../agenda";
 import useAgenda from "./useAgenda";
 import CustomModal from "../customModal";
@@ -16,7 +16,7 @@ export default function AgendamentoFormComponent({
     clientePreSelecionado
 }:{
     context:'visitante'|'cliente'|'funcionario'
-    clientePreSelecionado:Usuario;
+    clientePreSelecionado?:Usuario;
 }){
 
     const {
@@ -85,6 +85,7 @@ export default function AgendamentoFormComponent({
                             <SalvarAgendamentoForm 
                                 contexto={context}
                                 clientePreSelecionado={clientePreSelecionado}
+                                horariosSelecionados={horarioSelecionado}
                                 salvar={salvarReservas}
                             />
                         </div>
@@ -126,17 +127,19 @@ function SelectedSlotButton({
 
 type SalvarAgendamentoFormProps = {
     contexto: "visitante" | "cliente" | "funcionario";
-    clientePreSelecionado?:Usuario;
+    clientePreSelecionado?:Usuario | null;
+    horariosSelecionados:NovaReserva[];
     salvar:()=>void;
 }
 
 function SalvarAgendamentoForm({
     contexto,
-    clientePreSelecionado,
+    clientePreSelecionado = null,
+    horariosSelecionados,
     salvar,
 }:SalvarAgendamentoFormProps){
 
-    const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado ?? null);
+    const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado);
 
     const [modalOn,setModalOn] = useState<boolean>(false);
 
@@ -153,6 +156,7 @@ function SalvarAgendamentoForm({
                     <SubmitButton
                         estilo="primario"
                         onClick={abrirModal}
+                        disabled={horariosSelecionados.length === 0}
                     >
                         <span>Continuar</span>
                     </SubmitButton>
@@ -178,7 +182,7 @@ function SalvarAgendamentoForm({
                         label:'Confirmar',
                         estilo:'primario',
                         onClick:salvar,
-                        disabled:cliente? true : false,
+                        disabled:!cliente? true : false,
                     }
                 ]}
             >

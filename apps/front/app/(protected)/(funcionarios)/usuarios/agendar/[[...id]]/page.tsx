@@ -6,6 +6,7 @@ export default function AgendarClientePage(){
     return(
         <AgendamentoFormComponent
             context="funcionario"
+            clientePreSelecionado={}
         />
     )
 }
