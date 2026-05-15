@@ -142,7 +142,7 @@ export default function useAgenda(){
 
     useEffect(()=>{
         const horariosNaMemoria = localStorage.getItem('memoria');
-        
+
         if(!horariosNaMemoria){
             carregarDiasLivres();
         }
@@ -153,10 +153,6 @@ export default function useAgenda(){
     const sincronizarHorariosMemoria = async () => {
         const horariosNaMemoria = localStorage.getItem('memoria');
 
-        if(!horariosNaMemoria){
-            return;
-        }
-
         try {
             setLoading(true);
 
@@ -166,7 +162,7 @@ export default function useAgenda(){
 
             setDados(dadosAtuais); 
 
-            const horariosRascunho = JSON.parse(horariosNaMemoria) as HorarioSelecionado[];
+            const horariosRascunho = JSON.parse(horariosNaMemoria!) as HorarioSelecionado[];
 
             const horariosValidados = horariosRascunho.filter((rascunho) => {
                 const slotCorrespondente = dadosAtuais.find(
@@ -201,6 +197,8 @@ export default function useAgenda(){
     };
 
     useEffect(() => {
+        const horariosNaMemoria = localStorage.getItem('memoria');
+
         if (!horariosNaMemoria) return;       
 
         sincronizarHorariosMemoria();
