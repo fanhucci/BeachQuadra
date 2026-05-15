@@ -3,6 +3,7 @@ import CustomInput from "@/components/inputsComponents/customInput";
 import useCadastro from "./useCadastro"
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Suspense } from "react";
 
 export default function CadastroPage(){
     const cadastro = useCadastro();
@@ -60,13 +61,17 @@ export default function CadastroPage(){
                         erro={cadastro.erros.senha}
                         onChange={cadastro.handleChange}
                     />
-
-                    <div className="flex justify-between text-sm">
-                        <Link href={cadastro.callbackURL? `/login?=callback${cadastro.callbackURL}` : `/login`} className="text-blue-600 hover:underline">
-                            Voltar ao login
-                        </Link>
-                    </div>
-
+                    <Suspense fallback={
+                        <div className="flex justify-center py-4">
+                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
+                        </div>
+                    }>
+                        <div className="flex justify-between text-sm">
+                            <Link href={cadastro.callbackURL? `/login?=callback${cadastro.callbackURL}` : `/login`} className="text-blue-600 hover:underline">
+                                Voltar ao login
+                            </Link>
+                        </div>
+                    </Suspense>
                     <button
                         onClick={cadastro.cadastrarUsuario}
                         className="mt-4 h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
