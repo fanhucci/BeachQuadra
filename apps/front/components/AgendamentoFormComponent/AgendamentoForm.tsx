@@ -92,7 +92,10 @@ export default function AgendamentoFormComponent({
                                 selected={tipo}
                                 onChange={(valor)=>setTipo(valor)}
                             />
-                            {dinheiroMask(valorTotal)}
+                            <Campo
+                                label="Total:"
+                                valor={dinheiroMask(valorTotal)}
+                            />
                             <SalvarAgendamentoForm 
                                 contexto={context}
                                 clientePreSelecionado={clientePreSelecionado}
