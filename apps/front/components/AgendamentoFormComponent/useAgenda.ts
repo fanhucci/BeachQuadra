@@ -1,7 +1,6 @@
 'use client'
 
 import { apiRequest } from "@/utils/apiHandler"
-import { NovaReserva, Quadra } from "@app/shared";
 import { useEffect, useState } from "react";
 
 type TiposQuadra = 'individual'|'duplas';
@@ -12,7 +11,7 @@ type QuadraDisponivel = {
     valor:number;
 }
 
-type SlotHorario = {
+export type SlotHorario = {
     horario:Date;
     permitido:boolean;
     id_agendamento?:number;
