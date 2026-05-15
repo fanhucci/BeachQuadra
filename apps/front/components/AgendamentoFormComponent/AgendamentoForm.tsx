@@ -64,8 +64,8 @@ export default function AgendamentoFormComponent({
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                   <div className="flex flex-col w-[30%] h-[600px]">
-                        <div className="flex-1 min-h-0 flex flex-col mb-4"> 
+                   <div className="flex flex-col w-[30%] h-full">
+                        <div className="flex-1 h-[80%] min-h-0 flex flex-col mb-4"> 
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
