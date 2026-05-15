@@ -20,6 +20,16 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
     const [selecionado,setSelecionado] = useState<boolean>(false);
 
     useEffect(() => {
+        if (cliente) {
+            setBusca(cliente.nome);
+            setSelecionado(true);
+        } else {
+            setBusca('');
+            setSelecionado(false);
+        }
+    }, [cliente]);
+
+    useEffect(() => {
 
         if (busca.length < 3 || selecionado) {
             setResultados([]);
@@ -45,7 +55,7 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
         <div className="flex flex-col gap-2 relative">
             <CustomInput
                 name="busca"
-                value={cliente?.nome ?? busca}
+                value={busca}
                 onChange={(e) => {
                     setBusca(e.target.value)
                     setSelecionado(false);
