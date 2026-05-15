@@ -74,7 +74,7 @@ export default function CustomSwitch({
                 </button>
 
                 <div
-                    className={`absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-[#00B85C] rounded-lg shadow-sm transition-transform duration-300 ease-in-out ${
+                    className={`absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-blue-600 rounded-lg shadow-sm transition-transform duration-300 ease-in-out ${
                         estado === estadoB.value ? "translate-x-full" : "translate-x-0"
                     }`}
                 />

@@ -84,6 +84,7 @@ export default function AgendamentoFormComponent({
                         </div>
                         <div className="flex-1/3 items-center">
                             <CustomSwitch
+                                label="Tipo de quadra:"
                                 estadoA={{label:'Individual', value:'individual'}}
                                 estadoB={{label:'Duplas', value:'duplas'}}
                                 name="tipo"
