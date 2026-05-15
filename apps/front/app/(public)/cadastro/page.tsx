@@ -62,7 +62,7 @@ export default function CadastroPage(){
                     />
 
                     <div className="flex justify-between text-sm">
-                        <Link href="/login" className="text-blue-600 hover:underline">
+                        <Link href={cadastro.callbackURL? `/login?=callback${cadastro.callbackURL}` : `/login`} className="text-blue-600 hover:underline">
                             Voltar ao login
                         </Link>
                     </div>

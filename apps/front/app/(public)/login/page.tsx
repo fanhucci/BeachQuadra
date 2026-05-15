@@ -6,12 +6,15 @@ import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { LoginDTO, LoginSchema } from "@app/shared";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react"
 import { toast } from "sonner";
 
 export default function LoginPage(){
     const router = useRouter();
+    const params = useSearchParams();
+    const callbackURL = params.get('callback');
+
     const estadoInicial = { email:"", senha:"" };
 
     const [formData,setFormData] = useState(estadoInicial);
@@ -43,7 +46,9 @@ export default function LoginPage(){
                 body:JSON.stringify(parse.data)
             })
             await refreshUser();
-            router.push('/perfil');
+
+            
+            router.replace(callbackURL ?? '/perfil');
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
         }
@@ -89,7 +94,7 @@ export default function LoginPage(){
                     />
 
                     <div className="flex justify-between text-sm">
-                        <Link href="/cadastro" className="text-blue-600 hover:underline">
+                        <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/pefil'} className="text-blue-600 hover:underline">
                         Criar conta
                         </Link>
 

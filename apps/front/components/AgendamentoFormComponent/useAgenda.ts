@@ -143,6 +143,21 @@ import { toast } from "sonner";
             carregarDiasLivres();
         },[tipo,data])
 
+        useEffect(()=>{
+            const horariosNaMemoria = localStorage.getItem('memoria');
+
+            if(horariosNaMemoria){
+                try {
+                    setHorarioSelecionado(JSON.parse(horariosNaMemoria));
+                    localStorage.removeItem('memoria');
+                    //
+                    toast.success('Horarios recuprados com sucesso.');
+                } catch (error) {
+                    toast.error('Não foi possivel recuperar os horarios.');
+                }
+            }
+        },[])
+
         const valorTotal = horarioSelecionado.reduce((acc,item)=> acc + Number(item.quadra.valor),0);
 
         return {

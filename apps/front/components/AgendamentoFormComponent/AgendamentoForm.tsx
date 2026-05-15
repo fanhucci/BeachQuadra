@@ -3,7 +3,7 @@
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { NovaReserva, Usuario } from "@app/shared";
+import { Usuario } from "@app/shared";
 import Agenda from "../agenda";
 import useAgenda, { HorarioSelecionado } from "./useAgenda";
 import CustomModal from "../customModal";
@@ -12,6 +12,7 @@ import Campo from "../inputsComponents/campo";
 import BuscarCliente from "./buscarClientes/buscarClientesForm";
 import { dinheiroMask } from "@/utils/mascaras";
 import CustomSwitch from "../inputsComponents/customSwitch";
+import { useRouter } from "next/navigation";
 
 export default function AgendamentoFormComponent({
     context, 
@@ -168,8 +169,9 @@ function SalvarAgendamentoForm({
     salvar,
 }:SalvarAgendamentoFormProps){
 
-    const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado);
+    const router = useRouter();
 
+    const [cliente,setCliente] = useState<Usuario | null>(clientePreSelecionado);
     const [modalOn,setModalOn] = useState<boolean>(false);
 
     const abrirModal = ()=>{
@@ -177,6 +179,12 @@ function SalvarAgendamentoForm({
     }
     const fecharModal = ()=>{
         setModalOn(false);
+    }
+
+    const guardarHorariosMemoria = ()=>{
+        localStorage.setItem('memoria',JSON.stringify(horariosSelecionados));
+
+        router.push(`/login?callback=/perfil/agendar`);
     }
 
     return(
@@ -207,7 +215,7 @@ function SalvarAgendamentoForm({
                     ?{
                         label:'Confirmar',
                         estilo:'primario',
-                        href:'/login'
+                        onClick:guardarHorariosMemoria
                     }
                     :{
                         label:'Confirmar',

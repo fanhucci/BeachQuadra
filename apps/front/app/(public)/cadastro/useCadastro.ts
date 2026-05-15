@@ -3,11 +3,14 @@ import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
 import { CadastrarUsuarioDTO, CadastrarUsuarioSchema } from "@app/shared";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react"
 import { toast } from "sonner";
 
 export default function useCadastro(){
+    const params = useSearchParams();
+    const callbackURL = params.get('callback');
+
     const estado_inicial:CadastrarUsuarioDTO = {
         id_cargo:1,
         cpf:"",
@@ -46,7 +49,7 @@ export default function useCadastro(){
                 })
             });
             await refreshUser();
-            router.push('/perfil');
+            router.push(callbackURL ?? '/perfil');
         } 
         catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
@@ -68,6 +71,7 @@ export default function useCadastro(){
     return{
         formData,
         erros,
+        callbackURL,
         handleChange,
         cadastrarUsuario
     }
