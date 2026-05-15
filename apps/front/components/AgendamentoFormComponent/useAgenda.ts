@@ -19,6 +19,11 @@ type SlotHorario = {
     disponivel:QuadraDisponivel[];
 }
 
+export type HorarioSelecionado = {
+    horario:Date;
+    quadra:QuadraDisponivel;
+}
+
 export default function useAgenda(){
 
     const hoje = new Date();
@@ -32,7 +37,7 @@ export default function useAgenda(){
 
     const [dados, setDados] = useState<SlotHorario[]>([]);
     const [tipo,setTipo] = useState<TiposQuadra>('individual');
-    const [horarioSelecionado,setHorarioSelecionado] = useState<NovaReserva[]>([]);
+    const [horarioSelecionado,setHorarioSelecionado] = useState<HorarioSelecionado[]>([]);
     
 
     async function carregarDiasLivres() {
@@ -57,14 +62,14 @@ export default function useAgenda(){
                 return prev.filter(r => new Date(r.horario).getTime() !== new Date(slot.horario).getTime());
             }
 
-            const id_quadra = slot.disponivel[0];
+            const quadra = slot.disponivel[0];
 
-            if(!id_quadra) return prev;
+            if(!quadra) return prev;
 
             return[
                 ...prev,
                 {
-                    id_quadra,
+                    quadra: quadra,
                     horario:slot.horario
                 }
             ]
@@ -72,13 +77,12 @@ export default function useAgenda(){
         })
     }
 
-    const removerHorarioSelecionado = (slotHorario:NovaReserva)=>{
+    const removerHorarioSelecionado = (slotHorario:HorarioSelecionado)=>{
         setHorarioSelecionado((prev)=>{
             return prev.filter(r => new Date(r.horario).getTime() !== new Date(slotHorario.horario).getTime());
         })
     }
 
- 
     const proximaSemana = ()=>{
         const proximaSemana = new Date(data);
 
@@ -97,14 +101,15 @@ export default function useAgenda(){
         }
     }
 
-
-
     useEffect(()=>{
         carregarDiasLivres();
     },[tipo,data])
 
+    const valorTotal = horarioSelecionado.reduce((acc,item)=> acc + Number(item.quadra.valor),0);
+
     return {
         dados,
+        valorTotal,
         horarioSelecionado,
         tipo,
         selecionarHorario,

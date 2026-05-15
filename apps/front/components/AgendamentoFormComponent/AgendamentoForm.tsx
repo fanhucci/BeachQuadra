@@ -5,11 +5,12 @@ import { X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { NovaReserva, Usuario } from "@app/shared";
 import Agenda from "../agenda";
-import useAgenda from "./useAgenda";
+import useAgenda, { HorarioSelecionado } from "./useAgenda";
 import CustomModal from "../customModal";
 import Campo from "../inputsComponents/campo";
 import CustomSwitch from "../inputsComponents/customSwitch";
 import BuscarCliente from "./buscarClientes/buscarClientesForm";
+import { dinheiroMask } from "@/utils/mascaras";
 
 export default function AgendamentoFormComponent({
     context, 
@@ -22,6 +23,7 @@ export default function AgendamentoFormComponent({
     const {
         tipo,
         dados,
+        valorTotal,
         horarioSelecionado,
         semanaAnterior,
         proximaSemana,
@@ -90,6 +92,7 @@ export default function AgendamentoFormComponent({
                                 selected={tipo}
                                 onChange={(valor)=>setTipo(valor)}
                             />
+                            {dinheiroMask(valorTotal)}
                             <SalvarAgendamentoForm 
                                 contexto={context}
                                 clientePreSelecionado={clientePreSelecionado}
@@ -136,7 +139,7 @@ function SelectedSlotButton({
 type SalvarAgendamentoFormProps = {
     contexto: "visitante" | "cliente" | "funcionario";
     clientePreSelecionado?:Usuario | null;
-    horariosSelecionados:NovaReserva[];
+    horariosSelecionados:HorarioSelecionado[];
     salvar:()=>void;
 }
 
@@ -161,6 +164,7 @@ function SalvarAgendamentoForm({
     return(
         <div className="flex flex-col justify-center items-center">
             <>
+
                     <SubmitButton
                         estilo="primario"
                         onClick={abrirModal}
