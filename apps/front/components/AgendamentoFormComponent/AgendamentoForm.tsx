@@ -58,13 +58,13 @@ export default function AgendamentoFormComponent({
                         Avançar
                     </SubmitButton>
                 </div>
-                <section className="flex flex-row gap-4 h-[650px] min-h-0 overflow-hidden">
+                <section className="flex flex-row flex-1 h-full gap-4">
                     <Agenda
                         dados={dados}
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                   <div className="flex flex-col w-[30%] h-full min-h-0">
+                   <div className="flex flex-col w-[30%] h-full">
                         <CustomSwitch
                             label="Tipo de quadra:"
                             estadoA={{label:'Individual', value:'individual'}}
@@ -74,12 +74,12 @@ export default function AgendamentoFormComponent({
                             onChange={(valor)=>setTipo(valor)}
                         />
 
-                        <div className="flex-1 flex flex-col min-h-0 pt-4"> 
+                        <div className="flex-1 h-[80%] min-h-0 flex flex-col mb-4"> 
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
-                            </h3>
-                            
-                            <div className="flex-1 overflow-y-auto border rounded-xl p-3 bg-gray-50 min-h-0">
+                            </h3>   
+                     
+                            <div className="h-full overflow-y-auto border rounded-xl p-3 bg-gray-50">
                                 <div className="flex flex-wrap justify-center gap-2">
                                     {horariosOrdenados.map(r => (
                                         <SelectedSlotButton
@@ -99,7 +99,7 @@ export default function AgendamentoFormComponent({
                             </div>
                         </div>
 
-                        <div className="flex-none pt-4 bg-white space-y-4 border-t mt-4">
+                        <div className="flex-none pt-4 bg-white space-y-4">
                             
                             <div className="bg-gray-100 p-3 rounded-lg">
                                 <Campo
