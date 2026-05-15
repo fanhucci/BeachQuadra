@@ -1,6 +1,7 @@
     'use client'
 
     import { apiRequest } from "@/utils/apiHandler"
+import { useRouter } from "next/navigation";
     import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -33,8 +34,8 @@ import { toast } from "sonner";
         const segundaFeira = new Date(hoje);
         segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
 
+        const router = useRouter();
         const [data,setData] = useState<Date>(new Date(segundaFeira));
-
         const [dados, setDados] = useState<SlotHorario[]>([]);
         const [tipo,setTipo] = useState<TiposQuadra>('individual');
         const [horarioSelecionado,setHorarioSelecionado] = useState<HorarioSelecionado[]>([]);
@@ -53,8 +54,31 @@ import { toast } from "sonner";
             }
         }   
 
-        async function salvarReservas() {
-            
+        async function salvarReservas(id:number){
+            const reservas = horarioSelecionado.map(r=>({
+                id_quadra:r.quadra.id_quadra,
+                horario:r.horario
+            }));
+
+            const payload = {
+                id_pessoa:id,
+                reservas:reservas
+            }
+
+            try {
+                setLoading(true);
+                const agendamento = await apiRequest(`/agendamento`,{
+                    method:'POST',
+                    body:JSON.stringify(payload)
+                })
+                toast.success('Horários agendados com sucesso.');
+                router.replace(`/agendamentos/${agendamento}`);
+            } catch (error) {
+                toast.error(error instanceof Error? error.message : 'Erro ao salvar agendamento.');
+            }
+            finally{
+                setLoading(false);
+            }
         }
 
         const selecionarHorario = (slot: SlotHorario) => {

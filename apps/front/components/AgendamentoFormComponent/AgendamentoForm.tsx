@@ -76,7 +76,7 @@ export default function AgendamentoFormComponent({
                             onChange={(valor)=>setTipo(valor)}
                         />
 
-                        <div className="flex-1 h-[80%] min-h-0 flex flex-col mb-4"> 
+                        <div className="flex-1 h-[80%] min-h-0 flex flex-col pt-2 mb-4"> 
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>   
@@ -158,7 +158,7 @@ type SalvarAgendamentoFormProps = {
     contexto: "visitante" | "cliente" | "funcionario";
     clientePreSelecionado?:Usuario | null;
     horariosSelecionados:HorarioSelecionado[];
-    salvar:()=>void;
+    salvar:(id:number)=>void;
 }
 
 function SalvarAgendamentoForm({
@@ -212,7 +212,7 @@ function SalvarAgendamentoForm({
                     :{
                         label:'Confirmar',
                         estilo:'primario',
-                        onClick:salvar,
+                        onClick:()=>salvar(cliente?.id_pessoa),
                         disabled:!cliente? true : false,
                     }
                 ]}

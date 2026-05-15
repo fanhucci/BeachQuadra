@@ -24,7 +24,6 @@ export default class AgendamentoController{
     async cadastrarNovoAgendamento(req:Request,res:Response){
         const parse = NovoAgendamentoSchema.safeParse({
             ...req.body,
-            id_pessoa:Number(req.params.id),
             created_by:Number(req.user?.id)
         });
 
