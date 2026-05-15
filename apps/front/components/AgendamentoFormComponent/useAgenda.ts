@@ -2,6 +2,7 @@
 
     import { apiRequest } from "@/utils/apiHandler"
     import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
     type TiposQuadra = 'individual'|'duplas';
 
@@ -37,11 +38,19 @@
         const [dados, setDados] = useState<SlotHorario[]>([]);
         const [tipo,setTipo] = useState<TiposQuadra>('individual');
         const [horarioSelecionado,setHorarioSelecionado] = useState<HorarioSelecionado[]>([]);
-        
+        const [loading,setLoading] = useState<boolean>(false);
 
         async function carregarDiasLivres() {
-            const slots = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
-            setDados(slots);
+            try {
+                setLoading(true);
+                const slots = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
+                setDados(slots);
+            } catch (error) {
+                toast.error(error instanceof Error? error.message : 'Erro ao carregar horarios.');
+            }
+            finally{
+                setLoading(false);
+            }
         }   
 
         async function salvarReservas() {
@@ -51,7 +60,7 @@
         const selecionarHorario = (slot: SlotHorario) => {
 
             setHorarioSelecionado((prev) => {
-                
+
                 const quadraAtual = slot.disponivel[0]; 
                 if (!quadraAtual) return prev;
 
@@ -117,6 +126,7 @@
             valorTotal,
             horarioSelecionado,
             tipo,
+            loading,
             selecionarHorario,
             salvarReservas,
             proximaSemana,

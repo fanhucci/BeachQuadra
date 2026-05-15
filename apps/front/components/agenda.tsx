@@ -4,11 +4,13 @@ export default function Agenda({
     dados, 
     idQuadraEspecifica,
     selecionados = [],
+    loading,
     aoSelecionar
 }: {
     dados: any[],
     idQuadraEspecifica?: number,
     selecionados?: any[],
+    loading?:boolean,
     aoSelecionar?: (slot: any) => void
 }) {
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
@@ -16,7 +18,13 @@ export default function Agenda({
     return (
         <div className="flex-1 flex flex-col w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3">
 
-           <div className="grid grid-cols-7 gap-2 mb-2 text-center ">
+            {loading && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+                </div>
+            )}
+
+            <div className="grid grid-cols-7 gap-2 mb-2 text-center ">
                 {tableHeaders.map((label, index) => {
                     const slotDoDia = dados[index * 17]; 
                     const diaMes = slotDoDia 

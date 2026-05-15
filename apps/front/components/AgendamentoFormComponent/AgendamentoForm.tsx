@@ -26,6 +26,7 @@ export default function AgendamentoFormComponent({
         dados,
         valorTotal,
         horarioSelecionado,
+        loading,
         semanaAnterior,
         proximaSemana,
         selecionarHorario,
@@ -63,6 +64,7 @@ export default function AgendamentoFormComponent({
                         dados={dados}
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
+                        loading={loading}
                     />
                    <div className="flex flex-col w-[30%] h-full">
                         <CustomSwitch
