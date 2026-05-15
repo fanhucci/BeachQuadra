@@ -16,7 +16,7 @@ export default function Agenda({
     const tableHeaders = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 
     return (
-        <div className="flex-1 flex flex-col w-full max-w-6xl border rounded-xl bg-white shadow-sm p-3">
+        <div className="flex-1 flex flex-col w-full max-w-6xl border rounded-xl relative bg-white shadow-sm p-3">
 
             {loading && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
