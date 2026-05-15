@@ -276,12 +276,11 @@ function SalvarAgendamentoForm({
                         ))}
                     </div>
                 </div>
-
           
                 <div className="flex justify-between items-center bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/50">
-                    <span className="text-sm font-medium text-indigo-900">Valor Total</span>
-                    <span className="text-lg font-bold text-indigo-700">
-                        R$ {dinheiroMask(valorTotal)}
+                    <span className="text-sm font-medium">Valor Total</span>
+                    <span className="text-lg font-bold">
+                        {dinheiroMask(valorTotal)}
                     </span>
                 </div>
 

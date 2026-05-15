@@ -100,7 +100,7 @@ export default function AgendamentoDetailPage(){
                                             <td className="p-3">Quadra {r.id_quadra}</td>
                                             <td className="p-3">{dia}</td>
                                             <td className="p-3">{hora}</td>
-                                            <td className="p-3">R$ {r.valor}</td>
+                                            <td className="p-3">{dinheiroMask(r.valor)}</td>
                                             <td className="p-3 capitalize">{r.status}</td>
                                         </tr>
                                     );
