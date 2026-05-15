@@ -87,7 +87,7 @@ export function CadastroForm(){
                     />
                     
                     <div className="flex justify-between text-sm">
-                        <Link href={callbackURL? `/login?=callback${callbackURL}` : `/login`} className="text-blue-600 hover:underline">
+                        <Link href={callbackURL? `/login?callback=${callbackURL}` : `/login`} className="text-blue-600 hover:underline">
                             Voltar ao login
                         </Link>
                     </div>
