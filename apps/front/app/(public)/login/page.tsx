@@ -7,7 +7,7 @@ import { LoginDTO, LoginSchema } from "@app/shared";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { toast } from "sonner";
 
 export default function LoginPage(){
@@ -92,17 +92,21 @@ export default function LoginPage(){
                         erro={erros.senha}
                         type="password"
                     />
+                    <Suspense fallback={
+                        <div className="flex justify-center py-4">
+                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
+                        </div>
+                    }>
+                        <div className="flex justify-between text-sm">
+                            <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/pefil'} className="text-blue-600 hover:underline">
+                            Criar conta
+                            </Link>
 
-                    <div className="flex justify-between text-sm">
-                        <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/pefil'} className="text-blue-600 hover:underline">
-                        Criar conta
-                        </Link>
-
-                        <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
-                        Esqueci a senha
-                        </Link>
-                    </div>
-
+                            <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
+                            Esqueci a senha
+                            </Link>
+                        </div>
+                    </Suspense>
                     <button
                         type="button"
                         onClick={fazerLogin}
