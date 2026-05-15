@@ -61,7 +61,7 @@ export default function Agenda({
                         : slot.disponivel.length > 0;
 
                     const isSelected = selecionados.some(s => 
-                        new Date(s.horario).getTime() === new Date(slot.horario).getTime() && 
+                        new Date(s.horario).getTime() === new Date(slot.horario).getTime() &&
                         slot.disponivel.some((d: any) => d.id_quadra === s.quadra.id_quadra)
                     );
                     const horaFormatada = new Date(slot.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone:"utc" });

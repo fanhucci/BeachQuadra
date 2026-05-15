@@ -48,32 +48,34 @@ export default function useAgenda(){
         
     }
 
-    const selecionarHorario = (slot:SlotHorario) => {
-    
-        setHorarioSelecionado((prev)=>{
+    const selecionarHorario = (slot: SlotHorario) => {
+        
+        setHorarioSelecionado((prev) => {
+            const quadraAtual = slot.disponivel[0]; 
+            if (!quadraAtual) return prev;
 
             const jaSelecionado = prev.find(
-                (r)=> new Date(r.horario).getTime() === new Date(slot.horario).getTime()
-            ) 
-            
-            
-            if(jaSelecionado){
-                return prev.filter(r => new Date(r.horario).getTime() !== new Date(slot.horario).getTime());
+                (r) => 
+                    new Date(r.horario).getTime() === new Date(slot.horario).getTime() &&
+                    r.quadra.id_quadra === quadraAtual.id_quadra
+            );
+
+            if (jaSelecionado) {
+                return prev.filter(r => 
+                    !(new Date(r.horario).getTime() === new Date(slot.horario).getTime() && 
+                    r.quadra.id_quadra === quadraAtual.id_quadra)
+                );
             }
 
-            const quadra = slot.disponivel[0];
 
-            if(!quadra) return prev;
-
-            return[
+            return [
                 ...prev,
                 {
-                    quadra: quadra,
-                    horario:slot.horario
+                    horario: slot.horario,
+                    quadra: quadraAtual
                 }
-            ]
-            
-        })
+            ];
+        });
     }
 
     const removerHorarioSelecionado = (slotHorario:HorarioSelecionado)=>{
