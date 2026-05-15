@@ -213,7 +213,7 @@ function SalvarAgendamentoForm({
                     },
                     contexto === 'visitante'
                     ?{
-                        label:'Confirmar',
+                        label:'Continuar',
                         estilo:'primario',
                         onClick:guardarHorariosMemoria
                     }

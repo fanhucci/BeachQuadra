@@ -35,6 +35,8 @@ import { toast } from "sonner";
         segundaFeira.setDate(hoje.getDate() - diferencaParaSegunda);
 
         const router = useRouter();
+        const horariosNaMemoria = localStorage.getItem('memoria');
+        
         const [data,setData] = useState<Date>(new Date(segundaFeira));
         const [dados, setDados] = useState<SlotHorario[]>([]);
         const [tipo,setTipo] = useState<TiposQuadra>('individual');
@@ -140,23 +142,63 @@ import { toast } from "sonner";
         }
 
         useEffect(()=>{
-            carregarDiasLivres();
-        },[tipo,data])
 
-        useEffect(()=>{
-            const horariosNaMemoria = localStorage.getItem('memoria');
-
-            if(horariosNaMemoria){
-                try {
-                    setHorarioSelecionado(JSON.parse(horariosNaMemoria));
-                    localStorage.removeItem('memoria');
-                    //
-                    toast.success('Horarios recuprados com sucesso.');
-                } catch (error) {
-                    toast.error('Não foi possivel recuperar os horarios.');
-                }
+            if(!horariosNaMemoria){
+                carregarDiasLivres();
             }
-        },[])
+
+        },[tipo,data]);
+
+
+        const sincronizarHorariosMemoria = async () => {
+            try {
+                setLoading(true);
+
+                const dadosAtuais = await apiRequest(`/horario-disponivel?data=${data.toISOString()}&tipo=${tipo}`);
+
+                if (!dadosAtuais) return; 
+
+                setDados(dadosAtuais); 
+
+                const horariosRascunho = JSON.parse(horariosNaMemoria!) as HorarioSelecionado[];
+
+                const horariosValidados = horariosRascunho.filter((rascunho) => {
+                    const slotCorrespondente = dadosAtuais.find(
+                        (slot:SlotHorario) => new Date(slot.horario).getTime() === new Date(rascunho.horario).getTime()
+                    );
+
+                    if (!slotCorrespondente) return false;
+
+                    const quadraAindaDisponivel = slotCorrespondente.disponivel.some(
+                        (quadra:QuadraDisponivel) => quadra.id_quadra === rascunho.quadra.id_quadra
+                    );
+
+                    return quadraAindaDisponivel;
+                });
+
+                setHorarioSelecionado(horariosValidados);
+
+                if (horariosValidados.length > 0) {
+                    toast.success('Horarios recuperados com sucesso.');
+                }
+
+                if (horariosValidados.length < horariosRascunho.length) {
+                    toast.warning("Algum dos horários selecionados foi reservado recentemente e removido da lista.");
+                }
+
+            } catch (error) {
+                toast.error('Não foi possivel recuperar os horarios.');
+            } finally {
+                setLoading(false);
+                localStorage.removeItem('memoria');
+            }
+        };
+
+        useEffect(() => {
+            if (!horariosNaMemoria) return;       
+
+            sincronizarHorariosMemoria();
+        }, []);
 
         const valorTotal = horarioSelecionado.reduce((acc,item)=> acc + Number(item.quadra.valor),0);
 
