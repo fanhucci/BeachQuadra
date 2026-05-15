@@ -1,4 +1,4 @@
-import { UsuarioSearchSchema, NovoUsuarioSchema, EditarUsuarioSchema  } from "@app/shared";
+import { UsuarioSearchSchema, NovoUsuarioSchema, NovoUsuarioSchemaProprio, EditarUsuarioSchema  } from "@app/shared";
 import { Request, Response } from 'express';
 import UsuarioService from "../services/usuarioService";
 
@@ -64,6 +64,17 @@ export default class UsuarioController{
 
         return res.status(201).json(resposta);
        
+    }
+
+    async adicionarUsuarioProprio(req:Request, res:Response){
+        const parse = NovoUsuarioSchemaProprio.safeParse(req.body);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+
+        const resposta = await this.service.adicionarUsuarioProprio(parse.data);
+
+        return res.status(201).json(resposta);
+
     }
 
     async editarUsuario(req:Request, res:Response){

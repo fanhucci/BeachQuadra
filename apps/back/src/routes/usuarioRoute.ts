@@ -12,6 +12,7 @@ router.get(`/usuarios/clientes`, authMiddleware.auth, ctrl.buscarClientes.bind(c
 router.get(`/usuarios/perfil`, authMiddleware.auth, ctrl.listarUsuarioPerfil.bind(ctrl));
 router.get(`/usuarios/:id`, authMiddleware.auth, ctrl.listarUsuarioPorId.bind(ctrl));
 router.post(`/usuarios`, authMiddleware.auth, ctrl.adicionarUsuario.bind(ctrl));
+router.post(`/usuarios/proprio`, ctrl.adicionarUsuarioProprio.bind(ctrl));
 router.patch(`/usuarios/:id`, authMiddleware.auth, ctrl.editarUsuario.bind(ctrl));
 router.patch(`/usuarios/:id/ativar`, authMiddleware.auth, ctrl.ativarUsuario.bind(ctrl));
 router.patch(`/usuarios/:id/desativar`, authMiddleware.auth, ctrl.desativarUsuario.bind(ctrl));
