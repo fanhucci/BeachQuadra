@@ -21,7 +21,7 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
 
     useEffect(() => {
 
-        if (busca.length < 3) {
+        if (busca.length < 3 || selecionado) {
             setResultados([]);
             return;
         }
