@@ -67,7 +67,7 @@ import { toast } from "sonner";
 
             try {
                 setLoading(true);
-                const agendamento = await apiRequest(`/agendamento`,{
+                const agendamento = await apiRequest(`/agendamentos`,{
                     method:'POST',
                     body:JSON.stringify(payload)
                 })
