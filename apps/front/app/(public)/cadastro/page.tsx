@@ -4,6 +4,7 @@ import useCadastro from "./useCadastro"
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Suspense } from "react";
+import { cpfMask, telefoneMask } from "@/utils/mascaras";
 
 export default function CadastroPage(){
 
@@ -55,7 +56,7 @@ export function CadastroForm(){
                     <CustomInput
                         label="CPF"
                         name="cpf"
-                        value={formData.cpf}
+                        value={cpfMask(formData.cpf)}
                         erro={erros.cpf}
                         onChange={handleChange}
                     />
@@ -72,7 +73,7 @@ export function CadastroForm(){
                     <CustomInput
                         label="Telefone"
                         name="telefone"
-                        value={formData.telefone}
+                        value={telefoneMask(formData.telefone)}
                         erro={erros.telefone}
                         onChange={handleChange}
                     />
