@@ -72,7 +72,7 @@ export default function AgendamentoFormComponent({
                             <div className="flex flex-wrap justify-center gap-2">
                                 {horariosOrdenados.map(r => (
                                     <SelectedSlotButton
-                                        key={r.horario.toString()}
+                                        key={`${new Date(r.horario).getTime()}-${r.quadra.id_quadra}`}
                                         horario={r.horario}
                                         quadra={r.quadra}
                                         remover={() => removerHorarioSelecionado(r)}
