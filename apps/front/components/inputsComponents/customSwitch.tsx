@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 type Option = {
@@ -10,61 +11,76 @@ type CustomSwitchProps = {
     estadoA: Option;
     estadoB: Option;
     name: string;
-    onChange?:(value:any)=>void;
-    selected:any;
+    label?: string; 
+    onChange?: (value: any) => void;
+    selected: any;
 };
 
 export default function CustomSwitch({
     estadoA,
     estadoB,
     name,
+    label,
     onChange,
     selected
 }: CustomSwitchProps) {
-    const [estado, setEstado] = useState(estadoA.value);
+    const [estado, setEstado] = useState(selected || estadoA.value);
 
-    useEffect(()=>{
-        setEstado(selected)
-    },[selected]);
+    useEffect(() => {
+        setEstado(selected);
+    }, [selected]);
 
-    function handleChange(value:string){
+    function handleChange(value: any) {
         setEstado(value);
         onChange?.(value);
     }
 
     return (
-    <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-gray-700 capitalize">
-            {name}
-        </label>
+        <div className="flex flex-col gap-1.5 w-full">
 
-        <div className="flex border p-1 rounded-xl w-fit">
-            <button
-                type="button"
-                onClick={() => handleChange(estadoA.value)}
-                className={`flex items-center px-4 py-2 h-7 rounded-lg  text-sm font-medium transition-all ${
-                    estado === estadoA.value
-                    ? "bg-[#00B85C] text-white shadow"
-                    : "text-gray-600 hover:text-[#00B85C]"
-                }`}
-            >
-                {estadoA.label}
-            </button>
+            {(label || name) && (
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">
+                    {label || name}
+                </label>
+            )}
 
-            <button
-                type="button"
-                onClick={() => handleChange(estadoB.value)}
-                className={`flex items-center px-4 py-2 h-7 rounded-lg text-sm font-medium transition-all ${
-                    estado === estadoB.value
-                    ? "bg-[#00B85C] text-white shadow"
-                    : "text-gray-600 hover:text-[#00B85C]"
-                }`}
-            >
-                {estadoB.label}
-            </button>
+
+            <div className="relative flex p-1 bg-gray-100/50 border border-gray-200 rounded-xl w-full max-w-fit min-w-[200px] h-10 items-center">
+                
+
+                <button
+                    type="button"
+                    onClick={() => handleChange(estadoA.value)}
+                    className={`relative z-10 flex-1 flex items-center justify-center px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                        estado === estadoA.value
+                            ? "text-white"
+                            : "text-gray-500 hover:text-gray-700"
+                    }`}
+                >
+                    {estadoA.label}
+                </button>
+
+
+                <button
+                    type="button"
+                    onClick={() => handleChange(estadoB.value)}
+                    className={`relative z-10 flex-1 flex items-center justify-center px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                        estado === estadoB.value
+                            ? "text-white"
+                            : "text-gray-500 hover:text-gray-700"
+                    }`}
+                >
+                    {estadoB.label}
+                </button>
+
+                <div
+                    className={`absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-[#00B85C] rounded-lg shadow-sm transition-transform duration-300 ease-in-out ${
+                        estado === estadoB.value ? "translate-x-full" : "translate-x-0"
+                    }`}
+                />
+            </div>
+
+            <input type="hidden" name={name} value={estado} />
         </div>
-
-        <input type="hidden" name={name} value={estado} />
-    </div>
-  );
+    );
 }
