@@ -11,6 +11,39 @@ import { Suspense, useState } from "react"
 import { toast } from "sonner";
 
 export default function LoginPage(){
+    
+    return(
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+
+            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
+
+                <Link href="/" className="text-gray-600">
+                    <ArrowLeft />
+                </Link>
+                <div className="text-center space-y-2">
+                    <h1 className="text-3xl font-semibold text-gray-800">
+                        Bem-vindo de volta
+                    </h1>
+                    <p className="text-sm text-gray-500">
+                        Acesse sua conta para fazer suas reservas!
+                    </p>
+                </div>
+
+                <Suspense fallback={
+                        <div className="flex justify-center py-4">
+                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
+                        </div>
+                }>
+                    <LoginForm/>
+                </Suspense>
+    
+            </div>
+        </div>
+    )
+}
+
+function LoginForm(){
+
     const router = useRouter();
     const params = useSearchParams();
     const callbackURL = params.get('callback');
@@ -55,73 +88,49 @@ export default function LoginPage(){
     }
 
     return(
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+        <form className="flex flex-col gap-6">
 
-            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
+            <CustomInput
+                label="E-mail"
+                placeholder="seu@email.com"
+                name="email"
+                onChange={handleChange}
+                value={formData.email}
+                erro={erros.email}
+            />
 
-                <Link href="/" className="text-gray-600">
-                    <ArrowLeft />
+            <CustomInput
+                label="Senha"
+                placeholder="senha"
+                name="senha"
+                onChange={handleChange}
+                value={formData.senha}
+                erro={erros.senha}
+                type="password"
+            />
+                    
+            <div className="flex justify-between text-sm">
+                <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/pefil'} className="text-blue-600 hover:underline">
+                Criar conta
                 </Link>
-                <div className="text-center space-y-2">
-                <h1 className="text-3xl font-semibold text-gray-800">
-                    Bem-vindo de volta
-                </h1>
-                <p className="text-sm text-gray-500">
-                    Acesse sua conta para fazer suas reservas!
-                </p>
-                </div>
-
-    
-                <form className="flex flex-col gap-6">
-
-                    <CustomInput
-                        label="E-mail"
-                        placeholder="seu@email.com"
-                        name="email"
-                        onChange={handleChange}
-                        value={formData.email}
-                        erro={erros.email}
-                    />
-
-                    <CustomInput
-                        label="Senha"
-                        placeholder="senha"
-                        name="senha"
-                        onChange={handleChange}
-                        value={formData.senha}
-                        erro={erros.senha}
-                        type="password"
-                    />
-                    <Suspense fallback={
-                        <div className="flex justify-center py-4">
-                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
-                        </div>
-                    }>
-                        <div className="flex justify-between text-sm">
-                            <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/pefil'} className="text-blue-600 hover:underline">
-                            Criar conta
-                            </Link>
-
-                            <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
-                            Esqueci a senha
-                            </Link>
-                        </div>
-                    </Suspense>
-                    <button
-                        type="button"
-                        onClick={fazerLogin}
-                        className="
-                        mt-2 h-12 rounded-xl
-                        bg-blue-600 text-white font-semibold
-                        hover:bg-blue-700 active:scale-[.99]
-                        transition
-                        "
-                    >
-                        Entrar
-                    </button>
-
-                </form>
+                <Link href="/esqueci-senha" className="text-gray-500 hover:underline">
+                    Esqueci a senha
+                </Link>
             </div>
-        </div>
+
+            <button
+                type="button"
+                onClick={fazerLogin}
+                className="
+                mt-2 h-12 rounded-xl
+                bg-blue-600 text-white font-semibold
+                hover:bg-blue-700 active:scale-[.99]
+                transition
+                "
+            >
+                Entrar
+            </button>
+
+        </form>
     )
 }
