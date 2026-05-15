@@ -100,11 +100,15 @@ export default class HorarioRepository {
                 )as id_agendamento,
                 (
                     select 
-                        coalesce(json_agg(
-                            q.id_quadra,
-                            q.tipo,
-                            q.valor
-                        ),'[]'::json)
+                        coalesce(
+                            json_agg(
+                            json_build_object(
+                                'id_quadra', q.id_quadra,
+                                'tipo', q.tipo,
+                                'valor', q.valor
+                                )
+                            ),'[]'::json
+                        )
                     from quadras q
                     where q.ativo = true
                     and(
