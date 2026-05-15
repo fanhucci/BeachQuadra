@@ -15,12 +15,13 @@ export default class PessoaRepository {
     }
 
     async buscarClientes(busca:string){
+        const termo = `%${busca}%`
         return await sql`
             select * 
             from pessoas
-            where nome ilike %${busca}%
-            or cpf ilike %${busca}%
-            or email ilike %${busca}%
+            where (nome ilike ${termo})
+                or (cpf ilike ${termo})
+                or (email ilike ${termo})
             limit 10
         `;
     }
