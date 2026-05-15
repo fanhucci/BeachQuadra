@@ -49,7 +49,7 @@ export default function useAgenda(){
     }
 
     const selecionarHorario = (slot: SlotHorario) => {
-        
+
         setHorarioSelecionado((prev) => {
             const quadraAtual = slot.disponivel[0]; 
             if (!quadraAtual) return prev;
@@ -78,11 +78,14 @@ export default function useAgenda(){
         });
     }
 
-    const removerHorarioSelecionado = (slotHorario:HorarioSelecionado)=>{
-        setHorarioSelecionado((prev)=>{
-            return prev.filter(r => new Date(r.horario).getTime() !== new Date(slotHorario.horario).getTime());
-        })
-    }
+    const removerHorarioSelecionado = (slotHorario: HorarioSelecionado) => {
+        setHorarioSelecionado((prev) => 
+            prev.filter(r => 
+                new Date(r.horario).getTime() !== new Date(slotHorario.horario).getTime() || 
+                r.quadra.id_quadra !== slotHorario.quadra.id_quadra
+            )
+        );
+    };
 
     const proximaSemana = ()=>{
         const proximaSemana = new Date(data);
