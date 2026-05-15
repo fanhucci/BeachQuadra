@@ -46,7 +46,7 @@ export default function useQuadraDetail(){
     }
 
     const mostrarAgendamento = (slot:Slot)=>{
-        router.push(`/agendamento/${slot.id_agendamento}`);
+        router.push(`/agendamentos/${slot.id_agendamento}`);
     }
 
     useEffect(()=>{
