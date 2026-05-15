@@ -25,6 +25,7 @@ export default class PessoaRepository {
             from pessoas
             where (nome ilike ${termo})
                 ${termoCPF ? sql`or (cpf ilike ${termoCPF})` : sql``}
+            and ativo = true
             limit 10
         `;
     }

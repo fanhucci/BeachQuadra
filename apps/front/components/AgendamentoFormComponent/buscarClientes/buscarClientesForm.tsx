@@ -8,10 +8,11 @@ import { toast } from "sonner";
 import { cpfMask } from "@/utils/mascaras";
 
 interface BuscarClienteProps {
+    cliente?:Usuario | null;
     onSelecionar: (cliente: Usuario) => void;
 }
 
-export default function BuscarCliente({ onSelecionar }: BuscarClienteProps){
+export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarClienteProps){
     
     const [busca, setBusca] = useState<string>('');
     const [resultados, setResultados] = useState<Usuario[]>([]);
@@ -43,7 +44,7 @@ export default function BuscarCliente({ onSelecionar }: BuscarClienteProps){
         <div className="flex flex-col gap-2 relative">
             <CustomInput
                 name="busca"
-                value={busca}
+                value={cliente?.nome ?? busca}
                 onChange={(e) => setBusca(e.target.value)}
                 label="Cliente"
                 placeholder="Nome ou CPF"

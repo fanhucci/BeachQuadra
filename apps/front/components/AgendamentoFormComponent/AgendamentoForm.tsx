@@ -217,6 +217,7 @@ function SalvarAgendamentoForm({
                     : (
                         <>
                             <BuscarCliente
+                                cliente={cliente}
                                 onSelecionar={setCliente}
                             />
                         </>)
