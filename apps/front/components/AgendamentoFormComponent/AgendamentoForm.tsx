@@ -8,9 +8,10 @@ import Agenda from "../agenda";
 import useAgenda, { HorarioSelecionado } from "./useAgenda";
 import CustomModal from "../customModal";
 import Campo from "../inputsComponents/campo";
-import CustomSwitch from "../inputsComponents/customSwitch";
+
 import BuscarCliente from "./buscarClientes/buscarClientesForm";
 import { dinheiroMask } from "@/utils/mascaras";
+import CustomSwitch from "../inputsComponents/customSwitch";
 
 export default function AgendamentoFormComponent({
     context, 
@@ -63,28 +64,33 @@ export default function AgendamentoFormComponent({
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
-                    <div className="flex flex-col w-[30%]">
-                        <div className="flex-1 flex-wrap">
+                   <div className="flex flex-col w-[30%] h-[600px]">
+                        <div className="flex-1 min-h-0 flex flex-col mb-4"> 
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>
                             
-                            <div className="flex flex-wrap justify-center gap-2">
-                                {horariosOrdenados.map(r => (
-                                    <SelectedSlotButton
-                                        key={`${new Date(r.horario).getTime()}-${r.quadra.id_quadra}`}
-                                        horario={r.horario}
-                                        quadra={r.quadra}
-                                        remover={() => removerHorarioSelecionado(r)}
-                                    />
-                                ))}
-                                
-                                {horarioSelecionado.length === 0 && (
-                                    <p className="text-sm text-gray-400 italic">Nenhum horário selecionado</p>
-                                )}
+                            <div className="flex-1 overflow-y-auto border rounded-xl p-3 bg-gray-50">
+                                <div className="flex flex-wrap justify-center gap-2">
+                                    {horariosOrdenados.map(r => (
+                                        <SelectedSlotButton
+                                            key={`${new Date(r.horario).getTime()}-${r.quadra.id_quadra}`}
+                                            horario={r.horario}
+                                            quadra={r.quadra}
+                                            remover={() => removerHorarioSelecionado(r)}
+                                        />
+                                    ))}
+                                    
+                                    {horarioSelecionado.length === 0 && (
+                                        <p className="text-sm text-gray-400 italic text-center mt-4">
+                                            Nenhum horário selecionado
+                                        </p>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <div className="flex flex-1/3 items-center">
+
+                        <div className="flex-none border-t pt-4 bg-white space-y-4">
                             <CustomSwitch
                                 label="Tipo de quadra:"
                                 estadoA={{label:'Individual', value:'individual'}}
@@ -93,10 +99,14 @@ export default function AgendamentoFormComponent({
                                 selected={tipo}
                                 onChange={(valor)=>setTipo(valor)}
                             />
-                            <Campo
-                                label="Total:"
-                                valor={dinheiroMask(valorTotal)}
-                            />
+                            
+                            <div className="bg-gray-100 p-3 rounded-lg">
+                                <Campo
+                                    label="Total:"
+                                    valor={dinheiroMask(valorTotal)}
+                                />
+                            </div>
+
                             <SalvarAgendamentoForm 
                                 contexto={context}
                                 clientePreSelecionado={clientePreSelecionado}
