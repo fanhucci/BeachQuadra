@@ -16,12 +16,14 @@ export default class PessoaRepository {
 
     async buscarClientes(busca:string){
         const termo = `%${busca}%`
+        const apenasNumeros = busca.replace(/\D/g, '');
+        const termoCPF = `%${apenasNumeros}%`;
+        
         return await sql`
             select * 
             from pessoas
             where (nome ilike ${termo})
-                or (cpf ilike ${termo})
-                or (email ilike ${termo})
+                or (cpf ilike ${termoCPF})
             limit 10
         `;
     }

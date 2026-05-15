@@ -5,6 +5,7 @@ import { apiRequest } from "@/utils/apiHandler";
 import { useEffect, useState } from "react";
 import { Usuario } from "@app/shared"; 
 import { toast } from "sonner";
+import { cpfMask } from "@/utils/mascaras";
 
 interface BuscarClienteProps {
     onSelecionar: (cliente: Usuario) => void;
@@ -45,7 +46,7 @@ export default function BuscarCliente({ onSelecionar }: BuscarClienteProps){
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
                 label="Cliente"
-                placeholder="Nome, CPF ou E-mail..."
+                placeholder="Nome ou CPF"
             />
 
             {resultados.length > 0 && (
@@ -63,7 +64,7 @@ export default function BuscarCliente({ onSelecionar }: BuscarClienteProps){
                         >
                             <span className="font-bold text-gray-800 text-sm">{r.nome}</span>
                             <div className="flex gap-2 text-[11px] text-gray-500">
-                                {r.cpf && <span>{r.cpf}</span>}
+                                {r.cpf && <span>{cpfMask(r.cpf)}</span>}
                                 {r.email && <span>• {r.email}</span>}
                             </div>
                         </button>
