@@ -74,6 +74,7 @@ export default function AgendamentoFormComponent({
                                     <SelectedSlotButton
                                         key={r.horario.toString()}
                                         horario={r.horario}
+                                        quadra={r.quadra}
                                         remover={() => removerHorarioSelecionado(r)}
                                     />
                                 ))}
@@ -110,19 +111,20 @@ export default function AgendamentoFormComponent({
     )
 }
 
-type SelectedSlotButtonProps = {
-    horario:Date;
+interface SelectedSlotButtonProps extends HorarioSelecionado {
     remover?:()=>void;
 }
 
 function SelectedSlotButton({
     horario,
+    quadra,
     remover
 }:SelectedSlotButtonProps){
     return(
         <SubmitButton
             estilo="pilula"
             onClick={remover}
+            className={quadra.tipo === 'duplas'? `bg-purple-50 text-purple-600 border-purple-100 hover:bg-purple-100` : ``}
         >
             <span className="leading-none">
                 {new Date(horario).toLocaleString('pt-br', {
