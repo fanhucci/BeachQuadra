@@ -51,6 +51,7 @@ export function CadastroForm(){
                         value={formData.nome}
                         erro={erros.nome}
                         onChange={handleChange}
+                        type="text"
                     />
 
                     <CustomInput
@@ -59,6 +60,7 @@ export function CadastroForm(){
                         value={cpfMask(formData.cpf)}
                         erro={erros.cpf}
                         onChange={handleChange}
+                        type="cpf"
                     />
 
                     <CustomInput
@@ -68,6 +70,7 @@ export function CadastroForm(){
                         value={formData.email}
                         erro={erros.email}
                         onChange={handleChange}
+                        type="email"
                     />
 
                     <CustomInput
@@ -76,6 +79,7 @@ export function CadastroForm(){
                         value={telefoneMask(formData.telefone)}
                         erro={erros.telefone}
                         onChange={handleChange}
+                        type="tel"
                     />
 
                     <CustomInput

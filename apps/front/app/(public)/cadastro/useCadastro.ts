@@ -62,9 +62,16 @@ export default function useCadastro(){
 
         const {name, value} = e.target;
 
+        let valorLimpo = value;
+
+        if(name === 'cpf' || name === 'telefone'){
+            valorLimpo = value.replace(/\D/g, '');
+            valorLimpo = valorLimpo.slice(0, 11);
+        }
+
         setFormData((prev)=>({
             ...prev,
-            [name]:value
+            [name]:valorLimpo
         }));
     }
 
