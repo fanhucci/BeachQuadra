@@ -16,8 +16,9 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
     
     const [busca, setBusca] = useState<string>('');
     const [resultados, setResultados] = useState<Usuario[]>([]);
-    const [loading, setLoading] = useState(false);
-    
+    const [loading, setLoading] = useState<boolean>(false);
+    const [selecionado,setSelecionado] = useState<boolean>(false);
+
     useEffect(() => {
 
         if (busca.length < 3) {
@@ -45,7 +46,10 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
             <CustomInput
                 name="busca"
                 value={cliente?.nome ?? busca}
-                onChange={(e) => setBusca(e.target.value)}
+                onChange={(e) => {
+                    setBusca(e.target.value)
+                    setSelecionado(false);
+                }}
                 label="Cliente"
                 placeholder="Nome ou CPF"
             />
@@ -60,6 +64,7 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
                                 onSelecionar(r);
                                 setBusca(r.nome); 
                                 setResultados([]);
+                                setSelecionado(true);
                             }}
                             className="w-full flex flex-col items-start p-3 hover:bg-[#00B85C]/5 transition-colors border-b last:border-none border-gray-100"
                         >
