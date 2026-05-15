@@ -58,7 +58,7 @@ export default function AgendamentoFormComponent({
                         Avançar
                     </SubmitButton>
                 </div>
-                <section className="flex flex-row flex-1 h-full gap-4">
+                <section className="flex flex-row flex-1 gap-4">
                     <Agenda
                         dados={dados}
                         aoSelecionar={selecionarHorario}
@@ -79,7 +79,7 @@ export default function AgendamentoFormComponent({
                                 Selecionados ({horarioSelecionado.length})
                             </h3>   
                      
-                            <div className="h-full overflow-y-auto border rounded-xl p-3 bg-gray-50">
+                            <div className="h-[700px] overflow-y-auto border rounded-xl p-3 bg-gray-50">
                                 <div className="flex flex-wrap justify-center gap-2">
                                     {horariosOrdenados.map(r => (
                                         <SelectedSlotButton
