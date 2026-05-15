@@ -58,13 +58,19 @@ export default function AgendamentoFormComponent({
                         Avançar
                     </SubmitButton>
                 </div>
-                <section className="flex flex-row flex-1 gap-4">
+                <section className="flex flex-row flex-1 h-full gap-4">
                     <Agenda
                         dados={dados}
                         aoSelecionar={selecionarHorario}
                         selecionados={horarioSelecionado}
                     />
                    <div className="flex flex-col w-[30%] h-full">
+                        <div className="bg-gray-100 p-3 rounded-lg">
+                            <Campo
+                                label="Total:"
+                                valor={dinheiroMask(valorTotal)}
+                            />
+                        </div>
                         <div className="flex-1 h-[80%] min-h-0 flex flex-col mb-4"> 
                             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider pb-4">
                                 Selecionados ({horarioSelecionado.length})
@@ -99,13 +105,6 @@ export default function AgendamentoFormComponent({
                                 selected={tipo}
                                 onChange={(valor)=>setTipo(valor)}
                             />
-                            
-                            <div className="bg-gray-100 p-3 rounded-lg">
-                                <Campo
-                                    label="Total:"
-                                    valor={dinheiroMask(valorTotal)}
-                                />
-                            </div>
 
                             <SalvarAgendamentoForm 
                                 contexto={context}
