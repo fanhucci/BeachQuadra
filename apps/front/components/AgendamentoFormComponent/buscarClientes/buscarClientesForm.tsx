@@ -88,7 +88,7 @@ export default function BuscarCliente({ cliente = null, onSelecionar }: BuscarCl
                 </div>
             )}
 
-            {busca.length >= 3 && resultados.length === 0 && !loading && (
+            {busca.length >= 3 && resultados.length === 0 && !loading && !selecionado &&(
                 <p className="text-xs text-gray-400 mt-1 ml-1 italic">
                     Nenhum cliente encontrado.
                 </p>
