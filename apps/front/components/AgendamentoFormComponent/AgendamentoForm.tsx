@@ -212,7 +212,7 @@ function SalvarAgendamentoForm({
                     :{
                         label:'Confirmar',
                         estilo:'primario',
-                        onClick:()=>salvar(cliente?.id_pessoa),
+                        onClick:()=>salvar(cliente!.id_pessoa),
                         disabled:!cliente? true : false,
                     }
                 ]}
