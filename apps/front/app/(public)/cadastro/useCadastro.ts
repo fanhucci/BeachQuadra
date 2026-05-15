@@ -36,7 +36,7 @@ export default function useCadastro(){
         }
 
         try {
-            await apiRequest(`/usuarios/cadastro`,{
+            await apiRequest(`/usuarios/proprio`,{
                 method:"POST",
                 body:JSON.stringify(parse.data)
             });
