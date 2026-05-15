@@ -38,7 +38,7 @@ export default function AgendarClientePage(){
         else{
             setLoading(false);
         }
-    },[id,pegarUsuario])
+    },[id])
     
     if(loading){
         return (<>Carregando...</>)
