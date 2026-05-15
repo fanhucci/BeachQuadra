@@ -230,107 +230,60 @@ function SalvarAgendamentoForm({
             >
                 {
                     contexto === 'visitante'
-                    ?(
-                        <>
-                            <div className="text-center py-4 space-y-3">
+                    ?( 
+                        <div className="text-center py-4 space-y-3">
                 
-                                <h3 className="text-lg font-medium text-gray-900">Você está quase lá!</h3>
-                                <p className="text-sm text-gray-500 max-w-sm mx-auto">
-                                    Para garantir a sua reserva, precisamos que você entre na sua conta ou crie uma nova. Seus horários estão salvos!
-                                </p>
-                            </div>
-
-          
-                            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 space-y-2">
-                                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Horários selecionados</span>
-                                <div className="max-h-28 overflow-y-auto space-y-2 pr-1">
-                                    {horariosSelecionados.map((item, idx) => (
-                                        <div key={idx} className="flex justify-between items-center text-sm text-gray-700 bg-white p-2 rounded-lg shadow-sm border border-gray-100">
-                                            <span className="font-medium text-gray-800">{item.quadra.tipo === 'individual' ? '🎾 Quadra Individual' : '👥 Quadra Duplas'}</span>
-                                            <span className="text-xs bg-indigo-50 text-indigo-600 font-semibold px-2 py-1 rounded">
-                                                {new Date(item.horario).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </>
+                            <h3 className="text-lg font-medium text-gray-900">Você está quase lá!</h3>
+                            <p className="text-sm text-gray-500 max-w-sm mx-auto">
+                                Para garantir a sua reserva, precisamos que você entre na sua conta ou crie uma nova. Seus horários estão salvos!
+                            </p>
+                        </div>
                     )
                     
                     :contexto === 'cliente' && cliente 
                     ?(
-                       <>
-                            <div className="space-y-4">
-     
-                                <Campo
-                                    label="Titular da Reserva"
-                                    valor={cliente.nome}
-                                />
-
-                                <div className="space-y-2">
-                                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Resumo do Agendamento</label>
-                                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 max-h-40 overflow-y-auto space-y-2">
-                                        {horariosSelecionados.map((item, idx) => (
-                                            <div key={idx} className="flex justify-between items-center text-sm border-b border-gray-200/60 pb-2 last:border-none last:pb-0">
-                                                <div>
-                                                    <p className="font-medium text-gray-800">Quadra {item.quadra.id_quadra} ({item.quadra.tipo})</p>
-                                                    <p className="text-xs text-gray-500">
-                                                        {new Date(item.horario).toLocaleDateString()} às {new Date(item.horario).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                    </p>
-                                                </div>
-                                                <span className="font-semibold text-gray-700">
-                                                    {item.quadra.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-          
-                                <div className="flex justify-between items-center bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/50">
-                                    <span className="text-sm font-medium text-indigo-900">Valor Total</span>
-                                    <span className="text-lg font-bold text-indigo-700">
-                                        {valorTotal}
-                                    </span>
-                                </div>
-                            </div>
-                        </>
+                        <Campo
+                            label="Titular da Reserva"
+                            valor={cliente.nome}
+                        /> 
                     )
                     : (
-                        <>
-                            <div className="space-y-4">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Vincular Cliente</label>
-                                    <BuscarCliente
-                                        cliente={cliente}
-                                        onSelecionar={setCliente}
-                                    />
-                                </div>
-
-                       
-                                {cliente && (
-                                    <div className="space-y-3 pt-2 border-t border-gray-100 animate-fadeIn">
-                                        <div className="bg-gray-50 rounded-xl p-3 max-h-32 overflow-y-auto space-y-2">
-                                            {horariosSelecionados.map((item, idx) => (
-                                                <div key={idx} className="flex justify-between text-xs text-gray-600">
-                                                    <span>Quadra {item.quadra.id_quadra} - {new Date(item.horario).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                                                    <span className="font-medium">{item.quadra.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div className="flex justify-between items-center text-sm font-medium text-gray-700 px-1">
-                                            <span>Total da Reserva:</span>
-                                            <span className="font-bold text-gray-900">
-                                                {valorTotal}
-                                            </span>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </>
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Vincular Cliente</label>
+                            <BuscarCliente
+                                cliente={cliente}
+                                onSelecionar={setCliente}
+                            />
+                        </div>
                     )
                 }
+
+                <div className="space-y-2">
+                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Resumo do Agendamento</label>
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 max-h-40 overflow-y-auto space-y-2">
+                        {horariosSelecionados.map((item, idx) => (
+                            <div key={idx} className="flex justify-between items-center text-sm border-b border-gray-200/60 pb-2 last:border-none last:pb-0">
+                                   <div>
+                                       <p className="font-medium text-gray-800">Quadra {item.quadra.id_quadra} ({item.quadra.tipo})</p>
+                                    <p className="text-xs text-gray-500">
+                                        {new Date(item.horario).toLocaleDateString('pt-br',{ timeZone:'utc'})} às {new Date(item.horario).toLocaleTimeString('pt-br', { hour: '2-digit', minute: '2-digit', timeZone:'utc'})}
+                                    </p>
+                                </div>
+                                <span className="font-semibold text-gray-700">
+                                    {dinheiroMask(item.quadra.valor)}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+          
+                <div className="flex justify-between items-center bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/50">
+                    <span className="text-sm font-medium text-indigo-900">Valor Total</span>
+                    <span className="text-lg font-bold text-indigo-700">
+                        R$ {dinheiroMask(valorTotal)}
+                    </span>
+                </div>
 
             </CustomModal>
         </div>
