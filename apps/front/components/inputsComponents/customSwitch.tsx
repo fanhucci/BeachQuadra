@@ -36,7 +36,7 @@ export default function CustomSwitch({
     }
 
     return (
-        <div className="flex flex-col gap-1.5 w-full">
+        <div className="flex flex-col gap-1.5 w-fit">
 
             {(label || name) && (
                 <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">

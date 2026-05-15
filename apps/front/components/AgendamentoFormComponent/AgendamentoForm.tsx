@@ -11,6 +11,7 @@ import CustomModal from "../customModal";
 import CustomInput from "../inputsComponents/customInput";
 import Campo from "../inputsComponents/campo";
 import CustomSwitch from "../inputsComponents/customSwitch";
+import BuscarCliente from "./buscarClientes/buscarClientesForm";
 
 export default function AgendamentoFormComponent({
     context, 
@@ -215,13 +216,8 @@ function SalvarAgendamentoForm({
                     )
                     : (
                         <>
-                            <CustomInput
-                                label="Cliente"
-                                name="nome"
-                                onChange={(r)=>(r)}
-                                placeholder="Pesquisar"
-                                value={cliente?.nome ?? ''}
-                                type="text"
+                            <BuscarCliente
+                                onSelecionar={setCliente}
                             />
                         </>)
                 }

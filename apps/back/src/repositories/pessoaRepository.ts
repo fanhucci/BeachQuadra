@@ -14,6 +14,17 @@ export default class PessoaRepository {
         `;
     }
 
+    async buscarClientes(busca:string){
+        return await sql`
+            select * 
+            from pessoas
+            where nome ilike %${busca}%
+            or cpf ilike %${busca}%
+            or email ilike %${busca}%
+            limit 10
+        `;
+    }
+
 
     async editarPessoa(dados: EditarUsuario) {
   

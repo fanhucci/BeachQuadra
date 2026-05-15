@@ -40,6 +40,21 @@ export default class UsuarioController{
         res.json(usuario);
     }
 
+    async buscarClientes(req:Request, res:Response){
+        
+        const {search} = req.query;
+
+        const busca = String( search || '');
+
+        if (!busca || busca.length < 3) {
+            return res.json([]); 
+        }
+
+        const clientes = await this.service.buscarClientes(busca);
+
+        res.json(clientes);
+    }
+
     async adicionarUsuario(req:Request, res:Response){
         const parse = NovoUsuarioSchema.safeParse(req.body);
 

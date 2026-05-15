@@ -8,6 +8,10 @@ import crypto from 'crypto';
 export default class UsuarioService{
     private pessoa = new PessoaRepository();
     private conta = new ContaRepository();
+
+    async buscarClientes(busca:string){
+        return await this.pessoa.buscarClientes(busca);
+    }
     
     async listarUsuarios(filtro:UsuarioSearch){
         return await this.pessoa.listarUsuarios(filtro);
