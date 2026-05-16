@@ -5,11 +5,39 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
+interface CobrancaDetail{
+    id_cobranca:number;
+    status:string;
+    data_pagamento:string|null;
+}
+
+interface ClienteDetail{
+    id_cliente:number;
+    nome:string;
+}
+
+interface CriadorDetail{
+    id_criador:number;
+    nome:string;
+    id_cargo:number;
+}
+
+interface ReservaDetail{
+    id_reserva:number;
+    id_quadra:number;
+    valor:number;
+    status:string;
+    horario:string;
+}
 
 interface DetalhesAgendamento{
     id_agendamento:number;
+    status:string;
     valor_total:number;
-    
+    cobranca: CobrancaDetail;
+    cliente:ClienteDetail;
+    criador:CriadorDetail;
+    reservas:ReservaDetail[];
 }
 
 export default function useDetailAgendamento(){
@@ -40,7 +68,7 @@ export default function useDetailAgendamento(){
         try {
             setLoadingButton(true);
 
-            await apiRequest(`/cobranca/${agendamento.id_cobranca}/${acao}`);
+            await apiRequest(`/cobranca/${agendamento?.cobranca.id_cobranca}/${acao}`);
 
             toast.success('Agendamento atualizado com sucesso.');
 

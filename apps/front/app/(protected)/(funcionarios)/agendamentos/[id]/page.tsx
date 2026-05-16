@@ -3,6 +3,7 @@
 import { dinheiroMask } from "@/utils/mascaras";
 import useDetailAgendamento from "./useDetailAgendamento"
 import Campo from "@/components/inputsComponents/campo";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 
 export default function AgendamentoDetailPage(){
     const {
@@ -12,21 +13,22 @@ export default function AgendamentoDetailPage(){
         gerenciarCobranca
     } = useDetailAgendamento();
 
-    //const {cliente, criado_por, reservas} = agendamento;
+    if(!agendamento || loading) return <>Carregando...</>
+
+    const { cobranca, cliente, criador, reservas} = agendamento;
     
-    if(loading)return <>Carregando...</>
     return (
         <div className="w-full h-full flex justify-center bg-gray-50 p-8">
-            {/* <div className="w-full max-w-5xl bg-white rounded-xl shadow-sm border p-6 flex flex-col gap-6">
+            <div className="w-full max-w-5xl bg-white rounded-xl shadow-sm border p-6 flex flex-col gap-6">
 
     
                 <div className="flex justify-between items-start border-b pb-4">
                     <div>
                         <h1 className="text-xl font-semibold text-gray-800">
-                            Reserva #{cliente.id_agendamento}
+                            Reserva #{agendamento.id_agendamento}
                         </h1>
                         <p className="text-sm text-gray-500">
-                            Criado por <span className="font-medium">{criado_por.nome}</span>
+                            Criado por <span className="font-medium">{criador.nome}</span>
                         </p>
                     </div>
 
@@ -46,7 +48,7 @@ export default function AgendamentoDetailPage(){
 
             
                 <div>
-                    <h2 className="text-sm font-semibold text-gray-600 mb-2">Status da reserva</h2>
+                    
 
                     <Campo
                         label="Status"
@@ -98,8 +100,45 @@ export default function AgendamentoDetailPage(){
                         </table>
                     </div>
                 </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    
+    
+                    <SubmitButton
+                        estilo="primario"
+                        disabled={cobranca.status !== 'pendente' || loadingButton}
+                        onClick={() => gerenciarCobranca('pagar')}
+                    >
+                        Confirmar Pagamento
+                    </SubmitButton>
 
-            </div> */}
+  
+                    <SubmitButton
+                        estilo="perigo"
+                        disabled={cobranca.status !== 'pendente' || loadingButton}
+                        onClick={() => gerenciarCobranca('cancelar')}
+                    >
+                        Cancelar Reserva
+                    </SubmitButton>
+
+
+                    <SubmitButton
+                        estilo="secundario"
+                        disabled={cobranca.status !== 'pendente' || loadingButton}
+                        onClick={() => gerenciarCobranca('vencimento')}
+                    >   
+                        Forçar Vencimento
+                    </SubmitButton>
+
+
+                    <SubmitButton
+                        estilo="secundario"
+                        disabled={cobranca.status !== 'concluido' || loadingButton}
+                        onClick={() => gerenciarCobranca('estornar')}
+                    >
+                        Estornar Dinheiro
+                    </SubmitButton>
+                </div>
+            </div>
         </div>
     );
 }
