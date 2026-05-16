@@ -16,7 +16,7 @@ import QuadraModalForm from "@/components/quadrasComponents/quadraModalForm";
 export default function QuadrasPage(){
     const {queryString, filters, handleFilters, limparFiltros} = useFilter<QuadraSearch>({
         search:'',
-        status:true,
+        ativo:true
     });
 
     const {

@@ -10,6 +10,13 @@ const opcoesTipo = [
 ];
 
 
+const opcoesStatus = [
+    { value:"true", label: 'Disponível' },
+    { value:"false", label: 'Indisponível' },
+    
+];
+
+
 interface QuadraModalFormProps{
     formData:Partial<Quadra>;
     erros:Partial<Record<keyof Quadra, string>>;
