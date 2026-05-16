@@ -1,15 +1,14 @@
 'use client'
 
-import CustomModal from "@/components/customModal";
 import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, UsuarioSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
-import { Banknote, Plus, Users } from "lucide-react";
-import UsuarioModalForm from "@/components/usuariosComponents/usuarioModalForm";
+import { Banknote, Plus } from "lucide-react";
 import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";
 import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
+import LinkButton from "@/components/buttonComponents/linkButton";
 
 
 export default function UsuariosPage(){
@@ -22,25 +21,8 @@ export default function UsuariosPage(){
 
     const {
         loading,
-        buttonLoading,
 
         dados,
-        formData,
-        erros,
-
-        modalOn,
-        editionOn,
-
-        adicionar,
-        editar,
-        ativar,
-        desativar,
-
-        handleChange,
-        abrirEdicao,
-        abrirModal,
-        fecharModal
-
     } = usePageCrud<Cobranca>({
         idKey:'id_cobranca',
         endpoint:'cobrancas',
@@ -65,10 +47,13 @@ export default function UsuariosPage(){
                     </div>
                 </div>
                 
-                <SubmitButton estilo="primario" onClick={abrirModal}>
+                <LinkButton 
+                    estilo="primario"
+                    href={'/usuarios/agendar'}
+                >
                     <Plus size={20} />
                     <span>Nova Cobrança</span>
-                </SubmitButton>
+                </LinkButton>
             </header>
 
 
@@ -100,42 +85,6 @@ export default function UsuariosPage(){
                     isLoading={loading}
                 />
             </section>
-
-            <CustomModal
-                titulo={
-                    editionOn
-                    ? 'Editar'
-                    : 'Cadastrar'
-                }
-                estado={modalOn}
-                fechar={fecharModal}
-                size="2xl"
-                botoes={[
-                    {
-                        label:'Cancelar',
-                        estilo:'secundario',
-                        onClick:fecharModal,
-                        isLoading:buttonLoading
-                    },
-                    {
-                        label:editionOn
-                            ? 'Editar'
-                            : 'Cadastrar',
-                        estilo:'primario',
-                        onClick:editionOn
-                            ? editar
-                            : adicionar,
-                        isLoading:buttonLoading
-                    },
-
-                ]}
-            >
-                <UsuarioModalForm
-                    formData={formData}
-                    erros={erros}
-                    handleChange={handleChange}
-                />
-            </CustomModal>
 
         </main>
     );

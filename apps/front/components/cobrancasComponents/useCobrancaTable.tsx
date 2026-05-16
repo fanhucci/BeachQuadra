@@ -10,7 +10,10 @@ import { Search } from "lucide-react";
 export default function useCobrancaTable(){
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
-        { key: "id_agendamento", label: "Agendamento" },
+        { 
+            key: "id_agendamento", label: "Agendamento",
+            render:(value:string)=>`#${value}`
+        },
         { key: "valor", label: "Valor",
             render:(value:string)=>(dinheiroMask(value))
         },
