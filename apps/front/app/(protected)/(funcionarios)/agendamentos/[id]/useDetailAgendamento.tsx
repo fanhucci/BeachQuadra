@@ -50,9 +50,7 @@ export default function useDetailAgendamento(){
         try {
             setLoading(true);
 
-            const dados = await apiRequest(`/agendamentos/${id}`,{
-                method:"PATCH"
-            });
+            const dados = await apiRequest(`/agendamentos/${id}`);
 
             setAgendamento(dados);
             
@@ -70,7 +68,9 @@ export default function useDetailAgendamento(){
         try {
             setLoadingButton(true);
 
-            await apiRequest(`/cobranca/${agendamento?.cobranca.id_cobranca}/${acao}`);
+            await apiRequest(`/cobranca/${agendamento?.cobranca.id_cobranca}/${acao}`,{
+                method:"PATCH"
+            });
 
             toast.success('Agendamento atualizado com sucesso.');
 
