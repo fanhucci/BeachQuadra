@@ -12,7 +12,7 @@ export default function AgendamentoDetailPage(){
         gerenciarCobranca
     } = useDetailAgendamento();
 
-    const {cliente, criado_por, reservas} = agendamento;
+    //const {cliente, criado_por, reservas} = agendamento;
     
     if(loading)return <>Carregando...</>
     return (
