@@ -26,6 +26,7 @@ export default function useCobrancaTable(){
             key:'acoes', label:"Ações",
             render:(value:string)=>(
                 <LinkButton
+                className="w-fit"
                     estilo="primario"
                     href={`/agendamentos/${value}`}
                 >
