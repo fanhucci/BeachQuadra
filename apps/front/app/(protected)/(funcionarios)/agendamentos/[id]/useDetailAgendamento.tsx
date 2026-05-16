@@ -4,15 +4,19 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-// interface DetalhesAgendamento{
 
-// }
+
+interface DetalhesAgendamento{
+    id_agendamento:number;
+    valor_total:number;
+    
+}
 
 export default function useDetailAgendamento(){
     const {id} = useParams();
     const [loading,setLoading] = useState<boolean>(false);
     const [loadingButton,setLoadingButton] = useState<boolean>(false);
-    const [agendamento,setAgendamento] = useState(null);
+    const [agendamento,setAgendamento] = useState<DetalhesAgendamento|null>(null);
 
     async function carregarAgendamento(){
         try {

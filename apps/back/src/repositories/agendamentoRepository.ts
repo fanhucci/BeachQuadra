@@ -22,7 +22,6 @@ export default class AgendamentoRepository{
                 a.id_agendamento,
                 a.status,
                 a.valor_total,
-                a.data_criacao,
 
                 (
                     select json_build_object(
