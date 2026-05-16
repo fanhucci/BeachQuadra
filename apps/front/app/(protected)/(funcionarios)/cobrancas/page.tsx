@@ -49,11 +49,7 @@ export default function UsuariosPage(){
         editarSchema: EditarCobrancaSchema
     });
 
-    const {colunas} = useCobrancaTable({
-        editar:abrirEdicao,
-        ativar:ativar,
-        desativar:desativar
-    });
+    const {colunas} = useCobrancaTable();
 
     return(
         <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">

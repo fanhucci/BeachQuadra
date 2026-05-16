@@ -9,17 +9,7 @@ import { useMemo } from "react";
 export default function useCobrancaTable(){
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
-        { key: "id_agendamento", label: "Agendamento",
-            render:(value:string)=>(
-                <LinkButton
-                    className="border-none w-fit"
-                    estilo="secundario"
-                    href={`/agendamentos/${value}`}
-                >
-                    #{value}
-                </LinkButton>
-            )
-        },
+        { key: "id_agendamento", label: "Agendamento" },
         { key: "valor", label: "Valor",
             render:(value:string)=>(dinheiroMask(value))
         },
@@ -32,6 +22,18 @@ export default function useCobrancaTable(){
                     : 'Pendente'
             
         },
+        {
+            key:'acoes', label:"Ações",
+            render:(value:string)=>(
+                <LinkButton
+                    estilo="primario"
+                    href={`/agendamentos/${value}`}
+                >
+                    Ver agendamento
+                </LinkButton>
+            )
+
+        }
     ],[]);
 
     return{
