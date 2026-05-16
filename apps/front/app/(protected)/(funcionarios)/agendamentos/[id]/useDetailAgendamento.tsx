@@ -50,7 +50,9 @@ export default function useDetailAgendamento(){
         try {
             setLoading(true);
 
-            const dados = await apiRequest(`/agendamentos/${id}`);
+            const dados = await apiRequest(`/agendamentos/${id}`,{
+                method:"PATCH"
+            });
 
             setAgendamento(dados);
             
@@ -71,6 +73,8 @@ export default function useDetailAgendamento(){
             await apiRequest(`/cobranca/${agendamento?.cobranca.id_cobranca}/${acao}`);
 
             toast.success('Agendamento atualizado com sucesso.');
+
+            carregarAgendamento();
 
         } catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro ao carregar dados.');
