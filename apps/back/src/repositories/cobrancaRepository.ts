@@ -9,7 +9,7 @@ export default class CobrancaRepository{
                 c.*, 
                 p.nome 
             from cobrancas c
-            join pessoa p
+            join pessoas p
             on p.id_pessoa = c.id_pessoa
           
         `;
@@ -21,7 +21,7 @@ export default class CobrancaRepository{
                 c.*, 
                 p.nome 
             from cobrancas c
-            join pessoa p
+            join pessoas p
             on p.id_pessoa = c.id_pessoa
             where c.id_cobranca = ${id}
         `;
