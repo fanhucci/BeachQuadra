@@ -18,8 +18,22 @@ export default class AgendamentoRepository{
 
     async buscarAgendamentoPorId(id:number){
         const [resultado] = await sql`
-            select 
+            select
                 a.id_agendamento,
+                a.status,
+                a.valor_total,
+                a.data_criacao,
+
+                (
+                    select json_build_object(
+                        'id_cobranca', cob.id_cobranca, 
+                        'status', cob.status,         
+                        'data_pagamento', cob.data_pagamento
+                    ) 
+                    from cobrancas cob
+                    where cob.id_agendamento = a.id_agendamento
+                ) as cobranca,
+
                 (
                     select json_build_object(
                         'id_pessoa', p.id_pessoa,
@@ -28,8 +42,7 @@ export default class AgendamentoRepository{
                     from pessoas p
                     where p.id_pessoa = a.id_pessoa
                 ) as cliente,
-                a.status,
-                a.valor_total,
+
                 (
                     select json_build_object(
                         'id_pessoa', p.id_pessoa,
@@ -37,10 +50,10 @@ export default class AgendamentoRepository{
                         'cargo', c.id_cargo
                     )
                     from pessoas p
-                    join cargos c 
-                    on c.id_cargo = p.id_cargo
+                    join cargos c on c.id_cargo = p.id_cargo
                     where p.id_pessoa = a.created_by
                 ) as criado_por,
+
                 (
                     select coalesce(
                         json_agg(
@@ -56,10 +69,11 @@ export default class AgendamentoRepository{
                     )
                     from reservas r
                     where r.id_agendamento = a.id_agendamento
-                ) as reservas 
+                ) as reservas
+
             from agendamentos a
             where a.id_agendamento = ${id};
-        `
+        `;
         return resultado;
     }
 

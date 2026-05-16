@@ -1,43 +1,63 @@
 'use client'
 import { apiRequest } from "@/utils/apiHandler"
+import { Agendamento } from "@app/shared";
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function useDetailAgendamento(){
     const {id} = useParams();
-    const [agendamento,setAgendamento] = useState(null);
-    const [status,setStatus] = useState({status:""})
+    const [loading,setLoading] = useState<boolean>(false);
+    const [loadingButton,setLoadingButton] = useState<boolean>(false);
+    const [agendamento,setAgendamento] = useState<Agendamento|null>(null);
 
     async function carregarAgendamento(){
-        const dados = await apiRequest(`/agendamentos/${id}`);
-        setAgendamento(dados);
-        setStatus({status:dados.status});
+        try {
+            setLoading(true);
+
+            const dados = await apiRequest(`/agendamentos/${id}`);
+
+            setAgendamento(dados);
+            
+
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao carregar dados.');
+        }
+        finally{
+            setLoading(false);
+        }
+        
     }
 
-    async function alterarStatus(id_agendamento:number){
+    async function gerenciarCobranca(acao:string) {
         try {
-            await apiRequest(`/agendamentos/${id_agendamento}`,{
-                method:'PATCH',
-                body:JSON.stringify(status)
-            })
-            toast.success('Alteração feita com sucesso!');
-            carregarAgendamento();
+            setLoadingButton(true);
+
+            await apiRequest(`/cobranca/${agendamento?.id_agendamento}/${acao}`);
+
+            toast.success('Agendamento atualizado com sucesso.');
+
         } catch (error) {
-            toast.error(error instanceof Error? error.message : "Erro inesperado");
+            toast.error(error instanceof Error? error.message : 'Erro ao carregar dados.');
+        }
+        finally{
+            setLoadingButton(false);
         }
     }
 
+
     useEffect(()=>{
-        if(id && !isNaN(id)){
+        const idNumerico = Number(id);
+
+        if(id && !isNaN(idNumerico)){
             carregarAgendamento();
         }
     },[id]);
 
     return{
+        loading,
+        loadingButton,
         agendamento,
-        status,
-        setStatus,
-        alterarStatus
+        gerenciarCobranca
     }
 }

@@ -6,7 +6,7 @@ import useDetailAgendamento from "./useDetailAgendamento"
 export default function AgendamentoDetailPage(){
     const {agendamento,status, setStatus, alterarStatus} = useDetailAgendamento();
 
-    if(!agendamento) return <>Carregando...</>
+    
 
     const cliente = agendamento.cliente;
     const responsavel = agendamento.criado_por;
