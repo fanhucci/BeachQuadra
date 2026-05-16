@@ -23,12 +23,12 @@ export default function useCobrancaTable(){
             
         },
         {
-            key:'acoes', label:"Ações",
-            render:(value:string)=>(
+            key:'acoes', label:"Ações", align:'center',
+            render:(_,a)=>(
                 <LinkButton
                 className="w-fit"
                     estilo="primario"
-                    href={`/agendamentos/${value}`}
+                    href={`/agendamentos/${a.id_agendamento}`}
                 >
                     Ver agendamento
                 </LinkButton>
