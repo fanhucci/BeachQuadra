@@ -16,7 +16,7 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
         { key: "id_pessoa", label: "Cliente", 
             render:(_,c:Cobranca)=>(
                 <LinkButton
-                    className="border-none text-2xl"
+                    className="w-fit border-none"
                     estilo="secundario"
                     href={`/usuarios/${c.id_pessoa}`}
                 >
@@ -27,7 +27,8 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
         { key: "id_agendamento", label: "Agendamento",
             render:(value:string)=>(
                 <LinkButton
-                estilo="fantasma"
+                    className="border-none"
+                    estilo="secundario"
                     href={`/agendamentos/${value}`}
                 >
                     {value}
