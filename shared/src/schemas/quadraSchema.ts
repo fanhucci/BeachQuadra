@@ -7,7 +7,7 @@ const tiposQuadraEnum = [
 
 
 export const NovaQuadraSchema = z.object({
-    nome:z.string('Nome inválido.').min(4,'Mínimo de 4 caractéres').max(30,'Máximo de 30 caractéres'),
+    nome:z.string('Nome inválido.').min(2,'Mínimo de 2 caractéres').max(30,'Máximo de 30 caractéres'),
     tipo:z.enum(tiposQuadraEnum,'Tipo inválido.'),
     status:z.coerce.boolean('Valor inváldo.'),
     valor:z.coerce.number('Valor inválido.').int('Valor inválido').min(1,"Valor mínimo: R$ 0,01").max(9999999,"Valor máximo: R$ 99.999,99")
