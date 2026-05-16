@@ -47,7 +47,7 @@ export default function QuadraModalForm({
             <CustomSelect
                 label="Status"
                 name="status"
-                options={opcoesTipo}
+                options={opcoesStatus}
                 value={String(formData.status || "")}
                 erro={erros.status}
                 onChange={(name, val) => {
