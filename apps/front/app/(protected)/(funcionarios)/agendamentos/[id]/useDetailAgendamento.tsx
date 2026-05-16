@@ -36,7 +36,7 @@ interface DetalhesAgendamento{
     valor_total:number;
     cobranca: CobrancaDetail;
     cliente:ClienteDetail;
-    criador:CriadorDetail;
+    criado_por:CriadorDetail;
     reservas:ReservaDetail[];
 }
 

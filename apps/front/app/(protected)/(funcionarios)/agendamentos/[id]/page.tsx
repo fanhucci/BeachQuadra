@@ -15,7 +15,7 @@ export default function AgendamentoDetailPage(){
 
     if(!agendamento || loading) return <>Carregando...</>
 
-    const { cobranca, cliente, criador, reservas} = agendamento;
+    const { cobranca, cliente, criado_por, reservas} = agendamento;
     
     return (
         <div className="w-full h-full flex justify-center bg-gray-50 p-8">
@@ -28,7 +28,7 @@ export default function AgendamentoDetailPage(){
                             Reserva #{agendamento.id_agendamento}
                         </h1>
                         <p className="text-sm text-gray-500">
-                            Criado por <span className="font-medium">{criador.nome}</span>
+                            Criado por <span className="font-medium">{criado_por.nome}</span>
                         </p>
                     </div>
 
