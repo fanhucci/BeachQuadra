@@ -68,7 +68,7 @@ export default function useDetailAgendamento(){
         try {
             setLoadingButton(true);
 
-            await apiRequest(`/cobranca/${agendamento?.cobranca.id_cobranca}/${acao}`,{
+            await apiRequest(`/cobrancas/${agendamento?.cobranca.id_cobranca}/${acao}`,{
                 method:"PATCH"
             });
 
