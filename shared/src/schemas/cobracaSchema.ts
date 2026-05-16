@@ -2,9 +2,9 @@ import {z} from 'zod';
 
 const StatusCobrancaEnum = [
     'pendente',
-    'confirmado',
+    'concluido',
     'cancelado',
-    'vencido',
+    'expirado',
     'estorno'
 ] as const
 

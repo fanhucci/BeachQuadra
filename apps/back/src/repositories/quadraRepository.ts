@@ -14,7 +14,7 @@ export default class QuadraRepository {
             }
 
             ${filtro.tipo
-            ? sql`and tipo = ${filtro.tipo}`
+            ? sql`and tipo = ${filtro.tipo}::"QuadraTypesEnum"`
             : sql``}
                 
             ${filtro.status !== undefined

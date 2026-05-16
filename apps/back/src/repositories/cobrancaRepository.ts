@@ -45,11 +45,44 @@ export default class CobrancaRepository{
         const [{id_agendamento}] =  await tx`
             update cobrancas
             set 
-                status = 'confirmado',
+                status = 'concluido',
                 data_pagamento = now()
             where id_cobranca = ${id}
             returning id_agendamento
         `;
         return id_agendamento;
+    }
+
+    async cancelarCobrancaPorId(tx:TransactionSql,id:number){
+        const [{id_agendamento}] = await tx`
+            update cobrancas
+                set 
+                    status = 'cancelado'
+                where id_cobranca = ${id}
+                returning id_agendamento
+            `;
+        return id_agendamento;
+    }
+
+    async estornarCobrancaPorId(tx:TransactionSql,id:number){
+        const [{id_agendamento}] = await tx`
+            update cobrancas
+                set 
+                    status = 'estornado'
+                where id_cobranca = ${id}
+                returning id_agendamento
+            `;
+        return id_agendamento;
+    }
+
+    async expirarCobrancaPorId(tx:TransactionSql,id:number){
+        const [{id_agendamento}] = await tx`
+            update cobrancas
+                set 
+                    status = 'expirado'
+                where id_cobranca = ${id}
+                returning id_agendamento
+        `;
+        return id_agendamento
     }
 }

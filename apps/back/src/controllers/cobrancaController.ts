@@ -33,4 +33,37 @@ export default class CobrancaController {
 
         res.sendStatus(200);
     }
+
+    async cancelarCobranca(req:Request, res:Response){
+        const {id} = req.params;
+        const id_numero = Number(id);
+
+        if(isNaN(id_numero)) throw new Error(`ID inválido.`);
+
+        await this.service.cancelarCobranca(id_numero);
+
+        res.sendStatus(200);
+    }
+
+    async estornarCobranca(req:Request, res:Response){
+        const {id} = req.params;
+        const id_numero = Number(id);
+
+        if(isNaN(id_numero)) throw new Error(`ID inválido.`);
+
+        await this.service.estornarCobranca(id_numero);
+
+        res.sendStatus(200);
+    }
+
+    async expirarCobranca(req:Request, res:Response){
+        const {id} = req.params;
+        const id_numero = Number(id);
+
+        if(isNaN(id_numero)) throw new Error(`ID inválido.`);
+
+        await this.service.expirarCobranca(id_numero);
+
+        res.sendStatus(200);
+    }
 }

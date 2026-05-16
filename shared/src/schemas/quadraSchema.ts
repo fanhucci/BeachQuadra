@@ -27,22 +27,22 @@ export const QuadraSearchSchema = z.object({
     tipo: z.enum(tiposQuadraEnum).optional(),
     status: z
     .string()
-    .optional()
-    .transform((val) => {
-        if (val === undefined) return undefined;
-        if (val === "true") return true;
-        if (val === "false") return false;
-        return undefined;
-    }),
-    ativo: z
-    .string()
-    .optional()
     .transform((val) => {
         if (val === undefined) return undefined;
         if (val === "true") return true;
         if (val === "false") return false;
         return undefined;
     })
+    .optional(),
+    ativo: z
+    .string()
+    .transform((val) => {
+        if (val === undefined) return undefined;
+        if (val === "true") return true;
+        if (val === "false") return false;
+        return undefined;
+    })
+    .optional()
 })
 
 export type Quadra = z.infer<typeof QuadraSchema>;
