@@ -6,24 +6,9 @@ import { Cobranca } from "@app/shared";
 import { useMemo } from "react";
 
 
-type AcoesCobranca = {
-   
-}
-
-export default function useCobrancaTable(acoes:AcoesCobranca){
+export default function useCobrancaTable(){
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
-        { key: "id_pessoa", label: "Cliente", 
-            render:(_,c:Cobranca)=>(
-                <LinkButton
-                    className="border-none"
-                    estilo="secundario"
-                    href={`/usuarios/${c.id_pessoa}`}
-                >
-                    <span>{c.nome}</span>
-                </LinkButton>
-            )
-        },
         { key: "id_agendamento", label: "Agendamento",
             render:(value:string)=>(
                 <LinkButton
@@ -31,7 +16,7 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
                     estilo="secundario"
                     href={`/agendamentos/${value}`}
                 >
-                    {value}
+                    #{value}
                 </LinkButton>
             )
         },
@@ -43,28 +28,11 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
             key:"data_pagamento", label: "Pagamento",
             render:(value:string)=>
                 value
-                    ? new Date(value).toLocaleString('pt-br',{ timeZone:'utc', hour:'2-digit', minute:'2-digit'})
+                    ? new Date(value).toLocaleString('pt-br',{ timeZone:'utc', day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit'})
                     : 'Pendente'
             
         },
-        { 
-            key: "ações", label: "Ações", align:"center",
-            render: (_:any, c:Cobranca) => (
-                <div className="flex justify-center gap-2">
-    
-                    <LinkButton 
-                        href={`/cobrancas/${c.id_cobranca}`} 
-                        estilo="primario"
-                    >
-                        <span className="hidden lg:inline">Detalhes</span>
-                    </LinkButton>
-                  
-                </div>
-            )
-
-        },
-
-    ],[acoes]);
+    ],[]);
 
     return{
         colunas
