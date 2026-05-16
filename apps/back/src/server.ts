@@ -7,6 +7,7 @@ import usuarioRouter from "./routes/usuarioRoute";
 import bloqueioRouter from "./routes/bloqueioRoute";
 import authRouter from "./routes/authRoute";
 import agendamentoRouter from './routes/agendamentoRoute';
+import cobrancaRouter from './routes/cobrancaRoute';
 import cookieParser from "cookie-parser";
 
 
@@ -29,6 +30,7 @@ app.use(horarioRouter);
 app.use(usuarioRouter);
 app.use(agendamentoRouter);
 app.use(bloqueioRouter);
+app.use(cobrancaRouter);
 app.use(authRouter);
 
 app.get("/", (req: Request, res: Response) => {
