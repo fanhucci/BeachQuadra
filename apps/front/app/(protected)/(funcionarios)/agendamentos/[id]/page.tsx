@@ -14,7 +14,7 @@ export default function AgendamentoDetailPage(){
 
     const {cliente, criado_por, reservas} = agendamento;
     
-    
+    if(loading)return <>Carregando...</>
     return (
         <div className="w-full h-full flex justify-center bg-gray-50 p-8">
             <div className="w-full max-w-5xl bg-white rounded-xl shadow-sm border p-6 flex flex-col gap-6">
