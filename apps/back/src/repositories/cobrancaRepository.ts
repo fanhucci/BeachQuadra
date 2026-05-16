@@ -5,16 +5,25 @@ export default class CobrancaRepository{
 
     async listarCobrancas(){
         return await sql`
-            select * 
-            from cobrancas
+            select 
+                c.*, 
+                p.nome 
+            from cobrancas c
+            join pessoa p
+            on p.id_pessoa = c.id_pessoa
+          
         `;
     }
 
     async listarCobrancasPorId(id:number){
         return await sql`
-            select * 
-            from cobrancas
-            where id_cobranca = ${id}
+            select 
+                c.*, 
+                p.nome 
+            from cobrancas c
+            join pessoa p
+            on p.id_pessoa = c.id_pessoa
+            where c.id_cobranca = ${id}
         `;
     }
 

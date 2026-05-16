@@ -1,7 +1,6 @@
 'use client'
 import { Column } from "@/components/customTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
-import SubmitButton from "@/components/buttonComponents/submitButton";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Cobranca, Quadra } from "@app/shared";
 import { Pencil, RotateCcw, Trash } from "lucide-react";
@@ -16,12 +15,15 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
     const router = useRouter();
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
-        { key: "nome", label: "Cliente", 
-            render:(value:string)=>(
+        { key: "id_pessoa", label: "Cliente", 
+            render:(_,c:Cobranca)=>(
                 <LinkButton
+
                     estilo="secundario"
-                    href={`/usuarios/${value}`}
-                />
+                    href={`/usuarios/${c.id_pessoa}`}
+                >
+                    <span>{c.nome}</span>
+                </LinkButton>
             )
         },
         { key: "id_agendamento", label: "Agendamento",
@@ -29,7 +31,9 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
                 <LinkButton
                 estilo="fantasma"
                     href={`/agendamentos/${value}`}
-                />
+                >
+                    {value}
+                </LinkButton>
             )
         },
         { key: "valor", label: "Valor",
