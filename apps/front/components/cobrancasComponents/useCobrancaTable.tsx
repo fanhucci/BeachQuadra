@@ -18,12 +18,18 @@ export default function useCobrancaTable(acoes:AcoesCobranca){
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
         { key: "nome", label: "Cliente", 
             render:(value:string)=>{
-                router.push(`/usuarios/${value}`)
+                <LinkButton
+                    estilo="secundario"
+                    href={`/usuarios/${value}`}
+                />
             }
         },
         { key: "id_agendamento", label: "Agendamento",
             render:(value:string)=>{
-                router.push(`/agendamentos/${value}`)
+                <LinkButton
+                estilo="fantasma"
+                    href={`/agendamentos/${value}`}
+                />
             }
         },
         { key: "valor", label: "Valor",
