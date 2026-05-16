@@ -124,9 +124,9 @@ export default function AgendamentoDetailPage(){
                     <SubmitButton
                         estilo="secundario"
                         disabled={cobranca.status !== 'pendente' || loadingButton}
-                        onClick={() => gerenciarCobranca('vencimento')}
+                        onClick={() => gerenciarCobranca('expirar')}
                     >   
-                        Forçar Vencimento
+                        Expirar cobrança
                     </SubmitButton>
 
 
