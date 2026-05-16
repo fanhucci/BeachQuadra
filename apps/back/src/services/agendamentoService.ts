@@ -1,6 +1,7 @@
 import AppError from "../infra/appError";
 import sql from "../infra/db";
 import AgendamentoRepository from "../repositories/agendamentoRepository";
+import CobrancaRepository from "../repositories/cobrancaRepository";
 import HorarioRepository from "../repositories/horarioRepository";
 import ReservaRepository from "../repositories/reservasRepository";
 import {NovoAgendamento, EditarAgendamento, NovaReserva } from '@app/shared';
@@ -9,6 +10,7 @@ export default class AgendamentoService{
     private agenda = new AgendamentoRepository();
     private reserva = new ReservaRepository();
     private horario = new HorarioRepository();
+    private cobranca = new CobrancaRepository();
 
     async listarAgendamentos(){
         return await this.agenda.listarAgendamentos();
@@ -37,6 +39,8 @@ export default class AgendamentoService{
 
             await this.reserva.criarReserva(tx,id_agendamento,horarios,quadras);
             
+            await this.cobranca.novaCobranca(tx,id_agendamento, dados.id_pessoa, total);
+
             return id_agendamento;
         });
     }

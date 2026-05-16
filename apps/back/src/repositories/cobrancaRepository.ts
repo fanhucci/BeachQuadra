@@ -27,6 +27,20 @@ export default class CobrancaRepository{
         `;
     }
 
+    async novaCobranca(tx:TransactionSql, id_agendamento:number, id_pessoa:number, valor:number){
+        return await tx`
+            insert into cobrancas
+            (id_agendamento, id_pessoa, valor, status)
+            values (
+                ${id_agendamento},
+                ${id_pessoa},
+                ${valor},
+                'pendente'
+            )
+            returning *
+        `;
+    }
+
     async pagarCobrancaPorId(tx:TransactionSql,id:number){
         const [{id_agendamento}] =  await tx`
             update cobrancas
