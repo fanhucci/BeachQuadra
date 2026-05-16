@@ -8,19 +8,19 @@ const StatusCobrancaEnum = [
     'estorno'
 ] as const
 
-const NovaCobrancaSchema = z.object({
+export const NovaCobrancaSchema = z.object({
     id_agendamento: z.coerce.number().int(),
     id_pessoa: z.coerce.number().int(),
 })
 
-const CobrancaSchema = NovaCobrancaSchema.extend({
+export const CobrancaSchema = NovaCobrancaSchema.extend({
     id_cobranca: z.coerce.number().int(),
     valor: z.coerce.number().int(),
     status: z.enum(StatusCobrancaEnum),
     data_pagamento: z.coerce.date().nullable()
 })
 
-const EditarCobrancaSchema = CobrancaSchema.omit({
+export const EditarCobrancaSchema = CobrancaSchema.omit({
     id_pessoa:true,
     id_agendamento:true,
     valor:true,
