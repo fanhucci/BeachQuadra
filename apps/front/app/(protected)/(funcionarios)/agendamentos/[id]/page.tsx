@@ -2,15 +2,18 @@
 
 import { dinheiroMask } from "@/utils/mascaras";
 import useDetailAgendamento from "./useDetailAgendamento"
+import Campo from "@/components/inputsComponents/campo";
 
 export default function AgendamentoDetailPage(){
-    const {agendamento,status, setStatus, alterarStatus} = useDetailAgendamento();
+    const {
+        loading,
+        loadingButton,
+        agendamento,
+        gerenciarCobranca
+    } = useDetailAgendamento();
 
+    const {cliente, criado_por, reservas} = agendamento;
     
-
-    const cliente = agendamento.cliente;
-    const responsavel = agendamento.criado_por;
-    const reservas = agendamento.reservas;
     
     return (
         <div className="w-full h-full flex justify-center bg-gray-50 p-8">
@@ -23,7 +26,7 @@ export default function AgendamentoDetailPage(){
                             Reserva #{cliente.id_agendamento}
                         </h1>
                         <p className="text-sm text-gray-500">
-                            Criado por <span className="font-medium">{responsavel.nome}</span>
+                            Criado por <span className="font-medium">{criado_por.nome}</span>
                         </p>
                     </div>
 
@@ -44,26 +47,12 @@ export default function AgendamentoDetailPage(){
             
                 <div>
                     <h2 className="text-sm font-semibold text-gray-600 mb-2">Status da reserva</h2>
-                    
-                    <div className="flex gap-3 items-center">
-                        <select
-                            value={status.status}
-                            onChange={(e) => setStatus({status:e.target.value})}
-                            className="border rounded-md px-3 py-2 bg-white"
-                        >
-                            <option value="pendente">Pendente</option>
-                            <option value="confirmado">Confirmado</option>
-                            <option value="concluido">Concluido</option>
-                            <option value="cancelado">Cancelado</option>
-                        </select>
 
-                        <button
-                            onClick={()=>alterarStatus(agendamento.id_agendamento)}
-                            className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
-                        >
-                            Salvar
-                        </button>
-                    </div>
+                    <Campo
+                        label="Status"
+                        valor={agendamento.status}
+                    />    
+                
                 </div>
 
                 

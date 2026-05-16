@@ -1,15 +1,18 @@
 'use client'
 import { apiRequest } from "@/utils/apiHandler"
-import { Agendamento } from "@app/shared";
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
+interface DetalhesAgendamento{
+
+}
 
 export default function useDetailAgendamento(){
     const {id} = useParams();
     const [loading,setLoading] = useState<boolean>(false);
     const [loadingButton,setLoadingButton] = useState<boolean>(false);
-    const [agendamento,setAgendamento] = useState<Agendamento|null>(null);
+    const [agendamento,setAgendamento] = useState<DetalhesAgendamento|null>(null);
 
     async function carregarAgendamento(){
         try {
@@ -33,7 +36,7 @@ export default function useDetailAgendamento(){
         try {
             setLoadingButton(true);
 
-            await apiRequest(`/cobranca/${agendamento?.id_agendamento}/${acao}`);
+            await apiRequest(`/cobranca/${agendamento.id_cobranca}/${acao}`);
 
             toast.success('Agendamento atualizado com sucesso.');
 
