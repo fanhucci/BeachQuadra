@@ -4,6 +4,7 @@ import LinkButton from "@/components/buttonComponents/linkButton";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Cobranca } from "@app/shared";
 import { useMemo } from "react";
+import { Search } from "lucide-react";
 
 
 export default function useCobrancaTable(){
@@ -30,7 +31,7 @@ export default function useCobrancaTable(){
                     estilo="primario"
                     href={`/agendamentos/${a.id_agendamento}`}
                 >
-                    Ver agendamento
+                    Detalhes <Search size={16}/>
                 </LinkButton>
             )
 
