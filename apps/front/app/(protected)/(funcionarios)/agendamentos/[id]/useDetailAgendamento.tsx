@@ -5,39 +5,39 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
-interface CobrancaDetail{
-    id_cobranca:number;
-    status:string;
-    data_pagamento:string|null;
+interface CobrancaDetail {
+    id_cobranca: number;
+    status: string;
+    data_pagamento: string | null;
 }
 
-interface ClienteDetail{
-    id_cliente:number;
-    nome:string;
+interface ClienteDetail {
+    id_pessoa: number; 
+    nome: string;
 }
 
-interface CriadorDetail{
-    id_criador:number;
-    nome:string;
-    id_cargo:number;
+interface CriadorDetail {
+    id_pessoa: number;
+    nome: string;
+    cargo: number;
 }
 
-interface ReservaDetail{
-    id_reserva:number;
-    id_quadra:number;
-    valor:number;
-    status:string;
-    horario:string;
+interface ReservaDetail {
+    id_reserva: number;
+    id_quadra: number;
+    valor: number;
+    status: string;
+    horario: string;
 }
 
-interface DetalhesAgendamento{
-    id_agendamento:number;
-    status:string;
-    valor_total:number;
+interface DetalhesAgendamento {
+    id_agendamento: number;
+    status: string;
+    valor_total: number;
     cobranca: CobrancaDetail;
-    cliente:ClienteDetail;
-    criado_por:CriadorDetail;
-    reservas:ReservaDetail[];
+    cliente: ClienteDetail;
+    criado_por: CriadorDetail;
+    reservas: ReservaDetail[];
 }
 
 export default function useDetailAgendamento(){
@@ -74,7 +74,7 @@ export default function useDetailAgendamento(){
 
             toast.success('Agendamento atualizado com sucesso.');
 
-            carregarAgendamento();
+            await carregarAgendamento();
 
         } catch (error) {
             toast.error(error instanceof Error? error.message : 'Erro ao carregar dados.');
