@@ -32,12 +32,19 @@ export default function Navbar() {
             <Link href="/usuarios" className="hover:text-white transition">
               Usuários
             </Link>
-            <Link href="/quadras" className="hover:text-white transition">
-              Quadras
-            </Link>
+            
             <Link href="/agendamentos" className="hover:text-white transition">
               Agendamentos
             </Link>
+
+             <Link href="/cobrancas" className="hover:text-white transition">
+              Cobranças
+            </Link>
+
+             <Link href="/quadras" className="hover:text-white transition">
+              Quadras
+            </Link>
+
             <Link href="/horario" className="hover:text-white transition">
               Horario
             </Link>

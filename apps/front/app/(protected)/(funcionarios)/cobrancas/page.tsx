@@ -5,7 +5,6 @@ import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, UsuarioSearch } from "@app/shared";
-import useUsuariosTable from "../../../../components/usuariosComponents/useUsuariosTable";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Plus, Users } from "lucide-react";
 import UsuarioModalForm from "@/components/usuariosComponents/usuarioModalForm";
@@ -65,7 +64,7 @@ export default function UsuariosPage(){
                         <Users className="text-blue-600" size={28} />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Usuários</h2>
+                        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Gestão de Cobranças</h2>
                         <p className="text-sm text-gray-500">Visualize e gerencie as cobranças do sistema</p>
                     </div>
                 </div>
