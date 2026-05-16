@@ -2,17 +2,15 @@
 import { Column } from "@/components/customTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import { dinheiroMask } from "@/utils/mascaras";
-import { Cobranca, Quadra } from "@app/shared";
-import { Pencil, RotateCcw, Trash } from "lucide-react";
+import { Cobranca } from "@app/shared";
 import { useMemo } from "react";
-import { useRouter } from "next/navigation";
+
 
 type AcoesCobranca = {
    
 }
 
 export default function useCobrancaTable(acoes:AcoesCobranca){
-    const router = useRouter();
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
         { key: "id_pessoa", label: "Cliente", 
