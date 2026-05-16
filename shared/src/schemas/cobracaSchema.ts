@@ -15,6 +15,7 @@ export const NovaCobrancaSchema = z.object({
 
 export const CobrancaSchema = NovaCobrancaSchema.extend({
     id_cobranca: z.coerce.number().int(),
+    nome:z.string(),
     valor: z.coerce.number().int(),
     status: z.enum(StatusCobrancaEnum),
     data_pagamento: z.coerce.date().nullable()
@@ -22,6 +23,7 @@ export const CobrancaSchema = NovaCobrancaSchema.extend({
 
 export const EditarCobrancaSchema = CobrancaSchema.omit({
     id_pessoa:true,
+    nome:true,
     id_agendamento:true,
     valor:true,
     data_pagamento:true
