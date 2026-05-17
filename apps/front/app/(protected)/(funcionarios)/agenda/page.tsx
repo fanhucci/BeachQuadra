@@ -43,7 +43,7 @@ export default function AgendaPage(){
     if(!horarios) return;
 
     return(
-        <main className="flex flex-col flex-1 justify-center p-6 gap-6 bg-gray-50/30">
+        <main className="flex flex-col flex-1 items-center p-6 gap-6 bg-gray-50/30">
             <Agenda
                 loading={loading}
                 dados={horarios}
@@ -55,6 +55,13 @@ export default function AgendaPage(){
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="Reservas semanais"
+                botoes={[
+                    {
+                        label:'Fechar',
+                        estilo:'secundario',
+                        onClick:fecharModal
+                    }
+                ]}
             >   
                 <div className="flex flex-col gap-4 p-2">
                         
