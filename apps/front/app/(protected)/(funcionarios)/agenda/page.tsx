@@ -57,7 +57,7 @@ export default function AgendaPage(){
             >   
                 <div className="flex flex-col gap-4 p-2">
                         
-                    
+                    {slotSelecionado.agendamento && (
                             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                                 <h3 className="text-amber-800 font-semibold mb-2">Horário Reservado</h3>
                                 <div className="space-y-1 text-sm text-zinc-700">
@@ -67,8 +67,8 @@ export default function AgendaPage(){
                                     <p><strong>Email:</strong> {slotSelecionado.agendamento.email}</p>
                                 </div>
                             </div>
-                        
-                    
+                        ) 
+                    }
 
                 </div>
             </CustomModal>
