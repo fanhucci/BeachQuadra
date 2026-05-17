@@ -68,7 +68,7 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
             const valor = Number(prev.page)-1;
             return{
                 ...prev,
-                page: valor<0? 1 : valor 
+                page: valor<=0? 1 : valor 
             }
         });
     }
