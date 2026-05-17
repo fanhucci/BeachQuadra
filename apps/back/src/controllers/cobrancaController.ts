@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import CobrancaService from "../services/cobrancaService";
+import {CobrancaSearchSchema} from '@app/shared';
 
 export default class CobrancaController {
     private service = new CobrancaService();
 
     async listarCobrancas(req:Request, res:Response){
 
-        const filtros = req.query;
+        const parse = CobrancaSearchSchema.safeParse(req.query)
 
-        const resposta = await this.service.listarCobrancas(filtros);
+        if(!parse.success) return res.status(400).json({erro: parse.error.message})
+
+        const resposta = await this.service.listarCobrancas(parse);
         
         res.status(200).json(resposta);
     }

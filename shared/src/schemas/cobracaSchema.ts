@@ -35,7 +35,7 @@ export const CobrancaSearchSchema = z.object({
     data_inicio:z.coerce.date().optional(),
     data_fim:z.coerce.date().optional(),
     page: z.coerce.number().int().default(1),
-    limit: z.coerce.number().int(),
+    limit: z.coerce.number().int().default(10),
 })
 
 export type NovaCobranca = z.infer<typeof NovaCobrancaSchema>;
