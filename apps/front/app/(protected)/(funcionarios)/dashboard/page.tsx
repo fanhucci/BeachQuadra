@@ -1,6 +1,8 @@
 'use client'
 import SubmitButton from "@/components/buttonComponents/submitButton";
-import DashboardFiltrosForm from "@/components/dashboardComponents/DashboardFiltrosForm";
+import DashboardFiltrosForm from "@/components/dashboardComponents/dashboardFiltrosForm";
+
+
 
 import useFilter from "@/hooksGenericos/useFilter";
 import { useState } from "react";
