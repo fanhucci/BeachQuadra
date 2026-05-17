@@ -43,7 +43,7 @@ export default function AgendaPage(){
     if(!horarios) return;
 
     return(
-        <main className="flex flex-col max-w-6xl w-full justify-center border rounded-xl relative bg-white shadow-sm p-3">
+        <main className="flex flex-col flex-1 justify-center p-6 gap-6 bg-gray-50/30">
             <Agenda
                 loading={loading}
                 dados={horarios}
@@ -67,6 +67,7 @@ export default function AgendaPage(){
                                     <p><strong>CPF:</strong> {a.cpf}</p>
                                     <p><strong>Email:</strong> {a.email}</p>
                                     <LinkButton
+                                        className="w-fit"
                                         href={`/agendamentos/${a.id_agendamento}`}
                                         estilo="primario"
                                     >
