@@ -81,7 +81,7 @@ export default function Agenda({
                                 title={horaFormatada}
                                 isBlocked={blocked}
                                 isAvaliable={avaliable}
-                                hasAgendamento={!!slot.agendamento?.id_agendamento}
+                                hasAgendamento={!!slot.agendamento?.id_agendamento && contexto === 'agenda'}
                                 isSelected={isSelected}
                                 action={(temReserva || contexto ==='reserva') ? () => aoSelecionar?.(slot) : undefined}
                             />
