@@ -92,20 +92,20 @@ export default class HorarioRepository {
                     select
                         json_build_object(
                             'id_agendamento', r.id_agendamento,
-                            'nome',p.nome,
-                            'cpf',p.cpf,
-                            'email',p.email
+                            'nome', p.nome,
+                            'cpf', p.cpf,
+                            'email', p.email
                         )
                     from reservas r 
                     join agendamentos a 
                         on a.id_agendamento = r.id_agendamento
-                    join pessoas p
+                    join pessoas p 
                         on p.id_pessoa = a.id_pessoa
-                        and r.horario = h.horario
+                    where r.horario = h.horario -- Vincula com a hora atual da linha
                         and r.status != 'cancelado'
-                        and ${id_quadra ?? null}::int is not null
+                        and (${id_quadra ?? null}::int is null or r.id_quadra = ${id_quadra ?? null}::int)
                     limit 1
-                )as agendamento,
+                ) as agendamento,
                 (
                     select 
                         coalesce(
