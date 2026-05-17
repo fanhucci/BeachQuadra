@@ -101,7 +101,6 @@ export default class HorarioRepository {
                         on a.id_agendamento = r.id_agendamento
                     join pessoas p
                         on p.id_pessoa = a.id_pessoa
-                    where r.id_quadra = ${id_quadra ?? null}::int
                         and r.horario = h.horario
                         and r.status != 'cancelado'
                         and ${id_quadra ?? null}::int is not null
