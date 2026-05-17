@@ -5,7 +5,7 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
-import { Banknote, Plus } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, Banknote, Plus } from "lucide-react";
 import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
@@ -13,15 +13,18 @@ import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
 
 export default function CobrancasPage(){
     
-    const {queryString, filters, handleFilters, limparFiltros} = useFilter<CobrancaSearch>({
+    const {queryString, filters, handleFilters, limparFiltros, proximaPagina, voltarPagina} = useFilter<CobrancaSearch>({
         nome:'',
         pagamento:"pendente",
-        data_inicio: new Date()
+        data_inicio: new Date(),
+        page:1,
+        limit:10
     });
 
     const {
         loading,
         dados,
+
     } = usePageCrud<Cobranca>({
         idKey:'id_cobranca',
         endpoint:'cobrancas',
@@ -78,6 +81,23 @@ export default function CobrancasPage(){
             </section>
 
             <section className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="flex flex-row justify-around gap-4 p-4">
+                    <SubmitButton
+                        className="w-fit"
+                        estilo="secundario"
+                        onClick={voltarPagina}
+                    >
+                        <ArrowBigLeft size={16}/>
+                    </SubmitButton>
+
+                    <SubmitButton
+                        className="w-fit"
+                        estilo="secundario"
+                        onClick={proximaPagina}
+                    >
+                        <ArrowBigRight size={16}/>
+                    </SubmitButton>
+                </div>
                 <CustomTable
                     columns={colunas}
                     data={dados}

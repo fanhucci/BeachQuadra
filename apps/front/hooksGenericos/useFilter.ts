@@ -2,9 +2,14 @@
 
 import { useMemo, useState, useEffect } from "react";
 
-export default function useFilter<F extends object>(valoresIniciais: F, delay: number = 500) {
-    const [filters, setFilters] = useState<F>(valoresIniciais);
-    const [debouncedFilters, setDebouncedFilters] = useState<F>(valoresIniciais);
+interface BasePagination{
+    page:number;
+    limit:number
+}
+
+export default function useFilter<F extends object>(valoresIniciais: F & BasePagination, delay: number = 500) {
+    const [filters, setFilters] = useState<F & BasePagination>(valoresIniciais);
+    const [debouncedFilters, setDebouncedFilters] = useState<F & BasePagination>(valoresIniciais);
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -46,12 +51,36 @@ export default function useFilter<F extends object>(valoresIniciais: F, delay: n
         }));
     };
 
+    const proximaPagina = ()=>{
+       
+        setFilters((prev)=>{
+            const valor = Number(prev.page)+1;
+            return{
+                ...prev,
+                page:valor
+            }
+        });
+    }
+
+    const voltarPagina = ()=>{
+        
+        setFilters((prev)=>{
+            const valor = Number(prev.page)-1;
+            return{
+                ...prev,
+                page: valor<0? 0 : valor 
+            }
+        });
+    }
+
     const limparFiltros = () => setFilters(valoresIniciais);
 
     return {
         queryString,
         filters,
         handleFilters,
-        limparFiltros
+        limparFiltros,
+        proximaPagina,
+        voltarPagina
     }
 }

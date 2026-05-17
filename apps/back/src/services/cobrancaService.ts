@@ -1,16 +1,16 @@
-import { TransactionSql } from "postgres";
 import sql from "../infra/db";
 import CobrancaRepository from "../repositories/cobrancaRepository";
 import AgendamentoRepository from "../repositories/agendamentoRepository";
 import ReservaRepository from "../repositories/reservasRepository";
+import { CobrancaSearch } from '@app/shared';
 
 export default class CobrancaService{
     private cobranca = new CobrancaRepository();
     private agendamento = new AgendamentoRepository();
     private reserva = new ReservaRepository();
 
-    async listarCobrancas(){
-        return await this.cobranca.listarCobrancas();
+    async listarCobrancas(filtros:CobrancaSearch){
+        return await this.cobranca.listarCobrancas(filtros);
     }
 
     async listarCobrancasPorId(id:number){

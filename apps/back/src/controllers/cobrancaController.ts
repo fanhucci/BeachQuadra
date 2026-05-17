@@ -6,7 +6,9 @@ export default class CobrancaController {
 
     async listarCobrancas(req:Request, res:Response){
 
-        const resposta = await this.service.listarCobrancas();
+        const filtros = req.query;
+
+        const resposta = await this.service.listarCobrancas(filtros);
         
         res.status(200).json(resposta);
     }
