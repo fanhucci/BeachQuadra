@@ -204,10 +204,10 @@ function SalvarAgendamentoForm({
             </>
     
             <CustomModal
-                size="2xl"
+                
                 estado={modalOn}
                 fechar={fecharModal}
-                titulo="teste"
+                titulo="Reservas"
                 botoes={[
                     {
                         label:'Cancelar',

@@ -113,7 +113,6 @@ export default function UsuariosPage(){
                 }
                 estado={modalOn}
                 fechar={fecharModal}
-                size="2xl"
                 botoes={[
                     {
                         label:'Cancelar',

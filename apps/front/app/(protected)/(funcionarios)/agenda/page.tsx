@@ -52,7 +52,8 @@ export default function AgendaPage(){
             />
 
             <CustomModal
-                size="800"
+                width="800"
+                heigth="800"
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="Reservas semanais"

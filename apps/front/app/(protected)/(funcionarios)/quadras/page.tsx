@@ -112,7 +112,7 @@ export default function QuadrasPage(){
                 }
                 estado={modalOn}
                 fechar={fecharModal}
-                size="2xl"
+                heigth="100"
                 botoes={[
                     {
                         label:'Cancelar',

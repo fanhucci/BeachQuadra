@@ -13,7 +13,8 @@ type BotaoModal = {
 
 type ModalTypes = {
     children: React.ReactNode;
-    size?:string;
+    heigth?:string;
+    width?:string;
     titulo: string;
     estado: boolean;
     fechar: () => void;
@@ -22,7 +23,8 @@ type ModalTypes = {
 
 export default function CustomModal({
     children,
-    size = '400',
+    heigth = '200',
+    width = '400',
     titulo,
     botoes = [],
     estado,
@@ -34,7 +36,7 @@ export default function CustomModal({
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
             
-            <div className={`bg-white rounded-xl shadow-2xl w-fit max-w-[${size}px] overflow-hidden animate-in fade-in zoom-in duration-200`}>
+            <div className={`bg-white rounded-xl shadow-2xl w-fit overflow-hidden animate-in fade-in zoom-in duration-200`}>
                 
        
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
@@ -48,7 +50,7 @@ export default function CustomModal({
                 </div>
 
  
-                <div className="p-6 text-gray-600">
+                <div className={`w-${width} h-${heigth} p-6 text-gray-600`}>
                     {children}
                 </div>
 
