@@ -26,8 +26,6 @@ export default function CobrancasFiltrosForm({
         {value:"estornado", label:"estornado"},
     ]
 
-
-
     return(
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 items-end">
 

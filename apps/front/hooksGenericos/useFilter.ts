@@ -6,7 +6,6 @@ export default function useFilter<F extends object>(valoresIniciais: F, delay: n
     const [filters, setFilters] = useState<F>(valoresIniciais);
     const [debouncedFilters, setDebouncedFilters] = useState<F>(valoresIniciais);
 
-
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedFilters(filters);
@@ -20,7 +19,17 @@ export default function useFilter<F extends object>(valoresIniciais: F, delay: n
         
         Object.entries(debouncedFilters).forEach(([key, value]) => {
             if (value !== undefined && value !== null && value !== '') {
-                params.append(key, String(value));
+                let valorEmString = value;
+
+                if (value instanceof Date) {
+                    valorEmString = value.toISOString().split('T')[0];
+                }
+                
+                if (typeof value === 'string' && value.includes('T') && value.length > 10) {
+                    valorEmString = value.split('T')[0];
+                }
+
+                params.append(key, String(valorEmString));
             }
         });
 
