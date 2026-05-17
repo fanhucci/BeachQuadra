@@ -22,25 +22,7 @@ export default function AgendamentosPage(){
 
     const {
         loading,
-        buttonLoading,
-
         dados,
-        formData,
-        erros,
-
-        modalOn,
-        editionOn,
-
-        adicionar,
-        editar,
-        ativar,
-        desativar,
-
-        handleChange,
-        abrirEdicao,
-        abrirModal,
-        fecharModal
-
     } = usePageCrud<Agendamento>({
         idKey:'id_agendamento',
         endpoint:'agendamentos',

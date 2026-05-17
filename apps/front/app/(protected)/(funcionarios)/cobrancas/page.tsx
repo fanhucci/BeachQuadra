@@ -21,7 +21,6 @@ export default function UsuariosPage(){
 
     const {
         loading,
-
         dados,
     } = usePageCrud<Cobranca>({
         idKey:'id_cobranca',

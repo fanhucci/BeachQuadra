@@ -22,7 +22,12 @@ export default function useCobrancaTable(){
             key:"data_pagamento", label: "Pagamento",
             render:(value:string)=>
                 value
-                    ? new Date(value).toLocaleString('pt-br',{ timeZone:'utc', day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit'})
+                    ? (
+                        <div>
+                            <span>{new Date(value).toLocaleDateString('pt-br', {timeZone:'utc'})}</span>
+                            <span>{new Date(value).toLocaleTimeString('pt-br', {timeZone:'utc', hour:'2-digit', minute:'2-digit'})}</span>
+                        </div>
+                    )
                     : 'Pendente'
             
         },

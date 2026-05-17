@@ -11,6 +11,9 @@ import { useMemo } from "react";
 export default function useAgendamentoTable(){
 
     const colunas = useMemo<Column<Agendamento>[]>(()=>[
+        { key:'id_agendamento', label: 'Agendamento',
+            render:(value:string)=>(`#${value}`)
+        },
         { key: "nome", label: "Cliente" },
         { key: "status", label: "Status"},
         { 

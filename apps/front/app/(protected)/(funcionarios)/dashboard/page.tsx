@@ -1,13 +1,13 @@
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import DashboardFiltrosForm from "@/components/dashboardComponents/DashboardFiltrosForm";
 import useFilter from "@/hooksGenericos/useFilter";
-import usePageCrud from "@/hooksGenericos/usePageCrud";
 
 export default function DashboardPage(){
 
     const valoresIniciais = {
 
     }
+    
     const {queryString, filters, handleFilters, limparFiltros} = useFilter(valoresIniciais);
 
     return(
@@ -23,7 +23,7 @@ export default function DashboardPage(){
                         Resetar Filtros
                     </SubmitButton>
                 </div>
-                
+
                 <DashboardFiltrosForm
                     handle={handleFilters}
                     types={filters}
