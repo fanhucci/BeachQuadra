@@ -6,7 +6,6 @@ import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, UsuarioSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Banknote, Plus } from "lucide-react";
-import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";
 import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "./cobrancasFiltrosForm";

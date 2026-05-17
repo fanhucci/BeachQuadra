@@ -43,7 +43,7 @@ export default function CobrancasFiltrosForm({
                 label="Pagamento"
                 name="pagamento"
                 options={opcoesPagamento}
-                value={types.status}
+                value={types.pagamento}
                 onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
             />
 
@@ -51,7 +51,7 @@ export default function CobrancasFiltrosForm({
                 
                 <input type="date"/>
                 <input type="date"/>
-                
+
             </div>
             
         </div>
