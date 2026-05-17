@@ -12,11 +12,11 @@ import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
 
 
 export default function CobrancasPage(){
-    const hoje = new Date();
+    
     const {queryString, filters, handleFilters, limparFiltros} = useFilter<CobrancaSearch>({
         nome:'',
         pagamento:"pendente",
-        data_inicio:hoje.toLocaleDateString('pt-br')
+        data_inicio: new Date()
     });
 
     const {

@@ -10,7 +10,7 @@ type InputProps = {
     label?: string;
     placeholder?: string;
     name: string;
-    value?: string | number;
+    value?: string | number | Date;
     erro?: string;
     type?: InputVariant;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

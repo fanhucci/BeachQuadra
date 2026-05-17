@@ -32,8 +32,8 @@ export const EditarCobrancaSchema = CobrancaSchema.omit({
 export const CobrancaSearchSchema = z.object({
     nome:z.string().optional(),
     pagamento:z.enum(StatusCobrancaEnum).optional(),
-    data_inicio:z.coerce.string().optional(),
-    data_fim:z.coerce.string().optional(),
+    data_inicio:z.coerce.date().optional(),
+    data_fim:z.coerce.date().optional(),
 })
 
 export type NovaCobranca = z.infer<typeof NovaCobrancaSchema>;
