@@ -1,6 +1,7 @@
 'use client'
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import DashboardFiltrosForm from "@/components/dashboardComponents/dashboardFiltrosForm";
+import useDashboard from "@/components/dashboardComponents/useDashboard";
 
 
 
@@ -15,19 +16,7 @@ export default function DashboardPage(){
     }
 
     const {queryString, filters, handleFilters, limparFiltros} = useFilter(valoresIniciais);
-
-    const [loading,setLoading] = useState<boolean>(false);
-
-    const popularDashboard = async ()=>{
-        try {
-            setLoading(true)
-        } catch (error) {
-            
-        }
-        finally{
-            setLoading(false);
-        }
-    }
+    const {} = useDashboard();
 
     return(
         <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
@@ -65,7 +54,7 @@ export default function DashboardPage(){
             </section>
 
             <section>
-                
+
             </section>
 
            
