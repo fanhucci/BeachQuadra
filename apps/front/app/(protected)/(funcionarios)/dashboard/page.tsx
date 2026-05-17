@@ -3,6 +3,7 @@ import SubmitButton from "@/components/buttonComponents/submitButton";
 import DashboardFiltrosForm from "@/components/dashboardComponents/DashboardFiltrosForm";
 
 import useFilter from "@/hooksGenericos/useFilter";
+import { useState } from "react";
 
 export default function DashboardPage(){
 
@@ -11,6 +12,19 @@ export default function DashboardPage(){
     }
 
     const {queryString, filters, handleFilters, limparFiltros} = useFilter(valoresIniciais);
+
+    const [loading,setLoading] = useState<boolean>(false);
+
+    const popularDashboard = async ()=>{
+        try {
+            setLoading(true)
+        } catch (error) {
+            
+        }
+        finally{
+            setLoading(false);
+        }
+    }
 
     return(
         <div>
