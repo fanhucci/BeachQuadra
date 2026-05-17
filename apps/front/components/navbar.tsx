@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className="w-full h-14 px-8 flex items-center justify-between bg-[#1F2937] text-gray-200 border-b border-gray-700">
 
       <div className="flex items-center gap-10">
-        <Link href="/" className="text-lg font-semibold tracking-wide text-white">
+        <Link href={user && user.id_cargo>1? '/dashboard': '/'} className="text-lg font-semibold tracking-wide text-white">
           BeachQuadra
         </Link>
     

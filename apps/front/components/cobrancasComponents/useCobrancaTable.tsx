@@ -23,13 +23,12 @@ export default function useCobrancaTable(){
             render:(value:string)=>
                 value
                     ? (
-                        <div>
-                            <span>{new Date(value).toLocaleDateString('pt-br', {timeZone:'utc'})}</span>
-                            <span>{new Date(value).toLocaleTimeString('pt-br', {timeZone:'utc', hour:'2-digit', minute:'2-digit'})}</span>
+                        <div className="flex flex-col">
+                            <span className="font-medium text-gray-800">{new Date(value).toLocaleDateString('pt-br', {timeZone:'utc'})}</span>
+                            <span className="text-xs text-gray-400">{new Date(value).toLocaleTimeString('pt-br', {timeZone:'utc', hour:'2-digit', minute:'2-digit'})}</span>
                         </div>
                     )
                     : 'Pendente'
-            
         },
         {
             key:'acoes', label:"Ações", align:'center',
