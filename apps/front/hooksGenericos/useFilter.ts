@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 
-interface BasePagination{
+export interface BasePagination{
     page:number;
     limit:number
 }
@@ -74,10 +74,14 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
     }
 
     const limparFiltros = () => setFilters(valoresIniciais);
-
+    const page = filters.page;
+    const limit = valoresIniciais.limit;
+    
     return {
         queryString,
         filters,
+        page,
+        limit,
         handleFilters,
         limparFiltros,
         proximaPagina,

@@ -1,7 +1,7 @@
 'use client'
 
 import CustomTable from "@/components/customTable";
-import useFilter from "@/hooksGenericos/useFilter";
+import useFilter, { BasePagination } from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
@@ -13,7 +13,7 @@ import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
 
 export default function CobrancasPage(){
     
-    const {queryString, filters, handleFilters, limparFiltros, proximaPagina, voltarPagina} = useFilter<CobrancaSearch>({
+    const {queryString, filters, page, limit, handleFilters, limparFiltros, proximaPagina, voltarPagina} = useFilter<CobrancaSearch>({
         nome:'',
         pagamento:"pendente",
         data_inicio: new Date(),
@@ -85,6 +85,7 @@ export default function CobrancasPage(){
                     <SubmitButton
                         className="w-fit"
                         estilo="secundario"
+                        disabled={page === 1}
                         onClick={voltarPagina}
                     >
                         <ArrowBigLeft size={16}/>
@@ -93,6 +94,7 @@ export default function CobrancasPage(){
                     <SubmitButton
                         className="w-fit"
                         estilo="secundario"
+                        disabled={dados[0].total_geral<=limit}
                         onClick={proximaPagina}
                     >
                         <ArrowBigRight size={16}/>

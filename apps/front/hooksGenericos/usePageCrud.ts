@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner";
 import { ZodType } from 'zod';
 
+
+
 export default function usePageCrud<
     T,
     SCreate extends ZodType<any> = ZodType<any>, 
@@ -23,10 +25,13 @@ export default function usePageCrud<
     idKey:string;
     filtro?:string;
 }){
+    type CrudType = T &{
+        total_geral:number;
+    }
     const [loading,setLoading] = useState<boolean>(false);
     const [buttonLoading,setButtonLoading] = useState<boolean>(false);
 
-    const [dados,setDados] = useState<T[]>([]);
+    const [dados,setDados] = useState<CrudType[]>([]);
     const [formData,setFormData] = useState<Partial<T>>({});
     const [erros,setErros] = useState<Partial<Record<keyof T, string>>>({});
 
