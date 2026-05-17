@@ -12,7 +12,7 @@ export default function AgendaPage(){
         try {
             setLoading(true);
         } catch (error) {
-            const dados = await apiRequest(``);
+            const dados = await apiRequest(`/horario/agenda`);
             setHorarios(dados);
         }
         finally{
