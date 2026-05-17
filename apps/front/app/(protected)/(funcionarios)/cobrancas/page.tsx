@@ -9,14 +9,14 @@ import { Banknote, Plus } from "lucide-react";
 import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";
 import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
+import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
 
 
 export default function UsuariosPage(){
     const hoje = new Date();
     const {queryString, filters, handleFilters, limparFiltros} = useFilter({
         search:'',
-        tipo:"nome",
-        status:"",
+        pagamento:"pendente",
         data_pagamento:hoje.toLocaleDateString('pt-br')
     });
 
