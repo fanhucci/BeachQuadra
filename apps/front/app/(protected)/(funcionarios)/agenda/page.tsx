@@ -1,5 +1,6 @@
 'use client'
 import Agenda from "@/components/agenda";
+import LinkButton from "@/components/buttonComponents/linkButton";
 import CustomModal from "@/components/customModal";
 import { apiRequest } from "@/utils/apiHandler";
 import { useEffect, useState } from "react";
@@ -42,7 +43,7 @@ export default function AgendaPage(){
     if(!horarios) return;
 
     return(
-        <main>
+        <main className="flex w-fit flex-col max-w-6xl border rounded-xl relative bg-white shadow-sm p-3">
             <Agenda
                 loading={loading}
                 dados={horarios}
@@ -65,6 +66,12 @@ export default function AgendaPage(){
                                     <p><strong>Cliente:</strong> {a.nome}</p>
                                     <p><strong>CPF:</strong> {a.cpf}</p>
                                     <p><strong>Email:</strong> {a.email}</p>
+                                    <LinkButton
+                                        href={`/agendamentos/${a.id_agendamento}`}
+                                        estilo="primario"
+                                    >
+                                        Detalhes
+                                    </LinkButton>
                                 </div>
                             </div>
                     ))}
