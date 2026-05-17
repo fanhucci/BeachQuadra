@@ -60,7 +60,7 @@ export default function Agenda({
         
                     const isPassado = dataSemFuso.getTime() < agora.getTime();
 
-                    const temReserva = slot.id_agendamento !==null;
+                    const temReserva = slot.agendamento.id_agendamento !==null;
   
                     const blocked = contexto === 'agenda' 
                         ? !slot.permitido 
@@ -81,7 +81,7 @@ export default function Agenda({
                                 title={horaFormatada}
                                 isBlocked={blocked}
                                 isAvaliable={avaliable}
-                                hasAgendamento={!!slot.id_agendamento && contexto==='reserva'}
+                                hasAgendamento={!!slot.agendamento.id_agendamento}
                                 isSelected={isSelected}
                                 action={(temReserva || contexto ==='reserva') ? () => aoSelecionar?.(slot) : undefined}
                             />
