@@ -9,6 +9,11 @@ export default class CobrancaRepository{
 
         const offset = (Number(page) -1) * Number(limit); 
 
+        const searchNome = nome ?? null;
+        const searchPagamento = pagamento ?? null;
+        const searchDataInicio = data_inicio ?? null;
+        const searchDataFim = data_fim ?? null;
+
         return await sql`
             with query_filtrada as (
                 select 
@@ -22,10 +27,10 @@ export default class CobrancaRepository{
                 from cobrancas c
                 join pessoas p on p.id_pessoa = c.id_pessoa
                 where 1=1
-                    and (${nome ?? null}::text is null or p.nome ilike ${'%'+nome+'%'})
-                    and (${pagamento ?? null}::text is null or c.status = ${pagamento})
-                    and (${data_inicio ?? null}::text is null or c.data_pagamento >= ${data_inicio}::date)
-                    and (${data_fim ?? null}::text is null or c.data_pagamento <= ${data_fim}::date + interval '1 day' - interval '1 second')
+                    and (${searchNome}::text is null or p.nome ilike '%' || ${searchNome}::text || '%')
+                    and (${searchPagamento}::text is null or c.status = ${searchPagamento}::"CobrancaStatusEnum")
+                    and (${searchDataInicio}::text is null or c.data_pagamento >= ${searchDataInicio}::date)
+                    and (${searchDataFim}::text is null or c.data_pagamento <= ${searchDataFim}::date + interval '1 day' - interval '1 second')
             ),
             total_registros as (
                 select count(*) as total from query_filtrada
