@@ -14,6 +14,7 @@ export default function useCobrancaTable(){
             key: "id_agendamento", label: "Agendamento",
             render:(value:string)=>`#${value}`
         },
+        { key:'nome', label:'Cliente'},
         { key: "valor", label: "Valor",
             render:(value:string)=>(dinheiroMask(value))
         },
