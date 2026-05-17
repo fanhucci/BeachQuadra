@@ -1,3 +1,4 @@
+'use client'
 import Agenda from "@/components/agenda";
 import CustomModal from "@/components/customModal";
 import { apiRequest } from "@/utils/apiHandler";
