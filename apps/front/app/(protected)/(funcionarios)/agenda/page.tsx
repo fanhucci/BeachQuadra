@@ -43,7 +43,7 @@ export default function AgendaPage(){
     if(!horarios) return;
 
     return(
-        <main className="flex w-fit flex-col max-w-6xl border rounded-xl relative bg-white shadow-sm p-3">
+        <main className="flex flex-col max-w-6xl w-full justify-center border rounded-xl relative bg-white shadow-sm p-3">
             <Agenda
                 loading={loading}
                 dados={horarios}
