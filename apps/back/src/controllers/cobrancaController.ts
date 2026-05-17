@@ -11,7 +11,7 @@ export default class CobrancaController {
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
-        const resposta = await this.service.listarCobrancas(parse);
+        const resposta = await this.service.listarCobrancas(parse.data);
         
         res.status(200).json(resposta);
     }
