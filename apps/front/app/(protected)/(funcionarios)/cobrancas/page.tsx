@@ -3,7 +3,7 @@
 import CustomTable from "@/components/customTable";
 import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
-import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, UsuarioSearch } from "@app/shared";
+import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Banknote, Plus } from "lucide-react";
 import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
@@ -11,12 +11,12 @@ import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
 
 
-export default function UsuariosPage(){
+export default function CobrancasPage(){
     const hoje = new Date();
-    const {queryString, filters, handleFilters, limparFiltros} = useFilter({
-        search:'',
+    const {queryString, filters, handleFilters, limparFiltros} = useFilter<CobrancaSearch>({
+        nome:'',
         pagamento:"pendente",
-        data_pagamento:hoje.toLocaleDateString('pt-br')
+        data_inicio:hoje.toLocaleDateString('pt-br')
     });
 
     const {

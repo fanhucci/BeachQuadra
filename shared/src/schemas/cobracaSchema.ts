@@ -5,7 +5,7 @@ const StatusCobrancaEnum = [
     'concluido',
     'cancelado',
     'expirado',
-    'estorno'
+    'estornado'
 ] as const
 
 export const NovaCobrancaSchema = z.object({
@@ -29,6 +29,14 @@ export const EditarCobrancaSchema = CobrancaSchema.omit({
     data_pagamento:true
 })
 
+export const CobrancaSearchSchema = z.object({
+    nome:z.string().optional(),
+    pagamento:z.enum(StatusCobrancaEnum).optional(),
+    data_inicio:z.coerce.string().optional(),
+    data_fim:z.coerce.string().optional(),
+})
+
 export type NovaCobranca = z.infer<typeof NovaCobrancaSchema>;
 export type Cobranca = z.infer<typeof CobrancaSchema>;
 export type EditarCobranca = z.infer<typeof EditarCobrancaSchema>;
+export type CobrancaSearch = z.infer<typeof CobrancaSearchSchema>;
