@@ -53,7 +53,7 @@ export default function CobrancasFiltrosForm({
                 type="date"
                 name="data_inicio"
                 label="De"
-                value={types.data_inicio ?? ""}
+                value={types.data_inicio}
                 onChange={handle}
             />
 
@@ -61,7 +61,7 @@ export default function CobrancasFiltrosForm({
                 type="date"
                 name="data_fim"
                 label="Até"
-                value={types.data_fim ?? ""}
+                value={types.data_fim}
                 onChange={handle}
             />
 

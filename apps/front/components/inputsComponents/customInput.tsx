@@ -27,8 +27,19 @@ export default function CustomInput({
 }: InputProps) {
 
     const valorFormatado = useMemo(() => {
+        if (!value) return "";
+
+        if (value instanceof Date) {
+            return value.toISOString().split('T')[0]; 
+        }
+
         const valorEmString = String(value);
 
+        if (type === "date" && valorEmString.includes('T')) {
+            return valorEmString.split('T')[0];
+        }
+
+   
         if (type === "cpf") return cpfMask(valorEmString);
         if (type === "tel") return telefoneMask(valorEmString);
         if (type === "money") return dinheiroMask(valorEmString);
