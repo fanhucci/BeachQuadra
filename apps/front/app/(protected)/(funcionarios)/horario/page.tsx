@@ -182,6 +182,7 @@ export default function HorarioPage(){
             </section>
 
             <CustomModal
+                heigth="100"
                 titulo="Bloquear"
                 estado={modalBloqueio}
                 fechar={toggleModal}

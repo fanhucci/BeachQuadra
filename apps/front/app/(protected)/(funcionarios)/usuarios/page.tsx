@@ -106,6 +106,7 @@ export default function UsuariosPage(){
             </section>
 
             <CustomModal
+                heigth="100"
                 titulo={
                     editionOn
                     ? 'Editar'

@@ -24,7 +24,7 @@ type ModalTypes = {
 export default function CustomModal({
     children,
     heigth = '200',
-    width = '400',
+    width = '200',
     titulo,
     botoes = [],
     estado,
