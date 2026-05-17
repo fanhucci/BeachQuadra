@@ -33,8 +33,8 @@ export default function Navbar() {
               Usuários
             </Link>
             
-            <Link href="/agendamentos" className="hover:text-white transition">
-              Agendamentos
+            <Link href="/agenda" className="hover:text-white transition">
+              Agenda
             </Link>
 
              <Link href="/cobrancas" className="hover:text-white transition">
