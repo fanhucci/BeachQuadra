@@ -1,7 +1,10 @@
+'use client'
+
 import { cpfMask, dinheiroMask, telefoneMask } from "@/utils/mascaras";
 import React, { useMemo } from "react";
 
-type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money";
+// 1. ADICIONADO "date" NA VARIANT
+type InputVariant = "text" | "password" | "email" | "number" | "cpf" | "tel" | "money" | "date";
 
 type InputProps = {
     label?: string;
@@ -18,12 +21,12 @@ export default function CustomInput({
     placeholder,
     name,
     type = "text",
-    value = type === 'number' || type === 'money'? '0':"",
+    value = type === 'number' || type === 'money' ? '0' : "",
     erro,
     onChange,
 }: InputProps) {
 
-    const valorFormatado = useMemo(()=>{
+    const valorFormatado = useMemo(() => {
         const valorEmString = String(value);
 
         if (type === "cpf") return cpfMask(valorEmString);
@@ -31,12 +34,17 @@ export default function CustomInput({
         if (type === "money") return dinheiroMask(valorEmString);
         
         return value;
+    }, [value, type]);
 
-    },[value,type]);
+    const retornarTipoNativo = () => {
+        if (type === "password") return "password";
+        if (type === "date") return "date";
+        return "text";
+    };
 
     return (
         <div className="flex flex-col gap-1 w-full">
-           {label &&(
+           {label && (
                 <label htmlFor={name} className="text-sm font-semibold text-gray-700 px-1 uppercase tracking-wide">
                     {label}
                 </label>
@@ -46,7 +54,7 @@ export default function CustomInput({
                 id={name}
                 placeholder={placeholder}
                 name={name}
-                type={type === "password" ? "password" : "text"}
+                type={retornarTipoNativo()}
                 inputMode={type === "cpf" || type === "tel" || type === "number" ? "numeric" : "text"}
                 value={valorFormatado}
                 onChange={onChange}

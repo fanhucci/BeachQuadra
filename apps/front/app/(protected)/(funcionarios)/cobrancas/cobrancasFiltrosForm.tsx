@@ -49,27 +49,22 @@ export default function CobrancasFiltrosForm({
                 onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
             />
 
-            <div className="col-span-1 flex flex-col gap-1">
-                <label className="text-sm font-medium text-zinc-700">De (Data)</label>
-                <input 
-                    type="date"
-                    name="data_inicio"
-                    value={types.data_inicio ?? ''}
-                    onChange={handle}
-                    className="w-full h-10 px-3 rounded-md border border-zinc-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-zinc-700"
-                />
-            </div>
+            <CustomInput
+                type="date"
+                name="data_inicio"
+                label="De"
+                value={types.data_inicio ?? ""}
+                onChange={handle}
+            />
 
-            <div className="col-span-1 flex flex-col gap-1">
-                <label className="text-sm font-medium text-zinc-700">Até (Data)</label>
-                <input 
-                    type="date"
-                    name="data_fim" 
-                    value={types.data_fim ?? ''}
-                    onChange={handle}
-                    className="w-full h-10 px-3 rounded-md border border-zinc-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-zinc-700"
-                />
-            </div>
+            <CustomInput
+                type="date"
+                name="data_fim"
+                label="Até"
+                value={types.data_fim ?? ""}
+                onChange={handle}
+            />
+
         </div>
     )
 }
