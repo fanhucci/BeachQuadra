@@ -35,6 +35,7 @@ export default class HorarioRepository {
         `;
         return data;
     }
+    
 
     async validarHorarios(horarios: Date[]) {
         return await sql`
@@ -88,16 +89,24 @@ export default class HorarioRepository {
                     )
                 )as permitido,
                 (
-                    select 
-                        r.id_agendamento 
+                    select
+                        json_build_object(
+                            'id_agendamento', r.id_agendamento,
+                            'nome',p.nome,
+                            'cpf',p.cpf,
+                            'email',p.email
+                        )
                     from reservas r 
+                    join agendamentos a 
+                        on a.id_agendamento = r.id_agendamento
+                    join pessoas p
+                        on p.id_pessoa = a.id_pessoa
                     where r.id_quadra = ${id_quadra ?? null}::int
-                    and r.horario = h.horario
-                    and r.status != 'cancelado'
-                    and ${id_quadra ?? null}::int is not null
+                        and r.horario = h.horario
+                        and r.status != 'cancelado'
+                        and ${id_quadra ?? null}::int is not null
                     limit 1
-                    
-                )as id_agendamento,
+                )as agendamento,
                 (
                     select 
                         coalesce(

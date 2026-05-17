@@ -1,14 +1,15 @@
 import { Check } from "lucide-react";
 
+
 export default function Agenda({
     dados, 
-    idQuadraEspecifica,
+    contexto = 'reserva',
     selecionados = [],
     loading,
     aoSelecionar
 }: {
     dados: any[],
-    idQuadraEspecifica?: number,
+    contexto?: 'reserva'|'agenda';
     selecionados?: any[],
     loading?:boolean,
     aoSelecionar?: (slot: any) => void
@@ -61,10 +62,10 @@ export default function Agenda({
 
                     const temReserva = slot.id_agendamento !==null;
   
-                    const blocked = idQuadraEspecifica 
+                    const blocked = contexto === 'agenda' 
                         ? !slot.permitido 
                         : (!slot.permitido || isPassado);
-                    const avaliable = idQuadraEspecifica 
+                    const avaliable = contexto === 'agenda' 
                         ? !temReserva && slot.permitido
                         : slot.disponivel.length > 0;
 
@@ -82,7 +83,7 @@ export default function Agenda({
                                 isAvaliable={avaliable}
                                 hasAgendamento={!!slot.id_agendamento}
                                 isSelected={isSelected}
-                                action={(temReserva || !idQuadraEspecifica) ? () => aoSelecionar?.(slot) : undefined}
+                                action={(temReserva || contexto ==='reserva') ? () => aoSelecionar?.(slot) : undefined}
                             />
                         </div>
                     );

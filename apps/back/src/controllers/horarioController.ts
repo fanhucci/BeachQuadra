@@ -63,4 +63,17 @@ export default class HorarioController{
 
         return res.status(200).json(horarios);
     }
+
+    async listarAgenda(req:Request, res:Response){
+        const queryData = req.query.data as string;
+        
+        const data = (queryData && !isNaN(Date.parse(queryData))) 
+            ? new Date(queryData) 
+            : new Date();
+
+        const horarios = await this.service.listarAgenda(data);
+
+        return res.status(200).json(horarios);
+
+    }
 }
