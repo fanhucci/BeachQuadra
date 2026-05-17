@@ -23,14 +23,15 @@ export default class CobrancaRepository{
                     c.valor,
                     c.status,
                     c.data_pagamento,
-                    p.nome
+                    p.nome,
                 from cobrancas c
                 join pessoas p on p.id_pessoa = c.id_pessoa
+                join agendamentos a on a.id_agendamento = c.id_agendamento
                 where 1=1
                     and (${searchNome}::text is null or p.nome ilike '%' || ${searchNome}::text || '%')
                     and (${searchPagamento}::text is null or c.status = ${searchPagamento}::"CobrancaStatusEnum")
-                    and (${searchDataInicio}::text is null or c.data_pagamento >= ${searchDataInicio}::date)
-                    and (${searchDataFim}::text is null or c.data_pagamento <= ${searchDataFim}::date + interval '1 day' - interval '1 second')
+                    and (${searchDataInicio}::text is null or a.created_at >= ${searchDataInicio}::date)
+                    and (${searchDataFim}::text is null or a.created_at <= ${searchDataFim}::date + interval '1 day' - interval '1 second')
             ),
             total_registros as (
                 select count(*) as total from query_filtrada
