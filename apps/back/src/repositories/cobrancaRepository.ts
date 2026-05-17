@@ -24,6 +24,7 @@ export default class CobrancaRepository{
                     c.status,
                     c.data_pagamento,
                     p.nome,
+                    a.created_at
                 from cobrancas c
                 join pessoas p on p.id_pessoa = c.id_pessoa
                 join agendamentos a on a.id_agendamento = c.id_agendamento
@@ -41,7 +42,7 @@ export default class CobrancaRepository{
                 t.total::int as total_geral
             from query_filtrada q
             cross join total_registros t
-            order by q.data_pagamento desc nulls last
+            order by q.created_at desc
             limit ${Number(limit)}
             offset ${offset};
         `;
