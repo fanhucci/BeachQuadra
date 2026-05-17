@@ -12,11 +12,12 @@ import LinkButton from "@/components/buttonComponents/linkButton";
 
 
 export default function UsuariosPage(){
-    const {queryString, filters, handleFilters, limparFiltros} = useFilter<UsuarioSearch>({
+    const hoje = new Date();
+    const {queryString, filters, handleFilters, limparFiltros} = useFilter({
         search:'',
         tipo:"nome",
-        id_cargo:1,
-        ativo:true
+        status:"",
+        data_pagamento:hoje.toLocaleDateString('pt-br')
     });
 
     const {
@@ -70,7 +71,7 @@ export default function UsuariosPage(){
                     </SubmitButton>
                 </div>
                     
-                <UsuariosFiltrosForm
+                <CobrancasFiltrosForm
                     types={filters}
                     handle={handleFilters}
                 />
