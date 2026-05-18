@@ -1,7 +1,7 @@
 'use client'
 
 import CustomTable from "@/components/customTable";
-import useFilter, { BasePagination } from "@/hooksGenericos/useFilter";
+import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
@@ -34,6 +34,10 @@ export default function CobrancasPage(){
     });
 
     const {colunas} = useCobrancaTable();
+
+    const totalGeral = dados[0]?.total_geral ?? 0;
+
+    const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     return(
         <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
@@ -87,6 +91,7 @@ export default function CobrancasPage(){
                         estilo="secundario"
                         disabled={page === 1}
                         onClick={voltarPagina}
+                        isLoading={loading}
                     >
                         <ArrowBigLeft size={16}/>
                     </SubmitButton>
@@ -94,8 +99,9 @@ export default function CobrancasPage(){
                     <SubmitButton
                         className="w-fit"
                         estilo="secundario"
-                        disabled={dados[0].total_geral<=limit}
+                        disabled={naoTemProximaPagina}
                         onClick={proximaPagina}
+                        isLoading={loading}
                     >
                         <ArrowBigRight size={16}/>
                     </SubmitButton>
