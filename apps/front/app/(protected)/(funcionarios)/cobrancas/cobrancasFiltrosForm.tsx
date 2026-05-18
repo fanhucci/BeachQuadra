@@ -33,7 +33,7 @@ export default function CobrancasFiltrosForm({
                 <CustomInput 
                     label="Pesquisar"
                     placeholder="Buscar por nome do cliente..."
-                    name="search"
+                    name="nome"
                     onChange={handle}
                     value={types.nome}
                 />
