@@ -120,7 +120,7 @@ export default function HorarioPage(){
                     <SubmitButton
                         estilo="primario"
                         className="w-fit "
-                        onClick={salvarBloqueio}
+                        onClick={toggleModal}
                     >
                         <Plus size={18} />
                         Novo Bloqueio
