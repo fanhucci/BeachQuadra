@@ -3,6 +3,7 @@ import Agenda from "@/components/agenda";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CustomModal from "@/components/customModal";
 import { apiRequest } from "@/utils/apiHandler";
+import { cpfMask } from "@/utils/mascaras";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -55,7 +56,7 @@ export default function AgendaPage(){
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="Reservas semanais"
-                width="200"
+                width="100"
                 botoes={[
                     {
                         label:'Fechar',
@@ -72,7 +73,7 @@ export default function AgendaPage(){
                                 <div className="space-y-1 text-sm text-zinc-700">
                                     <p><strong>ID Agendamento:</strong> {a.id_agendamento}</p>
                                     <p><strong>Cliente:</strong> {a.nome}</p>
-                                    <p><strong>CPF:</strong> {a.cpf}</p>
+                                    <p><strong>CPF:</strong> {cpfMask(a.cpf)}</p>
                                     <p><strong>Email:</strong> {a.email}</p>
                                     <LinkButton
                                         className="w-fit"
