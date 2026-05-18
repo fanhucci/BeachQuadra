@@ -5,7 +5,7 @@ import Agenda from "@/components/agenda";
 
 export default function QuadraDetailPage(){
 
-    const { quadra,id, mostrarAgendamento} = useQuadraDetail();   
+    const { quadra, mostrarAgendamento} = useQuadraDetail();   
 
 
     if(!quadra) return <p>Quadra não encontrada</p>
@@ -14,7 +14,7 @@ export default function QuadraDetailPage(){
         <Agenda
             dados={quadra}
             contexto="agenda"
-            idQuadraEspecifica={id}
+            idQuadraEspecifica={quadra.id_quadra}
             aoSelecionar={mostrarAgendamento}
         />
     )

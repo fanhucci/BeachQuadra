@@ -4,11 +4,13 @@ import { Check } from "lucide-react";
 export default function Agenda({
     dados, 
     contexto = 'reserva',
+    idQuadraEspecifica,
     selecionados = [],
     loading,
     aoSelecionar
 }: {
     dados: any[],
+    idQuadraEspecifica?:number;
     contexto?: 'reserva'|'agenda';
     selecionados?: any[],
     loading?:boolean,
