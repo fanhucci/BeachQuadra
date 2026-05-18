@@ -68,7 +68,7 @@ export default function AgendaPage(){
                 <div className="flex flex-col w-200 overflow-y-scroll gap-4 p-2">
                         
                     {slotSelecionado?.agendamentos.map(a=>(
-                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <div className=" w-100 bg-amber-50 border border-amber-200 rounded-lg p-4">
                                 <h3 className="text-amber-800 font-semibold mb-2">Horário Reservado</h3>
                                 <div className="space-y-1 text-sm text-zinc-700">
                                     <p><strong>ID Agendamento:</strong> {a.id_agendamento}</p>
