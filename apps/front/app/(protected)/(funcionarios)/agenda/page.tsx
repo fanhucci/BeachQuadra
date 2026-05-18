@@ -55,6 +55,7 @@ export default function AgendaPage(){
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="Reservas semanais"
+                width="200"
                 botoes={[
                     {
                         label:'Fechar',
