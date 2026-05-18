@@ -65,7 +65,7 @@ export default function AgendaPage(){
                     }
                 ]}
             >   
-                <div className="flex flex-col w-200 overflow-y-scroll gap-4 p-2">
+                <div className="flex flex-col w-200 overflow-y-scroll items-center gap-4 p-2">
                         
                     {slotSelecionado?.agendamentos.map(a=>(
                         <div className=" w-100 bg-amber-50 border border-amber-200 rounded-lg p-4">
