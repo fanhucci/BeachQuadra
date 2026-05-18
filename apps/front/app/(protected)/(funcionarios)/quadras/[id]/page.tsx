@@ -13,6 +13,7 @@ export default function QuadraDetailPage(){
     return(
         <Agenda
             dados={quadra}
+            contexto="agenda"
             idQuadraEspecifica={id}
             aoSelecionar={mostrarAgendamento}
         />
