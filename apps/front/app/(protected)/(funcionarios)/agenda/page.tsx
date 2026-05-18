@@ -56,7 +56,7 @@ export default function AgendaPage(){
                 estado={modalOn}
                 fechar={fecharModal}
                 titulo="Reservas semanais"
-                width="100"
+                width="200"
                 botoes={[
                     {
                         label:'Fechar',
@@ -65,7 +65,7 @@ export default function AgendaPage(){
                     }
                 ]}
             >   
-                <div className="flex flex-col overflow-y-scroll gap-4 p-2">
+                <div className="flex flex-col w-200 overflow-y-scroll gap-4 p-2">
                         
                     {slotSelecionado?.agendamentos.map(a=>(
                         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
