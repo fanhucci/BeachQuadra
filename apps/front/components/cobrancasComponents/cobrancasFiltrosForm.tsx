@@ -5,8 +5,6 @@ import CustomSelect from "@/components/inputsComponents/customSelect";
 import { CobrancaSearch } from "@app/shared";
 
 
-
-
 interface CobrancasFiltrosProps {
     types:CobrancaSearch;
     handle:(e:React.ChangeEvent<HTMLInputElement>)=>void;

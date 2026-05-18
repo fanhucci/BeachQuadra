@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { Search } from "lucide-react";
 
 
-export default function useCobrancaTable(){
+export default function CobrancasTable(){
 
     const colunas = useMemo<Column<Cobranca>[]>(()=>[
         { 
@@ -34,13 +34,15 @@ export default function useCobrancaTable(){
         {
             key:'acoes', label:"Ações", align:'center',
             render:(_,a)=>(
-                <LinkButton
-                className="w-fit"
-                    estilo="primario"
-                    href={`/agendamentos/${a.id_agendamento}`}
-                >
-                    Detalhes <Search size={16}/>
-                </LinkButton>
+                <div className="flex justify-center gap-2">
+                    <LinkButton
+                        className="w-fit"
+                        estilo="primario"
+                        href={`/agendamentos/${a.id_agendamento}`}
+                    >
+                        Detalhes <Search size={16}/>
+                    </LinkButton>
+                </div>
             )
 
         }

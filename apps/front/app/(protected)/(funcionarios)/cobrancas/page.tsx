@@ -6,9 +6,9 @@ import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { ArrowBigLeft, ArrowBigRight, Banknote, Plus } from "lucide-react";
-import useCobrancaTable from "@/components/cobrancasComponents/useCobrancaTable";
+import useCobrancaTable from "@/components/cobrancasComponents/cobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
-import CobrancasFiltrosForm from "./cobrancasFiltrosForm";
+import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
 
 
 export default function CobrancasPage(){
