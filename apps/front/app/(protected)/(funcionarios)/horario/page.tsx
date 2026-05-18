@@ -4,6 +4,8 @@ import CustomModal from "@/components/customModal";
 import useHorario from "./useHorario";
 
 import { AlertCircle, CalendarDays, CalendarOff, Clock, Plus, Save, Trash2 } from "lucide-react";
+import SubmitButton from "@/components/buttonComponents/submitButton";
+import CustomInput from "@/components/inputsComponents/customInput";
 
 
 export default function HorarioPage(){
@@ -97,14 +99,14 @@ export default function HorarioPage(){
                         </div>
                     ))}
                 </div>
-
-                <button 
+                <SubmitButton
+                    estilo="primario"
+                    className="w-fit"
                     onClick={salvarHorario}
-                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors shadow-sm shadow-blue-200"
                 >
                     <Save size={18} />
                     "Salvar Configurações"
-                </button>
+                </SubmitButton>
             </section>
 
 
@@ -115,13 +117,14 @@ export default function HorarioPage(){
                         <CalendarOff className="text-red-500" size={28} />
                         <h2 className="text-2xl font-bold text-gray-800">Bloqueios de Datas</h2>
                     </div>
-
-                    <button className="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold px-4 py-2 rounded-xl transition-all"
-                        onClick={toggleModal}
+                    <SubmitButton
+                        estilo="primario"
+                        className="w-fit "
+                        onClick={salvarBloqueio}
                     >
                         <Plus size={18} />
                         Novo Bloqueio
-                    </button>
+                    </SubmitButton>
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
@@ -157,12 +160,13 @@ export default function HorarioPage(){
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <button 
+                                        <SubmitButton
                                             onClick={()=>removerBloqueio(b.id_bloqueio)}
-                                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                                            estilo="perigo"
+                                            className="w-fit"
                                         >
                                             <Trash2 size={18} />
-                                        </button>
+                                        </SubmitButton>
                                     </td>
                                 </tr>
                             )) : (
@@ -186,6 +190,22 @@ export default function HorarioPage(){
                 titulo="Bloquear"
                 estado={modalBloqueio}
                 fechar={toggleModal}
+                botoes={[
+                    {
+                        label:'Cancelar',
+                        disabled:loading,
+                        estilo:'secundario',
+                        isLoading:loading,
+                        onClick:toggleModal
+                    },
+                    {
+                        label:'Confirmar',
+                        disabled:loading,
+                        estilo:'primario',
+                        isLoading:loading,
+                        onClick:salvarBloqueio
+                    }
+                ]}
             >
                 <div className="space-y-6">
   
@@ -195,19 +215,13 @@ export default function HorarioPage(){
                     </div>
 
                     <div className="space-y-4">
-                        <div className="flex flex-col gap-1">
-                            <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            Motivo do Bloqueio
-                            </label>
-                            <input
-                            type="text"
+                        <CustomInput
                             name="motivo"
+                            label="Motido do bloqueio"
+                            placeholder="Manutenção..."
                             value={formData.motivo}
                             onChange={handleChangeBloqueio}
-                            placeholder="Ex: Manutenção, Feriado, Torneio..."
-                            className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500 transition-all"
-                            />
-                        </div>
+                        />
 
                         <div className="grid grid-cols-1 gap-4">
                             
@@ -238,23 +252,6 @@ export default function HorarioPage(){
                                 />
                             </div>
                         </div>
-                    </div>
-
-                    
-                    <div className="flex items-center gap-3 pt-2">
-                        <button
-                            onClick={toggleModal}
-                            className="flex-1 px-4 py-3 font-semibold text-gray-500 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
-                        >
-                            Cancelar
-                        </button>
-                        <button
-                            onClick={salvarBloqueio}
-                            disabled={loading}
-                            className="flex-1 px-4 py-3 font-semibold text-white bg-red-600 rounded-xl hover:bg-red-700 transition-colors shadow-md shadow-red-100 disabled:opacity-50"
-                        >
-                            Bloquear
-                        </button>
                     </div>
                 </div>
             </CustomModal>
