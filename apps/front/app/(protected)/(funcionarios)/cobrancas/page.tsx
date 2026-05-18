@@ -16,7 +16,6 @@ export default function CobrancasPage(){
     const {queryString, filters, page, limit, handleFilters, limparFiltros, proximaPagina, voltarPagina} = useFilter<CobrancaSearch>({
         nome:'',
         pagamento:"pendente",
-        data_inicio: new Date(),
         page:1,
         limit:10
     });
