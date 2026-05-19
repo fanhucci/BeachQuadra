@@ -66,15 +66,14 @@ export function ClientNav({logado}:{logado:boolean;}){
     <section
       className="flex flex-row h-14 w-full md:h-16"
     >
-      <LinkButton 
+      <Link 
         href={"/"}
-        estilo="fantasma"
         className="w-fit border-none bg-none"
       >
         <span
           className="text-bold text-2xl"
         >BeachQuadra</span>
-      </LinkButton>
+      </Link>
 
       {logado
         ?(<></>)
