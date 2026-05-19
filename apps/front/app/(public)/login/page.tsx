@@ -110,7 +110,7 @@ function LoginForm(){
                 type="password"
             />
                     
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-sm min-h-screen">
                 <Link href={callbackURL? `/cadastrar?callback=${callbackURL}` : '/cadastrar'} className="text-blue-600 hover:underline">
                 Criar conta
                 </Link>

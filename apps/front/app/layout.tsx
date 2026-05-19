@@ -9,8 +9,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br" className="h-full">
-      <body className="h-full flex flex-col">
+    <html lang="pt-br">
+      <body className="min-h-dvh w-full flex flex-col">
         <UserProvider>
           <Navbar />
           <main className="flex-1 bg-white text-black">
