@@ -100,7 +100,7 @@ export default function CobrancasPage(){
                         onChange={(e)=>trocarPagina(e.target.value)}
                         value={page}
                         type="number"
-
+                        className="w-fit"
                     />
 
                     <SubmitButton

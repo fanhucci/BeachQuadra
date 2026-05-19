@@ -14,6 +14,7 @@ type InputProps = {
     erro?: string;
     type?: InputVariant;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    className?:string;
 };
 
 export default function CustomInput({
@@ -24,6 +25,7 @@ export default function CustomInput({
     value = type === 'number' || type === 'money' ? '0' : "",
     erro,
     onChange,
+    className
 }: InputProps) {
 
     const valorFormatado = useMemo(() => {
@@ -70,7 +72,7 @@ export default function CustomInput({
                 value={valorFormatado}
                 onChange={onChange}
                 className={`
-                    border rounded-lg h-12 px-3 text-base transition-all duration-200
+                    border rounded-lg h-12 px-3 text-base transition-all duration-200 ${className}
                     focus:outline-none focus:ring-2
                     ${erro 
                         ? "border-red-400 focus:ring-red-100 bg-red-50/10" 
