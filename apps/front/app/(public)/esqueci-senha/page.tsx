@@ -61,7 +61,7 @@ export default function EsqueciSenhaPage(){
                 </div>
 
     
-                <form className="flex flex-col gap-6">
+                <form className="flex flex-col  items-center justify-center gap-6">
 
                     <CustomInput
                         label="E-mail"
