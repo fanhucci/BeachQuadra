@@ -23,7 +23,7 @@ export default function LoginPage(){
 
                 <LinkButton
                     estilo="fantasma"
-                    className="absolute left-0 top-0 w-fit bg-transparent!"
+                    className="absolute left-0 top-1 w-fit bg-transparent!"
                     href={'/'}
                 >
                     <span>
@@ -31,7 +31,7 @@ export default function LoginPage(){
                     </span>
                 </LinkButton>
                 
-                <div className="text-center space-y-2">
+                <div className="text-center space-y-2 px-12">
                     <h1 className="text-3xl font-semibold text-gray-800">
                         Bem-vindo de volta
                     </h1>
