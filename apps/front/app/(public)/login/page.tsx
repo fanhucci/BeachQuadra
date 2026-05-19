@@ -20,7 +20,6 @@ export default function LoginPage(){
 
             <div className="relative bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
 
-
                 <LinkButton
                     estilo="fantasma"
                     className="absolute left-0 top-1 w-fit bg-transparent!"

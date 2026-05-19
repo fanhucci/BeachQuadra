@@ -5,30 +5,40 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Suspense } from "react";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 
 export default function CadastroPage(){
 
     return (
-        <div className=" flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
-                <Link href="/" className="text-gray-600">
-                    <ArrowLeft />
-                </Link>
+        <section className="bg-gray-100 flex flex-1 justify-center items-center">
+
+            <div className="relative bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
+                
+                <LinkButton
+                    estilo="fantasma"
+                    className="absolute left-0 top-1 w-fit bg-transparent!"
+                    href={'/'}
+                >
+                    <span>
+                        <ArrowLeft/>    
+                    </span>
+                </LinkButton>
                 
                 <h1 className="text-2xl font-semibold text-center mb-8 text-gray-700">Criar Conta</h1>
 
                 <Suspense fallback={
-                        <div className="flex justify-center py-4">
-                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
-                        </div>
-                    }>
+                    <div className="flex justify-center py-4">
+                        <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
+                    </div>
+                }>
 
                     <CadastroForm/>
                 
                 </Suspense>
                 
             </div>
-        </div>
+        </section>
     );
 
 }
@@ -42,7 +52,7 @@ export function CadastroForm(){
         handleChange
     } = useCadastro();
     return(
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col items-center justify-center gap-6">
 
                     <CustomInput
                         label="Nome"
@@ -56,6 +66,7 @@ export function CadastroForm(){
 
                     <CustomInput
                         label="CPF"
+                        placeholder="___.___.___.__"
                         name="cpf"
                         value={cpfMask(formData.cpf)}
                         erro={erros.cpf}
@@ -76,6 +87,7 @@ export function CadastroForm(){
                     <CustomInput
                         label="Telefone"
                         name="telefone"
+                        placeholder="(99)9999-99999"
                         value={telefoneMask(formData.telefone)}
                         erro={erros.telefone}
                         onChange={handleChange}
@@ -84,6 +96,7 @@ export function CadastroForm(){
 
                     <CustomInput
                         label="Senha"
+                        placeholder="******"
                         name="senha"
                         type="password"
                         value={formData.senha}
@@ -91,18 +104,20 @@ export function CadastroForm(){
                         onChange={handleChange}
                     />
                     
-                    <div className="flex justify-between text-sm">
+                    <div className="flex w-full justify-between text-sm">
                         <Link href={callbackURL? `/login?callback=${callbackURL}` : `/login`} className="text-blue-600 hover:underline">
                             Voltar ao login
                         </Link>
                     </div>
 
-                    <button
+                    <SubmitButton
+                        type="submit"
                         onClick={cadastrarUsuario}
-                        className="mt-4 h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                        className="w-fit"
+                        estilo="primario"
                     >
-                        Cadastrar
-                    </button>
+                        <span>Entrar</span>
+                    </SubmitButton>
                 </div>
     )
 }
