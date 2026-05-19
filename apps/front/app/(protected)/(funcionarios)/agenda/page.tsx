@@ -58,7 +58,7 @@ export default function AgendaPage(){
                     </div>
                 </header>
 
-                <section className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-y-auto p-4 min-h-0">
+                <section className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-4 min-h-0">
                     <Agenda
                         loading={loading}
                         dados={horarios}
