@@ -10,7 +10,9 @@ import LinkButton from "./buttonComponents/linkButton";
 export default function Navbar() {
   const { user } = useUser();
 
-  switch (user?.id_cargo) {
+  const cargo = Number(user?.id_cargo);
+  
+  switch (cargo) {
     case 1: return <ClientNavbar />;
     case 2: return <EmployeeSidebar />;
     case 3: return <EmployeeSidebar />;
