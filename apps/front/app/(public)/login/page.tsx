@@ -20,23 +20,29 @@ export default function LoginPage(){
 
             <div className="bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
 
-                <LinkButton
-                    estilo="fantasma"
-                    href={'/'}
-                >
-                    <span>
-                        <ArrowLeft/>    
-                    </span>
-                </LinkButton>
+                <div className="felx flex-row gap-4">
+
+                    <LinkButton
+                        estilo="fantasma"
+                        className="w-fit bg-none"
+                        href={'/'}
+                    >
+                        <span>
+                            <ArrowLeft/>    
+                        </span>
+                    </LinkButton>
                 
-                <div className="text-center space-y-2">
-                    <h1 className="text-3xl font-semibold text-gray-800">
-                        Bem-vindo de volta
-                    </h1>
-                    <p className="text-sm text-gray-500">
-                        Acesse sua conta para fazer suas reservas!
-                    </p>
+                    <div className="text-center space-y-2">
+                        <h1 className="text-3xl font-semibold text-gray-800">
+                            Bem-vindo de volta
+                        </h1>
+                        <p className="text-sm text-gray-500">
+                            Acesse sua conta para fazer suas reservas!
+                        </p>
+                    </div>
+
                 </div>
+                
 
                 <Suspense fallback={
                         <div className="flex justify-center py-4">
