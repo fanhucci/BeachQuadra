@@ -27,7 +27,7 @@ export default function Navbar() {
   switch(user.id_cargo){
     case 2: return <EmployeeNav/>
     case 3: return <AdminNav/>
-    default: return <ClientNav logado={true}/>
+    default: return <ClientNav logado={isAuthenticated}/>
   }
 }
 
@@ -69,6 +69,7 @@ export function ClientNav({logado}:{logado:boolean;}){
       <LinkButton 
         href={"/"}
         estilo="fantasma"
+        className="w-fit"
       >
         <span
           className="text-bold text-2xl"
