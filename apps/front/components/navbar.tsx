@@ -160,7 +160,7 @@ export function EmployeeSidebar() {
       {!isOpen && (
         <SubmitButton
           estilo="fantasma"
-          className="fixed top-4 right-0 z-40 bg-gray-900! p-2.5! rounded-l-2xl text-white hover:bg-gray-800 shadow-md"
+          className="fixed top-4 right-0 z-40 bg-gray-900! p-2.5! rounded-r-none text-white hover:bg-gray-800 shadow-md"
           onClick={() => setIsOpen(true)}
         >
           <ChevronLeft className="h-5 w-5" />
