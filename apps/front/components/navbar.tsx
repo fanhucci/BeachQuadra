@@ -1,8 +1,11 @@
 'use client'
+
 import { useUser } from "@/context/userContext";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import LinkButton from "./buttonComponents/linkButton";
+
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useUser();
@@ -19,8 +22,105 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  return (
-    <nav className="w-full h-14 px-8 flex items-center justify-between bg-[#1F2937] text-gray-200 border-b border-gray-700">
+  if(!user) return <ClientNav logado={false}/>
+
+  switch(user.id_cargo){
+    case 2: return <EmployeeNav/>
+    case 3: return <AdminNav/>
+    default: return <ClientNav logado={true}/>
+  }
+}
+
+
+
+
+
+export function NavbarLinks({className}:{className?:string;}){
+  return(
+    <section className={`${className}`}>
+      <Link href="/usuarios" className="hover:text-white transition">
+        Usuários
+      </Link>
+            
+      <Link href="/agenda" className="hover:text-white transition">
+        Agenda
+      </Link>
+
+      <Link href="/cobrancas" className="hover:text-white transition">
+        Cobranças
+      </Link>
+
+      <Link href="/quadras" className="hover:text-white transition">
+        Quadras
+      </Link>
+
+      <Link href="/horario" className="hover:text-white transition">
+        Horario
+      </Link>
+    </section>
+  )
+}
+
+export function ClientNav({logado}:{logado:boolean;}){
+  return(
+    <section
+      className="h-14 w-full md:h-16"
+    >
+      <LinkButton 
+        href={"/"}
+        estilo="fantasma"
+      >
+        <span
+          className="text-bold text-2xl"
+        >BeachQuadra</span>
+      </LinkButton>
+
+      {logado
+        ?(<></>)
+        :(
+          <LinkButton
+            href={"/login"}
+            estilo="primario"
+          >
+            <span>Entrar</span>
+          </LinkButton>
+        )
+      }
+  
+    </section>
+  );
+}
+
+export function EmployeeNav({children}:{children?:React.ReactNode}){
+  return(
+    <section
+      className="bg-gray-800 flex flex-col"
+    >
+      <NavbarLinks
+        className="flex flex-col gap-4"
+      />
+      {children}
+    </section>
+  );
+}
+
+export function AdminNav(){
+  return(
+    <EmployeeNav>
+      <></>
+    </EmployeeNav>
+  )
+}
+
+
+
+
+
+
+
+
+
+{/* <nav className="w-full h-14 px-8 flex items-center justify-between bg-[#1F2937] text-gray-200 border-b border-gray-700">
 
       <div className="flex items-center gap-10">
         <Link href={user && user.id_cargo>1? '/dashboard': '/'} className="text-lg font-semibold tracking-wide text-white">
@@ -28,27 +128,9 @@ export default function Navbar() {
         </Link>
     
         {user && user.id_cargo > 1 && (
-          <div className="flex items-center gap-6 text-sm">
-            <Link href="/usuarios" className="hover:text-white transition">
-              Usuários
-            </Link>
-            
-            <Link href="/agenda" className="hover:text-white transition">
-              Agenda
-            </Link>
-
-             <Link href="/cobrancas" className="hover:text-white transition">
-              Cobranças
-            </Link>
-
-             <Link href="/quadras" className="hover:text-white transition">
-              Quadras
-            </Link>
-
-            <Link href="/horario" className="hover:text-white transition">
-              Horario
-            </Link>
-          </div>
+          <NavbarLinks
+            className="flex items-center gap-6 text-sm"
+          />
         )}
       </div>
 
@@ -92,6 +174,4 @@ export default function Navbar() {
           </div>
         )}
       </div>
-    </nav>
-  );
-}
+    </nav> */}
