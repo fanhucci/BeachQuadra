@@ -82,6 +82,7 @@ export function ClientNav({logado}:{logado:boolean;}){
           <LinkButton
             href={"/login"}
             estilo="primario"
+            className="w-fit"
           >
             <span>Entrar</span>
           </LinkButton>
