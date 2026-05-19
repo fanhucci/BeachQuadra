@@ -24,7 +24,7 @@ export default function LoginPage(){
 
                     <LinkButton
                         estilo="fantasma"
-                        className="w-fit bg-none hover:bg-none"
+                        className="w-fit bg-none!"
                         href={'/'}
                     >
                         <span>
