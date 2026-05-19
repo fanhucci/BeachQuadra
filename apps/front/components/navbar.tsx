@@ -64,7 +64,7 @@ export function NavbarLinks({className}:{className?:string;}){
 export function ClientNav({logado}:{logado:boolean;}){
   return(
     <section
-      className="h-14 w-full md:h-16"
+      className="flex flex-row h-14 w-full md:h-16"
     >
       <LinkButton 
         href={"/"}
@@ -96,7 +96,7 @@ export function ClientNav({logado}:{logado:boolean;}){
 export function EmployeeNav({children}:{children?:React.ReactNode}){
   return(
     <section
-      className="bg-gray-800 flex flex-col"
+      className="bg-gray-700 flex flex-col"
     >
       <NavbarLinks
         className="flex flex-col gap-4"
