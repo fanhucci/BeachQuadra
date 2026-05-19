@@ -18,30 +18,29 @@ export default function LoginPage(){
     return(
         <section className="bg-gray-100 flex flex-1 justify-center items-center">
 
-            <div className="bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
+            <div className="relative bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
 
-                <div className="felx flex-row gap-4">
 
-                    <LinkButton
-                        estilo="fantasma"
-                        className="w-fit bg-transparent!"
-                        href={'/'}
-                    >
-                        <span>
-                            <ArrowLeft/>    
-                        </span>
-                    </LinkButton>
+                <LinkButton
+                    estilo="fantasma"
+                    className="absolute left-0 top-0 w-fit bg-transparent!"
+                    href={'/'}
+                >
+                    <span>
+                        <ArrowLeft/>    
+                    </span>
+                </LinkButton>
                 
-                    <div className="text-center space-y-2">
-                        <h1 className="text-3xl font-semibold text-gray-800">
-                            Bem-vindo de volta
-                        </h1>
-                        <p className="text-sm text-gray-500">
-                            Acesse sua conta para fazer suas reservas!
-                        </p>
-                    </div>
-
+                <div className="text-center space-y-2">
+                    <h1 className="text-3xl font-semibold text-gray-800">
+                        Bem-vindo de volta
+                    </h1>
+                    <p className="text-sm text-gray-500">
+                        Acesse sua conta para fazer suas reservas!
+                    </p>
                 </div>
+
+                
                 
 
                 <Suspense fallback={
