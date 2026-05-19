@@ -123,7 +123,7 @@ export default function CobrancasPage(){
                             </div>
 
                             <SubmitButton
-                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white  hover:bg-gray-50 transition-all disabled:opacity-40"
                                 estilo="secundario"
                                 disabled={naoTemProximaPagina}
                                 onClick={proximaPagina}
