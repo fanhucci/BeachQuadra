@@ -111,7 +111,7 @@ function LoginForm(){
             />
                     
             <div className="flex justify-between text-sm">
-                <Link href={callbackURL? `/cadastrar?callback=${callbackURL}` : '/cadastrar'} className="text-blue-600 hover:underline">
+                <Link href={callbackURL? `/cadastro?callback=${callbackURL}` : '/cadastro'} className="text-blue-600 hover:underline">
                 Criar conta
                 </Link>
                 <Link href="/esqueci-senha" className="text-gray-500 hover:underline">

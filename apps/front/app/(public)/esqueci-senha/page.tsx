@@ -70,7 +70,7 @@ export default function EsqueciSenhaPage(){
                     />
 
                     <div className="flex justify-between text-sm">
-                        <Link href="/cadastrar" className="text-blue-600 hover:underline">
+                        <Link href="/cadastro" className="text-blue-600 hover:underline">
                         Criar conta
                         </Link>
 
