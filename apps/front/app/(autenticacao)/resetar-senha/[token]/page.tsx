@@ -28,7 +28,7 @@ export default function resetarSenhaPage(){
 
     async function alterarSenha(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
-        
+
         const parse = ResetarSenhaSchema.safeParse(formData);
 
         if(!parse.success){
@@ -76,7 +76,7 @@ export default function resetarSenhaPage(){
 
                 <form 
                     onSubmit={alterarSenha}
-                    className="flex flex-col gap-5"
+                    className="flex flex-col items-center justify-center gap-5"
                 >
 
                     <CustomInput
