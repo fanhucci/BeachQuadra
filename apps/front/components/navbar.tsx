@@ -160,10 +160,10 @@ export function EmployeeSidebar() {
       {!isOpen && (
         <SubmitButton
           estilo="fantasma"
-          className="fixed top-4 right-4 z-40 bg-gray-900! p-2.5! rounded-xl text-white hover:bg-gray-800 shadow-md"
+          className="fixed top-4 right-0 z-40 bg-gray-900! p-2.5! rounded-xl text-white hover:bg-gray-800 shadow-md"
           onClick={() => setIsOpen(true)}
         >
-          <Menu className="h-5 w-5" />
+          <ChevronLeft className="h-5 w-5" />
         </SubmitButton>
       )}
 
@@ -193,7 +193,7 @@ export function EmployeeSidebar() {
             </SubmitButton>
           </div>
 
-          {/* Navegação */}
+
           <nav className="flex flex-col gap-1">
             {links.map((link) => {
               const Icon = link.icon;
