@@ -102,15 +102,17 @@ export default function CobrancasPage(){
                                 onClick={voltarPagina}
                                 isLoading={loading}
                             >
-                                <ChevronLeft size={14}/>
+                                <ChevronLeft color="#000000" size={14}/>
                             </SubmitButton>
 
                             <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 h-8 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
                                 <span>Página</span>
                                 <input
                                     type="number"
-                                    value={page ?? 1}
+                                    value={page}
                                     onChange={(e) => trocarPagina(e.target.value)}
+                                    min={1}
+                                    max={Math.ceil(totalGeral / limit) || 1}
                                     className="w-8 text-center font-bold text-blue-600 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                                 <span className="text-gray-400 font-normal">de {Math.ceil(totalGeral / limit) || 1}</span>
@@ -123,7 +125,7 @@ export default function CobrancasPage(){
                                 onClick={proximaPagina}
                                 isLoading={loading}
                             >
-                                <ChevronRight size={14}/>
+                                <ChevronRight color="#000000" size={14}/>
                             </SubmitButton>
                         </div>
                     </div>

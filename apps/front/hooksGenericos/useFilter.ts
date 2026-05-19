@@ -74,10 +74,16 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
     }
 
     const trocarPagina = (valor:string)=>{
-        setFilters((prev)=>({
-            ...prev,
-            page:Number(valor)
-        }))
+
+        setFilters((prev)=>{
+           
+            const valorN = Number(valor);
+
+            return{
+                ...prev,
+                page:valorN
+            }
+        })
     }
 
     const limparFiltros = () => setFilters(valoresIniciais);
