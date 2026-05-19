@@ -5,6 +5,7 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import LinkButton from "./buttonComponents/linkButton";
+import SubmitButton from "./buttonComponents/submitButton";
 
 
 export default function Navbar() {
@@ -22,12 +23,13 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if(!user) return <ClientNav logado={false}/>
+ 
 
-  switch(user.id_cargo){
+  switch(user?.id_cargo){
+    case 1: return <ClientNav/>
     case 2: return <EmployeeNav/>
     case 3: return <AdminNav/>
-    default: return <ClientNav logado={isAuthenticated}/>
+    default: return <ClientNav/>
   }
 }
 
@@ -61,7 +63,8 @@ export function NavbarLinks({className}:{className?:string;}){
   )
 }
 
-export function ClientNav({logado}:{logado:boolean;}){
+export function ClientNav(){
+  const {isAuthenticated,logout} = useUser();
   return(
     <section
       className="flex flex-row h-14 w-full md:h-16"
@@ -75,9 +78,15 @@ export function ClientNav({logado}:{logado:boolean;}){
         >BeachQuadra</span>
       </Link>
 
-      {logado
-        ?(<></>)
-        :(
+      {isAuthenticated
+        ?(
+          <SubmitButton
+            estilo="perigo"
+            onClick={logout}
+          >
+            <span>Sair</span>
+          </SubmitButton>
+        ):(
           <LinkButton
             href={"/login"}
             estilo="primario"
