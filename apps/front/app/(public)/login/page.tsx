@@ -1,5 +1,7 @@
 'use client'
 
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import CustomInput from "@/components/inputsComponents/customInput";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
@@ -14,13 +16,18 @@ import { toast } from "sonner";
 export default function LoginPage(){
     
     return(
-        <div className=" flex items-center justify-center bg-gray-100 px-4">
-
+        <section className="bg-gray-100 h-full flex itemas-center">
             <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
 
-                <Link href="/" className="text-gray-600">
-                    <ArrowLeft />
-                </Link>
+                <LinkButton
+                    estilo="fantasma"
+                    href={'/'}
+                >
+                    <span>
+                        <ArrowLeft/>    
+                    </span>
+                </LinkButton>
+                
                 <div className="text-center space-y-2">
                     <h1 className="text-3xl font-semibold text-gray-800">
                         Bem-vindo de volta
@@ -39,7 +46,7 @@ export default function LoginPage(){
                 </Suspense>
     
             </div>
-        </div>
+        </section>
     )
 }
 
@@ -102,7 +109,7 @@ function LoginForm(){
 
             <CustomInput
                 label="Senha"
-                placeholder="senha"
+                placeholder="******"
                 name="senha"
                 onChange={handleChange}
                 value={formData.senha}
@@ -119,18 +126,14 @@ function LoginForm(){
                 </Link>
             </div>
 
-            <button
-                type="button"
+            <SubmitButton
+                type="submit"
                 onClick={fazerLogin}
-                className="
-                mt-2 h-12 rounded-xl
-                bg-blue-600 text-white font-semibold
-                hover:bg-blue-700 active:scale-[.99]
-                transition
-                "
+                className="w-fit"
+                estilo="primario"
             >
-                Entrar
-            </button>
+                <span>Entrar</span>
+            </SubmitButton>
 
         </form>
     )
