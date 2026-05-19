@@ -1,42 +1,23 @@
-'use client'
+'use client';
 
-import { useUser } from "@/context/userContext";
-import { Menu } from "lucide-react";
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import LinkButton from "./buttonComponents/linkButton";
+import { useUser } from "@/context/userContext";
 import SubmitButton from "./buttonComponents/submitButton";
-
+import { LogOut, User, Calendar, Users, DollarSign, Layers, Clock, Menu, CalendarDays } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import LinkButton from "./buttonComponents/linkButton";
 
 export default function Navbar() {
-  const { isAuthenticated, user, logout } = useUser();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const { user } = useUser();
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
- 
-
-  switch(user?.id_cargo){
-    case 1: return <ClientNav/>
-    case 2: return <EmployeeNav/>
-    case 3: return <AdminNav/>
-    default: return <ClientNav/>
+  switch (user?.id_cargo) {
+    case 1: return <ClientNavbar />;
+    case 2: return <EmployeeSidebar />;
+    case 3: return <EmployeeSidebar />;
+    default:
+      return <ClientNavbar />;
   }
 }
-
-
-
-
-
 export function NavbarLinks({className}:{className?:string;}){
   return(
     <section className={`${className}`}>
@@ -63,64 +44,150 @@ export function NavbarLinks({className}:{className?:string;}){
   )
 }
 
-export function ClientNav(){
-  const {isAuthenticated,logout} = useUser();
-  return(
-    <section
-      className="bg-gray-800 flex flex-row items-center justify-between px-4 h-14 w-full md:h-16"
-    >
-      <Link 
-        href={"/"}
-        className="w-fit border-none bg-none"
-      >
-        <span
-          className="text-bold text-2xl"
-        >BeachQuadra</span>
+export function ClientNavbar() {
+  const { isAuthenticated, user, logout } = useUser();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-800 text-white h-16 px-4 md:px-8 border-b border-gray-700 flex items-center justify-between">
+
+      <Link href="/" className="text-2xl font-bold tracking-tight">
+        BeachQuadra
       </Link>
 
-      {isAuthenticated
-        ?(
-          <SubmitButton
-            estilo="perigo"
-            className="w-fit"
-            onClick={logout}
-          >
-            <span>Sair</span>
-          </SubmitButton>
-        ):(
-          <LinkButton
-            href={"/login"}
-            estilo="primario"
-            className="w-fit"
-          >
+  
+      <div className="flex items-center gap-4">
+        {isAuthenticated ? (
+          <div className="relative flex items-center gap-3" ref={menuRef}>
+            <span className="hidden sm:inline text-sm text-gray-300 font-medium">
+              Olá, {user?.nome?.split(" ")[0]}
+            </span>
+
+
+            <SubmitButton
+              estilo="fantasma"
+              className="p-2! hover:bg-gray-700 rounded-full"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <Menu className="h-6 w-6 text-gray-200" />
+            </SubmitButton>
+
+            {isOpen && (
+              <div className="absolute right-0 top-12 w-48 bg-white text-gray-800 rounded-2xl shadow-xl py-2 border border-gray-100 flex flex-col z-50">
+                <Link
+                  href="/perfil"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition"
+                >
+                  <User className="h-4 w-4 text-gray-500" />
+                  Meu Perfil
+                </Link>
+                
+                <Link
+                  href="/agenda" // Rota simulada para agendar
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition"
+                >
+                  <CalendarDays className="h-4 w-4 text-gray-500" />
+                  Agendar Quadra
+                </Link>
+
+                <hr className="my-1 border-gray-100" />
+
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    logout();
+                  }}
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left w-full font-medium"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sair
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <LinkButton href="/login" estilo="primario" className="w-fit px-5">
             <span>Entrar</span>
           </LinkButton>
-        )
-      }
+        )}
+      </div>
+    </header>
+  );
+}
+export function EmployeeSidebar() {
+  const { user, logout } = useUser();
+
+  const links = [
+    { href: "/usuarios", label: "Usuários", icon: Users },
+    { href: "/agenda", label: "Agenda", icon: Calendar },
+    { href: "/cobrancas", label: "Cobranças", icon: DollarSign },
+    { href: "/quadras", label: "Quadras", icon: Layers },
+    { href: "/horario", label: "Horário", icon: Clock },
+  ];
+
+  return (
+    <aside className="fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col justify-between bg-gray-900 text-gray-300 p-4 border-r border-gray-800">
+      <div className="space-y-6">
+
+        <div className="px-2 py-4 border-b border-gray-800">
+          <Link href="/" className="text-2xl font-bold text-white block">
+            BeachQuadra <span className="text-xs text-blue-400 block font-normal">{user?.id_cargo === 3 ? 'Admin' : 'Staff'}</span>
+          </Link>
+        </div>
+
   
-    </section>
-  );
-}
+        <nav className="flex flex-col gap-1">
+          {links.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-800 hover:text-white transition-all text-sm font-medium"
+              >
+                <Icon className="h-4 w-4" />
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
 
-export function EmployeeNav({children}:{children?:React.ReactNode}){
-  return(
-    <section
-      className="bg-gray-700 flex flex-col"
-    >
-      <NavbarLinks
-        className="flex flex-col gap-4"
-      />
-      {children}
-    </section>
+      <div className="border-t border-gray-800 pt-4 space-y-3">
+        <div className="flex items-center gap-3 px-2 py-1">
+          <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center">
+            <User className="h-4 w-4 text-gray-400" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-sm font-medium text-white truncate">{user?.nome}</span>
+          </div>
+        </div>
+        
+        <SubmitButton
+          estilo="perigo"
+          className="w-full flex items-center justify-center gap-2 py-2! rounded-xl!"
+          onClick={logout}
+        >
+          <LogOut className="h-4 w-4" />
+          <span>Sair da conta</span>
+        </SubmitButton>
+      </div>
+    </aside>
   );
-}
-
-export function AdminNav(){
-  return(
-    <EmployeeNav>
-      <></>
-    </EmployeeNav>
-  )
 }
 
 

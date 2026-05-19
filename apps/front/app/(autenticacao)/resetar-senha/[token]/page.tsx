@@ -104,7 +104,7 @@ export default function resetarSenhaPage(){
                         className="w-fit"
                         estilo="primario"
                     >
-                        <span>Entrar</span>
+                        <span>Confirmar</span>
                     </SubmitButton>
 
                 </form>
