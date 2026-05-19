@@ -67,7 +67,7 @@ export function ClientNav(){
   const {isAuthenticated,logout} = useUser();
   return(
     <section
-      className="flex flex-row h-14 w-full md:h-16"
+      className="h-14 w-full md:h-16"
     >
       <Link 
         href={"/"}
