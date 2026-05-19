@@ -1,5 +1,7 @@
 'use client'
 
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import CustomInput from "@/components/inputsComponents/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
@@ -24,7 +26,9 @@ export default function resetarSenhaPage(){
     const [formData,setFormData] = useState<ResetarSenhaDTO>(estadoInicial);
     const [erros,setErros] = useState<Partial<Record<keyof ResetarSenhaDTO, string>>>({});
 
-    async function alterarSenha(){
+    async function alterarSenha(e:React.FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        
         const parse = ResetarSenhaSchema.safeParse(formData);
 
         if(!parse.success){
@@ -55,18 +59,29 @@ export default function resetarSenhaPage(){
     }
 
     return(
-        <div className=" flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
-                <Link href="/" className="text-gray-600">
-                    <ArrowLeft />
-                </Link>
+        <section className="bg-gray-100 flex flex-1 justify-center items-center">
+            <div className="relative bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
+                
+                <LinkButton
+                    estilo="fantasma"
+                    className="absolute left-0 top-1 w-fit bg-transparent!"
+                    href={'/'}
+                >
+                    <span>
+                        <ArrowLeft/>    
+                    </span>
+                </LinkButton>
                 
                 <h1 className="text-2xl font-semibold text-center mb-8 text-gray-700">Redefinir senha</h1>
 
-                <div className="flex flex-col gap-5">
+                <form 
+                    onSubmit={alterarSenha}
+                    className="flex flex-col gap-5"
+                >
 
                     <CustomInput
                         label="Senha"
+                        placeholder="******"
                         name="senha"
                         value={formData.senha}
                         erro={erros.senha}
@@ -76,6 +91,7 @@ export default function resetarSenhaPage(){
 
                     <CustomInput
                         label="Confirmar senha"
+                        placeholder="******"
                         name="senhaConfirmar"
                         value={formData.senhaConfirmar}
                         erro={erros.senhaConfirmar}
@@ -83,16 +99,17 @@ export default function resetarSenhaPage(){
                         type="password"
                     />
 
-
-                    <button
-                        onClick={alterarSenha}
-                        className="mt-4 h-11 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                    <SubmitButton
+                        type="submit"
+                        className="w-fit"
+                        estilo="primario"
                     >
-                        Confirmar
-                    </button>
-                </div>
+                        <span>Entrar</span>
+                    </SubmitButton>
+
+                </form>
 
             </div>
-        </div>
+        </section>
     )
 }

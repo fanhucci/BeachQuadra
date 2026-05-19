@@ -26,8 +26,9 @@ export default function useCadastro(){
     const {refreshUser} = useUser();
     const router = useRouter();
 
-    async function cadastrarUsuario(){
-
+    async function cadastrarUsuario(e:React.FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        
         const parse = CadastrarUsuarioSchema.safeParse(formData);
 
         if(!parse.success){

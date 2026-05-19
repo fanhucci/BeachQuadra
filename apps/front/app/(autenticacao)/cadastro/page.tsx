@@ -51,73 +51,77 @@ export function CadastroForm(){
         cadastrarUsuario,
         handleChange
     } = useCadastro();
+
     return(
-        <div className="flex flex-col items-center justify-center gap-6">
+        <form
+            onSubmit={cadastrarUsuario} 
+            className="flex flex-col items-center justify-center gap-6"
+        >
 
-                    <CustomInput
-                        label="Nome"
-                        placeholder="seu nome"
-                        name="nome"
-                        value={formData.nome}
-                        erro={erros.nome}
-                        onChange={handleChange}
-                        type="text"
-                    />
+            <CustomInput
+                label="Nome"
+                placeholder="seu nome"
+                name="nome"
+                value={formData.nome}
+                erro={erros.nome}
+                onChange={handleChange}
+                type="text"
+            />
 
-                    <CustomInput
-                        label="CPF"
-                        placeholder="___.___.___.__"
-                        name="cpf"
-                        value={cpfMask(formData.cpf)}
-                        erro={erros.cpf}
-                        onChange={handleChange}
-                        type="cpf"
-                    />
+            <CustomInput
+                label="CPF"
+                placeholder="___.___.___.__"
+                name="cpf"
+                value={cpfMask(formData.cpf)}
+                erro={erros.cpf}
+                onChange={handleChange}
+                type="cpf"
+            />
 
-                    <CustomInput
-                        label="E-mail"
-                        placeholder="seu@email.com"
-                        name="email"
-                        value={formData.email}
-                        erro={erros.email}
-                        onChange={handleChange}
-                        type="email"
-                    />
+            <CustomInput
+                label="E-mail"
+                placeholder="seu@email.com"
+                name="email"
+                value={formData.email}
+                erro={erros.email}
+                onChange={handleChange}
+                type="email"
+            />
 
-                    <CustomInput
-                        label="Telefone"
-                        name="telefone"
-                        placeholder="(99)9999-99999"
-                        value={telefoneMask(formData.telefone)}
-                        erro={erros.telefone}
-                        onChange={handleChange}
-                        type="tel"
-                    />
+            <CustomInput
+                label="Telefone"
+                name="telefone"
+                placeholder="(99)9999-99999"
+                value={telefoneMask(formData.telefone)}
+                erro={erros.telefone}
+                onChange={handleChange}
+                type="tel"
+            />
 
-                    <CustomInput
-                        label="Senha"
-                        placeholder="******"
-                        name="senha"
-                        type="password"
-                        value={formData.senha}
-                        erro={erros.senha}
-                        onChange={handleChange}
-                    />
+            <CustomInput
+                label="Senha"
+                placeholder="******"
+                name="senha"
+                type="password"
+                value={formData.senha}
+                erro={erros.senha}
+                onChange={handleChange}
+            />
                     
-                    <div className="flex w-full justify-between text-sm">
-                        <Link href={callbackURL? `/login?callback=${callbackURL}` : `/login`} className="text-blue-600 hover:underline">
-                            Voltar ao login
-                        </Link>
-                    </div>
+            <div className="flex w-full justify-between text-sm">
+                <Link href={callbackURL? `/login?callback=${callbackURL}` : `/login`} className="text-blue-600 hover:underline">
+                    Voltar ao login
+                </Link>
+            </div>
 
-                    <SubmitButton
-                        type="submit"
-                        onClick={cadastrarUsuario}
-                        className="w-fit"
-                        estilo="primario"
-                    >
-                        <span>Entrar</span>
-                    </SubmitButton>
-                </div>
+            <SubmitButton
+                type="submit"
+                className="w-fit"
+                estilo="primario"
+            >
+                <span>Entrar</span>
+            </SubmitButton>
+
+        </form>
     )
 }

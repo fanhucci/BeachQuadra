@@ -76,6 +76,7 @@ function LoginForm(){
 
     async function fazerLogin(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
+        
         const parse = LoginSchema.safeParse(formData);
 
         if(!parse.success){

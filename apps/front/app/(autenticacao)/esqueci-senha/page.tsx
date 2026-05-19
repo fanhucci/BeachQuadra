@@ -14,7 +14,9 @@ export default function EsqueciSenhaPage(){
     const [email,setEmail] = useState<string>("");
     const [erros,setErros] = useState<Partial<Record<keyof EsqueciSenhaDTO,string>>>({});
 
-    async function procurarConta() {
+    async function procurarConta(e:React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        
         const parse = EsqueciSenhaSchema.safeParse({email});
 
         if(!parse.success){
@@ -61,7 +63,10 @@ export default function EsqueciSenhaPage(){
                 </div>
 
     
-                <form className="flex flex-col  items-center justify-center gap-6">
+                <form 
+                    onSubmit={procurarConta}
+                    className="flex flex-col  items-center justify-center gap-6"
+                >
 
                     <CustomInput
                         label="E-mail"
@@ -86,7 +91,6 @@ export default function EsqueciSenhaPage(){
 
                     <SubmitButton
                         type="submit"
-                        onClick={procurarConta}
                         className="w-fit"
                         estilo="primario"
                     >
