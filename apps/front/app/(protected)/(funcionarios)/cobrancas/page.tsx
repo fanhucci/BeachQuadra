@@ -95,15 +95,15 @@ export default function CobrancasPage(){
                         </span>
                         
                         <div className="flex items-center gap-3">
-                            <SubmitButton
-                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
-                                estilo="secundario"
+  
+                            <button
+                                type="button"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-black hover:bg-gray-50 transition-all disabled:opacity-40"
                                 disabled={page === 1}
                                 onClick={voltarPagina}
-                                isLoading={loading}
                             >
-                                <ChevronLeft className="!text-black stroke-current stroke-[2.5]" size={14}/>
-                            </SubmitButton>
+                                <ChevronLeft stroke="#000000" style={{ display: 'block' }} size={14}/>
+                            </button>
 
                             <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 h-8 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
                                 <span>Página</span>
@@ -112,8 +112,9 @@ export default function CobrancasPage(){
                                     value={page}
                                     onChange={(e) => {
                                         let valor = Number(e.target.value) ?? 1;
-                                        if(valor>Math.ceil(totalGeral / limit)) valor = Math.ceil(totalGeral / limit);
-                                        trocarPagina(valor)
+                                        const maxPaginas = Math.ceil(totalGeral / limit) || 1;
+                                        if(valor > maxPaginas) valor = maxPaginas;
+                                        trocarPagina(valor);
                                     }}
                                     min={1}
                                     max={Math.ceil(totalGeral / limit) || 1}
@@ -122,15 +123,15 @@ export default function CobrancasPage(){
                                 <span className="text-gray-400 font-normal">de {Math.ceil(totalGeral / limit) || 1}</span>
                             </div>
 
-                            <SubmitButton
-                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600! hover:bg-gray-50 transition-all disabled:opacity-40"
-                                estilo="secundario"
+                            <button
+                                type="button"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-black hover:bg-gray-50 transition-all disabled:opacity-40"
                                 disabled={naoTemProximaPagina}
                                 onClick={proximaPagina}
-                                isLoading={loading}
                             >
-                                <ChevronRight color="#000000" size={14}/>
-                            </SubmitButton>
+                                <ChevronRight stroke="#000000" style={{ display: 'block' }} size={14}/>
+                            </button>
+
                         </div>
                     </div>
 
