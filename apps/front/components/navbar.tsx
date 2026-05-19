@@ -67,7 +67,7 @@ export function ClientNav(){
   const {isAuthenticated,logout} = useUser();
   return(
     <section
-      className="flex flex-row items-center justify-around px-4 h-14 w-full md:h-16"
+      className="bg-gray-700 flex flex-row items-center justify-between px-4 h-14 w-full md:h-16"
     >
       <Link 
         href={"/"}
@@ -82,6 +82,7 @@ export function ClientNav(){
         ?(
           <SubmitButton
             estilo="perigo"
+            className="w-fit"
             onClick={logout}
           >
             <span>Sair</span>
