@@ -73,6 +73,13 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
         });
     }
 
+    const trocarPagina = (valor:string)=>{
+        setFilters((prev)=>({
+            ...prev,
+            page:Number(valor)
+        }))
+    }
+
     const limparFiltros = () => setFilters(valoresIniciais);
     const page = filters.page;
     const limit = valoresIniciais.limit;
@@ -85,6 +92,7 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
         handleFilters,
         limparFiltros,
         proximaPagina,
-        voltarPagina
+        voltarPagina,
+        trocarPagina
     }
 }

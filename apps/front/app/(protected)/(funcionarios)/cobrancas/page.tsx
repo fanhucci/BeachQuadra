@@ -14,7 +14,7 @@ import CustomInput from "@/components/inputsComponents/customInput";
 
 export default function CobrancasPage(){
     
-    const {queryString, filters, page, limit, handleFilters, limparFiltros, proximaPagina, voltarPagina} = useFilter<CobrancaSearch>({
+    const {queryString, filters, page, limit, handleFilters, limparFiltros, proximaPagina, voltarPagina, trocarPagina} = useFilter<CobrancaSearch>({
         nome:'',
         page:1,
         limit:10
@@ -97,10 +97,10 @@ export default function CobrancasPage(){
 
                     <CustomInput
                         name="page"
-                        onChange={}
+                        onChange={(e)=>trocarPagina(e.target.value)}
                         value={page}
                         type="number"
-                        
+
                     />
 
                     <SubmitButton
