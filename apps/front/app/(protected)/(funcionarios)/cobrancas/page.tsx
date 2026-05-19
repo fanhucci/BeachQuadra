@@ -110,7 +110,11 @@ export default function CobrancasPage(){
                                 <input
                                     type="number"
                                     value={page}
-                                    onChange={(e) => trocarPagina(e.target.value)}
+                                    onChange={(e) => {
+                                        let valor = Number(e.target.value) ?? 1;
+                                        if(valor>Math.ceil(totalGeral / limit)) valor = Math.ceil(totalGeral / limit);
+                                        trocarPagina(valor)
+                                    }}
                                     min={1}
                                     max={Math.ceil(totalGeral / limit) || 1}
                                     className="w-8 text-center font-bold text-blue-600 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
