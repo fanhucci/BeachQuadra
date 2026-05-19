@@ -1,33 +1,33 @@
 'use client'
 
+import React from "react";
 import CustomInput from "@/components/inputsComponents/customInput";
 import CustomSelect from "@/components/inputsComponents/customSelect";
 import { CobrancaSearch } from "@app/shared";
 
-
 interface CobrancasFiltrosProps {
-    types:CobrancaSearch;
-    handle:(e:React.ChangeEvent<HTMLInputElement>)=>void;
+    types: CobrancaSearch;
+    handle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
 export default function CobrancasFiltrosForm({
     types,
     handle
-}:CobrancasFiltrosProps){
-
+}: CobrancasFiltrosProps) {
 
     const opcoesPagamento = [
-        {value:"", label:"Todos"},
-        {value:"pendente", label:"pendente"},
-        {value:"concluido", label:"concluido"},
-        {value:"cancelado", label:"cancelado"},
-        {value:"expirado", label:"expirado"},
-        {value:"estornado", label:"estornado"},
-    ]
+        { value: "", label: "Todos" },
+        { value: "pendente", label: "Pendente" },
+        { value: "concluido", label: "Concluído" },
+        { value: "cancelado", label: "Cancelado" },
+        { value: "expirado", label: "Expirado" },
+        { value: "estornado", label: "Estornado" },
+    ];
 
-    return(
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 items-end">
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-end w-full">
 
-            <div className="col-span-1 md:col-span-3">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-5">
                 <CustomInput 
                     label="Pesquisar"
                     placeholder="Buscar por nome do cliente..."
@@ -37,30 +37,37 @@ export default function CobrancasFiltrosForm({
                 />
             </div>
 
-            <CustomSelect 
-                label="Pagamento"
-                name="pagamento"
-                options={opcoesPagamento}
-                value={types.pagamento ?? ''}
-                onChange={(n, v) => handle({target: {name: n, value: v}} as any)}
-            />
+            <div className="col-span-1 lg:col-span-3">
+                <CustomSelect 
+                    label="Pagamento"
+                    name="pagamento"
+                    options={opcoesPagamento}
+                    value={types.pagamento ?? ''}
+                    onChange={(n, v) => handle({ target: { name: n, value: v } } as any)}
+                />
+            </div>
 
-            <CustomInput
-                type="date"
-                name="data_inicio"
-                label="De"
-                value={types.data_inicio}
-                onChange={handle}
-            />
 
-            <CustomInput
-                type="date"
-                name="data_fim"
-                label="Até"
-                value={types.data_fim}
-                onChange={handle}
-            />
+            <div className="col-span-1 lg:col-span-2">
+                <CustomInput
+                    type="date"
+                    name="data_inicio"
+                    label="De"
+                    value={types.data_inicio}
+                    onChange={handle}
+                />
+            </div>
+
+            <div className="col-span-1 lg:col-span-2">
+                <CustomInput
+                    type="date"
+                    name="data_fim"
+                    label="Até"
+                    value={types.data_fim}
+                    onChange={handle}
+                />
+            </div>
 
         </div>
-    )
+    );
 }
