@@ -35,37 +35,38 @@ export default function CobrancasPage(){
     const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     return (
-        <main className="flex-1 w-full bg-gray-50/50 min-h-screen">
 
-            <div className="mx-auto w-full max-w-7xl 2xl:max-w-[1600px] p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+        <main className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
 
-                <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-200 pb-6">
+            <div className="mx-auto w-full max-w-7xl 2xl:max-w-[1600px] h-full min-h-0 p-4 sm:p-6 lg:p-8 flex flex-col gap-4">
+
+                <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-200 pb-4 flex-shrink-0">
                     <div className="flex items-center gap-4">
-                        <div className="p-3 bg-blue-50 text-blue-600 rounded-xl shadow-sm border border-blue-100">
-                            <Banknote size={26} />
+                        <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl shadow-sm border border-blue-100">
+                            <Banknote size={24} />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 tracking-tight lg:text-3xl">Gestão de Cobranças</h2>
-                            <p className="text-sm text-gray-500 mt-0.5">Visualize e gerencie as cobranças do sistema</p>
+                            <h2 className="text-xl font-bold text-gray-900 tracking-tight lg:text-2xl">Gestão de Cobranças</h2>
+                            <p className="text-xs text-gray-500">Visualize e gerencie as cobranças do sistema</p>
                         </div>
                     </div>
                     
                     <LinkButton 
                         estilo="primario"
                         href={'/usuarios/agendar'}
-                        className="inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 font-semibold text-sm shadow-sm transition-all"
+                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 font-semibold text-sm shadow-sm transition-all"
                     >
-                        <Plus size={18} />
+                        <Plus size={16} />
                         <span>Nova Cobrança</span>
                     </LinkButton>
                 </header>
 
-                <section className="bg-white p-5 lg:p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-5">
-                    <div className="flex justify-between items-center border-b border-gray-100 pb-3">
+                <section className="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-4 flex-shrink-0">
+                    <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                         <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Busca Avançada</h3>
                         <SubmitButton
                             estilo="fantasma"
-                            className="text-xs text-red-600 hover:bg-red-50 border border-transparent hover:border-red-100 rounded-lg px-3 py-1.5 h-auto transition-all"
+                            className="text-xs text-red-600 hover:bg-red-50 border border-transparent hover:border-red-100 rounded-lg px-2.5 py-1 h-auto transition-all"
                             onClick={limparFiltros}
                         >
                             Resetar Filtros
@@ -78,9 +79,9 @@ export default function CobrancasPage(){
                     />
                 </section>
 
-                <section className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
-                
-                    <div className="flex-1">
+                <section className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-1 min-h-0">
+                    
+                    <div className="flex-1 overflow-y-auto min-h-0">
                         <CustomTable
                             columns={colunas}
                             data={dados}
@@ -88,41 +89,41 @@ export default function CobrancasPage(){
                         />
                     </div>
 
-                    <div className="bg-gray-50/50 px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="bg-gray-50/50 px-6 py-3.5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 flex-shrink-0">
                         <span className="text-xs font-medium text-gray-500">
-                            Mostrando <span className="text-gray-800 font-semibold">{dados.length}</span> de <span className="text-gray-800 font-semibold">{totalGeral}</span> registros registrados
+                            Mostrando <span className="text-gray-800 font-semibold">{dados.length}</span> de <span className="text-gray-800 font-semibold">{totalGeral}</span> registros
                         </span>
                         
                         <div className="flex items-center gap-3">
                             <SubmitButton
-                                className="h-9 w-9 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
                                 estilo="secundario"
                                 disabled={page === 1}
                                 onClick={voltarPagina}
                                 isLoading={loading}
                             >
-                                <ChevronLeft size={16}/>
+                                <ChevronLeft size={14}/>
                             </SubmitButton>
 
-                            <div className="flex items-center gap-1.5 text-xs font-semibold px-3 h-9 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
+                            <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 h-8 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
                                 <span>Página</span>
                                 <input
                                     type="number"
                                     value={page ?? 1}
                                     onChange={(e) => trocarPagina(e.target.value)}
-                                    className="w-10 text-center font-bold text-blue-600 bg-transparent focus:outline-none border-b border-transparent focus:border-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    className="w-8 text-center font-bold text-blue-600 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                                 <span className="text-gray-400 font-normal">de {Math.ceil(totalGeral / limit) || 1}</span>
                             </div>
 
                             <SubmitButton
-                                className="h-9 w-9 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-40"
                                 estilo="secundario"
                                 disabled={naoTemProximaPagina}
                                 onClick={proximaPagina}
                                 isLoading={loading}
                             >
-                                <ChevronRight size={16}/>
+                                <ChevronRight size={14}/>
                             </SubmitButton>
                         </div>
                     </div>
