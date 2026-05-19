@@ -104,7 +104,6 @@ export default function CobrancasPage(){
                                 <ChevronLeft size={16}/>
                             </SubmitButton>
 
-                            {/* Seletor numérico amigável e clean */}
                             <div className="flex items-center gap-1.5 text-xs font-semibold px-3 h-9 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
                                 <span>Página</span>
                                 <input
