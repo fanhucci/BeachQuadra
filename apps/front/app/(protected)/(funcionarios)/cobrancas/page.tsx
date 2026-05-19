@@ -9,7 +9,6 @@ import { ArrowBigLeft, ArrowBigRight, Banknote, Plus } from "lucide-react";
 import useCobrancaTable from "@/components/cobrancasComponents/cobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
-import CustomInput from "@/components/inputsComponents/customInput";
 
 
 export default function CobrancasPage(){
@@ -39,7 +38,7 @@ export default function CobrancasPage(){
     const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     return(
-        <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
+        <section className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
 
             <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
                 <div className="flex items-center gap-3">
@@ -95,12 +94,11 @@ export default function CobrancasPage(){
                         <ArrowBigLeft size={16}/>
                     </SubmitButton>
 
-                    <CustomInput
-                        name="page"
-                        onChange={(e)=>trocarPagina(e.target.value)}
-                        value={page}
+                    <input
                         type="number"
-                        className="w-fit"
+                        value={page ?? 1}
+                        onChange={(e)=>trocarPagina(e.target.value)}
+                        className=""
                     />
 
                     <SubmitButton
@@ -120,7 +118,7 @@ export default function CobrancasPage(){
                 />
             </section>
 
-        </main>
+        </section>
     );
 }
 
