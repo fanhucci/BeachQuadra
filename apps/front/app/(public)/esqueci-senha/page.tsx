@@ -1,4 +1,6 @@
 'use client'
+import LinkButton from "@/components/buttonComponents/linkButton";
+import SubmitButton from "@/components/buttonComponents/submitButton";
 import CustomInput from "@/components/inputsComponents/customInput";
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
@@ -35,17 +37,21 @@ export default function EsqueciSenhaPage(){
     }
 
     return(
-        <div className="flex items-center justify-center bg-gray-100 px-4">
+        <section className="bg-gray-100 flex flex-1 justify-center items-center">
 
-            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
+            <div className="relative bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
 
-                <Link href="/" className="text-gray-600">
-                    <ArrowLeft />
-                </Link>
+                <LinkButton
+                    estilo="fantasma"
+                    className="absolute left-0 top-1 w-fit bg-transparent!"
+                    href={'/'}
+                >
+                    <span>
+                        <ArrowLeft/>    
+                    </span>
+                </LinkButton>
 
                 <div className="text-center space-y-2">
-                    
-
                     <h1 className="text-3xl font-semibold text-gray-800">
                         Recuperação de senha
                     </h1>
@@ -57,7 +63,6 @@ export default function EsqueciSenhaPage(){
     
                 <form className="flex flex-col gap-6">
 
-           
                     <CustomInput
                         label="E-mail"
                         name="email"
@@ -69,7 +74,7 @@ export default function EsqueciSenhaPage(){
                         })}
                     />
 
-                    <div className="flex justify-between text-sm">
+                    <div className="flex w-full justify-between text-sm">
                         <Link href="/cadastro" className="text-blue-600 hover:underline">
                         Criar conta
                         </Link>
@@ -79,21 +84,16 @@ export default function EsqueciSenhaPage(){
                         </Link>
                     </div>
 
-                    <button
-                        type="button"
+                    <SubmitButton
+                        type="submit"
                         onClick={procurarConta}
-                        className="
-                        mt-2 h-12 rounded-xl
-                        bg-blue-600 text-white font-semibold
-                        hover:bg-blue-700 active:scale-[.99]
-                        transition
-                        "
+                        className="w-fit"
+                        estilo="primario"
                     >
-                        Enviar
-                    </button>
-
+                        <span>Enviar</span>
+                    </SubmitButton>
                 </form>
             </div>
-        </div>
+        </section>
     )
 }
