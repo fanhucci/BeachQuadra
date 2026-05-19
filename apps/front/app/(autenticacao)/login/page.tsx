@@ -39,9 +39,6 @@ export default function LoginPage(){
                     </p>
                 </div>
 
-                
-                
-
                 <Suspense fallback={
                         <div className="flex justify-center py-4">
                             <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
@@ -68,16 +65,17 @@ function LoginForm(){
     const {refreshUser} = useUser();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-        const {id,value} = e.target;
+        const {name,value} = e.target;
 
         setFormData(prev=>({
             ...prev,
-            [id]:value
+            [name]:value
         }))
     }
 
 
-    async function fazerLogin(){
+    async function fazerLogin(e: React.FormEvent<HTMLFormElement>){
+        e.preventDefault();
         const parse = LoginSchema.safeParse(formData);
 
         if(!parse.success){
@@ -101,7 +99,10 @@ function LoginForm(){
     }
 
     return(
-        <form className="flex flex-col items-center justify-center gap-6">
+        <form
+            className="flex flex-col items-center justify-center gap-6"
+            onSubmit={fazerLogin}
+        >
 
             <CustomInput
                 label="E-mail"
@@ -133,7 +134,6 @@ function LoginForm(){
 
             <SubmitButton
                 type="submit"
-                onClick={fazerLogin}
                 className="w-fit"
                 estilo="primario"
             >
