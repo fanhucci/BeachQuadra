@@ -13,7 +13,7 @@ export default function RootLayout({
       <body className="min-h-dvh w-full flex flex-col">
         <UserProvider>
           <Navbar />
-          <main className="flex-1 bg-white text-black">
+          <main className="flex-1 w-full bg-white text-black">
             {children}
             <Toaster richColors position="top-right" />
           </main> 

@@ -35,7 +35,7 @@ export default function AgendamentoDetailPage(){
     }
 
     return (
-        <div className="w-full min-h-screen bg-gray-50/50 p-4 md:p-8 flex justify-center">
+        <div className="w-full  bg-gray-50/50 p-4 md:p-8 flex justify-center">
             <div className="w-full max-w-6xl flex flex-col gap-6">
                 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white border border-gray-100 rounded-xl p-6 shadow-sm gap-4">
