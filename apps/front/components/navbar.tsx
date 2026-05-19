@@ -20,6 +20,7 @@ export default function Navbar() {
       return <ClientNavbar />;
   }
 }
+
 export function NavbarLinks({className}:{className?:string;}){
   return(
     <section className={`${className}`}>
@@ -240,65 +241,3 @@ export function EmployeeSidebar() {
 }
 
 
-
-
-
-
-
-
-
-{/* <nav className="w-full h-14 px-8 flex items-center justify-between bg-[#1F2937] text-gray-200 border-b border-gray-700">
-
-      <div className="flex items-center gap-10">
-        <Link href={user && user.id_cargo>1? '/dashboard': '/'} className="text-lg font-semibold tracking-wide text-white">
-          BeachQuadra
-        </Link>
-    
-        {user && user.id_cargo > 1 && (
-          <NavbarLinks
-            className="flex items-center gap-6 text-sm"
-          />
-        )}
-      </div>
-
-      <div className="flex items-center gap-6 text-sm">
-        {!isAuthenticated && (
-          <Link
-            href="/login"
-            className="px-4 py-1.5 rounded bg-blue-500 hover:bg-blue-600 text-white transition"
-          >
-            Entrar
-          </Link>
-        )}
-
-        {isAuthenticated && (
-          <div className="relative" ref={ref}>
-            <button
-              onClick={() => setOpen(!open)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded hover:bg-gray-700 transition"
-            >
-              <span>{user?.nome}</span>
-              <span className="text-xs opacity-60"><Menu /></span>
-            </button>
-
-            {open && (
-              <div className="absolute right-0 mt-2 w-44 bg-white text-gray-800 rounded shadow-lg overflow-hidden">
-                <Link
-                  href="/perfil"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                  onClick={() => setOpen(false)}
-                >
-                  Perfil
-                </Link>
-                <button
-                  onClick={logout}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Sair
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </nav> */}

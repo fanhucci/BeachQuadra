@@ -9,6 +9,7 @@ import { ArrowBigLeft, ArrowBigRight, Banknote, Plus } from "lucide-react";
 import useCobrancaTable from "@/components/cobrancasComponents/cobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
+import CustomInput from "@/components/inputsComponents/customInput";
 
 
 export default function CobrancasPage(){
@@ -93,6 +94,14 @@ export default function CobrancasPage(){
                     >
                         <ArrowBigLeft size={16}/>
                     </SubmitButton>
+
+                    <CustomInput
+                        name="page"
+                        onChange={}
+                        value={page}
+                        type="number"
+                        
+                    />
 
                     <SubmitButton
                         className="w-fit"
