@@ -69,7 +69,7 @@ export function ClientNav({logado}:{logado:boolean;}){
       <LinkButton 
         href={"/"}
         estilo="fantasma"
-        className="w-fit"
+        className="w-fit border-none bg-none"
       >
         <span
           className="text-bold text-2xl"
