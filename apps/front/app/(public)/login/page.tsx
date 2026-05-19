@@ -16,9 +16,9 @@ import { toast } from "sonner";
 export default function LoginPage(){
     
     return(
-        <section className="bg-gray-100 h-full flex items-center justify-center">
+        <section className="bg-gray-100 flex flex-1 justify-center items-center">
 
-            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-10 space-y-8">
+            <div className="bg-white w-full max-w-md  shadow-2xl rounded-3xl p-10 space-y-8">
 
                 <LinkButton
                     estilo="fantasma"
