@@ -102,7 +102,7 @@ export default function CobrancasPage(){
                                 onClick={voltarPagina}
                                 isLoading={loading}
                             >
-                                <ChevronLeft color="#000000" size={14}/>
+                                <ChevronLeft className="!text-black stroke-current stroke-[2.5]" size={14}/>
                             </SubmitButton>
 
                             <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 h-8 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
