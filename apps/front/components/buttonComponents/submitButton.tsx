@@ -9,7 +9,7 @@ interface SubmitButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 export default function SubmitButton({
     children,
     estilo = 'secundario',
-    className,
+    className = '',
     isLoading = false,
     ...props
 }:SubmitButtonProps){
@@ -29,7 +29,7 @@ export default function SubmitButton({
             className={`
                 ${base}
                 ${variantes[estilo]}
-                ${className} || ''
+                ${className}
             `}
             {...props}
         >
