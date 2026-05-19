@@ -11,7 +11,7 @@ export default function Navbar() {
   const { user } = useUser();
 
   const cargo = Number(user?.id_cargo);
-  
+
   switch (cargo) {
     case 1: return <ClientNavbar />;
     case 2: return <EmployeeSidebar />;
@@ -142,7 +142,7 @@ export function EmployeeSidebar() {
   ];
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col justify-between bg-gray-900 text-gray-300 p-4 border-r border-gray-800">
+    <aside className="fixed inset-y-0 right-0 z-50 flex h-screen w-64 flex-col justify-between bg-gray-900 text-gray-300 p-4 border-r border-gray-800">
       <div className="space-y-6">
 
         <div className="px-2 py-4 border-b border-gray-800">
