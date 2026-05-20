@@ -8,8 +8,8 @@ import { Edit, ShieldAlert, ShieldCheck } from "lucide-react";
 
 type UseUsuariosTableProps = {
     editar: (usuario: Usuario) => void;
-    ativar: (usuario: Usuario) => void;
-    desativar: (usuario: Usuario) => void;
+    ativar: (id: number) => void;
+    desativar: (id: number) => void;
 }
 
 export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuariosTableProps) {
@@ -57,19 +57,6 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
                 );
             }
         },
-        { 
-            key: "data_cadastro", 
-            label: "Membro Desde",
-            render: (value: string) =>
-                value ? (
-                    <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-gray-800">{new Date(value).toLocaleDateString('pt-br', { timeZone: 'utc' })}</span>
-                        <span className="text-xs text-gray-400 font-normal">{new Date(value).toLocaleTimeString('pt-br', { timeZone: 'utc', hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-                ) : (
-                    <span className="text-xs text-gray-400 italic font-normal">—</span>
-                )
-        },
         {
             key: 'acoes', 
             label: "Ações", 
@@ -89,7 +76,7 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
                         <SubmitButton
                             className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-transparent hover:border-red-200 bg-red-50/40 hover:bg-red-50 text-red-600 transition-all active:scale-95"
                             estilo="fantasma"
-                            onClick={() => desativar(row)}
+                            onClick={() => desativar(row.id_pessoa)}
                         >
                             <span>Bloquear</span>
                             <ShieldAlert size={13} className="stroke-[2.5]" />
@@ -98,7 +85,7 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
                         <SubmitButton
                             className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-transparent hover:border-emerald-200 bg-emerald-50/40 hover:bg-emerald-50 text-emerald-600 transition-all active:scale-95"
                             estilo="fantasma"
-                            onClick={() => ativar(row)}
+                            onClick={() => ativar(row.id_pessoa)}
                         >
                             <span>Ativar</span>
                             <ShieldCheck size={13} className="stroke-[2.5]" />
