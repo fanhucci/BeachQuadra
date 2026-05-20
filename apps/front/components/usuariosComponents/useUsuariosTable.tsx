@@ -68,6 +68,7 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
                     <LinkButton
                         estilo="primario"    
                         className="w-fit h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border"
+                        href={`/usuarios/agendar/${row.id_pessoa}`}
                     >
                         <span>Reservar</span>
                         <Calendar size={13} className="stroke-[2.5]" />
