@@ -43,43 +43,47 @@ export default function AgendamentoFormComponent({
     }, [horarioSelecionado]);
 
     return (
-        <div className="flex flex-col flex-1 h-full min-h-0 w-full items-center p-2 sm:p-4 bg-gray-50/30">
+        <div className="flex flex-col flex-1 h-full min-h-0 w-full items-center p-3 sm:p-4 bg-gray-50/30 overflow-hidden">
             
             <div className="w-full lg:w-[90%] xl:w-[85%] 2xl:max-w-[1600px] flex flex-col h-full min-h-0 gap-3">
                 
-                <div className="flex flex-row justify-between items-center bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm flex-shrink-0">
-                    <SubmitButton 
-                        estilo="secundario"
-                        onClick={semanaAnterior}
-                        className="flex items-center gap-1 !py-1.5 text-xs sm:text-sm"
-                    >
-                        <ChevronLeft size={16} />
-                        <span>Voltar</span>
-                    </SubmitButton>
-
-                    <span className="text-xs sm:text-sm font-bold text-gray-600 uppercase tracking-wider">
-                        Escopo Semanal
-                    </span>
-
-                    <SubmitButton 
-                        estilo="secundario"
-                        onClick={proximaSemana}
-                        className="flex items-center gap-1 !py-1.5 text-xs sm:text-sm"
-                    >
-                        <span>Avançar</span>
-                        <ChevronRight size={16} />
-                    </SubmitButton>
-                </div>
-
                 <section className="flex flex-col lg:flex-row flex-1 gap-4 min-h-0 overflow-y-auto lg:overflow-hidden pb-4 lg:pb-0">
                     
-                    <div className="flex-1 min-h-[450px] lg:min-h-0 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4">
-                        <Agenda
-                            dados={dados}
-                            aoSelecionar={selecionarHorario}
-                            selecionados={horarioSelecionado}
-                            loading={loading}
-                        />
+                    {/* Bloco da Esquerda (Controles + Agenda) */}
+                    <div className="flex-1 flex flex-col gap-3 min-h-[450px] lg:min-h-0">
+                        
+                        <div className="flex flex-row justify-between items-center bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm flex-shrink-0">
+                            <SubmitButton 
+                                estilo="secundario"
+                                onClick={semanaAnterior}
+                                className="flex items-center gap-1 !py-1.5 text-xs sm:text-sm"
+                            >
+                                <ChevronLeft size={16} />
+                                <span>Voltar</span>
+                            </SubmitButton>
+
+                            <span className="text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                Escopo Semanal
+                            </span>
+
+                            <SubmitButton 
+                                estilo="secundario"
+                                onClick={proximaSemana}
+                                className="flex items-center gap-1 !py-1.5 text-xs sm:text-sm"
+                            >
+                                <span>Avançar</span>
+                                <ChevronRight size={16} />
+                            </SubmitButton>
+                        </div>
+
+                        <div className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4 min-h-0">
+                            <Agenda
+                                dados={dados}
+                                aoSelecionar={selecionarHorario}
+                                selecionados={horarioSelecionado}
+                                loading={loading}
+                            />
+                        </div>
                     </div>
                     
                     <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0 lg:h-full lg:min-h-0">
@@ -95,13 +99,14 @@ export default function AgendamentoFormComponent({
                             />
                         </div>
 
-                        <div className="flex flex-col pt-3 mb-4 lg:flex-1 lg:min-h-0"> 
+                        <div className="flex flex-col pt-3 mb-4 flex-1 min-h-0"> 
                             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider pb-2">
                                 Selecionados ({horarioSelecionado.length})
                             </h3>   
                      
-                            <div className="h-[160px] lg:h-full lg:min-h-0 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar">
-                                <div className="flex flex-wrap gap-1.5 justify-start">
+                            <div className="h-[150px] lg:h-full lg:min-h-0 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar">
+                                {/* Centralização total dos slots lá dentro */}
+                                <div className="flex flex-wrap gap-1.5 justify-center items-center w-full min-h-full">
                                     {horariosOrdenados.map(r => (
                                         <SelectedSlotButton
                                             key={`${new Date(r.horario).getTime()}-${r.quadra.id_quadra}`}
@@ -150,11 +155,7 @@ interface SelectedSlotButtonProps extends HorarioSelecionado {
     remover?: () => void;
 }
 
-function SelectedSlotButton({
-    horario,
-    quadra,
-    remover
-}: SelectedSlotButtonProps){
+function SelectedSlotButton({ horario, quadra, remover }: SelectedSlotButtonProps){
     return (
         <SubmitButton
             estilo="pilula"
@@ -175,7 +176,7 @@ function SelectedSlotButton({
                     timeZone: 'utc'
                 })}
             </span>
-            <X size={13} strokeWidth={2.5} className="opacity-70 hover:opacity-100 transition-opacity" />
+            <X size={13} strokeWidth={2.5} className="opacity-70" />
         </SubmitButton>
     )
 }
@@ -188,16 +189,8 @@ type SalvarAgendamentoFormProps = {
     salvar: (id: number) => void;
 }
 
-function SalvarAgendamentoForm({
-    contexto,
-    clientePreSelecionado = null,
-    horariosSelecionados,
-    valorTotal,
-    salvar,
-}: SalvarAgendamentoFormProps){
-
+function SalvarAgendamentoForm({ contexto, clientePreSelecionado = null, horariosSelecionados, valorTotal, salvar }: SalvarAgendamentoFormProps){
     const router = useRouter();
-
     const [cliente, setCliente] = useState<Usuario | null>(clientePreSelecionado);
     const [modalOn, setModalOn] = useState<boolean>(false);
 
@@ -226,23 +219,10 @@ function SalvarAgendamentoForm({
                 titulo="Confirmar Reservas"
                 width="max-w-md sm:max-w-lg"
                 botoes={[
-                    {
-                        label: 'Cancelar',
-                        estilo: 'secundario',
-                        onClick: fecharModal
-                    },
+                    { label: 'Cancelar', estilo: 'secundario', onClick: fecharModal },
                     contexto === 'visitante'
-                    ? {
-                        label: 'Continuar',
-                        estilo: 'primario',
-                        onClick: guardarHorariosMemoria
-                    }
-                    : {
-                        label: 'Confirmar',
-                        estilo: 'primario',
-                        onClick: () => salvar(cliente!.id_pessoa),
-                        disabled: !cliente
-                    }
+                    ? { label: 'Continuar', estilo: 'primario', onClick: guardarHorariosMemoria }
+                    : { label: 'Confirmar', estilo: 'primario', onClick: () => salvar(cliente!.id_pessoa), disabled: !cliente }
                 ]}
             >
                 <div className="space-y-4 my-1 text-left">
@@ -254,17 +234,11 @@ function SalvarAgendamentoForm({
                             </p>
                         </div>
                     ) : contexto === 'cliente' && cliente ? (
-                        <Campo
-                            label="Titular da Reserva"
-                            valor={cliente.nome}
-                        /> 
+                        <Campo label="Titular da Reserva" valor={cliente.nome} /> 
                     ) : (
                         <div className="space-y-1">
                             <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Vincular Cliente</label>
-                            <BuscarCliente
-                                cliente={cliente}
-                                onSelecionar={setCliente}
-                            />
+                            <BuscarCliente cliente={cliente} onSelecionar={setCliente} />
                         </div>
                     )}
 
