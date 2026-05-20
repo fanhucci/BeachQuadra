@@ -76,7 +76,7 @@ export default function AgendamentoFormComponent({
                             </SubmitButton>
                         </div>
 
-                        <div className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4 min-h-0">
+                        <div className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4 min-h-0 flex flex-col">
                             <Agenda
                                 dados={dados}
                                 aoSelecionar={selecionarHorario}
@@ -84,6 +84,7 @@ export default function AgendamentoFormComponent({
                                 loading={loading}
                             />
                         </div>
+
                     </div>
                     
                     <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0 lg:h-full lg:min-h-0">
