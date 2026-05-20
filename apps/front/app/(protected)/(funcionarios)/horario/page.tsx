@@ -170,13 +170,15 @@ export default function HorarioPage(){
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-center">
-                                                <SubmitButton
+                                                <button
+                                                    type="button"
                                                     onClick={() => removerBloqueio(b.id_bloqueio)}
-                                                    estilo="perigo"
-                                                    className="inline-flex h-8 w-8 items-center justify-center p-0 rounded-lg border border-transparent shadow-none hover:bg-red-50 hover:text-red-600! text-red-600! transition-all mx-auto"
+                                                    disabled={loading}
+                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-500 hover:bg-red-50 hover:text-red-700 transition-all mx-auto disabled:opacity-40"
+                                                    title="Remover Bloqueio"
                                                 >
                                                     <Trash2 size={16} />
-                                                </SubmitButton>
+                                                </button>
                                             </td>
                                         </tr>
                                     )) : (
