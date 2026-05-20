@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function HomePage() {
   const {user} = useUser();
   return (
-    <main className="flex flex-col w-full text-gray-800">
+    <section className="flex flex-col w-full text-gray-800">
 
       <section className="w-full bg-linear-to-b from-[#1F4E6B] to-[#2C7DA0] text-white py-28 px-6 text-center flex flex-col items-center">
         <h1 className="text-5xl md:text-6xl font-extrabold max-w-4xl leading-tight">
@@ -107,6 +107,6 @@ export default function HomePage() {
           Reservar agora
         </Link>
       </section>
-    </main>
+    </section>
   );
 }

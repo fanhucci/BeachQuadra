@@ -19,7 +19,7 @@ export default function DashboardPage(){
     const {} = useDashboard();
 
     return(
-        <main className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
+        <section className="flex flex-col flex-1 p-6 gap-6 bg-gray-50/30">
 
             <header className="flex items-center justify-between gap-2 border-b border-gray-200 pb-5">
                 <div className="flex items-center gap-3">
@@ -58,6 +58,6 @@ export default function DashboardPage(){
             </section>
 
            
-        </main>
+        </section>
     )
 }

@@ -36,7 +36,7 @@ export default function CobrancasPage(){
 
     return (
 
-        <main className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
+        <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
 
             <div className="mx-auto w-full max-w-7xl 2xl:max-w-[1600px] h-full min-h-0 p-4 sm:p-6 lg:p-8 flex flex-col gap-4">
 
@@ -137,6 +137,6 @@ export default function CobrancasPage(){
 
                 </section>
             </div>
-        </main>
+        </section>
     );
 }
