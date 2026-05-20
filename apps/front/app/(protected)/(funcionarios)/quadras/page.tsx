@@ -6,17 +6,27 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { EditarQuadraSchema, NovaQuadraSchema, Quadra, QuadraSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
-import { Plus, SquareChartGantt } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, SquareChartGantt } from "lucide-react";
 import useQuadrasTable from "@/components/quadrasComponents/useQuadrasTable";
 import QuadrasFiltrosForm from "@/components/quadrasComponents/quadrasFiltrosForm";
 import QuadraModalForm from "@/components/quadrasComponents/quadraModalForm";
 
 export default function QuadrasPage(){
-    const {queryString, filters, handleFilters, limparFiltros} = useFilter<QuadraSearch>({
+    const {
+        queryString, 
+        filters, 
+        page, 
+        limit, 
+        handleFilters, 
+        limparFiltros, 
+        proximaPagina, 
+        voltarPagina, 
+        trocarPagina
+    } = useFilter<QuadraSearch>({
         search:'',
         ativo:true,
-        page:1,
-        limit:10
+        page: 1,
+        limit: 10
     });
 
     const {
@@ -48,6 +58,9 @@ export default function QuadrasPage(){
         ativar:ativar,
         desativar:desativar
     });
+
+    const totalGeral = dados[0]?.total_geral ?? dados.length;
+    const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     return(
         <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
@@ -93,12 +106,57 @@ export default function QuadrasPage(){
                 </section>
 
                 <section className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-1 min-h-0">
+
                     <div className="flex-1 overflow-y-auto min-h-0">
                         <CustomTable
                             columns={colunas}
                             data={dados}
                             isLoading={loading}
                         />
+                    </div>
+
+                    <div className="bg-gray-50/50 px-6 py-3.5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 flex-shrink-0">
+                        <span className="text-xs font-medium text-gray-500">
+                            Mostrando <span className="text-gray-800 font-semibold">{dados.length}</span> de <span className="text-gray-800 font-semibold">{totalGeral}</span> registros
+                        </span>
+                        
+                        <div className="flex items-center gap-3">
+                            <button
+                                type="button"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-black hover:bg-gray-50 transition-all disabled:opacity-40"
+                                disabled={page === 1}
+                                onClick={voltarPagina}
+                            >
+                                <ChevronLeft stroke="#000000" style={{ display: 'block' }} size={14}/>
+                            </button>
+
+                            <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 h-8 bg-white border border-gray-200 rounded-lg shadow-sm text-gray-700">
+                                <span>Página</span>
+                                <input
+                                    type="number"
+                                    value={page}
+                                    onChange={(e) => {
+                                        let valor = Number(e.target.value) ?? 1;
+                                        const maxPaginas = Math.ceil(totalGeral / limit) || 1;
+                                        if(valor > maxPaginas) valor = maxPaginas;
+                                        trocarPagina(valor);
+                                    }}
+                                    min={1}
+                                    max={Math.ceil(totalGeral / limit) || 1}
+                                    className="w-8 text-center font-bold text-blue-600 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                />
+                                <span className="text-gray-400 font-normal">de {Math.ceil(totalGeral / limit) || 1}</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="h-8 w-8 p-0 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-black hover:bg-gray-50 transition-all disabled:opacity-40"
+                                disabled={naoTemProximaPagina}
+                                onClick={proximaPagina}
+                            >
+                                <ChevronRight stroke="#000000" style={{ display: 'block' }} size={14}/>
+                            </button>
+                        </div>
                     </div>
                 </section>
 
