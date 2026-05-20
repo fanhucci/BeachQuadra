@@ -152,7 +152,7 @@ export default function HorarioPage(){
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center gap-3">
                                                     <div className="p-2 bg-red-50 text-red-600 rounded-lg flex-shrink-0">
-                                                        <AlertCircle color="#ff0000" size={16} />
+                                                        <AlertCircle size={16} />
                                                     </div>
                                                     <span className="font-semibold text-sm text-gray-700 truncate">{b.motivo}</span>
                                                 </div>
@@ -173,7 +173,7 @@ export default function HorarioPage(){
                                                 <SubmitButton
                                                     onClick={() => removerBloqueio(b.id_bloqueio)}
                                                     estilo="perigo"
-                                                    className="inline-flex h-8 w-8 items-center justify-center p-0 rounded-lg border border-transparent shadow-none hover:bg-red-50 hover:text-red-600 text-gray-400 transition-all mx-auto"
+                                                    className="inline-flex h-8 w-8 items-center justify-center p-0 rounded-lg border border-transparent shadow-none hover:bg-red-50 hover:text-red-600! text-red-600! transition-all mx-auto"
                                                 >
                                                     <Trash2 size={16} />
                                                 </SubmitButton>
