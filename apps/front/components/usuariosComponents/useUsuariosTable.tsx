@@ -1,102 +1,115 @@
 'use client'
-import { Column } from "@/components/customTable";
-import LinkButton from "@/components/buttonComponents/linkButton";
-import SubmitButton from "@/components/buttonComponents/submitButton";
-import { cpfMask, telefoneMask } from "@/utils/mascaras";
-import { Usuario } from "@app/shared";
-import { CalendarPlus,Pencil, UserCheck, UserMinus, UserSearch } from "lucide-react";
-import { useMemo } from "react";
 
-type AcoesUsuario = {
-    editar:(user:Usuario)=>(void);
-    ativar:(id:number)=>(void);
-    desativar:(id:number)=>(void);
+import { Column } from "@/components/customTable";
+import SubmitButton from "@/components/buttonComponents/submitButton";
+import { Usuario } from "@app/shared";
+import { useMemo } from "react";
+import { Edit, ShieldAlert, ShieldCheck } from "lucide-react";
+
+type UseUsuariosTableProps = {
+    editar: (usuario: Usuario) => void;
+    ativar: (usuario: Usuario) => void;
+    desativar: (usuario: Usuario) => void;
 }
 
-export default function useUsuariosTable(acoes:AcoesUsuario){
+export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuariosTableProps) {
 
-    const cargos: Record<number,string> = {
-        1:'Cliente',
-        2:'Funcionário',
-        3:'Administrador'
-    }
+    const statusStyles: Record<string, { bg: string; text: string; border: string; label: string; dot: string }> = {
+        ativo: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200", dot: "bg-emerald-500", label: "Ativo" },
+        inativo: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", dot: "bg-red-500", label: "Inativo" },
+    };
 
-    const colunas = useMemo<Column<Usuario>[]>(()=>[
-        { key: "nome", label: "Nome" },
+    const colunas = useMemo<Column<Usuario>[]>(() => [
         { 
-            key: "cpf", label: "CPF",
-            render:(value:string)=>(cpfMask(value))
+            key: "id_pessoa", 
+            label: "ID",
+            align: "center",
+            render: (value: string) => <span className="font-mono text-gray-900 font-semibold">#{value}</span>
         },
-        { key: "email", label: "E-mail"},
         { 
-            key: "telefone", label: "Telefone",
-            render:(value:string)=>(telefoneMask(value))
+            key: 'nome', 
+            label: 'Nome Completo',
+            render: (value: string, row) => (
+                <div className="flex flex-col">
+                    <span className="font-medium text-gray-900">{value}</span>
+                    <span className="text-xs text-gray-400 font-normal">{row.email}</span>
+                </div>
+            )
+        },
+        { 
+            key: 'cargo',
+            label: 'Cargo',
+            render: (value: string) => <span className="text-gray-700 font-medium">{value || "Usuário"}</span>
+        },
+        { 
+            key: "ativo", 
+            label: "Status",
+            align: "left",
+            render: (value: boolean) => {
+                const statusKey = value ? "ativo" : "inativo";
+                const style = statusStyles[statusKey];
+
+                return (
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${style.bg} ${style.text} ${style.border} shadow-sm select-none`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`}></span>
+                        {style.label}
+                    </span>
+                );
+            }
+        },
+        { 
+            key: "data_cadastro", 
+            label: "Membro Desde",
+            render: (value: string) =>
+                value ? (
+                    <div className="flex flex-col gap-0.5">
+                        <span className="font-medium text-gray-800">{new Date(value).toLocaleDateString('pt-br', { timeZone: 'utc' })}</span>
+                        <span className="text-xs text-gray-400 font-normal">{new Date(value).toLocaleTimeString('pt-br', { timeZone: 'utc', hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                ) : (
+                    <span className="text-xs text-gray-400 italic font-normal">—</span>
+                )
         },
         {
-            key:'id_cargo', label:"Cargo",
-            render:(value:number)=>cargos[value]
-        },
-        { 
-            key:"ativo", label: "Conta",
-            render:(value:boolean)=>value? 'Ativa' : 'Inativa'
-            
-        },
-        { 
-            key: "ações", label: "Ações", align:"center",
-            render: (_:any, usuario:Usuario) => (
+            key: 'acoes', 
+            label: "Ações", 
+            align: 'center',
+            render: (_, row) => (
                 <div className="flex justify-center gap-2">
-    
-                    <LinkButton 
-                        href={`/usuarios/${usuario.id_pessoa}`} 
-                        estilo="fantasma"
-                    >
-                        <UserSearch size={18} />
-                        <span className="hidden lg:inline">Perfil</span>
-                    </LinkButton>
-
-
-                    <LinkButton 
-                        href={`/usuarios/agendar/${usuario.id_pessoa}`} 
-                        estilo="primario"
-                    >
-                        <CalendarPlus size={18} />
-                        <span className="hidden xl:inline">Reserva</span>
-                    </LinkButton>
-
-                    <SubmitButton 
-                        onClick={() => acoes.editar(usuario)}
+                    <SubmitButton
+                        className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50/50 text-gray-700 hover:text-blue-600 transition-all active:scale-95"
                         estilo="secundario"
-                        title="Editar Usuário"
+                        onClick={() => editar(row)}
                     >
-                        <Pencil size={18} />
+                        <span>Editar</span>
+                        <Edit size={13} className="stroke-[2.5]" />
                     </SubmitButton>
 
-                    {usuario.ativo ? (
-                        <SubmitButton 
-                            onClick={() => acoes.desativar(usuario.id_pessoa)}
-                            estilo='perigo'
-                            title="Desativar"
+                    {row.ativo ? (
+                        <SubmitButton
+                            className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-transparent hover:border-red-200 bg-red-50/40 hover:bg-red-50 text-red-600 transition-all active:scale-95"
+                            estilo="fantasma"
+                            onClick={() => desativar(row)}
                         >
-                            <UserMinus size={18} />
+                            <span>Bloquear</span>
+                            <ShieldAlert size={13} className="stroke-[2.5]" />
                         </SubmitButton>
-                        ) : (
-                        <SubmitButton 
-                            onClick={() => acoes.ativar(usuario.id_pessoa)}
-                            estilo="secundario"
-                            className="text-green-500 hover:bg-green-50 p-2 rounded-md"
-                            title="Ativar"
+                    ) : (
+                        <SubmitButton
+                            className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-transparent hover:border-emerald-200 bg-emerald-50/40 hover:bg-emerald-50 text-emerald-600 transition-all active:scale-95"
+                            estilo="fantasma"
+                            onClick={() => ativar(row)}
                         >
-                            <UserCheck size={18} />
+                            <span>Ativar</span>
+                            <ShieldCheck size={13} className="stroke-[2.5]" />
                         </SubmitButton>
                     )}
                 </div>
             )
+        }
+    ], [editar, ativar, desativar]);
 
-        },
-
-    ],[acoes]);
-
-    return{
+    return {
         colunas
-    }
+    };
 }
