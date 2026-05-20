@@ -38,7 +38,9 @@ export const UsuarioSearchSchema = z.object({
         if (val === "true") return true;
         if (val === "false") return false;
         return undefined;
-    })
+    }),
+    page: z.coerce.number().int().default(1),
+    limit: z.coerce.number().int().default(10),
 })
 
 export type Usuario = z.infer<typeof UsuarioSchema>;

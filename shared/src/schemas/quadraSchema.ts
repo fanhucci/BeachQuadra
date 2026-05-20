@@ -42,7 +42,9 @@ export const QuadraSearchSchema = z.object({
         if (val === "false") return false;
         return undefined;
     })
-    .optional()
+    .optional(),
+    page: z.coerce.number().int().default(1),
+    limit: z.coerce.number().int().default(10),
 })
 
 export type Quadra = z.infer<typeof QuadraSchema>;
