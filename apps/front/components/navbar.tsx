@@ -64,7 +64,7 @@ export function ClientNavbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-800 text-white h-16 px-4 md:px-8 border-b border-gray-700 flex items-center justify-between">
+    <header className="sticky top-0 left-0 right-0 z-50 bg-gray-800 text-white h-16 px-4 md:px-8 border-b border-gray-700 flex items-center justify-between">
 
       <Link href="/" className="text-2xl font-bold tracking-tight">
         BeachQuadra
