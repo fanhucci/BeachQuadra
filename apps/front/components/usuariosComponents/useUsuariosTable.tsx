@@ -67,11 +67,10 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
 
                     <LinkButton
                         estilo="primario"    
-                        className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50/50 text-gray-700 hover:text-blue-600 transition-all active:scale-95"
-                        href={`/usuarios/agendar/${row.id_pessoa}`}
+                        className="w-fit h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border"
                     >
                         <span>Reservar</span>
-                        <Calendar    size={13} className="stroke-[2.5]" />
+                        <Calendar size={13} className="stroke-[2.5]" />
                     </LinkButton>
                     <SubmitButton
                         className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50/50 text-gray-700 hover:text-blue-600 transition-all active:scale-95"
