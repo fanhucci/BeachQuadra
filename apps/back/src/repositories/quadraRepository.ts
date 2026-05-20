@@ -4,28 +4,45 @@ import sql from "../infra/db";
 
 export default class QuadraRepository {
 
-    async listarQuadras(filtro:QuadraSearch){
-        return await sql`select * from quadras 
-            where 1=1
+    async listarQuadras(filtro: QuadraSearch) {
+        const { search, tipo, status, ativo, page = 1, limit = 10 } = filtro;
 
-            ${filtro.search
-                ?sql`and nome like ${'%'+filtro.search+'%'}`
-                :sql``
-            }
+        const offset = (Number(page) - 1) * Number(limit);
 
-            ${filtro.tipo
-            ? sql`and tipo = ${filtro.tipo}::"QuadraTypesEnum"`
-            : sql``}
-                
-            ${filtro.status !== undefined
-            ? sql`and status = ${filtro.status}`
-            : sql``}
+        const searchTexto = search ?? null;
+        const searchTipo = tipo ?? null;
+        const searchStatus = status !== undefined ? status : null;
+        const searchAtivo = ativo !== undefined ? ativo : null;
 
-            ${filtro.ativo !== undefined
-            ? sql`and ativo = ${filtro.ativo}`
-            : sql``}
-
-            order by id_quadra desc`;
+        return await sql`
+            with query_filtrada as (
+                select * 
+                from quadras 
+                where 1=1
+                    -- Filtro por Nome (ILIKE para ignorar maiúsculas/minúsculas)
+                    and (${searchTexto}::text is null or nome ilike '%' || ${searchTexto}::text || '%')
+                    
+                    -- Filtro por Tipo (Enum)
+                    and (${searchTipo}::text is null or tipo = ${searchTipo}::"QuadraTypesEnum")
+                    
+                    -- Filtro por Status (Se for Boolean ou Enum, ajuste o cast se necessário)
+                    and (${searchStatus}::boolean is null or status = ${searchStatus}::boolean)
+                    
+                    -- Filtro por Ativo (Boolean)
+                    and (${searchAtivo}::boolean is null or ativo = ${searchAtivo}::boolean)
+            ),
+            total_registros as (
+                select count(*) as total from query_filtrada
+            )
+            select 
+                q.*,
+                t.total::int as total_geral
+            from query_filtrada q
+            cross join total_registros t
+            order by q.id_quadra desc
+            limit ${Number(limit)}
+            offset ${offset};
+        `;
     }
 
     async adicionarQuadra(quadra:NovaQuadra){
