@@ -43,13 +43,16 @@ export default function AgendamentoFormComponent({
     }, [horarioSelecionado]);
 
     return (
-        <div className="flex flex-col flex-1  min-h-0 w-full items-center p-3 sm:p-4 bg-gray-50/30 overflow-hidden">
+
+        <div className="flex flex-col flex-1 h-full min-h-0 w-full items-center p-3 sm:p-4 bg-gray-50/30 overflow-hidden">
             
-            <div className="w-full lg:w-[90%] xl:w-[85%] 2xl:max-w-[1600px] flex flex-col min-h-0 gap-3">
+ 
+            <div className="w-full lg:w-[90%] xl:w-[85%] 2xl:max-w-[1600px] flex flex-col h-full min-h-0 gap-3">
                 
                 <section className="flex flex-col lg:flex-row flex-1 gap-4 min-h-0 overflow-y-auto lg:overflow-hidden pb-4 lg:pb-0">
                     
-                    <div className="flex-1 flex flex-col gap-3 min-h-[450px] lg:min-h-0">
+   
+                    <div className="flex-1 flex flex-col gap-3 min-h-0 h-full">
                         
                         <div className="flex flex-row justify-between items-center bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm flex-shrink-0">
                             <SubmitButton 
@@ -86,7 +89,8 @@ export default function AgendamentoFormComponent({
 
                     </div>
                     
-                    <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0  lg:min-h-0">
+
+                    <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0 lg:h-full lg:min-h-0">
                         
                         <div className="flex-shrink-0 border-b border-gray-100 pb-3">
                             <CustomSwitch
@@ -104,8 +108,7 @@ export default function AgendamentoFormComponent({
                                 Selecionados ({horarioSelecionado.length})
                             </h3>   
                      
-                            <div className="h-[150px] lg:h-full lg:min-h-0 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar">
-                                {/* Centralização total dos slots lá dentro */}
+                            <div className="h-[150px] lg:h-auto lg:flex-1 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar">
                                 <div className="flex flex-wrap gap-1.5 justify-center items-center w-full min-h-full">
                                     {horariosOrdenados.map(r => (
                                         <SelectedSlotButton
