@@ -51,7 +51,7 @@ export default function useQuadrasTable(acoes: AcoesQuadra) {
         { 
             key: "status", 
             label: "Disponibilidade",
-            align: "left",
+            align: "center",
             render: (value: boolean) => {
                 const style = value ? statusStyles.disponivel : statusStyles.indisponivel;
                 return (
@@ -65,7 +65,7 @@ export default function useQuadrasTable(acoes: AcoesQuadra) {
         { 
             key: "ativo", 
             label: "Status Cadastral",
-            align: "left",
+            align: "center",
             render: (value: boolean) => {
                 const style = value ? ativoStyles.ativa : ativoStyles.inativa;
                 return (
