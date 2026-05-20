@@ -152,7 +152,7 @@ export default function HorarioPage(){
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center gap-3">
                                                     <div className="p-2 bg-red-50 text-red-600 rounded-lg flex-shrink-0">
-                                                        <AlertCircle size={16} />
+                                                        <AlertCircle color="#ff0000" size={16} />
                                                     </div>
                                                     <span className="font-semibold text-sm text-gray-700 truncate">{b.motivo}</span>
                                                 </div>
@@ -201,7 +201,7 @@ export default function HorarioPage(){
             </div>
 
             <CustomModal
-                titulo="Novo Bloqueio"
+                titulo="Impedir Agendamentos"
                 estado={modalBloqueio}
                 fechar={toggleModal}
                 width="max-w-xl w-full"
@@ -223,10 +223,9 @@ export default function HorarioPage(){
                 ]}
             >
                 <div className="space-y-5">
-                    <div>
-                        <h3 className="text-lg font-bold text-gray-900 tracking-tight">Impedir Agendamentos</h3>
-                        <p className="text-xs text-gray-500">Nenhum cliente conseguirá reservar horários que sobreponham este intervalo.</p>
-                    </div>
+                    
+                    <p className="text-xs text-gray-500">Nenhum cliente conseguirá reservar horários que sobreponham este intervalo.</p>
+                    
 
                     <div className="space-y-4">
                         <CustomInput
