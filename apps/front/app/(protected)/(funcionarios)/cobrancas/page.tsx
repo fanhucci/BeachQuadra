@@ -10,6 +10,7 @@ import useCobrancaTable from "@/components/cobrancasComponents/cobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
 import { gerarPDFCobranças } from "@/utils/pdfHandler";
+import { apiRequest } from "@/utils/apiHandler";
 
 
 export default function CobrancasPage(){
@@ -32,7 +33,13 @@ export default function CobrancasPage(){
         editarSchema: EditarCobrancaSchema
     });
 
-    const handleExportarPDF = () => {
+    const {colunas} = useCobrancaTable();
+
+    const totalGeral = dados[0]?.total_geral ?? 0;
+    const naoTemProximaPagina = (page * limit) >= totalGeral;
+
+    const handleExportarPDF = async () => { 
+    
         const partesFiltro = [];
         if (filters.nome) partesFiltro.push(`Nome: "${filters.nome}"`);
         if (filters.data_inicio) partesFiltro.push(`De: "${filters.data_inicio}"`);
@@ -43,13 +50,23 @@ export default function CobrancasPage(){
             ? partesFiltro.join(" | ") 
             : "Nenhum (Todos os registros filtrados)";
 
-        gerarPDFCobranças(dados, textoFiltros);
+        try {
+
+            const filtroIlimitado = queryString.replace('limit=10', `limit=${totalGeral}`);
+
+            const resultado = await apiRequest(`/cobrancas?${filtroIlimitado}`);
+
+            const listaFinal = Array.isArray(resultado) ? resultado : (resultado?.dados || []);
+
+            gerarPDFCobranças(listaFinal, textoFiltros);
+
+        } catch (error) {
+            console.error("Erro ao buscar dados para o PDF:", error);
+            gerarPDFCobranças(dados, `${textoFiltros} (Parcial - Erro ao buscar todos)`);
+        }
     };
 
-    const {colunas} = useCobrancaTable();
 
-    const totalGeral = dados[0]?.total_geral ?? 0;
-    const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     return (
 
