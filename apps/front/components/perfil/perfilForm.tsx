@@ -222,66 +222,69 @@ export default function PerfilForm(
                 )
             }
             
-            {!isEditing && (
-                <div className="pt-6 flex flex-wrap gap-3 border-t border-gray-100">
+            </div>
 
-                    {(isUser || isAdmin) && (
-                        <SubmitButton
-                            estilo="primario"
-                            onClick={setEditingOn}
-                        >
-                            <span>Editar Perfil</span>
-                        </SubmitButton>
-                    )}
+            <div>
+                {!isEditing && (
+                    <div className="pt-6 flex flex-wrap gap-3 border-t border-gray-100">
+
+                        {(isUser || isAdmin) && (
+                            <SubmitButton
+                                estilo="primario"
+                                onClick={setEditingOn}
+                            >
+                                <span>Editar Perfil</span>
+                            </SubmitButton>
+                        )}
 
 
-                    {isUser && (
-                        <SubmitButton
-                            estilo="perigo" 
-                            onClick={() => {/* Sua lógica de abrir modal aqui */}}
-                        >
-                            <span>Alterar Minha Senha</span>
-                        </SubmitButton>
-                    )}
+                        {isUser && (
+                            <SubmitButton
+                                estilo="perigo" 
+                                onClick={() => {/* Sua lógica de abrir modal aqui */}}
+                            >
+                                <span>Alterar Minha Senha</span>
+                            </SubmitButton>
+                        )}
 
-                    {isAdmin && !isUser && (
-                        <SubmitButton
-                            estilo="perigo"
-                            onClick={() => {/* Chamada de API para redefinir */}}
-                        >
-                            <span>Redefinir Senha</span>
-                        </SubmitButton>
-                    )}
+                        {isAdmin && !isUser && (
+                            <SubmitButton
+                                estilo="perigo"
+                                onClick={() => {/* Chamada de API para redefinir */}}
+                            >
+                                <span>Redefinir Senha</span>
+                            </SubmitButton>
+                        )}
 
-                  
-                    {isAdmin && !isUser && !usuario?.ativo && (
-                        <SubmitButton
-                            estilo="primario"
-                            onClick={() => {/* Chamada de API para ativar */}}
-                        >
-                            <span>Ativar Conta</span>
-                        </SubmitButton>
-                    )}
+                    
+                        {isAdmin && !isUser && !usuario?.ativo && (
+                            <SubmitButton
+                                estilo="primario"
+                                onClick={() => {/* Chamada de API para ativar */}}
+                            >
+                                <span>Ativar Conta</span>
+                            </SubmitButton>
+                        )}
 
-                    {isAdmin && !isUser && usuario?.ativo && (
-                        <SubmitButton
-                            estilo="perigo"
-                            onClick={() => {/* Chamada de API para desativar */}}
-                        >
-                            <span>Desativar Conta</span>
-                        </SubmitButton>
-                    )}
+                        {isAdmin && !isUser && usuario?.ativo && (
+                            <SubmitButton
+                                estilo="perigo"
+                                onClick={() => {/* Chamada de API para desativar */}}
+                            >
+                                <span>Desativar Conta</span>
+                            </SubmitButton>
+                        )}
 
-                    {isAdmin && !isUser && (
-                        <SubmitButton
-                            estilo="perigo"
-                            onClick={() => {/* Chamada de API para deletar */}}
-                        >
-                            <span>Excluir Conta</span>
-                        </SubmitButton>
-                    )}
-                </div>
-            )}
+                        {isAdmin && !isUser && (
+                            <SubmitButton
+                                estilo="perigo"
+                                onClick={() => {/* Chamada de API para deletar */}}
+                            >
+                                <span>Excluir Conta</span>
+                            </SubmitButton>
+                        )}
+                    </div>
+                )}
             </div>
 
 
