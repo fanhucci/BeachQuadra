@@ -13,10 +13,9 @@ interface FiltrosHistorico {
 interface HistoricoFiltrosProps {
     types: FiltrosHistorico;
     handle: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-    onLimpar: () => void;
 }
 
-export default function PerfilHistoricoFiltrosForm({ types, handle }: Omit<HistoricoFiltrosProps, 'onLimpar'>) {
+export default function PerfilHistoricoFiltrosForm({ types, handle }: HistoricoFiltrosProps) {
     const opcoesStatus = [
         { value: "", label: "Todos" },
         { value: "concluido", label: "Concluído" },
@@ -25,45 +24,43 @@ export default function PerfilHistoricoFiltrosForm({ types, handle }: Omit<Histo
     ];
 
     return (
-        /* Removido o container de card, bordas e padding fixo para herdar a estrutura da página pai */
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 items-end">
+            
             <div className="col-span-1 md:col-span-2">
                 <CustomInput 
                     label="Pesquisar Código"
                     placeholder="Ex: #1234..."
                     name="search"
                     onChange={handle}
-                    value={types.search || ''}
+                    value={types.search ?? ""}
                 />
             </div>
 
-            <div className="col-span-1 md:col-span-1">
-                <CustomSelect 
-                    label="Status"
-                    name="status"
-                    options={opcoesStatus}
-                    value={String(types.status || '')}
-                    onChange={(n, v) => handle({ target: { name: n, value: v } } as any)}
-                />
-            </div>
+            <CustomSelect 
+                label="Status"
+                name="status"
+                options={opcoesStatus}
+                value={String(types.status ?? "")}
+                onChange={(n, v) => handle({ target: { name: n, value: v } } as any)}
+            />
 
-            <div className="col-span-1 md:col-span-1.5 lg:col-span-1.5 md:col-span-1">
+            <div className="col-span-1">
                 <CustomInput 
                     label="Data Inicial"
                     type="date"
                     name="dataInicio"
                     onChange={handle}
-                    value={types.dataInicio || ''}
+                    value={types.dataInicio ?? ""}
                 />
             </div>
 
-            <div className="col-span-1 md:col-span-1">
+            <div className="col-span-1">
                 <CustomInput 
                     label="Data Final"
                     type="date"
                     name="dataFim"
                     onChange={handle}
-                    value={types.dataFim || ''}
+                    value={types.dataFim ?? ""}
                 />
             </div>
         </div>
