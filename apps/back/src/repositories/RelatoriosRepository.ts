@@ -17,7 +17,7 @@ export default class RelatoriosRepository{
             with query_filtrada as (
                 select 
                     q.id_quadra,
-                    q.nome
+                    q.nome,
                     q.tipo,
                     count(r.id_reserva) filter (where r.status != 'cancelado')::int as total_reservas,
                     count(r.id_reserva) filter (where r.status = 'cancelado')::int as total_cancelamentos
