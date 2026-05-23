@@ -13,7 +13,7 @@ export default function PerfilPage({ id_perfil }: { id_perfil: number }) {
 
     if (!user) return <NaoAutenticado />;
 
-    const ehDonoDoPerfil = user.id_pessoa === id_perfil;
+    const ehDonoDoPerfil = Number(user.id_pessoa) === id_perfil;
     const ehAdminOuFuncionario = user.id_cargo > 1; 
 
     if (!ehDonoDoPerfil && !ehAdminOuFuncionario) return <SemAutorizacao />;
