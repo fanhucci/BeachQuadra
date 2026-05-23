@@ -4,7 +4,7 @@ import { Column } from "@/components/customTable";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import { Usuario } from "@app/shared";
 import { useMemo } from "react";
-import { Calendar, Edit, ShieldAlert, ShieldCheck } from "lucide-react";
+import { Calendar, Edit, ShieldAlert, ShieldCheck, User } from "lucide-react";
 import LinkButton from "../buttonComponents/linkButton";
 
 type UseUsuariosTableProps = {
@@ -72,6 +72,14 @@ export default function useUsuariosTable({ editar, ativar, desativar }: UseUsuar
                     >
                         <span>Reservar</span>
                         <Calendar size={13} className="stroke-[2.5]" />
+                    </LinkButton>
+                    <LinkButton
+                        estilo="secundario"    
+                        className="w-fit h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border"
+                        href={`/usuarios/${row.id_pessoa}`}
+                    >
+                        <span>Perfil</span>
+                        <User size={13} className="stroke-[2.5]" />
                     </LinkButton>
                     <SubmitButton
                         className="h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50/50 text-gray-700 hover:text-blue-600 transition-all active:scale-95"
