@@ -1,5 +1,5 @@
 
-import { UsuarioHistoricoSarch, EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
+import { UsuarioHistoricoSearch, EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
 import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
 
@@ -168,7 +168,7 @@ export default class PessoaRepository {
         `;
     }
 
-    async listarHistorico(id_pessoa:number, filtro:UsuarioHistoricoSarch){
+    async listarHistorico(id_pessoa:number, filtro:UsuarioHistoricoSearch){
 
         const { search, status, dataInicio, dataFim, page = 1, limit = 10 } = filtro;
 
@@ -212,7 +212,7 @@ export default class PessoaRepository {
             limit ${Number(limit)}
             offset ${offset};
         `;
-        
+
         return {
             saidas: resultado,
             total: resultado[0]?.total_geral || 0
