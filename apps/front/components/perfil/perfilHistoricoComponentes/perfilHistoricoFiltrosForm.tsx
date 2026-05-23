@@ -3,7 +3,6 @@
 import CustomInput from "@/components/inputsComponents/customInput";
 import CustomSelect from "@/components/inputsComponents/customSelect";
 
-
 interface FiltrosHistorico {
     search?: string;
     dataInicio?: string;
@@ -20,12 +19,12 @@ interface HistoricoFiltrosProps {
 export default function PerfilHistoricoFiltrosForm({ types, handle, onLimpar }: HistoricoFiltrosProps) {
     const opcoesStatus = [
         { value: "", label: "Todos" },
-        { value: "FINALIZADO", label: "Finalizado" },
-        { value: "PENDENTE", label: "Pendente" },
-        { value: "CANCELADO", label: "Cancelado" },
+        { value: "finalizado", label: "Finalizado" },
+        { value: "pendente", label: "Pendente" },
+        { value: "cancelado", label: "Cancelado" },
     ];
 
-    const temFiltroAtivo = types.search || types.dataInicio || types.dataFim || types.status;
+    const temFiltroAtivo = !!(types.search || types.dataInicio || types.dataFim || types.status);
 
     return (
         <div className="bg-white shadow-md rounded-2xl border border-gray-100 p-5">
@@ -65,7 +64,7 @@ export default function PerfilHistoricoFiltrosForm({ types, handle, onLimpar }: 
                     />
                 </div>
 
-                <div className="col-span-1 md:col-span-1.5">
+                <div className="col-span-1 md:col-span-1.5 lg:col-span-1.5 md:col-span-1">
                     <CustomInput 
                         label="Data Inicial"
                         type="date"
@@ -75,7 +74,7 @@ export default function PerfilHistoricoFiltrosForm({ types, handle, onLimpar }: 
                     />
                 </div>
 
-                <div className="col-span-1 md:col-span-1.5">
+                <div className="col-span-1 md:col-span-1">
                     <CustomInput 
                         label="Data Final"
                         type="date"
