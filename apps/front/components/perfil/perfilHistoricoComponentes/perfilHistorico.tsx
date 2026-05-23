@@ -47,7 +47,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
         async function carregarHistorico() {
             try {
                 setLoading(true);
-                const dados = await apiRequest(`/usuarios/${id_usuario}/saidas${queryString}`);
+                const dados = await apiRequest(`/usuarios/${id_usuario}/historico${queryString}`);
                 
                 setSaidas(dados.saidas || []);
                 setTotalItens(dados.total || 0);
