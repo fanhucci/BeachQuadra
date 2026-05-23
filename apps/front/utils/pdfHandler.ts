@@ -122,7 +122,7 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
 
 interface OcupacaoItem {
     id_quadra: string | number;
-    nome_quadra: string;
+    nome: string;
     tipo: 'individual' | 'duplas';
     total_reservas: number;
     total_cancelamentos: number;
@@ -146,7 +146,7 @@ export function gerarPDFOcupacao(dados: OcupacaoItem[], filtrosTexto: string) {
 
             if (reservasNum > acc.maiorVolume) {
                 acc.maiorVolume = reservasNum;
-                acc.quadraMaisPopular = item.nome_quadra;
+                acc.quadraMaisPopular = item.nome;
             }
 
             return acc;
@@ -206,7 +206,7 @@ export function gerarPDFOcupacao(dados: OcupacaoItem[], filtrosTexto: string) {
 
         return [
             `#${item.id_quadra}`,
-            item.nome_quadra,
+            item.nome,
             item.tipo === "individual" ? "Individual" : "Duplas",
             `${reservas}h`,
             cancelamentos.toString(),

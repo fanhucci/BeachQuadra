@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useUser } from "@/context/userContext";
 import SubmitButton from "./buttonComponents/submitButton";
-import { LogOut, User, Calendar, Users, DollarSign, Layers, Clock, Menu, CalendarDays, ChevronLeft, X } from "lucide-react";
+import { LogOut, User, Calendar, Users, DollarSign, Layers, Clock, Menu, CalendarDays, ChevronLeft, X, BookOpen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import LinkButton from "./buttonComponents/linkButton";
 
@@ -151,6 +151,7 @@ export function EmployeeSidebar() {
     { href: "/usuarios", label: "Usuários", icon: Users },
     { href: "/agenda", label: "Agenda", icon: Calendar },
     { href: "/cobrancas", label: "Cobranças", icon: DollarSign },
+    { href: "/ocupacao", label: "Ocupação", icon: BookOpen},
     { href: "/quadras", label: "Quadras", icon: Layers },
     { href: "/horario", label: "Horário", icon: Clock },
   ];
