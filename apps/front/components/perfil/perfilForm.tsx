@@ -33,7 +33,7 @@ export default function PerfilForm(
 
             const dados = await apiRequest(`/usuarios/${id_perfil}`);
 
-            setUsuario(dados);
+            setUsuario(dados.usuario);
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro ao buscar dados do perfil.");
         }
@@ -105,7 +105,7 @@ export default function PerfilForm(
     },[id_perfil])
     
     if(!usuario) return <>Nenhum usuario encontrado</>
-    
+
     return (
         <section className="max-w-3xl mx-auto p-6">
             {
@@ -183,6 +183,11 @@ export default function PerfilForm(
                         <Campo
                             label="Telefone"
                             valor={usuario?.telefone}
+                        />
+
+                        <Campo
+                            label="Cargo"
+                            valor={usuario?.cargo}
                         />
 
                         <Campo 
