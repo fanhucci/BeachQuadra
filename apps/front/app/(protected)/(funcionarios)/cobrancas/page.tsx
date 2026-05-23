@@ -32,9 +32,19 @@ export default function CobrancasPage(){
         editarSchema: EditarCobrancaSchema
     });
 
-        const handleExportarPDF = () =>{
-        gerarPDFCobranças(dados,filters)
-    }
+    const handleExportarPDF = () => {
+        const partesFiltro = [];
+        if (filters.nome) partesFiltro.push(`Nome: "${filters.nome}"`);
+        if (filters.data_inicio) partesFiltro.push(`De: "${filters.data_inicio}"`);
+        if (filters.data_fim) partesFiltro.push(`Até: "${filters.data_fim}"`);
+        if (filters.pagamento) partesFiltro.push(`Status: "${filters.pagamento}"`);
+
+        const textoFiltros = partesFiltro.length > 0 
+            ? partesFiltro.join(" | ") 
+            : "Nenhum (Todos os registros filtrados)";
+
+        gerarPDFCobranças(dados, textoFiltros);
+    };
 
     const {colunas} = useCobrancaTable();
 

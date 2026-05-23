@@ -87,6 +87,7 @@ export default function useFilter<F extends object>(valoresIniciais: F & BasePag
     const page = filters.page;
     const limit = valoresIniciais.limit;
     
+    
     return {
         queryString,
         filters,
