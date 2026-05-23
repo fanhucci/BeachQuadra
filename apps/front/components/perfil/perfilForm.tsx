@@ -121,9 +121,12 @@ export default function PerfilForm(
 
 
     return (
-        <section className="max-w-3xl mx-auto p-6 relative">
+        <section className="max-w-3xl mx-auto p-6">
 
-            {loading && (
+            <div className="relative">
+                <h3>Perfil</h3>
+
+                            {loading && (
                 <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-xl">
                     <div className="h-9 w-9 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
                 </div>
@@ -279,6 +282,7 @@ export default function PerfilForm(
                     )}
                 </div>
             )}
+            </div>
 
 
         </section>
