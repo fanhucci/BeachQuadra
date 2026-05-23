@@ -4,17 +4,10 @@ import { useState, useEffect } from "react";
 import useFilter from "@/hooksGenericos/useFilter";
 import { apiRequest } from "@/utils/apiHandler";
 import CustomTable from "@/components/customTable";
-
 import { toast } from "sonner";
-<<<<<<< HEAD
-
-=======
-import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
->>>>>>> 4d5f7bedd9acd456f5ef3109f07e6285a84a679b
 import PerfilHistoricoFiltrosForm from "./perfilHistoricoFiltrosForm";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
-
 
 interface FiltrosHistorico {
     search?: string;
@@ -58,7 +51,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                 setTotalItens(dados.total || 0);
             } catch (error) {
                 console.error(error);
-                toast.error("Não foi possível carregar o histórico de saídas.");
+                toast.error("Não foi possível carregar o histórico de agendamentos.");
             } finally {
                 setLoading(false);
             }
@@ -75,14 +68,12 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
 
     return (
         <section className="w-full space-y-6">
-
             <PerfilHistoricoFiltrosForm 
                 types={filters}
                 handle={handleFilters}
                 onLimpar={limparFiltros}
             />
 
-            {/* Listagem */}
             <div className="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden relative">
                 
                 {loading && (
@@ -98,11 +89,10 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
 
                 {saidas.length === 0 && !loading && (
                     <div className="px-6 py-12 text-center text-gray-400 font-medium">
-                        Nenhum registro de saída encontrado para os filtros selecionados.
+                        Nenhum registro de agendamento encontrado para os filtros selecionados.
                     </div>
                 )}
 
-                {/* Paginação */}
                 {saidas.length > 0 && (
                     <div className="bg-white border-t border-gray-100 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="text-xs sm:text-sm text-gray-500">
