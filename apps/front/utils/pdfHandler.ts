@@ -1,5 +1,14 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { dinheiroMask } from "./mascaras";
+
+
+
+const formatarDataUTC = (dataString: string | null): string => {
+    if (!dataString) return "Pendente";
+    return new Date(dataString).toLocaleDateString("pt-BR", { timeZone: "UTC" });
+};
+
 
 interface CobrancaItem {
     id_cobranca: string;
@@ -19,13 +28,15 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
     const totais = dados.reduce(
         (acc, item) => {
             const valorNum = Number(item.valor) || 0;
-            if(item.status.toLowerCase() === "concluido" || item.status.toLowerCase() === "pendente" ){
+            const statusLower = item.status.toLowerCase();
+
+            if(statusLower === "concluido" || statusLower === "pendente" ){
                 acc.totalGeral += valorNum;
             }
             
-            if (item.status.toLowerCase() === "concluido") {
+            if (statusLower === "concluido") {
                 acc.totalRecebido += valorNum;
-            } else if (item.status.toLowerCase() === "pendente") {
+            } else if (statusLower === "pendente") {
                 acc.totalPendente += valorNum;
             }
 
@@ -55,16 +66,15 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
     doc.text("TOTAL FATURADO", 14, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(31, 41, 55);
-    doc.text(`R$ ${totais.totalGeral.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`, 14, resumoY + 6);
+    doc.text(dinheiroMask(totais.totalGeral), 14, resumoY + 6);
 
-    doc.setFont("Helvetica", "bold");
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
     doc.setTextColor(107, 114, 128);
     doc.text("TOTAL RECEBIDO", 75, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(22, 163, 74); 
-    doc.text(`R$ ${totais.totalRecebido.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`, 75, resumoY + 6);
-
+    doc.text(dinheiroMask(totais.totalRecebido), 75, resumoY + 6);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
@@ -72,12 +82,10 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
     doc.text("TOTAL PENDENTE", 140, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(220, 38, 38); 
-    doc.text(`R$ ${totais.totalPendente.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`, 140, resumoY + 6);
+    doc.text(dinheiroMask(totais.totalPendente), 140, resumoY + 6);
 
     doc.setDrawColor(243, 244, 246);
     doc.line(14, resumoY + 12, 196, resumoY + 12);
-
-
 
     const colunas = ["ID", "Cliente", "Valor", "Status", "Data Pagamento"];
 
@@ -94,11 +102,9 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
     const linhas = dados.map((item) => [
         item.id_cobranca.toString(),
         item.nome,
-        `R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`,
+        dinheiroMask(item.valor),
         formatarStatus(item.status),
-        item.data_pagamento 
-            ? new Date(item.data_pagamento).toLocaleDateString("pt-BR") 
-            : "Pendente"
+        formatarDataUTC(item.data_pagamento)
     ]);
 
     autoTable(doc, {
@@ -115,7 +121,7 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
         margin: { left: 14, right: 14 },
     });
 
-    const dataHoje = new Date().toISOString().split('T')[0];
+    const dataHoje = new Date().toLocaleDateString("pt-BR", { timeZone: "UTC" }).replace(/\//g, "-");
     doc.save(`relatorio-cobrancas-${dataHoje}.pdf`);
 }
 
@@ -228,7 +234,7 @@ export function gerarPDFOcupacao(dados: OcupacaoItem[], filtrosTexto: string) {
         margin: { left: 14, right: 14 },
     });
 
-    const dataHoje = new Date().toISOString().split('T')[0];
+    const dataHoje = new Date().toLocaleDateString("pt-BR", { timeZone: "UTC" }).replace(/\//g, "-");
     doc.save(`relatorio-ocupacao-${dataHoje}.pdf`);
 }
 
@@ -291,7 +297,7 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
     doc.text("VALOR EM AGENDAMENTOS", 14, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(31, 41, 55);
-    doc.text(`R$ ${totais.totalFinanceiro.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`, 14, resumoY + 6);
+    doc.text(dinheiroMask(totais.totalFinanceiro), 14, resumoY + 6);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
@@ -328,9 +334,9 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
 
     const linhas = dados.map((item) => [
         `#${item.id_agendamento}`,
-        new Date(item.created_at).toLocaleDateString("pt-BR"),
+        formatarDataUTC(item.created_at), 
         `${item.quantidade_itens} un.`,
-        `R$ ${Number(item.valor_total).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`,
+        dinheiroMask(item.valor_total), 
         formatarStatus(item.status)
     ]);
 
@@ -348,9 +354,6 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
         margin: { left: 14, right: 14 },
     });
 
-    const dataHoje = new Date().toISOString().split('T')[0];
+    const dataHoje = new Date().toLocaleDateString("pt-BR", { timeZone: "UTC" }).replace(/\//g, "-");
     doc.save(`historico-agendamentos-${dataHoje}.pdf`);
 }
-
-
-

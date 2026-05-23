@@ -84,7 +84,6 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
         try {
             const textoFiltros = obterFiltrosTexto();
             gerarPDFHistorico(saidas, textoFiltros);
-            toast.success("PDF gerado com sucesso!");
         } catch (error) {
             console.error(error);
             toast.error("Erro ao gerar o arquivo PDF.");
