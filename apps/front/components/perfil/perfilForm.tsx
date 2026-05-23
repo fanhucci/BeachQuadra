@@ -104,6 +104,8 @@ export default function PerfilForm(
         buscarUsuario();
     },[id_perfil])
     
+    if(!usuario) return <>Nenhum usuario encontrado</>
+    
     return (
         <section className="max-w-3xl mx-auto p-6">
             {
@@ -165,22 +167,22 @@ export default function PerfilForm(
                     <div>
                         <Campo
                             label="Nome"
-                            valor={usuario?.nome || ''}
+                            valor={usuario?.nome}
                         />
 
                         <Campo
                             label="CPF"
-                            valor={usuario?.cpf || ''}
+                            valor={usuario?.cpf}
                         />
 
                         <Campo
                             label="E-mail"
-                            valor={usuario?.email || ''}
+                            valor={usuario?.email}
                         />
 
                         <Campo
                             label="Telefone"
-                            valor={usuario?.telefone || ''}
+                            valor={usuario?.telefone}
                         />
 
                         <Campo 
