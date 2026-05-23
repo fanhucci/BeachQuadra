@@ -5,3 +5,4 @@ export * from "./schemas/contaSchema";
 export * from "./schemas/usuarioSchema";
 export * from "./schemas/agendamentoSchema";
 export * from "./schemas/cobracaSchema";
+export * from "./schemas/ocupacaoSchema";

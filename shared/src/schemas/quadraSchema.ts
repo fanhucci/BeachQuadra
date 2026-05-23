@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const tiposQuadraEnum = [
+export const tiposQuadraEnum = [
     "individual",
     "duplas"
 ] as const;

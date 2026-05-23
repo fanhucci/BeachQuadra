@@ -12,9 +12,9 @@ export default class QuadraController{
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
-        const usuarios = await this.service.listarQuadras(parse.data);
+        const quadras = await this.service.listarQuadras(parse.data);
 
-        res.json(usuarios);
+        res.json(quadras);
        
     }
 
