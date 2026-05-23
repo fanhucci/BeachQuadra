@@ -353,6 +353,8 @@ function ModalSenha({estado, abrir, fechar}:{estado:boolean, abrir:()=>void, fec
 
             <CustomInput
                 name="senha"
+                label="Senha"
+                placeholder="******"
                 value={formDataSenha.senha || ''}
                 onChange={handleChange}
                 erro={errosSenha.senha}
@@ -361,6 +363,8 @@ function ModalSenha({estado, abrir, fechar}:{estado:boolean, abrir:()=>void, fec
 
             <CustomInput
                 name="senhaConfirmar"
+                label="Confirmar Senha"
+                placeholder="******"
                 value={formDataSenha.senhaConfirmar || ''}
                 onChange={handleChange}
                 erro={errosSenha.senhaConfirmar}

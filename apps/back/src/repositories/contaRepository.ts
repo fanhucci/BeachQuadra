@@ -58,12 +58,25 @@ export default class ContaRepository{
         `;
         return resposta ?? null;
     }
+
+    async buscarContaPorPessoa(id_usuario: number) {
+  
+        const [{ id_conta } = {}] = await sql`
+            select c.id_conta 
+            from contas c
+            where c.id_pessoa = ${id_usuario}
+        `; 
+        
+        return id_conta ?? null;
+    }
     
     async alterarSenhaPorId(id:number,senha:string){
         const [resposta] = await sql`
-            update contas c set c.senha = ${senha} where c.id_pessoa = ${id} 
-            join pessoas p
-                on p.id_pessoa = c.id_pessoa 
+            update contas c 
+            set senha = ${senha} 
+            from pessoas p
+            where c.id_pessoa = p.id_pessoa
+                and c.id_conta =  ${id} 
             returning p.email
         `;
         return resposta;

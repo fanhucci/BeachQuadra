@@ -30,9 +30,14 @@ export default class ContaService{
 
     async alterarMinhaSenha(usuario:number, senhas:AlterarSenhaPerfil){
 
+        const id_conta = await this.conta.buscarContaPorPessoa(usuario);
+
+        if(!id_conta) throw new AppError('Id inválido', 400);
+
         const senhaHash = await bcrypt.hash(senhas.senha,10);
 
-        return await this.conta.alterarSenhaPorId(usuario, senhaHash);
+
+        return await this.conta.alterarSenhaPorId(id_conta, senhaHash);
         
     }
 
