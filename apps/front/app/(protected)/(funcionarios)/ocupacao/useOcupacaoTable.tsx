@@ -22,7 +22,7 @@ export default function useOcupacaoTable() {
         },
         { 
             key: 'nome', 
-            label: 'Quadra / Complexo',
+            label: 'Quadra',
             render: (value: string, row) => {
                 const labelCategoria = row.tipo === 'individual' ? 'Individual' : 'Duplas';
                 
