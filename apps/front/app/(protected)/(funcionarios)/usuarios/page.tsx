@@ -66,23 +66,23 @@ export default function UsuariosPage(){
     const naoTemProximaPagina = (page * limit) >= totalGeral;
 
     const totaisTela = dados.reduce(
-    (acc, item) => {
-        const valorNum = Number(item.valor) || 0;
-        
-        if(item.status.toLowerCase() === "concluido" || item.status.toLowerCase() === "pendente" ){
-            acc.totalGeral += valorNum;
-        }
-            
-        if (item.status.toLowerCase() === "concluido") {
-            acc.totalRecebido += valorNum;
-        } else if (item.status.toLowerCase() === "pendente") {
-            acc.totalPendente += valorNum;
-        }
+        (acc, item) => {
+            const valorNum = Number(item.valor) || 0;
 
-        return acc;
-    },
-    { totalGeral: 0, totalRecebido: 0, totalPendente: 0 }
-);
+            if(item.status.toLowerCase() === "concluido" || item.status.toLowerCase() === "pendente" ){
+                acc.totalGeral += valorNum;
+            }
+                
+            if (item.status.toLowerCase() === "concluido") {
+                acc.totalRecebido += valorNum;
+            } else if (item.status.toLowerCase() === "pendente") {
+                acc.totalPendente += valorNum;
+            }
+
+            return acc;
+        },
+        { totalGeral: 0, totalRecebido: 0, totalPendente: 0 }
+    );
 
     return(
         <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
@@ -126,6 +126,7 @@ export default function UsuariosPage(){
                         handle={handleFilters}
                     />
                 </section>
+
                 <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-shrink-0">
 
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
@@ -135,7 +136,7 @@ export default function UsuariosPage(){
                         </span>
                     </div>
 
-                    {/* Card Total Recebido */}
+ 
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Recebido</span>
                         <span className="text-xl font-bold text-green-600">
@@ -143,7 +144,6 @@ export default function UsuariosPage(){
                         </span>
                     </div>
 
-                    {/* Card Total Pendente */}
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Pendente</span>
                         <span className="text-xl font-bold text-red-600">
