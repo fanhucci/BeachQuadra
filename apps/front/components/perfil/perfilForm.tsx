@@ -11,7 +11,7 @@ import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import Campo from "../inputsComponents/campo";
 import NaoEncontrado from "../erros/naoEncontrado";
 import CustomModal from "../customModal";
-import { AleterarSenhaErro } from "@/app/(protected)/(cliente)/perfil/usePerfil";
+
 
 interface PerfilUsuario {
     id_pessoa: number;
@@ -235,7 +235,7 @@ export default function PerfilForm({
 
                             {isUser && (
                                 <div className="w-full sm:w-auto">
-                                    <SubmitButton estilo="perigo" type="button" onClick={() => {/* Modal */}}>
+                                    <SubmitButton estilo="perigo" type="button" onClick={abrirModalSenha}>
                                         <span className="w-full text-center">Alterar Minha Senha</span>
                                     </SubmitButton>
                                 </div>
