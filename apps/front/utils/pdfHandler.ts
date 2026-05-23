@@ -233,5 +233,124 @@ export function gerarPDFOcupacao(dados: OcupacaoItem[], filtrosTexto: string) {
 }
 
 
+export interface HistoricoItem {
+    id_agendamento: number;
+    created_at: string;
+    valor_total: number;
+    status: 'finalizado' | 'pendente' | 'cancelado' | 'FINALIZADO' | 'PENDENTE' | 'CANCELADO';
+    quantidade_itens: number;
+}
+
+export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) {
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+    });
+
+    const totais = dados.reduce(
+        (acc, item) => {
+            const valorNum = Number(item.valor_total) || 0;
+            const reservasNum = Number(item.quantidade_itens) || 0;
+            const statusLower = item.status.toLowerCase();
+
+            if (statusLower === "finalizado" || statusLower === "pendente") {
+                acc.totalFinanceiro += valorNum;
+                acc.totalReservasValidas += reservasNum;
+            }
+
+            if (statusLower === "cancelado") {
+                acc.totalCancelados += 1;
+            } else {
+                acc.totalAgendamentosValidos += 1;
+            }
+
+            return acc;
+        },
+        { totalFinanceiro: 0, totalReservasValidas: 0, totalAgendamentosValidos: 0, totalCancelados: 0 }
+    );
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor(31, 41, 55); 
+    doc.text("Histórico de Agendamentos do Usuário", 14, 20);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(107, 114, 128); 
+    doc.text(`Filtros ativos: ${filtrosTexto}`, 14, 26);
+    
+    doc.setDrawColor(229, 231, 235);
+    doc.line(14, 30, 196, 30);
+
+    const resumoY = 36; 
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(107, 114, 128);
+    doc.text("VALOR EM AGENDAMENTOS", 14, resumoY);
+    doc.setFontSize(14);
+    doc.setTextColor(31, 41, 55);
+    doc.text(`R$ ${totais.totalFinanceiro.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`, 14, resumoY + 6);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(107, 114, 128);
+    doc.text("TOTAL DE RESERVAS (QTD)", 75, resumoY);
+    doc.setFontSize(14);
+    doc.setTextColor(79, 70, 229); 
+    doc.text(`${totais.totalReservasValidas} un.`, 75, resumoY + 6);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(107, 114, 128);
+    doc.text("CONCLUÍDOS / CANCELADOS", 140, resumoY);
+    doc.setFontSize(12);
+    doc.setTextColor(31, 41, 55); 
+    doc.text(`${totais.totalAgendamentosValidos} ativo(s) / `, 140, resumoY + 6);
+    
+    const larguraTextoAtivo = doc.getTextWidth(`${totais.totalAgendamentosValidos} ativo(s) / `);
+    doc.setTextColor(220, 38, 38);
+    doc.text(`${totais.totalCancelados} canc.`, 140 + larguraTextoAtivo, resumoY + 6);
+
+    doc.setDrawColor(243, 244, 246);
+    doc.line(14, resumoY + 12, 196, resumoY + 12);
+
+    const colunas = ["ID Agendamento", "Data do Registro", "Qtd. Reservas", "Valor Total", "Status"];
+
+    const formatarStatus = (status: string) => {
+        const s = status.toLowerCase();
+        if (s === "finalizado") return "Finalizado";
+        if (s === "pendente") return "Pendente";
+        if (s === "cancelado") return "Cancelado";
+        return status; 
+    };
+
+    const linhas = dados.map((item) => [
+        `#${item.id_agendamento}`,
+        new Date(item.created_at).toLocaleDateString("pt-BR"),
+        `${item.quantidade_itens} un.`,
+        `R$ ${Number(item.valor_total).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`,
+        formatarStatus(item.status)
+    ]);
+
+    autoTable(doc, {
+        head: [colunas],
+        body: linhas,
+        startY: 54, 
+        styles: { font: "helvetica", fontSize: 9, cellPadding: 3 },
+        headStyles: {
+            fillColor: [31, 41, 55],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+        },
+        alternateRowStyles: { fillColor: [249, 250, 251] }, 
+        margin: { left: 14, right: 14 },
+    });
+
+    const dataHoje = new Date().toISOString().split('T')[0];
+    doc.save(`historico-agendamentos-${dataHoje}.pdf`);
+}
+
 
 

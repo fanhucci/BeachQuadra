@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import PerfilHistoricoFiltrosForm from "./perfilHistoricoFiltrosForm";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
+import { gerarPDFHistorico } from "@/utils/pdfHandler";
 
 interface FiltrosHistorico {
     search?: string;
@@ -62,6 +63,32 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
         }
     }, [queryString, id_usuario]);
 
+    const obterFiltrosTexto = () => {
+        const partes: string[] = [];
+        if (filters.search) partes.push(`Código: ${filters.search}`);
+        if (filters.status) partes.push(`Status: ${filters.status}`);
+        if (filters.dataInicio) partes.push(`Início: ${new Date(filters.dataInicio).toLocaleDateString('pt-BR')}`);
+        if (filters.dataFim) partes.push(`Fim: ${new Date(filters.dataFim).toLocaleDateString('pt-BR')}`);
+        
+        return partes.length > 0 ? partes.join(" | ") : "Nenhum";
+    };
+
+    const handleExportarPDF = () => {
+        if (saidas.length === 0) {
+            toast.warning("Não há registros exibidos para gerar o relatório.");
+            return;
+        }
+
+        try {
+            const textoFiltros = obterFiltrosTexto();
+            gerarPDFHistorico(saidas, textoFiltros);
+            toast.success("PDF gerado com sucesso!");
+        } catch (error) {
+            console.error(error);
+            toast.error("Erro ao gerar o arquivo PDF.");
+        }
+    };
+
     const totalPaginas = Math.ceil(totalItens / limit) || 1;
     const itemInicial = (page - 1) * limit + 1;
     const itemFinal = Math.min(page * limit, totalItens);
@@ -73,6 +100,19 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                 handle={handleFilters}
                 onLimpar={limparFiltros}
             />
+
+            <div className="flex justify-end pr-1">
+                <button
+                    type="button"
+                    onClick={handleExportarPDF}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-sm font-semibold shadow-sm transition-all active:scale-[0.98]"
+                >
+                    <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Exportar PDF
+                </button>
+            </div>
 
             <div className="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden relative">
                 
