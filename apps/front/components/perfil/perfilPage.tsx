@@ -4,21 +4,20 @@ import { useState } from "react";
 import { useUser } from "@/context/userContext";
 import PerfilForm from "./perfilForm";
 import PerfilHistorico from "./perfilHistorico";
+import SemAutorizacao from "../erros/semAutorizacao";
+import NaoAutenticado from "../erros/naoAutenticado";
 
 export default function PerfilPage({id_perfil}:{id_perfil:number}) {
     const { user } = useUser();
     const [abaAtiva, setAbaAtiva] = useState<"cadastro" | "historico">("cadastro");
 
-    if (!user) {
-        return <div className="p-6 text-center text-red-500">Usuário não autenticado.</div>;
-    }
+    if (!user) return <NaoAutenticado/>
 
     const ehDonoDoPerfil = user.id_pessoa === id_perfil;
     const ehAdminOuFuncionario = user.id_cargo > 1; 
 
-    if (!ehDonoDoPerfil && !ehAdminOuFuncionario) {
-        return <div className="p-6 text-center text-gray-500 font-medium">Sem permissão para acessar este perfil.</div>;
-    }
+    if (!ehDonoDoPerfil && !ehAdminOuFuncionario)return <SemAutorizacao/>
+    
 
     return (
         <section className="max-w-4xl mx-auto p-6">

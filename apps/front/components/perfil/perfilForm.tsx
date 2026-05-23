@@ -2,13 +2,25 @@
 
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
-import { EditarUsuario, EditarUsuarioSchema, Usuario } from "@app/shared";
+import { EditarUsuario, EditarUsuarioSchema } from "@app/shared";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "../buttonComponents/submitButton";
 import CustomInput from "../inputsComponents/customInput";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import Campo from "../inputsComponents/campo";
+import NaoEncontrado from "../erros/naoEncontrado";
+
+interface PerfilUsuario {
+    id_pessoa:number;
+    nome:string;
+    email:string;
+    cpf:string;
+    telefone:string;
+    id_cargo:number;
+    cargo:string;
+    ativo:boolean;
+}
 
 export default function PerfilForm(
 {   
@@ -21,9 +33,9 @@ export default function PerfilForm(
     isAdmin:boolean;
 }){
 
-    const [usuario,setUsuario] = useState<Usuario|null>(null);
+    const [usuario,setUsuario] = useState<PerfilUsuario|null>(null);
     const [formData,setFormData] = useState<EditarUsuario>({id_pessoa:0});
-    const [erros,setErros] = useState<Partial<Record<keyof Usuario, string>>>({});
+    const [erros,setErros] = useState<Partial<Record<keyof EditarUsuario, string>>>({});
     const [isEditing,setIsEditing] = useState<boolean>(false);
     const [loading,setLoading] = useState<boolean>(false);
 
@@ -104,12 +116,20 @@ export default function PerfilForm(
         buscarUsuario();
     },[id_perfil])
     
-    if(!usuario) return <>Nenhum usuario encontrado</>
+    if(!usuario && !loading) return <NaoEncontrado/>
+
+
 
     return (
-        <section className="max-w-3xl mx-auto p-6">
-            {
-                isEditing?
+        <section className="max-w-3xl mx-auto p-6 relative">
+
+            {loading && (
+                <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-xl">
+                    <div className="h-9 w-9 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+                </div>
+            )}
+
+            {isEditing?
                 (
                     <form onSubmit={salvarUsuario}>
 
@@ -167,27 +187,27 @@ export default function PerfilForm(
                     <div>
                         <Campo
                             label="Nome"
-                            valor={usuario?.nome}
+                            valor={usuario?.nome || ''}
                         />
 
                         <Campo
                             label="CPF"
-                            valor={usuario?.cpf}
+                            valor={usuario?.cpf || ''}
                         />
 
                         <Campo
                             label="E-mail"
-                            valor={usuario?.email}
+                            valor={usuario?.email || ''}
                         />
 
                         <Campo
                             label="Telefone"
-                            valor={usuario?.telefone}
+                            valor={usuario?.telefone || ''}
                         />
 
                         <Campo
                             label="Cargo"
-                            valor={usuario?.cargo}
+                            valor={usuario?.cargo || ''}
                         />
 
                         <Campo 
@@ -197,7 +217,6 @@ export default function PerfilForm(
                        
                     </div>
                 )
-
             }
             
             {!isEditing && (
