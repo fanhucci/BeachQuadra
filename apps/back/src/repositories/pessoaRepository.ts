@@ -180,25 +180,25 @@ export default class PessoaRepository {
 
         const resultado = await sql`
             select 
-                s.id_saida,
-                s.data_saida,
-                s.valor_total,
-                s.status,
-                count(its.id_item)::int as quantidade_itens,
+                a.id_agendamento,
+                a.created_at,
+                a.valor_total,
+                a.status,
+                count(r.id_reserva)::int as quantidade_itens,
                 count(*) over()::int as total_geral
-            from saidas s
-            left join itens_saida its on s.id_saida = its.id_saida
-            where s.id_pessoa = ${id_pessoa}
-                and (${searchStatus}::text is null or s.status = ${searchStatus}::text)
-                and (${dataInicial}::date is null or s.data_saida >= ${dataInicial}::date)
-                and (${dataFinal}::date is null or s.data_saida <= ${dataFinal}::date)
-                and (${searchTexto}::text is null or s.id_saida::text ilike '%' || ${searchTexto}::text || '%')
+            from public.agendamentos a
+            left join public.reservas r on a.id_agendamento = r.id_agendamento
+            where a.id_pessoa = ${id_pessoa}
+                and (${searchStatus}::text is null or a.status = ${searchStatus}::text)
+                and (${dataInicial}::date is null or a.created_at >= ${dataInicial}::date)
+                and (${dataFinal}::date is null or a.created_at <= ${dataFinal}::date)
+                and (${searchTexto}::text is null or a.id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
             group by 
-                s.id_saida,
-                s.data_saida,
-                s.valor_total,
-                s.status
-            order by s.data_saida desc, s.id_saida desc
+                a.id_agendamento,
+                a.created_at,
+                a.valor_total,
+                a.status
+            order by a.created_at desc, a.id_agendamento desc
             limit ${Number(limit)}
             offset ${offset};
         `;
