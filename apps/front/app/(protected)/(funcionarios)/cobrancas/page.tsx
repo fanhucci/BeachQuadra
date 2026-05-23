@@ -5,13 +5,16 @@ import useFilter from "@/hooksGenericos/useFilter";
 import usePageCrud from "@/hooksGenericos/usePageCrud";
 import { NovaCobrancaSchema, EditarCobrancaSchema, Cobranca, CobrancaSearch } from "@app/shared";
 import SubmitButton from "@/components/buttonComponents/submitButton";
-import { ChevronLeft, ChevronRight, Banknote, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Banknote, Plus, FileDown } from "lucide-react";
 import useCobrancaTable from "@/components/cobrancasComponents/cobrancaTable";
 import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
+import { gerarPDFCobranças } from "@/utils/pdfHandler";
+
 
 export default function CobrancasPage(){
     
+
     const {queryString, filters, page, limit, handleFilters, limparFiltros, proximaPagina, voltarPagina, trocarPagina} = useFilter<CobrancaSearch>({
         nome:'',
         page:1,
@@ -28,6 +31,10 @@ export default function CobrancasPage(){
         criarSchema: NovaCobrancaSchema,
         editarSchema: EditarCobrancaSchema
     });
+
+        const handleExportarPDF = () =>{
+        gerarPDFCobranças(dados,filters)
+    }
 
     const {colunas} = useCobrancaTable();
 
@@ -51,14 +58,26 @@ export default function CobrancasPage(){
                         </div>
                     </div>
                     
-                    <LinkButton 
-                        estilo="primario"
-                        href={'/usuarios/agendar'}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 font-semibold text-sm shadow-sm transition-all"
-                    >
-                        <Plus size={16} />
-                        <span>Nova Cobrança</span>
-                    </LinkButton>
+                    <div className="flex items-center gap-3 self-end sm:self-center">
+                        <button 
+                            type="button"
+                            onClick={handleExportarPDF}
+                            disabled={dados.length === 0 || loading}
+                            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 font-semibold text-sm shadow-sm transition-all bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 disabled:opacity-40"
+                        >
+                            <FileDown size={16} />
+                            <span>Exportar PDF</span>
+                        </button>
+
+                        <LinkButton 
+                            estilo="primario"
+                            href={'/usuarios/agendar'}
+                            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 font-semibold text-sm shadow-sm transition-all"
+                        >
+                            <Plus size={16} />
+                            <span>Nova Cobrança</span>
+                        </LinkButton>
+                    </div>
                 </header>
 
                 <section className="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-4 flex-shrink-0">
