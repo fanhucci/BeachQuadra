@@ -184,10 +184,10 @@ export default class PessoaRepository {
                 s.data_saida,
                 s.valor_total,
                 s.status,
-                count(is.id_item)::int as quantidade_itens,
+                count(its.id_item)::int as quantidade_itens,
                 count(*) over()::int as total_geral
             from saidas s
-            left join itens_saida is on s.id_saida = is.id_saida
+            left join itens_saida its on s.id_saida = its.id_saida
             where s.id_pessoa = ${id_pessoa}
                 and (${searchStatus}::text is null or s.status = ${searchStatus}::text)
                 and (${dataInicial}::date is null or s.data_saida >= ${dataInicial}::date)
