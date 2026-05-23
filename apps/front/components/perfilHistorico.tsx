@@ -57,7 +57,7 @@ export default function PerfilHsitorico({ id_usuario }: { id_usuario: number }) 
                 />
             </div>
 
-            {/* Listagem (Requisito: Relatório de Histórico) */}
+
             <div className="bg-white shadow rounded-2xl overflow-hidden">
                 <CustomTable columns={colunas} data={[]} totalRows={0} page={1} setPage={() => {}} />
             </div>

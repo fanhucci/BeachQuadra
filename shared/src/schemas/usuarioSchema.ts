@@ -49,6 +49,19 @@ export type NovoUsuarioProprio = z.infer<typeof NovoUsuarioProprioSchema>;
 export type EditarUsuario = z.infer<typeof EditarUsuarioSchema>;
 export type UsuarioSearch = z.infer<typeof UsuarioSearchSchema>;
 
+
+export const UsuarioHistoricoSearchSchema = z.object({
+    search: z.string().optional(),
+    dataInicio: z.string().optional(),
+    dataFim: z.string().optional(),
+    status: z.string().optional(),
+    page: z.coerce.number().int().default(1),
+    limit: z.coerce.number().int().default(10),
+})
+
+export type UsuarioHistoricoSearch = z.infer<typeof UsuarioHistoricoSearchSchema>;
+
+
 export const PerfilSchema = z.object({
     usuario:UsuarioSchema.extend({
         cargo:z.string()

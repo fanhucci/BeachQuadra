@@ -2,7 +2,7 @@
 
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
-import { AlterarSenhaDTO, AlterarSenhaPerfil, AlterarSenhaPerfilSchema, EditarUsuario, EditarUsuarioSchema } from "@app/shared";
+import { AlterarSenhaPerfil, AlterarSenhaPerfilSchema, EditarUsuario, EditarUsuarioSchema } from "@app/shared";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "../buttonComponents/submitButton";
@@ -44,7 +44,7 @@ export default function PerfilForm({
     async function buscarUsuario() {
         try {
             setLoading(true);
-            const dados = await apiRequest(`/usuarios/${id_perfil}`);
+            const dados = await apiRequest(`/usuarios/${id_perfil}/historico`);
             setUsuario(dados.usuario);
         } catch (error) {
             toast.error(error instanceof Error ? error.message : "Erro ao buscar dados do perfil.");
@@ -330,6 +330,14 @@ function ModalSenha({estado, abrir, fechar}:{estado:boolean, abrir:()=>void, fec
             [name]:value
         }))
     }
+
+    useEffect(()=>{
+        if(!estado){
+            setFormDataSenha({})
+            setErrosSenha({})
+        }
+    },[estado]);
+
     return(
         <CustomModal
             estado={estado}

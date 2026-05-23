@@ -1,4 +1,4 @@
-import { UsuarioSearchSchema, NovoUsuarioSchema, NovoUsuarioProprioSchema, EditarUsuarioSchema  } from "@app/shared";
+import { UsuarioHistoricoSearchSchema,UsuarioSearchSchema, NovoUsuarioSchema, NovoUsuarioProprioSchema, EditarUsuarioSchema  } from "@app/shared";
 import { Request, Response } from 'express';
 import UsuarioService from "../services/usuarioService";
 
@@ -26,6 +26,19 @@ export default class UsuarioController{
         const usuario = await this.service.listarUsuarioPorId(id,id);
 
         res.json(usuario);
+    }
+
+    async listarHistorico(req:Request, res:Response){
+
+        const id = Number(req.params.id);
+
+        const parse = UsuarioHistoricoSearchSchema.safeParse(req.query);
+
+        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+
+        const historico = await this.service.listarHistoricoPerfil(id,parse.data);
+
+        res.status(200).json(historico);
     }
 
     async listarUsuarioPorId(req:Request, res:Response){

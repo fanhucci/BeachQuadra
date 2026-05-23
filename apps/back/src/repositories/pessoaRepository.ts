@@ -1,5 +1,5 @@
 
-import { EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
+import { UsuarioHistoricoSarch, EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
 import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
 
@@ -168,5 +168,55 @@ export default class PessoaRepository {
         `;
     }
 
+    async listarHistorico(id_pessoa:number, filtro:UsuarioHistoricoSarch){
+
+        const { search, status, dataInicio, dataFim, page = 1, limit = 10 } = filtro;
+
+        const offset = (Number(page) - 1) * Number(limit);
+
+        const searchTexto = search || null;
+        const searchStatus = status || null;
+        const dataInicial = dataInicio || null;
+        const dataFinal = dataFim || null;
+
+        const resultado = await sql`
+            with query_filtrada as (
+                select 
+                    s.id_saida,
+                    s.data_saida,
+                    s.valor_total,
+                    s.status,
+                    count(is.id_item)::int as quantidade_itens
+                from saidas s
+                left join itens_saida is on s.id_saida = is.id_saida
+                where s.id_pessoa = ${id_pessoa}
+                    and (${searchStatus}::text is null or s.status = ${searchStatus}::text)
+                    and (${dataInicial}::date is null or s.data_saida >= ${dataInicial}::date)
+                    and (${dataFinal}::date is null or s.data_saida <= ${dataFinal}::date)
+                    and (${searchTexto}::text is null or s.id_saida::text ilike '%' || ${searchTexto}::text || '%')
+                group by 
+                    s.id_saida,
+                    s.data_saida,
+                    s.valor_total,
+                    s.status
+            ),
+            total_registros as (
+                select count(*) as total from query_filtrada
+            )
+            select 
+                q.*,
+                t.total::int as total_geral
+            from query_filtrada q
+            cross join total_registros t
+            order by q.data_saida desc, q.id_saida desc
+            limit ${Number(limit)}
+            offset ${offset};
+        `;
+        
+        return {
+            saidas: resultado,
+            total: resultado[0]?.total_geral || 0
+        };
+    }
 
 }

@@ -1,4 +1,4 @@
-import { UsuarioSearch, NovoUsuario, NovoUsuarioProprio, EditarUsuario } from "@app/shared";
+import { UsuarioHistoricoSarch, UsuarioSearch, NovoUsuario, NovoUsuarioProprio, EditarUsuario } from "@app/shared";
 import PessoaRepository from "../repositories/pessoaRepository";
 import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
@@ -38,6 +38,10 @@ export default class UsuarioService{
             }
         }
         return resposta;
+    }
+
+    async listarHistoricoPerfil(id_perfil:number, filtro:UsuarioHistoricoSarch){
+        return await this.pessoa.listarHistorico(id_perfil,filtro);
     }
 
     async adicionarUsuarioProprio (dados:NovoUsuarioProprio ){

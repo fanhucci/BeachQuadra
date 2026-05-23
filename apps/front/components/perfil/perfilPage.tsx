@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@/context/userContext";
 import PerfilForm from "./perfilForm";
-import PerfilHistorico from "./perfilHistorico";
+import PerfilHistorico from "./perfilHistoricoComponentes/perfilHistorico";
 import SemAutorizacao from "../erros/semAutorizacao";
 import NaoAutenticado from "../erros/naoAutenticado";
 

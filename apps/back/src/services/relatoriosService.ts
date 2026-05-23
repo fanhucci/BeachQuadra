@@ -1,5 +1,5 @@
 import {OcupacaoSearch} from "@app/shared";
-import RelatoriosRepository from "../repositories/RelatoriosRepository";
+import RelatoriosRepository from "../repositories/relatoriosRepository";
 
 export default class RelatoriosService{
     private repo = new RelatoriosRepository();
