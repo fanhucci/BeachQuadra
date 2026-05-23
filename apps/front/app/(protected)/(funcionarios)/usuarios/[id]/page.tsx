@@ -1,7 +1,5 @@
 'use client'
 import { useParams } from "next/navigation";
-import { useUsuario } from "./useUsuario";
-import UsuarioPerfilForm from "@/components/usuarioPerfilForm";
 import PerfilPage from "@/components/perfil/perfilPage";
 import { useEffect, useState } from "react";
 import NaoEncontrado from "@/components/erros/naoEncontrado";

@@ -9,6 +9,7 @@ import PerfilHistoricoFiltrosForm from "./perfilHistoricoFiltrosForm";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
 import { gerarPDFHistorico } from "@/utils/pdfHandler";
+import { FileDown } from "lucide-react"; // Importado para manter a mesma iconografia
 
 interface FiltrosHistorico {
     search?: string;
@@ -95,24 +96,38 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
 
     return (
         <section className="w-full space-y-6">
-            <PerfilHistoricoFiltrosForm 
-                types={filters}
-                handle={handleFilters}
-                onLimpar={limparFiltros}
-            />
+            
+            <section className="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-4 flex-shrink-0">
+                <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Filtrar Histórico</h3>
+                    
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="button"
+                            onClick={handleExportarPDF}
+                            disabled={saidas.length === 0 || loading}
+                            className="inline-flex items-center gap-2 px-3 py-1.5 h-auto text-xs font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 rounded-lg shadow-sm transition-all active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
+                        >
+                            <FileDown size={14} className="text-red-500" strokeWidth={2.5} />
+                            <span>Exportar Relatório</span>       
+                        </button>
 
-            <div className="flex justify-end pr-1">
-                <button
-                    type="button"
-                    onClick={handleExportarPDF}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-sm font-semibold shadow-sm transition-all active:scale-[0.98]"
-                >
-                    <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Exportar PDF
-                </button>
-            </div>
+                        <button
+                            type="button"
+                            onClick={limparFiltros}
+                            className="text-xs font-semibold text-red-600 hover:bg-red-50 border border-transparent hover:border-red-100 rounded-lg px-2.5 py-1.5 transition-all"
+                        >
+                            Resetar Filtros
+                        </button>
+                    </div>
+                </div>
+                    
+                <PerfilHistoricoFiltrosForm 
+                    types={filters}
+                    handle={handleFilters}
+                    onLimpar={limparFiltros}
+                />
+            </section>
 
             <div className="bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden relative">
                 

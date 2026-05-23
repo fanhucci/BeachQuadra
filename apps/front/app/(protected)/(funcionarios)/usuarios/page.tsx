@@ -12,7 +12,7 @@ import UsuarioModalForm from "@/components/usuariosComponents/usuarioModalForm";
 import UsuariosFiltrosForm from "@/components/usuariosComponents/usuariosFiltrosForm";
 
 export default function UsuariosPage(){
-    // Alinhando o hook de filtros com a paginação idêntica à de cobranças
+
     const {
         queryString, 
         filters, 
