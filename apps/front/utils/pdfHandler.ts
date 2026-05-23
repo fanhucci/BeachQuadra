@@ -19,13 +19,16 @@ export function gerarPDFCobranças(dados: CobrancaItem[], filtrosTexto: string) 
     const totais = dados.reduce(
         (acc, item) => {
             const valorNum = Number(item.valor) || 0;
-            acc.totalGeral += valorNum;
+            if(item.status.toLowerCase() === "concluido" || item.status.toLowerCase() === "pendente" ){
+                acc.totalGeral += valorNum;
+            }
             
-            if (item.status.toLowerCase() === "pago" || item.status.toLowerCase() === "concluido") {
+            if (item.status.toLowerCase() === "concluido") {
                 acc.totalRecebido += valorNum;
             } else if (item.status.toLowerCase() === "pendente") {
                 acc.totalPendente += valorNum;
             }
+
             return acc;
         },
         { totalGeral: 0, totalRecebido: 0, totalPendente: 0 }
