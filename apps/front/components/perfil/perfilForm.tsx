@@ -90,8 +90,8 @@ export default function PerfilForm(
         let valorLimpo = value;
 
         if(name === 'cpf' || name === 'telefone'){
-            valorLimpo = value.replace(/\D/g, '');
-            valorLimpo = value.slice(0,11);
+            valorLimpo = valorLimpo.replace(/\D/g, '');
+            valorLimpo = valorLimpo.slice(0,11);
         }
 
         setFormData((prev)=>({
