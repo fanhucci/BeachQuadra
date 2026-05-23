@@ -66,6 +66,25 @@ export default function CobrancasPage(){
         }
     };
 
+    const totaisTela = dados.reduce(
+        (acc, item) => {
+            const valorNum = Number(item.valor) || 0;
+    
+            if(item.status.toLowerCase() === "concluido" || item.status.toLowerCase() === "pendente" ){
+                acc.totalGeral += valorNum;
+            }
+                    
+            if (item.status.toLowerCase() === "concluido") {
+                acc.totalRecebido += valorNum;
+            } else if (item.status.toLowerCase() === "pendente") {
+                acc.totalPendente += valorNum;
+            }
+    
+            return acc;
+        },
+        { totalGeral: 0, totalRecebido: 0, totalPendente: 0 }
+    );
+
 
 
     return (
@@ -123,6 +142,31 @@ export default function CobrancasPage(){
                         types={filters}
                         handle={handleFilters}
                     />
+                </section>
+
+                <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-shrink-0">
+                
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Faturado (Página)</span>
+                        <span className="text-xl font-bold text-gray-900">
+                            R$ {totaisTela.totalGeral.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                        </span>
+                    </div>
+                
+
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Recebido</span>
+                        <span className="text-xl font-bold text-green-600">
+                            R$ {totaisTela.totalRecebido.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                        </span>
+                    </div>
+                
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Pendente</span>
+                        <span className="text-xl font-bold text-red-600">
+                            R$ {totaisTela.totalPendente.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                        </span>
+                    </div>
                 </section>
 
                 <section className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-1 min-h-0">
