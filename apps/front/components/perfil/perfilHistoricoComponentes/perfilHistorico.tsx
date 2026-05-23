@@ -6,7 +6,11 @@ import { apiRequest } from "@/utils/apiHandler";
 import CustomTable from "@/components/customTable";
 
 import { toast } from "sonner";
+<<<<<<< HEAD
 
+=======
+import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
+>>>>>>> 4d5f7bedd9acd456f5ef3109f07e6285a84a679b
 import PerfilHistoricoFiltrosForm from "./perfilHistoricoFiltrosForm";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
