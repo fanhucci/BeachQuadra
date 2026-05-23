@@ -46,7 +46,7 @@ export default function PerfilPage({id_perfil}:{id_perfil:number}) {
                 </button>
             </div>
 
-            {/* <div className="mt-4">
+            <div className="mt-4">
                 {abaAtiva === "cadastro" ? (
                     <PerfilForm 
                         id_perfil={id_perfil}
@@ -56,7 +56,7 @@ export default function PerfilPage({id_perfil}:{id_perfil:number}) {
                 ) : (
                     <PerfilHistorico id_usuario={id_perfil} />
                 )}
-            </div> */}
+            </div>
 
         </section>
     );
