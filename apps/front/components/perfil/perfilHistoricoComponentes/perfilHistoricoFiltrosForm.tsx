@@ -19,7 +19,7 @@ interface HistoricoFiltrosProps {
 export default function PerfilHistoricoFiltrosForm({ types, handle, onLimpar }: HistoricoFiltrosProps) {
     const opcoesStatus = [
         { value: "", label: "Todos" },
-        { value: "finalizado", label: "Finalizado" },
+        { value: "concluido", label: "Concluído" },
         { value: "pendente", label: "Pendente" },
         { value: "cancelado", label: "Cancelado" },
     ];
