@@ -12,13 +12,12 @@ export default function PerfilPage({ id_perfil }: { id_perfil: number }) {
     const [abaAtiva, setAbaAtiva] = useState<"cadastro" | "historico">("cadastro");
 
     if (!user) return <NaoAutenticado />;
-        console.log(user.id_pessoa , typeof user.id_pessoa);
-        console.log(id_perfil , typeof id_perfil);
+
     const ehDonoDoPerfil = Number(user.id_pessoa) === id_perfil;
     const ehAdminOuFuncionario = user.id_cargo > 1; 
 
     if (!ehDonoDoPerfil && !ehAdminOuFuncionario) return <SemAutorizacao />;
-     console.log(`ususario: ${id_perfil}, ehAdmin: ${ehAdminOuFuncionario}, ehDono: ${ehDonoDoPerfil}`)
+
     return (
         <section className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 w-full transition-all">
             

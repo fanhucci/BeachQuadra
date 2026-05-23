@@ -10,7 +10,7 @@ router.post(`/contas`, authMiddleware.auth, ctrl.adicionarConta.bind(ctrl));
 router.post(`/contas/resetar-senha`, ctrl.resetarSenha.bind(ctrl));
 router.post(`/contas/resetar-senha-admin`,authMiddleware.auth, ctrl.resetarSenhaPorAdmin.bind(ctrl));
 router.post(`/contas/esqueci-senha`, ctrl.esqueciSenha.bind(ctrl));
-router.patch(`/contas/senha`, authMiddleware.auth, ctrl.alterarSenha.bind(ctrl));
+router.patch(`/contas/senha`, authMiddleware.auth, ctrl.alterarMinhaSenha.bind(ctrl));
 router.patch(`/contas/:id/status`, authMiddleware.auth, ctrl.alterarStatus.bind(ctrl));
 
 export default router;

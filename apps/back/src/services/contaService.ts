@@ -1,5 +1,5 @@
 
-import { AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO,ForcarRedefinirSenhaDTO } from "@app/shared";
+import { AlterarSenhaPerfil,AlterarStatusContaDTO, CriarContaDTO,EsqueciSenhaDTO,ResetarSenhaDTO,ForcarRedefinirSenhaDTO } from "@app/shared";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
 import sql from "../infra/db";
@@ -28,13 +28,13 @@ export default class ContaService{
         });
     }
 
-    // async alterarSenha(dados:AlterarSenhaDTO){
+    async alterarMinhaSenha(usuario:number, senhas:AlterarSenhaPerfil){
 
-    //     const senhaHash = await bcrypt.hash(dados.senha,10);
+        const senhaHash = await bcrypt.hash(senhas.senha,10);
 
-    //     return await this.conta.alterarSenhaPorId(dados.id_pessoa, senhaHash);
+        return await this.conta.alterarSenhaPorId(usuario, senhaHash);
         
-    // }
+    }
 
     async alterarStatus(status:AlterarStatusContaDTO){
         

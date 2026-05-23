@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AlterarSenhaSchema, AlterarStatusContaSchema, CriarContaSchema, EsqueciSenhaSchema,ResetarSenhaSchema, ForcarRedefinirSenhaSchema } from "@app/shared";
+import { AlterarSenhaPerfilSchema, AlterarStatusContaSchema, CriarContaSchema, EsqueciSenhaSchema,ResetarSenhaSchema, ForcarRedefinirSenhaSchema } from "@app/shared";
 import ContaService from '../services/contaService';
 
 export default class ContaController{
@@ -27,13 +27,14 @@ export default class ContaController{
         return res.status(200).json(resposta);
     }
 
-    async alterarSenha(req:Request, res:Response){
+    async alterarMinhaSenha(req:Request, res:Response){
 
-        const parse = AlterarSenhaSchema.safeParse(req.body);
+        const parse = AlterarSenhaPerfilSchema.safeParse(req.body);
+        const id = Number(req.user?.id);
         
         if(!parse.success) return res.status(400).json({erro: parse.error.message})
 
-        //const resposta = await this.service.alterarSenha(parse.data);
+        const resposta = await this.service.alterarMinhaSenha(id,parse.data);
        
         return res.sendStatus(204);
     }

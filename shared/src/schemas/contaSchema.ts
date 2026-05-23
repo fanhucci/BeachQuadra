@@ -21,11 +21,10 @@ export const LoginSchema = z.object({
 })
 export type LoginDTO = z.infer<typeof LoginSchema>;
 
-export const EsqueciSenhaSchema = z.object({
-  email:z.string().email("E-mail inválido"),
+export const EsqueciSenhaSchema = LoginSchema.omit({
+  senha:true
 })
 export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSchema>
-
 
 
 export const ForcarRedefinirSenhaSchema = z.object({
@@ -34,21 +33,31 @@ export const ForcarRedefinirSenhaSchema = z.object({
 export type ForcarRedefinirSenhaDTO = z.infer<typeof ForcarRedefinirSenhaSchema>
 
 
-
+//apagar
 export const AlterarSenhaSchema = z.object({
   senhaAtual:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. "),
   senhaNova:z.string().min(6, "Senha deve ter pelo menos 6 caracteres. "),
 })
 export type AlterarSenhaDTO = z.infer<typeof AlterarSenhaSchema>
 
+const AlterarSenhaBaseSchema = z.object({
+  senha: z.string().min(6, "Senha deve ter pelo menos 6 caracteres."),
+  senhaConfirmar: z.string().min(6, "Senha deve ter pelo menos 6 caracteres."),
+})
 
-export const ResetarSenhaSchema = z.object({
+export const ResetarSenhaSchema = AlterarSenhaBaseSchema.extend({
   token: z.string(),
-  senha: z.string().min(6),
-  senhaConfirmar: z.string().min(6),
 })
 .refine(data => data.senha === data.senhaConfirmar, {
   message: "Senhas não coincidem",
   path: ["senhaConfirmar"],
 });
+
+export const AlterarSenhaPerfilSchema = AlterarSenhaBaseSchema
+.refine(data => data.senha === data.senhaConfirmar, {
+  message: "Senhas não coincidem",
+  path: ["senhaConfirmar"],
+});
+
 export type ResetarSenhaDTO = z.infer<typeof ResetarSenhaSchema>
+export type AlterarSenhaPerfil = z.infer<typeof AlterarSenhaPerfilSchema>;

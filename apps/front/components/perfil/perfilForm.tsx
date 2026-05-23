@@ -2,7 +2,7 @@
 
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
-import { EditarUsuario, EditarUsuarioSchema } from "@app/shared";
+import { AlterarSenhaDTO, AlterarSenhaPerfil, AlterarSenhaPerfilSchema, EditarUsuario, EditarUsuarioSchema } from "@app/shared";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "../buttonComponents/submitButton";
@@ -10,6 +10,8 @@ import CustomInput from "../inputsComponents/customInput";
 import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import Campo from "../inputsComponents/campo";
 import NaoEncontrado from "../erros/naoEncontrado";
+import CustomModal from "../customModal";
+import { AleterarSenhaErro } from "@/app/(protected)/(cliente)/perfil/usePerfil";
 
 interface PerfilUsuario {
     id_pessoa: number;
@@ -36,6 +38,7 @@ export default function PerfilForm({
     const [formData, setFormData] = useState<EditarUsuario>({ id_pessoa: 0 });
     const [erros, setErros] = useState<Partial<Record<keyof EditarUsuario, string>>>({});
     const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [modalSenhaOn,setModalSenhaOn] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     async function buscarUsuario() {
@@ -90,6 +93,14 @@ export default function PerfilForm({
         setFormData({ id_pessoa: id_perfil });
         setErros({});
     };
+
+    const abrirModalSenha = () =>{
+        setModalSenhaOn(true);
+    }
+
+    const fecharModalSenha = () =>{
+        setModalSenhaOn(false);
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -265,6 +276,97 @@ export default function PerfilForm({
                     </div>
                 )}
             </div>
+
+            <ModalSenha
+                estado={modalSenhaOn}
+                abrir={abrirModalSenha}
+                fechar={fecharModalSenha}
+            />
         </section>
     );
+}
+
+interface AlterarSenha {
+    senha:string;
+    senhaConfirmar:string;
+}
+
+function ModalSenha({estado, abrir, fechar}:{estado:boolean, abrir:()=>void, fechar:()=>void}){
+
+    const [formDataSenha,setFormDataSenha] = useState<Partial<AlterarSenha>>({});
+    const [errosSenha,setErrosSenha] = useState<Partial<Record<keyof AlterarSenhaPerfil,string>>>({});
+    const [loading,setLoading] = useState<boolean>(false);
+
+    async function salvarSenha() {
+        const parse = AlterarSenhaPerfilSchema.safeParse(formDataSenha);
+
+        if(!parse.success){
+            setErrosSenha(formatarErrosZod(parse.error));
+            return;
+        }
+
+        try {
+            await apiRequest(`/contas/senha`,{
+                method:'PATCH',
+                body:JSON.stringify(parse.data)
+            })
+            toast.success('Senha alterada com sucesso.');
+            fechar();
+            setFormDataSenha({});
+        } 
+        catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao alterar senha.')
+        }
+        finally{
+            setLoading(false);
+        }
+    }
+
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        const {name,value} = e.target;
+
+        setFormDataSenha((prev)=>({
+            ...prev,
+            [name]:value
+        }))
+    }
+    return(
+        <CustomModal
+            estado={estado}
+            fechar={fechar}
+            titulo="Alterar Senha"
+            botoes={[
+                {
+                    label: 'Cancelar',
+                    estilo: 'secundario',
+                    disabled:loading,
+                    onClick: fechar
+                },
+                {
+                    label: 'Salvar',
+                    estilo: 'primario',
+                    disabled:loading,
+                    onClick: salvarSenha
+                }
+            ]}
+        >
+
+            <CustomInput
+                name="senha"
+                value={formDataSenha.senha || ''}
+                onChange={handleChange}
+                erro={errosSenha.senha}
+                type="password"
+            />
+
+            <CustomInput
+                name="senhaConfirmar"
+                value={formDataSenha.senhaConfirmar || ''}
+                onChange={handleChange}
+                erro={errosSenha.senhaConfirmar}
+                type="password"
+            />
+
+        </CustomModal>
+    )
 }
