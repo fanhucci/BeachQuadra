@@ -86,15 +86,15 @@ export default function CobrancasPage(){
                     </div>
                     
                     <div className="flex items-center gap-3 self-end sm:self-center">
-                        <button 
+                        <SubmitButton
                             type="button"
+                            estilo="perigo"
                             onClick={handleExportarPDF}
                             disabled={dados.length === 0 || loading}
-                            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 font-semibold text-sm shadow-sm transition-all bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 disabled:opacity-40"
                         >
                             <FileDown size={16} />
-                            <span>Exportar PDF</span>
-                        </button>
+                            <span>Exportar PDF</span>       
+                        </SubmitButton>
 
                         <LinkButton 
                             estilo="primario"
