@@ -93,7 +93,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
     const totalPaginas = Math.ceil(totalItens / limit) || 1;
 
     return (
-        <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
+        <section className="w-full flex-1 min-h-0 bg-gray-50/50 overflow-hidden flex flex-col rounded-2xl">
             <div className="mx-auto w-full max-w-7xl 2xl:max-w-[1600px] h-full min-h-0 p-4 sm:p-6 lg:p-8 flex flex-col gap-4">
 
                 <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-200 pb-4 flex-shrink-0">
