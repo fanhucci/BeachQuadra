@@ -40,9 +40,6 @@ export default function AgendarClientePage(){
         }
     },[id])
     
-    if(loading){
-        return (<>Carregando...</>)
-    }
     
     if(!perfil){
         return(

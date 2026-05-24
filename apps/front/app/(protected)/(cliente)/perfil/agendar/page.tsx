@@ -37,9 +37,6 @@ export default function AgendarPage(){
         }
     },[user])
 
-    if(loading){
-        return (<>Carregando...</>)
-    }
 
     if(!perfil) {
         router.replace('/login');
