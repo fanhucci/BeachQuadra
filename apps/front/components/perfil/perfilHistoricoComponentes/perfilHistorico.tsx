@@ -126,10 +126,10 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
     const totalPaginas = Math.ceil(totalItens / limit) || 1;
 
     return (
-        <section className="w-full h-full flex flex-col overflow-hidden bg-gray-50/50 rounded-2xl p-4 sm:p-6 lg:p-8 gap-4">
-            <div className="mx-auto w-full max-w-7xl 2xl:max-w-[1600px] h-full min-h-0 p-4 sm:p-6 lg:p-8 flex flex-col gap-4">
+        <section className="w-full h-full min-h-0 bg-gray-50/50 overflow-hidden flex flex-col rounded-2xl">
+            <div className="w-full h-full min-h-0 p-4 sm:p-6 lg:p-8 flex flex-col gap-4 overflow-hidden">
 
-                <header className="flex-shrink-0 border-b border-gray-200 pb-4">
+                <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-200 pb-4 flex-shrink-0">
                     <div className="flex items-center gap-4">
                         <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl shadow-sm border border-indigo-100">
                             <History size={24} />
@@ -214,7 +214,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
 
                 </div>
 
-                <section className="flex-shrink-0 bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+                <section className="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-4 flex-shrink-0">
                     <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                         <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Filtrar Histórico</h3>
                         <SubmitButton
@@ -232,7 +232,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                     />
                 </section>
 
-                <section className="flex-1 min-h-0 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <section className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-1 min-h-0 relative">
                     
                     {loading && (
                         <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
@@ -240,7 +240,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                         </div>
                     )}
 
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto min-h-0">
                         <CustomTable 
                             columns={colunas}
                             data={saidas}
@@ -253,7 +253,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                         )}
                     </div>
 
-                    <div className="flex-shrink-0 border-t border-gray-200">
+                    <div className="bg-gray-50/50 px-6 py-3.5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 flex-shrink-0">
                         <span className="text-xs font-medium text-gray-500">
                             Mostrando <span className="text-gray-800 font-semibold">{saidas.length}</span> de <span className="text-gray-800 font-semibold">{totalItens}</span> registros encontrados
                         </span>
