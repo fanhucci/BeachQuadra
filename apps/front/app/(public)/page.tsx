@@ -10,10 +10,10 @@ export default function HomePage() {
   const { user } = useUser();
 
   return (
-    <div className="flex flex-1 bg-zinc-950 text-white overflow-hidden">
+    <div className="flex flex-1 flex-col bg-zinc-950 text-white overflow-hidden">
 
       <section className="pt-24 pb-20 md:pt-32 md:pb-28 relative bg-gradient-to-br from-zinc-900 via-orange-950 to-zinc-900">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1622290291469-0f5e1c2a5e3e')] bg-cover bg-center opacity-30" />
+        <div className="absolute inset-0 bg-[url('https://assets.grok.com/users/ee0ef925-46a5-4a32-9d92-53d524e8a13f/generated/f8723534-0f5d-40c9-89d4-70aea0993dbc/image.jpg')] bg-cover bg-center opacity-30" />
         
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full mb-6 border border-white/20">
@@ -51,8 +51,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="group bg-zinc-800 rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
               <div className="h-80 bg-gradient-to-br from-orange-500 to-amber-500 relative">
-                {/* Você pode substituir pela imagem gerada */}
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611080626919-2c9f4c2c4d5c')] bg-cover bg-center opacity-90" />
+                <div className="absolute inset-0 bg-[url('https://assets.grok.com/users/ee0ef925-46a5-4a32-9d92-53d524e8a13f/generated/a63863ff-fca0-49a1-a421-2de8aa894afd/image.jpg')] bg-cover bg-center opacity-90" />
                 <div className="absolute top-6 left-6 bg-black/70 px-5 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
                   <User className="w-5 h-5" /> Individual
                 </div>
@@ -65,7 +64,7 @@ export default function HomePage() {
 
             <div className="group bg-zinc-800 rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
               <div className="h-80 bg-gradient-to-br from-blue-500 to-cyan-500 relative">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1594736797939-4e5d9f8c3f0b')] bg-cover bg-center opacity-90" />
+                <div className="absolute inset-0 bg-[url('https://assets.grok.com/users/ee0ef925-46a5-4a32-9d92-53d524e8a13f/generated/24349053-a226-4303-bd38-4aaaaa901ee7/image.jpg')] bg-cover bg-center opacity-90" />
                 <div className="absolute top-6 left-6 bg-black/70 px-5 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
                   <Users className="w-5 h-5" /> Duplas
                 </div>
