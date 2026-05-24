@@ -1,5 +1,6 @@
 'use client'
 
+import HelpButton from "@/components/helpButton";
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
 
@@ -9,6 +10,13 @@ export default function HomePage() {
     <section className="flex flex-col w-full text-gray-800">
 
       <section className="w-full bg-linear-to-b from-[#1F4E6B] to-[#2C7DA0] text-white py-28 px-6 text-center flex flex-col items-center">
+
+        <HelpButton
+          steps={[
+            {element: '#botao-reserva', popover:{title:'Agendamento',description:'Clique aqui para começar seu agendamento.'}}
+          ]}
+        />
+
         <h1 className="text-5xl md:text-6xl font-extrabold max-w-4xl leading-tight">
           Sua quadra de Beach Tennis reservada em segundos
         </h1>
@@ -18,7 +26,8 @@ export default function HomePage() {
           Veja as quadras livres e reserve online de forma simples e rápida.
         </p>
 
-          <Link                                           
+        <Link           
+          id="botao-reserva"                                
           href={user
             ?"perfil/agendar"
             :"/visitante"

@@ -1,4 +1,5 @@
 import "./globals.css";
+import "driver.js/dist/driver.css";
 import { Toaster } from "sonner";
 import { UserProvider } from "@/context/userContext";
 
