@@ -25,8 +25,10 @@ export default class UsuarioService{
 
     async listarUsuarioPorId(user:User, id_busca:number){
 
-        const {id, cargo} = user;
-        console.log(typeof id, typeof cargo, typeof id_busca);
+        const id = Number(user.id);
+        const cargo = Number(user.cargo);
+
+        console.log(typeof id, typeof cargo, typeof id_busca)
         if (cargo < 2 && id_busca !== id) {
             throw new AppError('Sem autorização', 403);
         }
@@ -37,7 +39,9 @@ export default class UsuarioService{
     }
 
     async listarHistoricoPerfil(user:User, id_perfil:number, filtro:UsuarioHistoricoSearch){
-        const {id, cargo} = user;
+        const id = Number(user.id);
+        const cargo = Number(user.cargo);
+
 
         if (cargo < 2 && id_perfil !== id) {
             throw new AppError('Sem autorização', 403);
@@ -76,7 +80,9 @@ export default class UsuarioService{
     }
     
     async editarUsuario(user:User, dados:EditarUsuario){
-        const {id, cargo} = user;
+        const id = Number(user.id);
+        const cargo = Number(user.cargo);
+
 
         if (cargo < 2 && dados.id_pessoa !== id) {
             throw new AppError('Sem autorização', 403);
