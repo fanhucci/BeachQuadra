@@ -367,10 +367,10 @@ export function gerarPDFAgenda(dados: any[]) {
     
     const corpoTabela = lista.flatMap(item => 
         item.agendamentos.map((a: any) => [
-            new Date(item.horario).toLocaleDateString('pt-BR'),
-            new Date(item.horario).toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}),
+            new Date(item.horario).toLocaleDateString('pt-BR',{timeZone:'utc'}),
+            new Date(item.horario).toLocaleTimeString('pt-BR', {timeZone:'utc', hour: '2-digit', minute: '2-digit'}),
             a.nome,
-            a.cpf
+            cpfMask(a.cpf)
         ])
     );
 

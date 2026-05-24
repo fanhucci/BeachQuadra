@@ -51,7 +51,7 @@ export default function AgendaPage(){
     }
 
     useEffect(() => {
-        carregarHorarios();
+        carregarHorarios(dataSelecionada);
     }, [dataSelecionada])
 
 
