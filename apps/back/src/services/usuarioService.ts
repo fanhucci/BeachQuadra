@@ -4,6 +4,12 @@ import sql from "../infra/db";
 import ContaRepository from "../repositories/contaRepository";
 import bcrypt from "bcrypt";
 import crypto from 'crypto';
+import AppError from "../infra/appError";
+
+interface User {
+    id:number;
+    cargo:number;
+}
 
 export default class UsuarioService{
     private pessoa = new PessoaRepository();
@@ -17,30 +23,26 @@ export default class UsuarioService{
         return await this.pessoa.listarUsuarios(filtro);
     }
 
-    async listarUsuarioPorId(id_logado:number,id_busca:number){
+    async listarUsuarioPorId(user:User, id_busca:number){
+
+        const {id, cargo} = user;
+
+        if (cargo < 2 && id_busca !== id) {
+            throw new AppError('Sem autorização', 403);
+        }
 
         const usuario = await this.pessoa.listarUsuarioPorId(id_busca);
         
-        const isOwner = id_logado === id_busca
-
-        //const isClient = false;
-        //const isAdmin =  isClient && true;
-
-        const resposta = {
-            usuario,
-            permissions:{
-                canEdit: isOwner,
-                canChangePassword: isOwner,
-                canResetPassword: !isOwner,
-                canActivateAccount: !isOwner,
-                canDeactivateAccount: !isOwner,
-                canDelete: isOwner,
-            }
-        }
-        return resposta;
+        return usuario;
     }
 
-    async listarHistoricoPerfil(id_perfil:number, filtro:UsuarioHistoricoSearch){
+    async listarHistoricoPerfil(user:User, id_perfil:number, filtro:UsuarioHistoricoSearch){
+        const {id, cargo} = user;
+
+        if (cargo < 2 && id_perfil !== id) {
+            throw new AppError('Sem autorização', 403);
+        }
+
         return await this.pessoa.listarHistorico(id_perfil,filtro);
     }
 
@@ -73,7 +75,17 @@ export default class UsuarioService{
         })
     }
     
-    async editarUsuario(dados:EditarUsuario){
+    async editarUsuario(user:User, dados:EditarUsuario){
+        const {id, cargo} = user;
+
+        if (cargo < 2 && dados.id_pessoa !== id) {
+            throw new AppError('Sem autorização', 403);
+        }
+
+        if (cargo < 3 && dados.id_cargo !== undefined) {
+            throw new AppError('Você não tem permissão para alterar cargos', 403);
+        }
+
         return await this.pessoa.editarPessoa(dados);
     }
 

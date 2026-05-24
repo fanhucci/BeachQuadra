@@ -19,16 +19,20 @@ export default class UsuarioController{
 
     async listarUsuarioPerfil(req:Request,res:Response){
 
-        const id = Number(req.user?.id);
+        if(!req.user) return res.sendStatus(403);
+
+        const id = Number(req.user.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
-
-        const usuario = await this.service.listarUsuarioPorId(id,id);
+        
+        const usuario = await this.service.listarUsuarioPorId(req.user,id);
 
         res.json(usuario);
     }
 
     async listarHistorico(req:Request, res:Response){
+
+        if(!req.user) return res.sendStatus(403);
 
         const id = Number(req.params.id);
 
@@ -36,19 +40,20 @@ export default class UsuarioController{
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const historico = await this.service.listarHistoricoPerfil(id,parse.data);
+        const historico = await this.service.listarHistoricoPerfil(req.user,id,parse.data);
 
         res.status(200).json(historico);
     }
 
     async listarUsuarioPorId(req:Request, res:Response){
+
+        if(!req.user) return res.sendStatus(403);
+
         const id_busca = Number(req.params.id);
         
-        const id_logado = Number(req.user?.id);
-
         if(isNaN(id_busca)) return res.status(400).json({erro: "Id inválido"})
 
-        const usuario = await this.service.listarUsuarioPorId(id_logado,id_busca);
+        const usuario = await this.service.listarUsuarioPorId(req.user,id_busca);
 
         res.json(usuario);
     }
@@ -91,11 +96,14 @@ export default class UsuarioController{
     }
 
     async editarUsuario(req:Request, res:Response){
+
+        if(!req.user) return res.sendStatus(403);
+
         const parse = EditarUsuarioSchema.safeParse(req.body);
 
         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const resposta = await this.service.editarUsuario(parse.data);
+        const resposta = await this.service.editarUsuario(req.user,parse.data);
 
         return res.status(201).json(resposta);
        
@@ -108,7 +116,7 @@ export default class UsuarioController{
 
         const resposta = await this.service.ativarUsuario(id);
 
-        return res.status(201).json(resposta);
+        return res.status(200).json(resposta);
        
     }
 
@@ -119,7 +127,7 @@ export default class UsuarioController{
 
         const resposta = await this.service.desativarUsuario(id);
 
-        return res.status(201).json(resposta);
+        return res.status(200).json(resposta);
        
     }
 
