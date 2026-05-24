@@ -3,7 +3,8 @@ import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import { 
   Calendar, Clock, CheckCircle, Users, User, 
-  Sun, ArrowRight, Star 
+  Sun, ArrowRight, Star, 
+  MapPin
 } from "lucide-react";
 
 export default function HomePage() {
