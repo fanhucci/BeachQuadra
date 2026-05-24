@@ -16,7 +16,7 @@ export type Slot = {
 export default function useQuadraDetail(){
     const {id} = useParams();
     const [loading,setLoading] = useState<boolean>(false);
-    const [quadra,setQuadra] = useState<Quadra|null>(null);
+    const [quadra,setQuadra] = useState<Quadra[]|null>(null);
     const router = useRouter();
 
 
