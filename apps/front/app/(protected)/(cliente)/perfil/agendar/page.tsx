@@ -43,7 +43,7 @@ export default function AgendarPage(){
         router.replace('/login');
         return null;
     }
-
+    console.log('teste'+perfil)
     return(
         <>
             <HelpButton
