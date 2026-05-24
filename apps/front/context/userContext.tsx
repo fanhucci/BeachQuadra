@@ -28,10 +28,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         try {
             const resposta = await apiRequest("/usuarios/perfil");
 
-            setUser(resposta.usuario);
-            setLoading(false);
+            setUser(resposta);
         } catch {
             setUser(null);
+            setLoading(false);
+        }
+        finally{
             setLoading(false);
         }
     }
