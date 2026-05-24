@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 export default function AgendamentoFormComponent({
     context, 
-    clientePreSelecionado
+    clientePreSelecionado,
 }:{
     context: 'visitante' | 'cliente' | 'funcionario'
     clientePreSelecionado?: Usuario;

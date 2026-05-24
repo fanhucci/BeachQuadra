@@ -2,13 +2,13 @@
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import { 
-  Calendar, Clock, CheckCircle, Users, User, 
+  Clock, CheckCircle, Users, User, 
   Sun, ArrowRight, Star, 
   MapPin
 } from "lucide-react";
 
 export default function HomePage() {
-  const { user } = useUser();
+  const { user,isAuthenticated } = useUser();
 
   return (
     <div className="flex flex-1 flex-col bg-white text-gray-900 overflow-hidden">
@@ -40,7 +40,7 @@ export default function HomePage() {
 
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link
-              href="/reservar"
+              href={isAuthenticated? "/perfil/agendar" : "/visitante"}
               className="group inline-flex items-center justify-center gap-4 bg-orange-500 hover:bg-orange-600 text-white text-2xl font-semibold px-14 py-7 rounded-3xl transition-all hover:scale-105 shadow-2xl"
             >
               Reservar Quadra Agora
@@ -69,7 +69,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Tipos de Quadras */}
       <section id="quadras" className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -78,7 +77,6 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Individual */}
             <div className="rounded-3xl overflow-hidden shadow-xl group">
               <div className="relative h-[520px]">
                 <img 
@@ -94,7 +92,7 @@ export default function HomePage() {
                 <h3 className="text-3xl font-bold mb-3">Quadra Individual</h3>
                 <p className="text-gray-600 text-lg">Treino focado, aulas particulares ou jogo intenso.</p>
                 <Link
-                  href="/reservar"
+                  href={isAuthenticated? "/perfil/agendar" : "/visitante"}
                   className="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl transition font-medium"
                 >
                   Reservar Individual →
@@ -102,7 +100,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Duplas */}
             <div className="rounded-3xl overflow-hidden shadow-xl group">
               <div className="relative h-[520px]">
                 <img 
@@ -118,7 +115,7 @@ export default function HomePage() {
                 <h3 className="text-3xl font-bold mb-3">Quadra de Duplas</h3>
                 <p className="text-gray-600 text-lg">Diversão garantida com os amigos e família.</p>
                 <Link
-                  href="/reservar"
+                  href={isAuthenticated? "/perfil/agendar" : "/visitante"}
                   className="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl transition font-medium"
                 >
                   Reservar Duplas →
@@ -129,7 +126,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Como Funciona */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-16">Super simples de usar</h2>
@@ -139,8 +135,8 @@ export default function HomePage() {
               <div className="w-20 h-20 mx-auto bg-orange-100 rounded-3xl flex items-center justify-center">
                 <MapPin className="w-12 h-12 text-orange-500" />
               </div>
-              <h3 className="text-2xl font-semibold">1. Escolha a quadra</h3>
-              <p className="text-gray-600">Fotos, localização e disponibilidade em tempo real.</p>
+              <h3 className="text-2xl font-semibold">1. Escolha o tipo de quadra</h3>
+              <p className="text-gray-600">Localização e disponibilidade em tempo real.</p>
             </div>
             <div className="space-y-6">
               <div className="w-20 h-20 mx-auto bg-orange-100 rounded-3xl flex items-center justify-center">
@@ -160,7 +156,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Final - Mais suave e harmonioso */}
       <section className="py-28 bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white text-center">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-5xl md:text-6xl font-bold mb-8">
@@ -171,7 +166,7 @@ export default function HomePage() {
           </p>
 
           <Link
-            href="/reservar"
+            href={isAuthenticated? "/perfil/agendar" : "/visitante"}
             className="inline-flex items-center gap-4 bg-white text-orange-700 hover:bg-white hover:text-orange-600 text-3xl font-bold px-16 py-8 rounded-3xl transition-all hover:scale-105 shadow-2xl"
           >
             Reservar Quadra Agora

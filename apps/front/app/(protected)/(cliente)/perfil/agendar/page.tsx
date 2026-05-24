@@ -3,8 +3,8 @@
 import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/AgendamentoForm"
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
-import { Perfil, Usuario } from "@app/shared";
-import { useParams, useRouter } from "next/navigation"
+import { Perfil } from "@app/shared";
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 
