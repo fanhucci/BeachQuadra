@@ -9,7 +9,7 @@ import PerfilHistoricoFiltrosForm from "./perfilHistoricoFiltrosForm";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
 import { gerarPDFHistorico } from "@/utils/pdfHandler";
-import { History, FileDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { History, FileDown, ChevronLeft, ChevronRight, Calendar, Hourglass, DollarSign, Percent, Trophy } from "lucide-react";
 
 interface FiltrosHistorico {
     search?: string;
@@ -18,10 +18,27 @@ interface FiltrosHistorico {
     status?: string;
 }
 
+interface ResumoCliente {
+    total_agendamentos: number;
+    total_horas: number;
+    valor_total_gasto: number;
+    taxa_cancelamento: number;
+    ultima_reserva: string | null;
+    quadra_mais_utilizada: string | null;
+}
+
 export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) {
     const [saidas, setSaidas] = useState<ItemHistorico[]>([]);
     const [totalItens, setTotalItens] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
+    const [resumo, setResumo] = useState<ResumoCliente>({
+        total_agendamentos: 0,
+        total_horas: 0,
+        valor_total_gasto: 0,
+        taxa_cancelamento: 0,
+        ultima_reserva: null,
+        quadra_mais_utilizada: 'Nenhuma'
+    });
 
     const { 
         queryString,      
@@ -52,6 +69,10 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                 
                 setSaidas(dados.saidas || []);
                 setTotalItens(dados.total || 0);
+                
+                if (dados.resumo) {
+                    setResumo(dados.resumo);
+                }
             } catch (error) {
                 console.error(error);
                 toast.error("Não foi possível carregar o histórico de agendamentos.");
@@ -64,6 +85,19 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
             carregarHistorico();
         }
     }, [queryString, id_usuario]);
+
+    const formatarDinheiro = (valor: number) => {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+    };
+
+    const formatarData = (dataString: string | null) => {
+        if (!dataString) return "Sem registros";
+        return new Date(dataString).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    };
 
     const obterFiltrosTexto = () => {
         const partes: string[] = [];
@@ -119,6 +153,67 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                         </SubmitButton>
                     </div>
                 </header>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 flex-shrink-0">
+                    
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                            <Calendar size={20} />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Reservas</span>
+                            <span className="text-xl font-bold text-gray-900 mt-0.5">{resumo.total_agendamentos}</span>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div className="p-3 bg-amber-50 text-amber-600 rounded-xl">
+                            <Hourglass size={20} />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Horas em Quadra</span>
+                            <span className="text-xl font-bold text-gray-900 mt-0.5">{resumo.total_horas}h</span>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                            <DollarSign size={20} />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Gasto</span>
+                            <span className="text-xl font-bold text-emerald-600 mt-0.5">{formatarDinheiro(resumo.valor_total_gasto)}</span>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div className="p-3 bg-red-50 text-red-600 rounded-xl">
+                            <Percent size={20} />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Cancelamentos</span>
+                            <span className={`text-xl font-bold mt-0.5 ${resumo.taxa_cancelamento > 20 ? 'text-red-600' : 'text-gray-900'}`}>
+                                {resumo.taxa_cancelamento}%
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-3.5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-center gap-1.5 col-span-1 sm:col-span-2 lg:col-span-1">
+                        <div className="flex items-center gap-2">
+                            <Trophy size={14} className="text-indigo-500 flex-shrink-0" />
+                            <span className="text-[11px] font-bold text-gray-700 truncate max-w-[180px]">
+                                {resumo.quadra_mais_utilizada || 'Nenhuma'}
+                            </span>
+                        </div>
+                        <div className="border-t border-gray-100 pt-1.5 flex flex-col">
+                            <span className="text-[10px] font-medium text-gray-400 uppercase">Última Atividade</span>
+                            <span className="text-xs text-gray-600 font-semibold mt-0.5">
+                                {formatarData(resumo.ultima_reserva)}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
 
                 <section className="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-4 flex-shrink-0">
                     <div className="flex justify-between items-center border-b border-gray-100 pb-2">

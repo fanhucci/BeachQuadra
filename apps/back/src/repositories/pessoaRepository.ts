@@ -178,7 +178,7 @@ export default class PessoaRepository {
         const dataInicial = dataInicio || null;
         const dataFinal = dataFim || null;
 
-        const resultado = await sql`
+        const listagem = await sql`
             select 
                 a.id_agendamento,
                 a.created_at,
@@ -203,9 +203,57 @@ export default class PessoaRepository {
             offset ${offset};
         `;
 
+        const resumo = await sql`
+            with dados_reservas as (
+                select 
+                    a.id_agendamento,
+                    a.status,
+                    a.valor_total,
+                    a.created_at,
+                    r.id_reserva,
+                    extract(epoch from (r.horario_fim - r.horario_inicio))/3600 as horas_reserva,
+                    r.nome_quadra
+                from public.agendamentos a
+                left join public.reservas r on a.id_agendamento = r.id_agendamento
+                where a.id_pessoa = ${id_pessoa}
+                    and (${searchStatus}::text is null or a.status = ${searchStatus}::text)
+                    and (${dataInicial}::date is null or a.created_at >= ${dataInicial}::date)
+                    and (${dataFinal}::date is null or a.created_at <= ${dataFinal}::date)
+                    and (${searchTexto}::text is null or a.id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
+            ),
+            quadra_favorita as (
+                select nome_quadra
+                from dados_reservas
+                where nome_quadra is not null
+                group by nome_quadra
+                order by count(*) desc
+                limit 1
+            )
+            select
+                count(distinct id_agendamento)::int as total_agendamentos,
+                coalesce(sum(horas_reserva), 0)::float as total_horas,
+                coalesce(sum(distinct case when status in ('pago', 'finalizado', 'concluido') then valor_total else 0 end), 0)::int as valor_total_gasto,
+                case 
+                    when count(distinct id_agendamento) > 0 then 
+                        round((count(distinct case when status = 'cancelado' then id_agendamento end)::float / count(distinct id_agendamento)::float) * 100)
+                    else 0 
+                end::int as taxa_cancelamento,
+                max(created_at) as ultima_reserva,
+                (select nome_quadra from quadra_favorita) as quadra_mais_utilizada
+            from dados_reservas;
+        `;
+
         return {
-            saidas: resultado,
-            total: resultado[0]?.total_geral || 0
+            saidas: listagem,
+            total: listagem[0]?.total_geral || 0,
+            resumo: resumo[0] || {
+                total_agendamentos: 0,
+                total_horas: 0,
+                valor_total_gasto: 0,
+                taxa_cancelamento: 0,
+                ultima_reserva: null,
+                quadra_mais_utilizada: 'Nenhuma'
+            }
         };
     }
 

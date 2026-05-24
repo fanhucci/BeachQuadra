@@ -8,19 +8,14 @@ export interface ItemHistorico {
     id_agendamento: number;
     created_at: string;
     valor_total: number;
-    status: 'finalizado' | 'pendente' | 'cancelado' | 'FINALIZADO' | 'PENDENTE' | 'CANCELADO';
+    status: 'finalizado' | 'pendente' | 'cancelado';
     quantidade_itens: number;
 }
 
 export default function usePerfilHistoricoTable() {
     const statusStyles: Record<string, { bg: string; text: string; border: string; label: string; dot: string }> = {
-        FINALIZADO: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200", dot: "bg-emerald-500", label: "Finalizado" },
         finalizado: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200", dot: "bg-emerald-500", label: "Finalizado" },
-        
-        PENDENTE: { bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200", dot: "bg-amber-500", label: "Pendente" },
         pendente: { bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200", dot: "bg-amber-500", label: "Pendente" },
-        
-        CANCELADO: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", dot: "bg-red-500", label: "Cancelado" },
         cancelado: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", dot: "bg-red-500", label: "Cancelado" },
     };
 
