@@ -1,3 +1,4 @@
+'use client'
 import SemAutorizacao from "@/components/erros/semAutorizacao";
 import Navbar from "@/components/navbar";
 import { useUser } from "@/context/userContext";
