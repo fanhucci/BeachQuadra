@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 export default function EmployeeLayout({children}:{children:React.ReactNode}){
     const {user} = useUser();
     const {id} = useParams();
-
+    console.log(!user || (user.id_pessoa != Number(id) && user.id_cargo != 1))
     if (!user || (user.id_pessoa != Number(id) && user.id_cargo != 1)) {
         return <SemAutorizacao />;
     }
