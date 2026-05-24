@@ -367,17 +367,22 @@ export function gerarPDFAgenda(dados: any[]) {
     
     const corpoTabela = lista.flatMap(item => 
         item.agendamentos.map((a: any) => [
-            new Date(item.horario).toLocaleDateString('pt-BR',{timeZone:'utc'}),
-            new Date(item.horario).toLocaleTimeString('pt-BR', {timeZone:'utc', hour: '2-digit', minute: '2-digit'}),
+            new Date(item.horario).toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
+            new Date(item.horario).toLocaleTimeString('pt-BR', {timeZone: 'UTC', hour: '2-digit', minute: '2-digit'}),
+            `${a.nome_quadra || 'N/A'} (${a.tipo || 'Padrão'})`, 
             a.nome,
             cpfMask(a.cpf)
         ])
     );
 
     autoTable(doc, {
-        head: [['Data', 'Horário', 'Cliente', 'CPF']],
+        head: [['Data', 'Horário', 'Quadra', 'Cliente', 'CPF']],
         body: corpoTabela,
         startY: 25,
+        styles: { fontSize: 10 },
+        columnStyles: {
+            2: { cellWidth: 40 }
+        }
     });
 
     doc.save("agenda_atendimentos.pdf");
