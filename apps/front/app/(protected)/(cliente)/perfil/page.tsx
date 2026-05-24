@@ -19,7 +19,6 @@ export default function MeuPerfilPage(){
         }
     },[user])
     
-    console.log(idUsuario);
     if(!idUsuario) return <NaoEncontrado/>
 
     return (
