@@ -10,10 +10,11 @@ export default function EmployeeLayout({children}:{children:React.ReactNode}){
     console.log(user?.id_pessoa)
     console.log(user?.id_cargo)
     console.log(Number(id));
-    console.log(!user || (user.id_cargo === 1 && user.id_pessoa !== Number(id)))
-    if (!user || (user.id_cargo === 1 && user.id_pessoa !== Number(id))) {
-        return <SemAutorizacao />;
-    }
+    console.log(!user || (user.id_cargo == 1 && user.id_pessoa != Number(id)))
+
+    if(!user) return <SemAutorizacao/>
+
+    if(user.id_cargo == 1 && user.id_pessoa != Number(id)) return <SemAutorizacao/>
 
     return(
         <>
