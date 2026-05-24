@@ -172,7 +172,6 @@ export default class PessoaRepository {
         const { search, status, dataInicio, dataFim, page = 1, limit = 10 } = filtro;
 
         const offset = (Number(page) - 1) * Number(limit);
-
         const searchTexto = search || null;
         const searchStatus = status || null;
         const dataInicial = dataInicio || null;
@@ -205,11 +204,7 @@ export default class PessoaRepository {
 
         const resumo = await sql`
             with agendamentos_filtrados as (
-                select 
-                    id_agendamento,
-                    valor_total,
-                    status,
-                    created_at
+                select id_agendamento, valor_total, status, created_at
                 from public.agendamentos
                 where id_pessoa = ${id_pessoa}
                     and (${searchStatus}::text is null or status = ${searchStatus}::text)
@@ -218,36 +213,24 @@ export default class PessoaRepository {
                     and (${searchTexto}::text is null or id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
             )
             select
+                p.nome as nome_cliente,
+                p.cpf as cpf_cliente,
                 (select count(*)::int from agendamentos_filtrados) as total_agendamentos,
-                
-                (select count(*)::int 
-                 from public.reservas r 
-                 where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
-                ) as total_horas,
-                
-                (select coalesce(sum(valor_total), 0)::bigint 
-                 from agendamentos_filtrados 
-                 where status in ('pago', 'finalizado', 'concluido')
-                ) as valor_total_gasto,
-                
-                (select round((count(*) filter (where status = 'cancelado')::float / nullif(count(*), 0)) * 100)::int 
-                 from agendamentos_filtrados
-                ) as taxa_cancelamento,
-                
+                (select count(*)::int from public.reservas r where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)) as total_horas,
+                (select coalesce(sum(valor_total), 0)::bigint from agendamentos_filtrados where status in ('pago', 'finalizado', 'concluido')) as valor_total_gasto,
+                (select round((count(*) filter (where status = 'cancelado')::float / nullif(count(*), 0)) * 100)::int from agendamentos_filtrados) as taxa_cancelamento,
                 (select max(created_at) from agendamentos_filtrados) as ultima_reserva,
-                
-                (select q.nome 
-                 from public.reservas r 
-                 join public.quadras q on r.id_quadra = q.id_quadra
-                 where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
-                 group by q.nome order by count(*) desc limit 1
-                ) as quadra_mais_utilizada
+                (select q.nome from public.reservas r join public.quadras q on r.id_quadra = q.id_quadra where r.id_agendamento in (select id_agendamento from agendamentos_filtrados) group by q.nome order by count(*) desc limit 1) as quadra_mais_utilizada
+            from public.pessoas p
+            where p.id_pessoa = ${id_pessoa}
         `;
         
         return {
             saidas: listagem,
             total: listagem[0]?.total_geral || 0,
             resumo: resumo[0] || {
+                nome_cliente: 'Cliente',
+                cpf_cliente: '',
                 total_agendamentos: 0,
                 total_horas: 0,
                 valor_total_gasto: 0,

@@ -239,15 +239,20 @@ export function gerarPDFOcupacao(dados: OcupacaoItem[], filtrosTexto: string) {
 }
 
 
-export interface HistoricoItem {
+interface HistoricoItem {
     id_agendamento: number;
     created_at: string;
-    valor_total: number;
-    status: 'finalizado' | 'pendente' | 'cancelado' | 'FINALIZADO' | 'PENDENTE' | 'CANCELADO';
     quantidade_itens: number;
+    valor_total: string | number;
+    status: string;
 }
 
-export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) {
+interface InfoCliente {
+    nome: string;
+    identificacao?: string;
+}
+
+export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string, infoCliente: InfoCliente) {
     const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -279,22 +284,29 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.setTextColor(31, 41, 55); 
-    doc.text("Histórico de Agendamentos do Usuário", 14, 20);
+    doc.text("Histórico de Agendamentos", 14, 20);
 
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text(`Cliente: ${infoCliente.nome}`, 14, 30);
+    
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
+    doc.text(`ID/Doc: ${infoCliente.identificacao || 'N/A'}`, 14, 35);
+
+    doc.setFontSize(9);
     doc.setTextColor(107, 114, 128); 
-    doc.text(`Filtros ativos: ${filtrosTexto}`, 14, 26);
+    doc.text(`Filtros ativos: ${filtrosTexto}`, 14, 42);
     
     doc.setDrawColor(229, 231, 235);
-    doc.line(14, 30, 196, 30);
+    doc.line(14, 46, 196, 46);
 
-    const resumoY = 36; 
+    const resumoY = 52; 
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
     doc.setTextColor(107, 114, 128);
-    doc.text("VALOR EM AGENDAMENTOS", 14, resumoY);
+    doc.text("VALOR TOTAL", 14, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(31, 41, 55);
     doc.text(dinheiroMask(totais.totalFinanceiro), 14, resumoY + 6);
@@ -302,7 +314,7 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
     doc.setTextColor(107, 114, 128);
-    doc.text("TOTAL DE RESERVAS (QTD)", 75, resumoY);
+    doc.text("TOTAL DE RESERVAS", 75, resumoY);
     doc.setFontSize(14);
     doc.setTextColor(79, 70, 229); 
     doc.text(`${totais.totalReservasValidas} un.`, 75, resumoY + 6);
@@ -313,9 +325,9 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
     doc.text("CONCLUÍDOS / CANCELADOS", 140, resumoY);
     doc.setFontSize(12);
     doc.setTextColor(31, 41, 55); 
-    doc.text(`${totais.totalAgendamentosValidos} ativo(s) / `, 140, resumoY + 6);
+    doc.text(`${totais.totalAgendamentosValidos} / `, 140, resumoY + 6);
     
-    const larguraTextoAtivo = doc.getTextWidth(`${totais.totalAgendamentosValidos} ativo(s) / `);
+    const larguraTextoAtivo = doc.getTextWidth(`${totais.totalAgendamentosValidos} / `);
     doc.setTextColor(220, 38, 38);
     doc.text(`${totais.totalCancelados} canc.`, 140 + larguraTextoAtivo, resumoY + 6);
 
@@ -323,37 +335,24 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string) 
     doc.line(14, resumoY + 12, 196, resumoY + 12);
 
     const colunas = ["ID Agendamento", "Data do Registro", "Qtd. Reservas", "Valor Total", "Status"];
-
-    const formatarStatus = (status: string) => {
-        const s = status.toLowerCase();
-        if (s === "finalizado") return "Finalizado";
-        if (s === "pendente") return "Pendente";
-        if (s === "cancelado") return "Cancelado";
-        return status; 
-    };
-
     const linhas = dados.map((item) => [
         `#${item.id_agendamento}`,
         formatarDataUTC(item.created_at), 
         `${item.quantidade_itens} un.`,
         dinheiroMask(item.valor_total), 
-        formatarStatus(item.status)
+        item.status.charAt(0).toUpperCase() + item.status.slice(1)
     ]);
 
     autoTable(doc, {
         head: [colunas],
         body: linhas,
-        startY: 54, 
+        startY: 70, 
         styles: { font: "helvetica", fontSize: 9, cellPadding: 3 },
-        headStyles: {
-            fillColor: [31, 41, 55],
-            textColor: [255, 255, 255],
-            fontStyle: "bold",
-        },
+        headStyles: { fillColor: [31, 41, 55], textColor: [255, 255, 255], fontStyle: "bold" },
         alternateRowStyles: { fillColor: [249, 250, 251] }, 
         margin: { left: 14, right: 14 },
     });
 
     const dataHoje = new Date().toLocaleDateString("pt-BR", { timeZone: "UTC" }).replace(/\//g, "-");
-    doc.save(`historico-agendamentos-${dataHoje}.pdf`);
+    doc.save(`historico-${infoCliente.nome.replace(/\s+/g, '-').toLowerCase()}-${dataHoje}.pdf`);
 }
