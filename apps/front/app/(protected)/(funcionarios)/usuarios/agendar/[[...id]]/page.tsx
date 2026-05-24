@@ -40,8 +40,8 @@ export default function AgendarClientePage(){
             setLoading(false);
         }
     },[id])
+    console.log('teste'+perfil)
     
-    console.log(perfil)
     if(!perfil){
         return(
             <>
