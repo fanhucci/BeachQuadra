@@ -3,6 +3,8 @@
 import { useMemo } from "react";
 import { dinheiroMask } from "@/utils/mascaras";
 import { Column } from "@/components/customTable";
+import LinkButton from "@/components/buttonComponents/linkButton";
+import { Calendar } from "lucide-react";
 
 export interface ItemHistorico {
     id_agendamento: number;
@@ -67,6 +69,25 @@ export default function usePerfilHistoricoTable() {
                 );
             }
         },
+        {
+            key: 'acoes', 
+            label: "Ações", 
+            align: 'center',
+            render: (_, row) => (
+                <div className="flex justify-center gap-2">
+
+                    <LinkButton
+                        estilo="primario"    
+                        className="w-fit h-8 text-xs font-semibold flex items-center justify-center gap-1.5 px-3 rounded-lg shadow-sm border"
+                        href={`/agendamentos/${row.id_agendamento}`}
+                    >
+                        <span>Detalhes</span>
+                        <Calendar size={13} className="stroke-[2.5]" />
+                    </LinkButton>
+                    
+                </div>
+            )
+        }
     ], []);
 
     return { colunas };
