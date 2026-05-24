@@ -14,7 +14,7 @@ import { gerarPDFAgenda } from "@/utils/pdfHandler";
 
 export default function AgendaPage(){
     const [modalOn, setModalOn] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [horarios, setHorarios] = useState<any[]|null>(null);
     const [slotSelecionado, setSlotSelecionado] = useState<any|null>(null);
     const [dataSelecionada, setDataSelecionada] = useState<string>(new Date().toISOString().split('T')[0]);
