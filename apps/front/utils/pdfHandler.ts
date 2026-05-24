@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import { dinheiroMask } from "./mascaras";
+import { cpfMask, dinheiroMask } from "./mascaras";
 
 
 
@@ -292,7 +292,7 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string, 
     
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
-    doc.text(`ID/Doc: ${infoCliente.identificacao || 'N/A'}`, 14, 35);
+    doc.text(`ID/Doc: ${infoCliente.identificacao? cpfMask(infoCliente.identificacao) : 'N/A'}`, 14, 35);
 
     doc.setFontSize(9);
     doc.setTextColor(107, 114, 128); 
@@ -355,4 +355,30 @@ export function gerarPDFHistorico(dados: HistoricoItem[], filtrosTexto: string, 
 
     const dataHoje = new Date().toLocaleDateString("pt-BR", { timeZone: "UTC" }).replace(/\//g, "-");
     doc.save(`historico-${infoCliente.nome.replace(/\s+/g, '-').toLowerCase()}-${dataHoje}.pdf`);
+}
+
+
+export function gerarPDFAgenda(dados: any[]) {
+    const doc = new jsPDF();
+    
+    const lista = dados.filter(h => h.agendamentos.length > 0);
+
+    doc.text("Relatório de Agendamentos", 14, 15);
+    
+    const corpoTabela = lista.flatMap(item => 
+        item.agendamentos.map((a: any) => [
+            new Date(item.horario).toLocaleDateString('pt-BR'),
+            new Date(item.horario).toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}),
+            a.nome,
+            a.cpf
+        ])
+    );
+
+    autoTable(doc, {
+        head: [['Data', 'Horário', 'Cliente', 'CPF']],
+        body: corpoTabela,
+        startY: 25,
+    });
+
+    doc.save("agenda_atendimentos.pdf");
 }

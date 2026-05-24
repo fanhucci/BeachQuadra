@@ -6,18 +6,24 @@ import { apiRequest } from "@/utils/apiHandler";
 import { cpfMask } from "@/utils/mascaras";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { CalendarDays, X } from "lucide-react";
+import { CalendarDays, FileText, X } from "lucide-react";
+import ErroInesperado from "@/components/erros/erroInesperado";
+import SubmitButton from "@/components/buttonComponents/submitButton";
+import CustomInput from "@/components/inputsComponents/customInput";
+import { gerarPDFAgenda } from "@/utils/pdfHandler";
 
 export default function AgendaPage(){
     const [modalOn, setModalOn] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [horarios, setHorarios] = useState<any[]|null>(null);
     const [slotSelecionado, setSlotSelecionado] = useState<any|null>(null);
+    const [dataSelecionada, setDataSelecionada] = useState<string>(new Date().toISOString().split('T')[0]);
 
-    async function carregarHorarios(){
+    async function carregarHorarios(data?: string){
         try {
             setLoading(true);
-            const dados = await apiRequest(`/horario/agenda`);
+            const query = data ? `?data=${data}` : '';
+            const dados = await apiRequest(`/horario/agenda${query}`);
             setHorarios(dados);
         } catch (error) {
             toast.error(error instanceof Error ? error.message : `Erro ao carregar agenda.`)
@@ -36,11 +42,20 @@ export default function AgendaPage(){
         setModalOn(false);
     }
 
+    const handleExportarPDF = ()=>{
+        if(!horarios){
+            toast.error('Erro ao gerar PDF.')
+            return;
+        }
+        gerarPDFAgenda(horarios)
+    }
+
     useEffect(() => {
         carregarHorarios();
-    }, [])
+    }, [dataSelecionada])
 
-    if (!horarios) return null;
+
+    if (!horarios) return <ErroInesperado/>;
 
     return (
         <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">
@@ -53,15 +68,35 @@ export default function AgendaPage(){
                         </div>
                         <div>
                             <h2 className="text-xl font-bold text-gray-900 tracking-tight lg:text-2xl">Agenda de Atendimentos</h2>
-                            <p className="text-xs text-gray-500">Monitore, gerencie e navegue pelos slots de horários semanais</p>
+                            <p className="text-xs text-gray-500">Monitore, gerencie e navegue pelos slots de horários</p>
                         </div>
+                    </div>
+
+                    <div className="flex items-end gap-3">
+                        <div className="w-40">
+                            <CustomInput
+                                name="data"
+                                label="Data de Consulta"
+                                type="date"
+                                value={dataSelecionada}
+                                onChange={(e) => setDataSelecionada(e.target.value)}
+                            />
+                        </div>
+                        <SubmitButton 
+                            estilo="secundario" 
+                            onClick={handleExportarPDF}
+                            className="flex items-center gap-2"
+                        >
+                            <FileText size={18} />
+                            PDF
+                        </SubmitButton>
                     </div>
                 </header>
 
                 <section className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-4 min-h-0">
                     <Agenda
                         loading={loading}
-                        dados={horarios}
+                        dados={horarios || []}
                         contexto="agenda"
                         aoSelecionar={(slot) => abrirModal(slot)}
                     />
