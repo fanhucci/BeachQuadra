@@ -114,6 +114,7 @@ export default class HorarioRepository {
                             json_agg(
                             json_build_object(
                                 'id_quadra', q.id_quadra,
+                                'nome', q.nome,
                                 'tipo', q.tipo,
                                 'valor', q.valor
                                 )

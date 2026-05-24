@@ -19,16 +19,9 @@ export default class QuadraRepository {
                 select * 
                 from quadras 
                 where 1=1
-                    -- Filtro por Nome (ILIKE para ignorar maiúsculas/minúsculas)
                     and (${searchTexto}::text is null or nome ilike '%' || ${searchTexto}::text || '%')
-                    
-                    -- Filtro por Tipo (Enum)
                     and (${searchTipo}::text is null or tipo = ${searchTipo}::"QuadraTypesEnum")
-                    
-                    -- Filtro por Status (Se for Boolean ou Enum, ajuste o cast se necessário)
                     and (${searchStatus}::boolean is null or status = ${searchStatus}::boolean)
-                    
-                    -- Filtro por Ativo (Boolean)
                     and (${searchAtivo}::boolean is null or ativo = ${searchAtivo}::boolean)
             ),
             total_registros as (
