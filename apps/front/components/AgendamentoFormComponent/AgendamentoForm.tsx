@@ -54,7 +54,10 @@ export default function AgendamentoFormComponent({
    
                     <div className="flex-1 flex flex-col gap-3 min-h-0 h-full">
                         
-                        <div className="flex flex-row justify-between items-center bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm flex-shrink-0">
+                        <div
+                            id="seletor-periodo" 
+                            className="flex flex-row justify-between items-center bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm flex-shrink-0"
+                        >
                             <SubmitButton 
                                 estilo="secundario"
                                 onClick={semanaAnterior}
@@ -78,7 +81,10 @@ export default function AgendamentoFormComponent({
                             </SubmitButton>
                         </div>
 
-                        <div className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4 min-h-0 flex flex-col">
+                        <div 
+                            id="seletor-horarios"
+                            className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm p-2 sm:p-4 min-h-0 flex flex-col"
+                        >
                             <Agenda
                                 dados={dados}
                                 aoSelecionar={selecionarHorario}
@@ -92,7 +98,10 @@ export default function AgendamentoFormComponent({
 
                     <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0 lg:h-full lg:min-h-0">
                         
-                        <div className="flex-shrink-0 border-b border-gray-100 pb-3">
+                        <div 
+                            id="#seletor-tipo-quadra"
+                            className="flex-shrink-0 border-b border-gray-100 pb-3"
+                        >
                             <CustomSwitch
                                 label="Tipo de quadra:"
                                 estadoA={{ label: 'Individual', value: 'individual' }}
@@ -108,7 +117,11 @@ export default function AgendamentoFormComponent({
                                 Selecionados ({horarioSelecionado.length})
                             </h3>   
                      
-                            <div className="h-[150px] lg:h-auto lg:flex-1 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar">
+                            <div
+                                id="seletor-horarios-selecionados"
+                                className="h-[150px] lg:h-auto lg:flex-1 overflow-y-auto border border-gray-100 rounded-xl p-2.5 bg-gray-50/60 custom-scrollbar"
+                            >
+
                                 <div className="flex flex-wrap gap-1.5 justify-center items-center w-full min-h-full">
                                     {horariosOrdenados.map(r => (
                                         <SelectedSlotButton
@@ -207,7 +220,9 @@ function SalvarAgendamentoForm({ contexto, clientePreSelecionado = null, horario
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
+            
             <SubmitButton
+                id="botao-concluir"
                 estilo="primario"
                 onClick={abrirModal}
                 disabled={horariosSelecionados.length === 0}
