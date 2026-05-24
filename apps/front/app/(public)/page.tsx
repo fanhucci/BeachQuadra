@@ -12,78 +12,79 @@ export default function HomePage() {
   return (
     <div className="flex flex-1 flex-col bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="pt-24 pb-20 md:pt-32 md:pb-28 relative bg-gradient-to-br from-gray-50 via-blue-50 to-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1622290291469-0f5e1c2a5e3e')] bg-cover bg-center opacity-10" />
+      <section className="pt-24 pb-24 md:pt-32 md:pb-32 relative bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1622290291469-0f5e1c2a5e3e')] bg-cover bg-center opacity-20" />
         
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-5 py-2 rounded-full mb-6 font-medium">
-            🏖️ Beach Tennis • Reserva Online
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2.5 rounded-full mb-8">
+            🏖️ Beach Tennis • Reserva Instantânea
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
-            Sua quadra de <span className="text-blue-600">Beach Tennis</span><br />
-            reservada em <span className="text-gray-900">segundos</span>
+          <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-8 text-white">
+            Reserve sua quadra de<br />
+            <span className="text-orange-400">Beach Tennis</span> em segundos
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto mb-10">
-            Nada de ligações, mensagens ou confusão de horários. 
-            Veja as quadras livres e reserve online de forma simples e rápida.
+          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-12">
+            Acabe com ligações, mensagens e confusão de horários. 
+            Veja quadras disponíveis e reserve com poucos cliques.
           </p>
 
           <Link
             href="/reservar"
-            className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold px-10 py-5 rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-lg"
+            className="inline-flex items-center gap-4 bg-white text-blue-950 hover:bg-orange-400 hover:text-white text-xl font-semibold px-12 py-6 rounded-2xl transition-all duration-300 hover:scale-105 shadow-xl"
           >
             Fazer minha reserva agora
-            <ArrowRight className="w-6 h-6" />
+            <ArrowRight className="w-7 h-7" />
           </Link>
 
-          <p className="text-sm text-gray-500 mt-6">Mais de 2.400 jogadores já reservaram esta semana</p>
+          <p className="text-blue-200 mt-8 text-sm">+2.400 reservas realizadas esta semana</p>
         </div>
+
+        {/* Decorative wave */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Tipos de Quadras */}
-      <section id="quadras" className="py-20 bg-gray-50">
+      <section id="quadras" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-            Escolha seu estilo de jogo
-          </h2>
-          <p className="text-gray-600 text-center mb-12">Quadras preparadas para todos os níveis</p>
+          <h2 className="text-4xl font-bold text-center mb-4">Escolha seu estilo de jogo</h2>
+          <p className="text-gray-600 text-center mb-14 text-lg">Duas modalidades para diferentes formas de jogar</p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Quadra Individual */}
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="h-80 relative">
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* Individual */}
+            <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+              <div className="h-96 relative">
                 <img 
                   src="https://grok.x.ai/attachments/SGSHv" 
                   alt="Quadra Individual" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-5 py-1 rounded-full text-sm font-semibold flex items-center gap-2 text-gray-800">
-                  <User className="w-5 h-5" /> Individual
+                <div className="absolute top-8 left-8 bg-white/95 backdrop-blur px-6 py-2 rounded-2xl flex items-center gap-3 text-gray-800 font-semibold shadow">
+                  <User className="w-6 h-6" /> Individual
                 </div>
               </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-3">Quadra Individual</h3>
-                <p className="text-gray-600">Ideal para treinos intensos, aulas particulares e jogadores que buscam performance.</p>
+              <div className="p-10">
+                <h3 className="text-3xl font-bold mb-4">Quadra Individual</h3>
+                <p className="text-gray-600 text-lg">Perfeita para treinos, aulas particulares e quem quer jogar com alta intensidade.</p>
               </div>
             </div>
 
-            {/* Quadra de Duplas */}
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="h-80 relative">
+            {/* Duplas */}
+            <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+              <div className="h-96 relative">
                 <img 
                   src="https://grok.x.ai/attachments/vlTLQ" 
                   alt="Quadra de Duplas" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-5 py-1 rounded-full text-sm font-semibold flex items-center gap-2 text-gray-800">
-                  <Users className="w-5 h-5" /> Duplas
+                <div className="absolute top-8 left-8 bg-white/95 backdrop-blur px-6 py-2 rounded-2xl flex items-center gap-3 text-gray-800 font-semibold shadow">
+                  <Users className="w-6 h-6" /> Duplas
                 </div>
               </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-3">Quadra de Duplas</h3>
-                <p className="text-gray-600">A mais divertida! Perfeita para jogar com amigos e família.</p>
+              <div className="p-10">
+                <h3 className="text-3xl font-bold mb-4">Quadra de Duplas</h3>
+                <p className="text-gray-600 text-lg">Diversão garantida! Ideal para jogar com amigos e família.</p>
               </div>
             </div>
           </div>
@@ -91,77 +92,68 @@ export default function HomePage() {
       </section>
 
       {/* Como Funciona */}
-      <section id="como-funciona" className="py-20 bg-white">
+      <section id="como-funciona" className="py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Como funciona?</h2>
+          <h2 className="text-4xl font-bold text-center mb-16">Como funciona?</h2>
 
           <div className="grid md:grid-cols-3 gap-10">
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
-                <MapPin className="w-10 h-10 text-blue-600" />
+            {[
+              { icon: MapPin, title: "Escolha a quadra", desc: "Visualize fotos, localização e disponibilidade em tempo real." },
+              { icon: Clock, title: "Selecione o horário", desc: "Horários atualizados ao vivo. Escolha o que melhor te atende." },
+              { icon: CheckCircle, title: "Confirme a reserva", desc: "Pagamento seguro e confirmação instantânea." }
+            ].map((step, i) => (
+              <div key={i} className="text-center group">
+                <div className="w-24 h-24 mx-auto mb-8 bg-blue-100 rounded-3xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                  <step.icon className="w-12 h-12 text-blue-600 group-hover:text-white" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
-              <h3 className="text-2xl font-semibold mb-3">1. Escolha a quadra</h3>
-              <p className="text-gray-600">Visualize todas as quadras disponíveis com fotos e detalhes em tempo real.</p>
-            </div>
-
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
-                <Clock className="w-10 h-10 text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-3">2. Selecione o horário</h3>
-              <p className="text-gray-600">Horários atualizados ao vivo. Escolha o melhor para você.</p>
-            </div>
-
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
-                <CheckCircle className="w-10 h-10 text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-3">3. Confirme</h3>
-              <p className="text-gray-600">Pagamento seguro e reserva confirmada em poucos segundos.</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Vantagens */}
-      <section id="vantagens" className="py-20 bg-gray-50">
+      <section id="vantagens" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4 text-gray-900">Por que usar nossa plataforma?</h2>
+          <h2 className="text-4xl font-bold mb-4">Por que escolher a BeachQuadra?</h2>
+          <p className="text-gray-600 mb-16">Facilidade, transparência e agilidade para você</p>
           
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-              <Trophy className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h4 className="text-xl font-semibold mb-3">Praticidade Total</h4>
-              <p className="text-gray-600">Reserve de qualquer lugar, a qualquer momento, sem ligar para ninguém.</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-50 p-10 rounded-3xl hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-gray-100">
+              <Trophy className="w-14 h-14 text-orange-500 mx-auto mb-6" />
+              <h4 className="text-2xl font-semibold mb-3">Praticidade Total</h4>
+              <p className="text-gray-600">Reserve de onde estiver, sem precisar ligar ou esperar resposta.</p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-              <Calendar className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h4 className="text-xl font-semibold mb-3">Horários em Tempo Real</h4>
-              <p className="text-gray-600">Sem conflitos ou horários duplicados. Tudo atualizado automaticamente.</p>
+            <div className="bg-gray-50 p-10 rounded-3xl hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-gray-100">
+              <Calendar className="w-14 h-14 text-orange-500 mx-auto mb-6" />
+              <h4 className="text-2xl font-semibold mb-3">Horários em Tempo Real</h4>
+              <p className="text-gray-600">Sem sobreposições ou horários duplicados.</p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-              <Sun className="w-12 h-12 text-blue-600 mx-auto mb-6" />
-              <h4 className="text-xl font-semibold mb-3">Rápido e Seguro</h4>
-              <p className="text-gray-600">Menos de 1 minuto para confirmar sua reserva com segurança.</p>
+            <div className="bg-gray-50 p-10 rounded-3xl hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-gray-100">
+              <Sun className="w-14 h-14 text-orange-500 mx-auto mb-6" />
+              <h4 className="text-2xl font-semibold mb-3">Rápido e Confiável</h4>
+              <p className="text-gray-600">Reserva confirmada em menos de 60 segundos.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="py-24 bg-blue-600 text-white text-center">
+      <section className="py-28 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="text-5xl font-bold mb-6">Bora jogar hoje?</h2>
-          <p className="text-xl mb-10 opacity-90">Não perca seu horário favorito. As quadras estão enchendo rápido!</p>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">Pronto para jogar?</h2>
+          <p className="text-xl mb-12 text-blue-100">Escolha seu horário e garanta sua quadra agora mesmo.</p>
           
           <Link
             href="/reservar"
-            className="inline-flex items-center gap-3 bg-white text-blue-600 text-xl font-bold px-12 py-6 rounded-2xl hover:bg-gray-100 transition-all hover:scale-105"
+            className="inline-flex items-center gap-4 bg-white text-blue-700 hover:bg-orange-400 hover:text-white text-2xl font-bold px-14 py-7 rounded-3xl transition-all hover:scale-105 shadow-2xl"
           >
             Reservar Agora
-            <ArrowRight className="w-7 h-7" />
+            <ArrowRight className="w-8 h-8" />
           </Link>
         </div>
       </section>
