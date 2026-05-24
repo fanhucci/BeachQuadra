@@ -26,12 +26,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     async function refreshUser() {
         try {
+            setLoading(true)
             const resposta = await apiRequest("/usuarios/perfil");
 
             setUser(resposta);
         } catch {
             setUser(null);
-            setLoading(false);
         }
         finally{
             setLoading(false);

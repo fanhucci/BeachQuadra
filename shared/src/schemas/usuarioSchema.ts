@@ -62,19 +62,10 @@ export const UsuarioHistoricoSearchSchema = z.object({
 export type UsuarioHistoricoSearch = z.infer<typeof UsuarioHistoricoSearchSchema>;
 
 
-export const PerfilSchema = z.object({
-    usuario:UsuarioSchema.extend({
-        cargo:z.string()
-    }),
-    permissions:z.object({
-        canEdit:z.coerce.boolean(),
-        canChangePassword:z.coerce.boolean(),
-        canResetPassword:z.coerce.boolean(),
-        canActivateAccount:z.coerce.boolean(),
-        canDeactivateAccount:z.coerce.boolean(),
-        canDelete:z.coerce.boolean()
-    })
+export const PerfilSchema = UsuarioSchema.extend({
+    cargo:z.string()
 })
+
 
 export type Perfil = z.infer<typeof PerfilSchema>;
 

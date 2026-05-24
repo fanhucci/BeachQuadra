@@ -5,7 +5,7 @@ import Carregando from "@/components/carregando";
 import HelpButton from "@/components/helpButton";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
-import { Perfil } from "@app/shared";
+import { Perfil, Usuario } from "@app/shared";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
@@ -14,7 +14,7 @@ export default function AgendarPage(){
     const {user} = useUser();
     const router = useRouter();
 
-    const [perfil,setPerfil] = useState<Perfil|null>(null);
+    const [perfil,setPerfil] = useState<Usuario|null>(null);
     const [loading,setLoading] = useState<boolean>(true);
 
     async function pegarUsuario(id:number){
@@ -41,7 +41,7 @@ export default function AgendarPage(){
 
     if(loading) return <Carregando/>
 
-    if(!perfil && !loading) {
+    if(!perfil) {
         router.replace('/login');
         return null;
     }
@@ -89,7 +89,7 @@ export default function AgendarPage(){
             />
             <AgendamentoFormComponent
                 context="cliente"
-                clientePreSelecionado={perfil?.usuario}
+                clientePreSelecionado={perfil}
             />
         </>
         
