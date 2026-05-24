@@ -369,7 +369,7 @@ export function gerarPDFAgenda(dados: any[]) {
         item.agendamentos.map((a: any) => [
             new Date(item.horario).toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
             new Date(item.horario).toLocaleTimeString('pt-BR', {timeZone: 'UTC', hour: '2-digit', minute: '2-digit'}),
-            `${a.nome_quadra || 'N/A'} (${a.tipo || 'Padrão'})`, 
+            `${a.nome_quadra || 'N/A'} (${a.tipo_quadra || ''})`, 
             a.nome,
             cpfMask(a.cpf)
         ])
