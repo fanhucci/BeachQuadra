@@ -11,6 +11,7 @@ import LinkButton from "@/components/buttonComponents/linkButton";
 import CobrancasFiltrosForm from "../../../../components/cobrancasComponents/cobrancasFiltrosForm";
 import { gerarPDFCobranças } from "@/utils/pdfHandler";
 import { apiRequest } from "@/utils/apiHandler";
+import { dinheiroMask } from "@/utils/mascaras";
 
 
 export default function CobrancasPage(){
@@ -149,7 +150,7 @@ export default function CobrancasPage(){
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Faturado (Página)</span>
                         <span className="text-xl font-bold text-gray-900">
-                            R$ {totaisTela.totalGeral.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                            {dinheiroMask(totaisTela.totalGeral)}
                         </span>
                     </div>
                 
@@ -157,14 +158,14 @@ export default function CobrancasPage(){
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Recebido</span>
                         <span className="text-xl font-bold text-green-600">
-                            R$ {totaisTela.totalRecebido.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                            {dinheiroMask(totaisTela.totalRecebido)}
                         </span>
                     </div>
                 
                     <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col gap-1">
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Pendente</span>
                         <span className="text-xl font-bold text-red-600">
-                            R$ {totaisTela.totalPendente.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                            {dinheiroMask(totaisTela.totalPendente)}
                         </span>
                     </div>
                 </section>
