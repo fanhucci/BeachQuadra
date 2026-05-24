@@ -42,7 +42,7 @@ export default function AgendarClientePage(){
     },[id])
     
     
-    if(!perfil){
+    if(!perfil && !loading){
         return(
             <>
                 <HelpButton
