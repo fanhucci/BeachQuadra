@@ -28,15 +28,15 @@ export default class UsuarioService{
         const id = Number(user.id);
         const cargo = Number(user.cargo);
 
-        console.log(typeof id, typeof cargo, typeof id_busca)
-        console.log(cargo, id_busca, id)
-        if (cargo < 2 && id_busca !== id) {
+        if (id_busca === id) {
+            return await this.pessoa.listarUsuarioPorId(id_busca);
+        }
+
+        if (cargo < 2) {
             throw new AppError('Sem autorização', 403);
         }
 
-        const usuario = await this.pessoa.listarUsuarioPorId(id_busca);
-        
-        return usuario;
+        return await this.pessoa.listarUsuarioPorId(id_busca);
     }
 
     async listarHistoricoPerfil(user:User, id_perfil:number, filtro:UsuarioHistoricoSearch){
@@ -44,7 +44,11 @@ export default class UsuarioService{
         const cargo = Number(user.cargo);
 
 
-        if (cargo < 2 && id_perfil !== id) {
+        if (id_perfil === id) {
+            return await this.pessoa.listarHistorico(id_perfil,filtro);
+        }
+
+        if (cargo < 2) {
             throw new AppError('Sem autorização', 403);
         }
 
@@ -80,16 +84,17 @@ export default class UsuarioService{
         })
     }
     
-    async editarUsuario(user:User, dados:EditarUsuario){
+    async editarUsuario(user: User, dados: EditarUsuario) {
         const id = Number(user.id);
         const cargo = Number(user.cargo);
 
+        const isOwner = dados.id_pessoa === id;
 
-        if (cargo < 2 && dados.id_pessoa !== id) {
-            throw new AppError('Sem autorização', 403);
+        if (cargo < 2 && !isOwner) {
+            throw new AppError('Sem autorização para editar outros usuários', 403);
         }
 
-        if (cargo < 3 && dados.id_cargo !== undefined) {
+        if (dados.id_cargo !== undefined && cargo < 3) {
             throw new AppError('Você não tem permissão para alterar cargos', 403);
         }
 
