@@ -6,12 +6,25 @@ import {
   Sun, ArrowRight, Star, 
   MapPin
 } from "lucide-react";
+import HelpButton from "@/components/helpButton";
 
 export default function HomePage() {
   const { user,isAuthenticated } = useUser();
 
   return (
     <div className="flex flex-1 flex-col bg-white text-gray-900 overflow-hidden">
+
+      <HelpButton
+        steps={[
+          {
+            element:"",
+            popover:{
+              title:"",
+              description:""
+            }
+          }
+        ]}
+      />
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-white">
 
         <div 
