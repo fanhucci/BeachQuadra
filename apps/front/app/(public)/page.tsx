@@ -11,10 +11,14 @@ export default function HomePage() {
   const { user } = useUser();
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
-      {/* Hero Section */}
+    <div className="flex flex-1 flex-col bg-white text-gray-900 overflow-hidden">
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-white">
-        <div className="absolute inset-0 bg-[url('https://grok.x.ai/attachments/c6SWk')] bg-cover bg-center opacity-40" />
+
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40" 
+          style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        />
+        
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
@@ -78,7 +82,7 @@ export default function HomePage() {
             <div className="rounded-3xl overflow-hidden shadow-xl group">
               <div className="relative h-[520px]">
                 <img 
-                  src="https://grok.x.ai/attachments/SGSHv" 
+                  src="/images/individual.jpg"
                   alt="Quadra Individual" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -102,7 +106,7 @@ export default function HomePage() {
             <div className="rounded-3xl overflow-hidden shadow-xl group">
               <div className="relative h-[520px]">
                 <img 
-                  src="https://grok.x.ai/attachments/vlTLQ" 
+                  src="/images/duplas.jpg"
                   alt="Quadra de Duplas" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
