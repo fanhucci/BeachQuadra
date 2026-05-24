@@ -1,3 +1,5 @@
+'use client'
+
 import SemAutorizacao from "@/components/erros/semAutorizacao";
 import { useUser } from "@/context/userContext";
 
