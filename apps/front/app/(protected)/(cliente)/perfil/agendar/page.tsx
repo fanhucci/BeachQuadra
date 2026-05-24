@@ -38,12 +38,13 @@ export default function AgendarPage(){
         }
     },[user])
 
+    if(loading)return <>carregando</>
 
     if(!perfil && !loading) {
         router.replace('/login');
         return null;
     }
-    console.log('teste'+perfil)
+    console.log('teste'+perfil+loading)
     return(
         <>
             <HelpButton
