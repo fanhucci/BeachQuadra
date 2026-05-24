@@ -204,42 +204,43 @@ export default class PessoaRepository {
         `;
 
         const resumo = await sql`
-            with dados_agendamentos as (
-                select distinct
-                    a.id_agendamento,
-                    a.status,
-                    a.valor_total,
-                    a.created_at
-                from public.agendamentos a
-                where a.id_pessoa = ${id_pessoa}
-                    and (${searchStatus}::text is null or a.status = ${searchStatus}::text)
-                    and (${dataInicial}::date is null or a.created_at >= ${dataInicial}::date)
-                    and (${dataFinal}::date is null or a.created_at <= ${dataFinal}::date)
-                    and (${searchTexto}::text is null or a.id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
-            ),
-            contagem_horas as (
-                select count(r.id_reserva) as total_h
-                from public.reservas r
-                join dados_agendamentos da on r.id_agendamento = da.id_agendamento
-                where da.status in ('pago', 'finalizado', 'concluido')
+            with agendamentos_filtrados as (
+                select 
+                    id_agendamento,
+                    valor_total,
+                    status,
+                    created_at
+                from public.agendamentos
+                where id_pessoa = ${id_pessoa}
+                    and (${searchStatus}::text is null or status = ${searchStatus}::text)
+                    and (${dataInicial}::date is null or created_at >= ${dataInicial}::date)
+                    and (${dataFinal}::date is null or created_at <= ${dataFinal}::date)
+                    and (${searchTexto}::text is null or id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
             )
             select
-                (select count(*) from dados_agendamentos)::int as total_agendamentos,
-                (select total_h from contagem_horas)::int as total_horas,
+                count(*)::int as total_agendamentos,
+                (select count(*) 
+                from public.reservas r 
+                where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
+                )::int as total_horas,
                 (select coalesce(sum(valor_total), 0) 
-                from dados_agendamentos 
-                where status in ('pago', 'finalizado', 'concluido'))::bigint as valor_total_gasto,
+                from agendamentos_filtrados 
+                where status in ('pago', 'finalizado', 'concluido')
+                )::bigint as valor_total_gasto,
                 
                 (select round((count(*) filter (where status = 'cancelado')::float / nullif(count(*), 0)) * 100) 
-                from dados_agendamentos)::int as taxa_cancelamento,
+                from agendamentos_filtrados)::int as taxa_cancelamento,
                 
-                (select max(created_at) from dados_agendamentos) as ultima_reserva,
+                (select max(created_at) from agendamentos_filtrados) as ultima_reserva,
+                
+
                 (select q.nome 
                 from public.reservas r 
                 join public.quadras q on r.id_quadra = q.id_quadra
-                join dados_agendamentos da on r.id_agendamento = da.id_agendamento
+                where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
                 group by q.nome order by count(*) desc limit 1) as quadra_mais_utilizada
-            from (select 1) as t;
+            from agendamentos_filtrados
+            limit 1;
         `;
 
         return {
