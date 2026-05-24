@@ -136,7 +136,7 @@ export default function AgendarClientePage(){
                 />
                 <AgendamentoFormComponent
                     context="funcionario"
-                    clientePreSelecionado={perfil?.usuario}
+                    clientePreSelecionado={perfil}
                 />
             </>
         )

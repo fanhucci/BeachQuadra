@@ -45,7 +45,7 @@ export default function PerfilForm({
         try {
             setLoading(true);
             const dados = await apiRequest(`/usuarios/${id_perfil}`);
-            setUsuario(dados.usuario);
+            setUsuario(dados);
         } catch (error) {
             toast.error(error instanceof Error ? error.message : "Erro ao buscar dados do perfil.");
         } finally {
