@@ -92,7 +92,6 @@ function LoginForm(){
             })
             await refreshUser();
 
-            
             router.replace(callbackURL ?? '/perfil');
         } catch (error) {
             toast.error(error instanceof Error? error.message : "Erro inesperado");
