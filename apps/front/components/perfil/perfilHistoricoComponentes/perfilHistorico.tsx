@@ -10,6 +10,7 @@ import SubmitButton from "@/components/buttonComponents/submitButton";
 import usePerfilHistoricoTable, { ItemHistorico } from "./usePerfilHistoricoTable";
 import { gerarPDFHistorico } from "@/utils/pdfHandler";
 import { History, FileDown, ChevronLeft, ChevronRight, Calendar, Hourglass, DollarSign, Percent, Trophy } from "lucide-react";
+import { dinheiroMask } from "@/utils/mascaras";
 
 interface FiltrosHistorico {
     search?: string;
@@ -86,13 +87,11 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
         }
     }, [queryString, id_usuario]);
 
-    const formatarDinheiro = (valor: number) => {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
-    };
 
     const formatarData = (dataString: string | null) => {
         if (!dataString) return "Sem registros";
         return new Date(dataString).toLocaleDateString('pt-BR', {
+            timeZone:'utc',
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
@@ -182,7 +181,7 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Gasto</span>
-                            <span className="text-xl font-bold text-emerald-600 mt-0.5">{formatarDinheiro(resumo.valor_total_gasto)}</span>
+                            <span className="text-xl font-bold text-emerald-600 mt-0.5">{dinheiroMask(resumo.valor_total_gasto)}</span>
                         </div>
                     </div>
 
