@@ -95,6 +95,8 @@ export default class HorarioRepository {
                                 json_build_object(
                                     'id_agendamento', r.id_agendamento,
                                     'id_quadra', r.id_quadra,
+                                    'nome_quadra', q.nome,     
+                                    'tipo_quadra', q.tipo,     
                                     'nome', p.nome,
                                     'cpf', p.cpf,
                                     'email', p.email
@@ -104,6 +106,7 @@ export default class HorarioRepository {
                     from reservas r 
                     join agendamentos a on a.id_agendamento = r.id_agendamento
                     join pessoas p on p.id_pessoa = a.id_pessoa
+                    join quadras q on q.id_quadra = r.id_quadra 
                     where r.horario = h.horario
                     and r.status != 'cancelado'
                     and (${id_quadra ?? null}::int is null or r.id_quadra = ${id_quadra ?? null}::int)
@@ -114,7 +117,6 @@ export default class HorarioRepository {
                             json_agg(
                             json_build_object(
                                 'id_quadra', q.id_quadra,
-                                'nome', q.nome,
                                 'tipo', q.tipo,
                                 'valor', q.valor
                                 )
