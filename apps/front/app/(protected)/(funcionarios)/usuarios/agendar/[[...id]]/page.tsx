@@ -1,6 +1,7 @@
 'use client'
 
 import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/AgendamentoForm"
+import Carregando from "@/components/carregando";
 import HelpButton from "@/components/helpButton";
 import { apiRequest } from "@/utils/apiHandler";
 import { Perfil } from "@app/shared";
@@ -40,7 +41,8 @@ export default function AgendarClientePage(){
             setLoading(false);
         }
     },[id])
-    console.log('teste'+perfil)
+    
+    if(loading) return <Carregando/>
     
     if(!perfil){
         return(

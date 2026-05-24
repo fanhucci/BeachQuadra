@@ -1,6 +1,7 @@
 'use client'
 
 import AgendamentoFormComponent from "@/components/AgendamentoFormComponent/AgendamentoForm"
+import Carregando from "@/components/carregando";
 import HelpButton from "@/components/helpButton";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
@@ -38,13 +39,13 @@ export default function AgendarPage(){
         }
     },[user])
 
-    if(loading)return <>carregando</>
+    if(loading) return <Carregando/>
 
     if(!perfil && !loading) {
         router.replace('/login');
         return null;
     }
-    console.log('teste'+perfil+loading)
+
     return(
         <>
             <HelpButton
