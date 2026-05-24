@@ -65,7 +65,7 @@ export default function QuadraDetailPage(){
                         </div>
                         <div>
                             <h2 className="text-xl font-bold text-gray-900 tracking-tight lg:text-2xl">
-                                Agenda: {horarios?.[0]?.agendamentos?.[0]?.nome_quadra || "Carregando..."}
+                                Agenda - {horarios?.find(slot => slot.agendamentos?.length > 0)?.agendamentos[0]?.nome_quadra || "Carregando..."}
                             </h2>
                             <p className="text-xs text-gray-500">Monitore, gerencie e navegue pelos slots de horários</p>
                         </div>
