@@ -99,7 +99,7 @@ export default function AgendamentoFormComponent({
                     <div className="flex flex-col w-full lg:w-[320px] xl:w-[360px] bg-white rounded-2xl border border-gray-200 shadow-sm p-4 flex-shrink-0 lg:h-full lg:min-h-0">
                         
                         <div 
-                            id="#seletor-tipo-quadra"
+                            id="seletor-tipo-quadra"
                             className="flex-shrink-0 border-b border-gray-100 pb-3"
                         >
                             <CustomSwitch
