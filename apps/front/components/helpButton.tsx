@@ -30,7 +30,6 @@ export default function HelpButton({ steps }: { steps: Step[] }) {
       <span>
         <BadgeQuestionMark size={20}/>
       </span>
-      <span>Ajuda</span>
     </button>
   );
 }

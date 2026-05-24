@@ -12,36 +12,36 @@ export default function VisitantePage(){
                     {
                         element:"#seletor-periodo",
                         popover:{
-                            title:"Escopo semanal",
-                            description:"Aqui é possivel alterar o período de agendamento."
+                            title:"Período Semanal",
+                            description:"Use este campo para navegar entre as semanas e encontrar o melhor dia para sua reserva."
                         }
                     },
                     {
                         element:"#seletor-tipo-quadra",
                         popover:{
-                            title:"Tipo de quadra",
-                            description:"Escolha entre as modalidades de quadras disponíveis."
+                            title:"Modalidade",
+                            description:"Filtre as quadras disponíveis pela modalidade desejada."
                         }
                     },
                     {
                         element:"#seletor-horarios",
                         popover:{
-                            title:"Horários disponíveis",
-                            description:"Em verde estão os horários disponíveis para reserva, é possivel selecionar mais de um por agendamento."
+                            title:"Horários Disponíveis",
+                            description:"Os horários em verde estão livres. Clique para selecionar vários de uma só vez."
                         }
                     },
                     {
                         element:"#seletor-horarios-selecionados",
                         popover:{
-                            title:"Horários selecionados",
-                            description:"Aqui são mostrados todos os hórarios selecionados, é possivel remover eles facilmente ao clicar em um deles."
+                            title:"Resumo da Seleção",
+                            description:"Aqui você acompanha o que já escolheu. Precisa desistir de algum? Basta clicar no item para removê-lo."
                         }
                     },
                     {
                         element:"#botao-concluir",
                         popover:{
-                            title:"Concluir",
-                            description:"Ao terminar sua seleção, basta clicar aqui e confirmar suas reservas."
+                            title:"Finalizar Reserva",
+                            description:"Tudo certo? Clique aqui para confirmar seus horários e continuar para finalizar a reserva."
                         }
                     },
                 ]}
