@@ -20,6 +20,8 @@ interface FiltrosHistorico {
 }
 
 interface ResumoCliente {
+    nome_cliente: string;   
+    cpf_cliente: string;      
     total_agendamentos: number;
     total_horas: number;
     valor_total_gasto: number;
@@ -33,6 +35,8 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
     const [totalItens, setTotalItens] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [resumo, setResumo] = useState<ResumoCliente>({
+        nome_cliente:'',
+        cpf_cliente:'',
         total_agendamentos: 0,
         total_horas: 0,
         valor_total_gasto: 0,
@@ -116,7 +120,14 @@ export default function PerfilHistorico({ id_usuario }: { id_usuario: number }) 
 
         try {
             const textoFiltros = obterFiltrosTexto();
-            gerarPDFHistorico(saidas, textoFiltros);
+
+            const infoCliente = {
+                nome: resumo.nome_cliente || "Cliente não identificado",
+                identificacao: resumo.cpf_cliente || "Não informado"
+            };
+
+            gerarPDFHistorico(saidas, textoFiltros, infoCliente);
+            
         } catch (error) {
             console.error(error);
             toast.error("Erro ao gerar o arquivo PDF.");
