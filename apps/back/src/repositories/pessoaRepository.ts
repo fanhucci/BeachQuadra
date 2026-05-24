@@ -218,31 +218,32 @@ export default class PessoaRepository {
                     and (${searchTexto}::text is null or id_agendamento::text ilike '%' || ${searchTexto}::text || '%')
             )
             select
-                count(*)::int as total_agendamentos,
-                (select count(*) 
-                from public.reservas r 
-                where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
-                )::int as total_horas,
-                (select coalesce(sum(valor_total), 0) 
-                from agendamentos_filtrados 
-                where status in ('pago', 'finalizado', 'concluido')
-                )::bigint as valor_total_gasto,
+                (select count(*)::int from agendamentos_filtrados) as total_agendamentos,
                 
-                (select round((count(*) filter (where status = 'cancelado')::float / nullif(count(*), 0)) * 100) 
-                from agendamentos_filtrados)::int as taxa_cancelamento,
+                (select count(*)::int 
+                 from public.reservas r 
+                 where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
+                ) as total_horas,
+                
+                (select coalesce(sum(valor_total), 0)::bigint 
+                 from agendamentos_filtrados 
+                 where status in ('pago', 'finalizado', 'concluido')
+                ) as valor_total_gasto,
+                
+                (select round((count(*) filter (where status = 'cancelado')::float / nullif(count(*), 0)) * 100)::int 
+                 from agendamentos_filtrados
+                ) as taxa_cancelamento,
                 
                 (select max(created_at) from agendamentos_filtrados) as ultima_reserva,
                 
-
                 (select q.nome 
-                from public.reservas r 
-                join public.quadras q on r.id_quadra = q.id_quadra
-                where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
-                group by q.nome order by count(*) desc limit 1) as quadra_mais_utilizada
-            from agendamentos_filtrados
-            limit 1;
+                 from public.reservas r 
+                 join public.quadras q on r.id_quadra = q.id_quadra
+                 where r.id_agendamento in (select id_agendamento from agendamentos_filtrados)
+                 group by q.nome order by count(*) desc limit 1
+                ) as quadra_mais_utilizada
         `;
-
+        
         return {
             saidas: listagem,
             total: listagem[0]?.total_geral || 0,
