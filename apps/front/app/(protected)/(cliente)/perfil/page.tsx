@@ -1,36 +1,28 @@
 'use client'
-import UsuarioPerfilForm from "@/components/usuarioPerfilForm";
-import usePerfil from "./usePerfil";
+
+import PerfilPage from "@/components/perfil/perfilPage";
+import { useEffect, useState } from "react";
+import NaoEncontrado from "@/components/erros/naoEncontrado";
+import { useUser } from "@/context/userContext";
 
 
-export default function UsuarioPage(){
+export default function MeuPerfilPage(){
 
-    const perfil = usePerfil();
+    const {user} = useUser();
+    const [idUsuario,setIdUsuario] = useState<number|null>(null);
 
-    if (perfil.loading) return <p>Carregando...</p>;
+    useEffect(()=>{
+        const idNumerico = Number(user?.id_pessoa);
+        
+        if(!isNaN(idNumerico) && idNumerico>0){
+            setIdUsuario(idNumerico);
+        }
+    },[user])
+    
 
-    if(!perfil.usuario || !perfil.permissions) return null;
+    if(!idUsuario) return <NaoEncontrado/>
 
-    return(
-        <UsuarioPerfilForm 
-            usuario={perfil.usuario}
-            permissions={perfil.permissions}
-            formData={perfil.formData}
-            isEditing={perfil.isEditing}
-            erros={perfil.erros}
-            erroSenha={perfil.errosSenha}
-            modalAberta={perfil.modalAberta}
-            abrirModalSenha={perfil.abrirModalSenha}
-            fecharModalSenha={perfil.fechaModalSenha}
-            handleChange={perfil.handleChange}
-            abrirEdicao={perfil.abrirEdicao}
-            fecharEdicao={perfil.fecharEdicao}
-            salvarPerfil={perfil.salvarPerfil}
-            alterarSenha={perfil.alterarSenha}
-            excluirConta={perfil.excluirConta}
-            senha={perfil.senha}
-            setSenha={perfil.setSenha}
-        />
-
+    return (
+        <PerfilPage id_perfil={idUsuario}/>
     )
 }
