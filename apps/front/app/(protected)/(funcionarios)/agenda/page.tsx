@@ -6,7 +6,7 @@ import { apiRequest } from "@/utils/apiHandler";
 import { cpfMask } from "@/utils/mascaras";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { CalendarDays, FileText, X } from "lucide-react";
+import { CalendarDays, FileDown, FileText, X } from "lucide-react";
 import ErroInesperado from "@/components/erros/erroInesperado";
 import SubmitButton from "@/components/buttonComponents/submitButton";
 import CustomInput from "@/components/inputsComponents/customInput";
@@ -82,13 +82,14 @@ export default function AgendaPage(){
                                 onChange={(e) => setDataSelecionada(e.target.value)}
                             />
                         </div>
-                        <SubmitButton 
-                            estilo="secundario" 
+                        <SubmitButton
+                            type="button"
+                            estilo="perigo"
                             onClick={handleExportarPDF}
-                            className="flex items-center gap-2"
+                                    
                         >
-                            <FileText size={18} />
-                            PDF
+                            <FileDown size={16} />
+                            <span>Exportar PDF</span>       
                         </SubmitButton>
                     </div>
                 </header>
