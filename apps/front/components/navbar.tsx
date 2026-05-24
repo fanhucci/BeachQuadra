@@ -99,7 +99,7 @@ export function ClientNavbar() {
                 </Link>
                 
                 <Link
-                  href="/agenda" 
+                  href="/perfil/agendar" 
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition"
                 >
