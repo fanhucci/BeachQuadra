@@ -41,8 +41,8 @@ export default function AgendarClientePage(){
         }
     },[id])
     
-    
-    if(!perfil && !loading){
+    console.log(perfil)
+    if(!perfil){
         return(
             <>
                 <HelpButton
