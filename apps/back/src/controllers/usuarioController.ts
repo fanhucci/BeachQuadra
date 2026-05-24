@@ -18,8 +18,8 @@ export default class UsuarioController{
     }
 
     async listarUsuarioPerfil(req:Request,res:Response){
-
-        if(!req.user) return res.sendStatus(403);
+        
+        if(!req.user) return res.sendStatus(401);
 
         const id = Number(req.user.id);
 
@@ -32,7 +32,7 @@ export default class UsuarioController{
 
     async listarHistorico(req:Request, res:Response){
 
-        if(!req.user) return res.sendStatus(403);
+        if(!req.user) return res.sendStatus(401);
 
         const id = Number(req.params.id);
 
@@ -47,7 +47,7 @@ export default class UsuarioController{
 
     async listarUsuarioPorId(req:Request, res:Response){
 
-        if(!req.user) return res.sendStatus(403);
+        if(!req.user) return res.sendStatus(401);
 
         const id_busca = Number(req.params.id);
         
@@ -97,7 +97,7 @@ export default class UsuarioController{
 
     async editarUsuario(req:Request, res:Response){
 
-        if(!req.user) return res.sendStatus(403);
+        if(!req.user) return res.sendStatus(401);
 
         const parse = EditarUsuarioSchema.safeParse(req.body);
 

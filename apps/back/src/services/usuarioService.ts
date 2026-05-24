@@ -26,7 +26,7 @@ export default class UsuarioService{
     async listarUsuarioPorId(user:User, id_busca:number){
 
         const {id, cargo} = user;
-
+        console.log(typeof id, typeof cargo, typeof id_busca);
         if (cargo < 2 && id_busca !== id) {
             throw new AppError('Sem autorização', 403);
         }
