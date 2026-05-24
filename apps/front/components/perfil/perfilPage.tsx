@@ -19,9 +19,9 @@ export default function PerfilPage({ id_perfil }: { id_perfil: number }) {
     if (!ehDonoDoPerfil && !ehAdminOuFuncionario) return <SemAutorizacao />;
 
     return (
-        <section className="w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col flex-1 h-full max-h-full min-h-0 overflow-hidden transition-all">
+        <section className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 w-full transition-all">
             
-            <div className="border-b border-gray-200 mb-6 overflow-x-auto scrollbar-none flex-shrink-0">
+            <div className="border-b border-gray-200 mb-6 overflow-x-auto scrollbar-none">
                 <div className="flex gap-4 sm:gap-8 min-w-max px-1">
                     <button
                         type="button"
@@ -49,7 +49,7 @@ export default function PerfilPage({ id_perfil }: { id_perfil: number }) {
                 </div>
             </div>
 
-            <div className="w-full flex-1 min-h-0 flex flex-col animation-fadeIn overflow-hidden h-full max-h-full">
+            <div className="w-full flex-1 min-h-0 flex flex-col animation-fadeIn overflow-hidden">
                 {abaAtiva === "cadastro" ? (
                     <PerfilForm 
                         id_perfil={id_perfil}
