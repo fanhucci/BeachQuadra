@@ -38,7 +38,7 @@ export default function AgendarPage(){
     },[user])
 
 
-    if(!perfil) {
+    if(!perfil && !loading) {
         router.replace('/login');
         return null;
     }
@@ -46,7 +46,7 @@ export default function AgendarPage(){
     return(
         <AgendamentoFormComponent
             context="cliente"
-            clientePreSelecionado={perfil.usuario}
+            clientePreSelecionado={perfil?.usuario}
         />
     )
 }

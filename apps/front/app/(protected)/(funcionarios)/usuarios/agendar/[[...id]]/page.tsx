@@ -52,7 +52,7 @@ export default function AgendarClientePage(){
         return(
             <AgendamentoFormComponent
                 context="funcionario"
-                clientePreSelecionado={perfil.usuario}
+                clientePreSelecionado={perfil?.usuario}
             />
         )
     }
