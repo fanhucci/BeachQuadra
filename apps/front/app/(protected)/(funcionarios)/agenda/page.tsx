@@ -55,7 +55,7 @@ export default function AgendaPage(){
     }, [dataSelecionada])
 
 
-    if (!horarios) return <ErroInesperado/>;
+    if (!horarios && !loading) return <ErroInesperado/>;
 
     return (
         <section className="w-full h-screen bg-gray-50/50 overflow-hidden flex flex-col">

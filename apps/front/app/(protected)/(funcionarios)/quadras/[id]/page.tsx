@@ -94,7 +94,7 @@ export default function QuadraDetailPage(){
 
                 <section className="flex-1 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-4 min-h-0">
                     <Agenda
-                        dados={horarios}
+                        dados={horarios || []}
                         loading={loading}
                         contexto="agenda"
                         idQuadraEspecifica={Number(id)}
