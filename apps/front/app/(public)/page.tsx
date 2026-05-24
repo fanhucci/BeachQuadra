@@ -11,8 +11,8 @@ export default function HomePage() {
   const { user } = useUser();
 
   return (
-    <div className="flex flex-1 flex-col bg-white text-gray-900 overflow-hidden">
-      {/* Hero Section - Impactante */}
+    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
+      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-white">
         <div className="absolute inset-0 bg-[url('https://grok.x.ai/attachments/c6SWk')] bg-cover bg-center opacity-40" />
         <div className="absolute inset-0 bg-black/40" />
@@ -21,7 +21,7 @@ export default function HomePage() {
           <div className="flex justify-center mb-6">
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-lg px-6 py-3 rounded-full border border-white/20">
               <Sun className="w-6 h-6 text-orange-400" />
-              <span className="font-medium">Beach Tennis • Ao Vivo</span>
+              <span className="font-medium">Beach Tennis • Reserva Rápida</span>
             </div>
           </div>
 
@@ -61,7 +61,7 @@ export default function HomePage() {
         </div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="text-white/70 text-sm">Role para baixo</div>
+          <div className="text-white/70 text-sm">Role para baixo ↓</div>
         </div>
       </section>
 
@@ -88,10 +88,10 @@ export default function HomePage() {
               </div>
               <div className="p-10 bg-white">
                 <h3 className="text-3xl font-bold mb-3">Quadra Individual</h3>
-                <p className="text-gray-600 text-lg">Treino focado, aulas particulares ou jogo intenso. Total controle da quadra.</p>
+                <p className="text-gray-600 text-lg">Treino focado, aulas particulares ou jogo intenso.</p>
                 <Link
                   href="/reservar"
-                  className="mt-8 inline-block bg-blue-600 text-white px-8 py-4 rounded-2xl hover:bg-blue-700 transition"
+                  className="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl transition font-medium"
                 >
                   Reservar Individual →
                 </Link>
@@ -112,10 +112,10 @@ export default function HomePage() {
               </div>
               <div className="p-10 bg-white">
                 <h3 className="text-3xl font-bold mb-3">Quadra de Duplas</h3>
-                <p className="text-gray-600 text-lg">Diversão garantida com os amigos. A modalidade mais jogada e animada.</p>
+                <p className="text-gray-600 text-lg">Diversão garantida com os amigos e família.</p>
                 <Link
                   href="/reservar"
-                  className="mt-8 inline-block bg-blue-600 text-white px-8 py-4 rounded-2xl hover:bg-blue-700 transition"
+                  className="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl transition font-medium"
                 >
                   Reservar Duplas →
                 </Link>
@@ -132,22 +132,22 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-12">
             <div className="space-y-6">
-              <div className="w-20 h-20 mx-auto bg-blue-100 rounded-3xl flex items-center justify-center">
-                <MapPin className="w-12 h-12 text-blue-600" />
+              <div className="w-20 h-20 mx-auto bg-orange-100 rounded-3xl flex items-center justify-center">
+                <MapPin className="w-12 h-12 text-orange-500" />
               </div>
               <h3 className="text-2xl font-semibold">1. Escolha a quadra</h3>
               <p className="text-gray-600">Fotos, localização e disponibilidade em tempo real.</p>
             </div>
             <div className="space-y-6">
-              <div className="w-20 h-20 mx-auto bg-blue-100 rounded-3xl flex items-center justify-center">
-                <Clock className="w-12 h-12 text-blue-600" />
+              <div className="w-20 h-20 mx-auto bg-orange-100 rounded-3xl flex items-center justify-center">
+                <Clock className="w-12 h-12 text-orange-500" />
               </div>
               <h3 className="text-2xl font-semibold">2. Escolha o horário</h3>
               <p className="text-gray-600">Calendário ao vivo. Sem surpresas.</p>
             </div>
             <div className="space-y-6">
-              <div className="w-20 h-20 mx-auto bg-blue-100 rounded-3xl flex items-center justify-center">
-                <CheckCircle className="w-12 h-12 text-blue-600" />
+              <div className="w-20 h-20 mx-auto bg-orange-100 rounded-3xl flex items-center justify-center">
+                <CheckCircle className="w-12 h-12 text-orange-500" />
               </div>
               <h3 className="text-2xl font-semibold">3. Confirme</h3>
               <p className="text-gray-600">Reserva garantida em menos de 1 minuto.</p>
@@ -156,25 +156,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Final Forte */}
-      <section className="py-28 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white text-center">
+      {/* CTA Final - Mais suave e harmonioso */}
+      <section className="py-28 bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white text-center">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-5xl md:text-6xl font-bold mb-8">
-            Chegou a hora de jogar!
+            Bora jogar hoje?
           </h2>
-          <p className="text-2xl text-blue-100 mb-12">
-            Não deixe seu horário favorito escapar. Reserve agora e garanta sua quadra.
+          <p className="text-2xl text-orange-100 mb-12">
+            Não perca seu horário favorito. As quadras estão enchendo rápido!
           </p>
 
           <Link
             href="/reservar"
-            className="inline-flex items-center gap-4 bg-white text-blue-700 hover:bg-orange-400 hover:text-white text-3xl font-bold px-16 py-8 rounded-3xl transition-all hover:scale-105 shadow-2xl"
+            className="inline-flex items-center gap-4 bg-white text-orange-700 hover:bg-white hover:text-orange-600 text-3xl font-bold px-16 py-8 rounded-3xl transition-all hover:scale-105 shadow-2xl"
           >
             Reservar Quadra Agora
             <ArrowRight className="w-10 h-10" />
           </Link>
 
-          <p className="mt-8 text-blue-200">Muitos horários já estão sendo reservados hoje</p>
+          <p className="mt-8 text-orange-200">Muitos horários estão sendo reservados neste momento</p>
         </div>
       </section>
     </div>
