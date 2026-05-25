@@ -3,8 +3,10 @@
 import { dinheiroMask } from "@/utils/mascaras";
 import useDetailAgendamento from "./useDetailAgendamento"
 import SubmitButton from "@/components/buttonComponents/submitButton";
+import { useUser } from "@/context/userContext";
 
 export default function AgendamentoDetailPage(){
+    const {user} = useUser();
     const {
         loading,
         loadingButton,
@@ -137,41 +139,43 @@ export default function AgendamentoDetailPage(){
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-2 pt-2">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ações</span>
+                        { user && user.id_cargo === 3 &&(
+                            <div className="flex flex-col gap-2 pt-2">
+                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ações</span>
 
-                            <SubmitButton
-                                estilo="primario"
-                                disabled={cobranca.status !== 'pendente' || loadingButton}
-                                onClick={() => gerenciarCobranca('pagar')}
-                            >
-                                {loadingButton ? 'Processando...' : 'Confirmar Pagamento'}
-                            </SubmitButton>
+                                <SubmitButton
+                                    estilo="primario"
+                                    disabled={cobranca.status !== 'pendente' || loadingButton}
+                                    onClick={() => gerenciarCobranca('pagar')}
+                                >
+                                    {loadingButton ? 'Processando...' : 'Confirmar Pagamento'}
+                                </SubmitButton>
 
-                            <SubmitButton
-                                estilo="perigo"
-                                disabled={cobranca.status !== 'pendente' || loadingButton}
-                                onClick={() => gerenciarCobranca('cancelar')}
-                            >
-                                {loadingButton ? 'Processando...' : 'Cancelar Reserva'}
-                            </SubmitButton>
+                                <SubmitButton
+                                    estilo="perigo"
+                                    disabled={cobranca.status !== 'pendente' || loadingButton}
+                                    onClick={() => gerenciarCobranca('cancelar')}
+                                >
+                                    {loadingButton ? 'Processando...' : 'Cancelar Reserva'}
+                                </SubmitButton>
 
-                            <SubmitButton
-                                estilo="secundario"
-                                disabled={cobranca.status !== 'pendente' || loadingButton}
-                                onClick={() => gerenciarCobranca('expirar')}
-                            >   
-                                {loadingButton ? 'Processando...' : 'Expirar Cobrança'}
-                            </SubmitButton>
+                                <SubmitButton
+                                    estilo="secundario"
+                                    disabled={cobranca.status !== 'pendente' || loadingButton}
+                                    onClick={() => gerenciarCobranca('expirar')}
+                                >   
+                                    {loadingButton ? 'Processando...' : 'Expirar Cobrança'}
+                                </SubmitButton>
 
-                            <SubmitButton
-                                estilo="secundario"
-                                disabled={cobranca.status !== 'concluido' || loadingButton}
-                                onClick={() => gerenciarCobranca('estornar')}
-                            >
-                                {loadingButton ? 'Processando...' : 'Estornar Dinheiro'}
-                            </SubmitButton>
-                        </div>
+                                <SubmitButton
+                                    estilo="secundario"
+                                    disabled={cobranca.status !== 'concluido' || loadingButton}
+                                    onClick={() => gerenciarCobranca('estornar')}
+                                >
+                                    {loadingButton ? 'Processando...' : 'Estornar Dinheiro'}
+                                </SubmitButton>
+                            </div>
+                        )}
                     </div>
 
                 </div>
