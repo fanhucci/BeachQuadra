@@ -20,7 +20,7 @@ export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
     if (!response.ok) {
 
-        if (response.status === 403) {
+        if (response.status === 403 && data.tipo === 'FORBIDDEN_AREA') {
             window.location.replace('/sem-permissao');
             return;
         }

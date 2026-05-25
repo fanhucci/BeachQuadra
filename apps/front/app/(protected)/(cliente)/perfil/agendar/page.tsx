@@ -5,7 +5,7 @@ import Carregando from "@/components/carregando";
 import HelpButton from "@/components/helpButton";
 import { useUser } from "@/context/userContext";
 import { apiRequest } from "@/utils/apiHandler";
-import { Perfil, Usuario } from "@app/shared";
+import { Usuario } from "@app/shared";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";

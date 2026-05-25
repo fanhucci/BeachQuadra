@@ -33,7 +33,7 @@ export default class UsuarioService{
         }
 
         if (cargo < 2) {
-            throw new AppError('Sem autorização', 403);
+            throw new AppError('Sem autorização', 403, "FORBIDDEN_AREA");
         }
 
         return await this.pessoa.listarUsuarioPorId(id_busca);
@@ -49,7 +49,7 @@ export default class UsuarioService{
         }
 
         if (cargo < 2) {
-            throw new AppError('Sem autorização', 403);
+            throw new AppError('Sem autorização', 403, 'FORBIDDEN_AREA');
         }
 
         return await this.pessoa.listarHistorico(id_perfil,filtro);
