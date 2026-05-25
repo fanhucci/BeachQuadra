@@ -111,7 +111,7 @@ export default function PerfilForm({
         try {
             setLoading(true);
 
-            const parse = ForcarRedefinirSenhaSchema.safeParse({id_conta: usuario?.id_pessoa});
+            const parse = ForcarRedefinirSenhaSchema.safeParse({id_pessoa: usuario?.id_pessoa});
 
             if(!parse.success){
                 toast.error('Erro resetando senha');
