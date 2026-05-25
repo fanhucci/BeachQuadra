@@ -307,7 +307,7 @@ export default function PerfilForm({
                             {isUser && (
                                 <div className="w-full sm:w-auto">
                                     <SubmitButton estilo="perigo" type="button" onClick={abrirModalSenha}>
-                                        <span className="w-full text-center">Alterar Minha Senha</span>
+                                        <span className="w-full text-center">Alterar Senha</span>
                                     </SubmitButton>
                                 </div>
                             )}
@@ -336,7 +336,7 @@ export default function PerfilForm({
                                 </div>
                             )}
 
-                            {isAdmin && !isUser && (
+                            {isUser && (
                                 <div className="w-full sm:w-auto sm:ml-auto">
                                     <SubmitButton estilo="perigo" type="button" onClick={abrirModalDelete}>
                                         <span className="w-full text-center">Excluir Conta</span>
