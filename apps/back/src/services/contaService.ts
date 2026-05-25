@@ -75,11 +75,11 @@ export default class ContaService{
         const senhaFake = crypto.randomBytes(32).toString('hex');
         const senhaHash = await bcrypt.hash(senhaFake,10)
 
-        const usuario = await this.conta.buscarContaPorPessoa(dados);
+        const {id_conta} = await this.conta.buscarContaPorPessoa(dados);
 
-        if(!usuario) throw new AppError('Usuario não encotrado', 404);
-        
-        const {email} = await this.conta.alterarSenhaPorId(usuario,senhaHash);
+        if(!id_conta) throw new AppError('Conta não encotrada', 404);
+
+        const {email} = await this.conta.alterarSenhaPorId(id_conta,senhaHash);
 
         if(!email) throw new AppError('Erro ao resetar senha',404);
         console.log(email)
