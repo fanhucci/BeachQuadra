@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import pessoaRouter from "./routes/pessoaRoute";
+// import pessoaRouter from "./routes/pessoaRoute";
 import quadraRouter from "./routes/quadraRoute";
 import contaRouter from "./routes/contaRoute";
 import horarioRouter from "./routes/horarioRoute";
@@ -24,7 +24,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(pessoaRouter);
+// app.use(pessoaRouter);
 app.use(quadraRouter);
 app.use(contaRouter);
 app.use(horarioRouter);

@@ -13,7 +13,11 @@ export enum Permissao {
 
     //horario
     HORARIOS = 'gerenciarHorarioFuncionamento',
-    BLOQUEIOS = 'gerenciarBloqueios'
+    BLOQUEIOS = 'gerenciarBloqueios',
+
+    //relatorios
+    RELATORIOS = 'exportarRelatorios',
+    AGENDA = 'exibirAgenda'
 }
 
 
@@ -31,7 +35,9 @@ export const ROLES_PERMISSIONS: Record<number, Permissao[]> = {
         Permissao.OCUPACAO,
 
         Permissao.FUNCIONARIOS,
-        Permissao.CLIENTES
+        Permissao.CLIENTES,
+
+        Permissao.AGENDA
     ],
 
     //Adminstrador
@@ -46,6 +52,10 @@ export const ROLES_PERMISSIONS: Record<number, Permissao[]> = {
 
         Permissao.ADMINISTRADORES,
         Permissao.FUNCIONARIOS,
-        Permissao.CLIENTES
+        Permissao.CLIENTES,
+
+        Permissao.RELATORIOS,
+
+        Permissao.AGENDA
     ]
 };

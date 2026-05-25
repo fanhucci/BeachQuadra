@@ -1,46 +1,46 @@
-import { Request, Response } from 'express';
-import { AlterarPessoaSchema, CriarPessoaSchema, PessoaQuerySchema,  } from "@app/shared";
-import PessoaService from '../services/pessoaService';
+// import { Request, Response } from 'express';
+// import { AlterarPessoaSchema, CriarPessoaSchema, PessoaQuerySchema,  } from "@app/shared";
+// import PessoaService from '../services/pessoaService';
 
 
-export default class PessoaController{
-    private service = new PessoaService();
+// export default class PessoaController{
+//     private service = new PessoaService();
 
     
 
-    async adicionarPessoa(req:Request, res:Response){
+//     async adicionarPessoa(req:Request, res:Response){
       
-        const parse = CriarPessoaSchema.safeParse(req.body);
+//         const parse = CriarPessoaSchema.safeParse(req.body);
 
-        if(!parse.success) return res.status(400).json({erro: parse.error.message})
+//         if(!parse.success) return res.status(400).json({erro: parse.error.message})
             
-        const resposta = await this.service.adicionarPessoa(parse.data);
+//         const resposta = await this.service.adicionarPessoa(parse.data);
 
-        return res.status(201).json(resposta);
+//         return res.status(201).json(resposta);
 
-    }
+//     }
 
-    async editarPessoa(req:Request,res:Response){
-        const parse = AlterarPessoaSchema.safeParse({
-            id_pessoa:Number(req.params.id),
-            ...req.body
-        });
+//     async editarPessoa(req:Request,res:Response){
+//         const parse = AlterarPessoaSchema.safeParse({
+//             id_pessoa:Number(req.params.id),
+//             ...req.body
+//         });
 
-        if(!parse.success) return res.status(400).json({erro: parse.error.message});
+//         if(!parse.success) return res.status(400).json({erro: parse.error.message});
 
-        const resposta = await this.service.editarPessoa(parse.data);
+//         const resposta = await this.service.editarPessoa(parse.data);
 
-        return res.status(200).json(resposta);
+//         return res.status(200).json(resposta);
 
-    }
+//     }
 
-    async alterarStatus(req:Request, res:Response){
-        const id = Number(req.params.id);
-        const {status} = req.body
+//     async alterarStatus(req:Request, res:Response){
+//         const id = Number(req.params.id);
+//         const {status} = req.body
 
-        const resposta = await this.service.alterarStatus(id,status);
+//         const resposta = await this.service.alterarStatus(id,status);
 
-        return res.status(200).json(resposta);
-    }
+//         return res.status(200).json(resposta);
+//     }
 
-}
+// }

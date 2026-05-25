@@ -18,15 +18,15 @@ export default class ContaService{
     //     return await this.repo.listarContas(filtro);
     // }
 
-    async adicionarConta(dados:CriarContaDTO){
+    // async adicionarConta(dados:CriarContaDTO){
 
-        const senhaHash = await bcrypt.hash(dados.senha,10);
+    //     const senhaHash = await bcrypt.hash(dados.senha,10);
 
-        return await this.conta.adicionarConta(sql,{
-            ...dados,
-            senha:senhaHash
-        });
-    }
+    //     return await this.conta.adicionarConta(sql,{
+    //         ...dados,
+    //         senha:senhaHash
+    //     });
+    // }
 
     async alterarMinhaSenha(usuario:number, senhas:AlterarSenhaPerfil){
 
@@ -41,11 +41,11 @@ export default class ContaService{
         
     }
 
-    async alterarStatus(status:AlterarStatusContaDTO){
+    // async alterarStatus(status:AlterarStatusContaDTO){
         
-        const resposta =  await this.conta.alterarStatus(status);
-        return resposta
-    }
+    //     const resposta =  await this.conta.alterarStatus(status);
+    //     return resposta
+    // }
 
     async resetarSenha(dados: ResetarSenhaDTO){
 
