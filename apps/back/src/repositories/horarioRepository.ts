@@ -2,7 +2,7 @@ import { EditarHorarioDTO } from '@app/shared';
 import sql from "../infra/db";
 
 export default class HorarioRepository {
-    //precisa ser alterada 
+    
     async editarHorario(horario: EditarHorarioDTO[]) {
 
         return await sql.begin(async (transaction) => {

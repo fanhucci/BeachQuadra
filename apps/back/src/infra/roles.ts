@@ -36,7 +36,7 @@ export const ROLES_PERMISSIONS: Record<number, Permissao[]> = {
 
         Permissao.FUNCIONARIOS,
         Permissao.CLIENTES,
-
+        
         Permissao.AGENDA
     ],
 
