@@ -22,6 +22,7 @@ export async function apiRequest(endpoint: string, options: RequestInit = {}) {
 
         if (response.status === 403) {
             window.location.replace('/sem-permissao');
+            return;
         }
 
         throw new Error(data?.erro || `Erro HTTP ${response.status}`);
