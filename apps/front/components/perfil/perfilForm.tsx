@@ -2,7 +2,7 @@
 
 import { apiRequest } from "@/utils/apiHandler";
 import { formatarErrosZod } from "@/utils/zodErrorHandler";
-import { AlterarSenhaPerfil, AlterarSenhaPerfilSchema, EditarUsuario, EditarUsuarioSchema } from "@app/shared";
+import { AlterarSenhaPerfil, AlterarSenhaPerfilSchema, EditarUsuario, EditarUsuarioSchema, ForcarRedefinirSenhaSchema } from "@app/shared";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "../buttonComponents/submitButton";
@@ -111,8 +111,15 @@ export default function PerfilForm({
         try {
             setLoading(true);
 
+            const parse = ForcarRedefinirSenhaSchema.safeParse({id_conta: usuario?.id_pessoa});
+
+            if(!parse.success){
+                toast.error('Erro resetando senha');
+                return;
+            }
             await apiRequest(`/contas/resetar-senha-admin`,{
-                method:"POST"
+                method:"POST",
+                body:JSON.stringify(parse.data)
             });
             toast.success('Senha resetada com sucesso.');
 
