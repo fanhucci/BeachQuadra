@@ -139,7 +139,7 @@ export default function AgendamentoDetailPage(){
                             </div>
                         </div>
 
-                        { user && user.id_cargo === 3 &&(
+                        { user && Number(user.id_cargo) === 3 &&(
                             <div className="flex flex-col gap-2 pt-2">
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ações</span>
 
