@@ -75,7 +75,7 @@ export default class ContaService{
         const senhaFake = crypto.randomBytes(32).toString('hex');
         const senhaHash = await bcrypt.hash(senhaFake,10)
         console.log(dados, JSON.stringify(dados))
-        const {id_conta} = await this.conta.buscarContaPorPessoa(dados.id_pessoa);
+        const id_conta = await this.conta.buscarContaPorPessoa(dados.id_pessoa);
         console.log(id_conta, typeof id_conta)
         if(!id_conta) throw new AppError('Conta não encotrada', 404);
 
