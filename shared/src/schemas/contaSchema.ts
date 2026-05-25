@@ -28,7 +28,7 @@ export type EsqueciSenhaDTO = z.infer<typeof EsqueciSenhaSchema>
 
 
 export const ForcarRedefinirSenhaSchema = z.object({
-  id_conta:z.coerce.number(),
+  id_pessoa:z.coerce.number(),
 })
 export type ForcarRedefinirSenhaDTO = z.infer<typeof ForcarRedefinirSenhaSchema>
 
