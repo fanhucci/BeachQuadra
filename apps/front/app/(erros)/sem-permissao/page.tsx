@@ -3,6 +3,8 @@ import SemAutorizacao from "@/components/erros/semAutorizacao";
 
 export default function SemPermissaoPage(){
     return(
-        <SemAutorizacao/>
+        <section className="flex flex-1 w-full">
+            <SemAutorizacao/>
+        </section>
     )
 }
