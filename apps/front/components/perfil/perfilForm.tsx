@@ -11,6 +11,7 @@ import { cpfMask, telefoneMask } from "@/utils/mascaras";
 import Campo from "../inputsComponents/campo";
 import NaoEncontrado from "../erros/naoEncontrado";
 import CustomModal from "../customModal";
+import { useUser } from "@/context/userContext";
 
 
 interface PerfilUsuario {
@@ -33,13 +34,15 @@ export default function PerfilForm({
     isUser: boolean;
     isAdmin: boolean;
 }) {
-
+    const {logout} = useUser();
     const [usuario, setUsuario] = useState<PerfilUsuario | null>(null);
     const [formData, setFormData] = useState<EditarUsuario>({ id_pessoa: 0 });
     const [erros, setErros] = useState<Partial<Record<keyof EditarUsuario, string>>>({});
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [modalSenhaOn,setModalSenhaOn] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [modalDeleteOn,setModalDeleteOn] = useState<boolean>(false);
 
     async function buscarUsuario() {
         try {
@@ -81,6 +84,65 @@ export default function PerfilForm({
         }
     }
 
+    async function deletarConta(){
+        try {
+            setLoading(true);
+
+            await apiRequest(`/usuarios`,{
+                method:"DELETE"
+            });
+
+            fecharModalDelete();
+
+            toast.success('Conta deletada com sucesso, adeus.');
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            logout();
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao deletar conta.');
+        }
+        finally{
+            setLoading(false);
+        }
+    }
+
+    async function resetarSenha(){
+        try {
+            setLoading(true);
+
+            await apiRequest(`/contas/resetar-senha-admin`,{
+                method:"POST"
+            });
+            toast.success('Senha resetada com sucesso.');
+
+        } catch (error) {
+            toast.error(error instanceof Error? error.message : 'Erro ao resetar senha da conta.');
+        }
+        finally{
+            setLoading(false);
+        }
+    }
+
+    async function alterarStatusConta(acao: 'ativar' | 'desativar') {
+        try {
+            setLoading(true);
+
+            await apiRequest(`/usuarios/${usuario?.id_pessoa}/${acao}`, {
+                method: "PATCH"
+            });
+
+            const mensagem = acao === 'ativar' ? 'Conta ativada com sucesso.' : 'Conta desativada com sucesso.';
+            toast.success(mensagem);
+
+            buscarUsuario();
+        } catch (error) {
+            toast.error(error instanceof Error ? error.message : `Erro ao ${acao} conta.`);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     const setEditingOn = () => {
         if (!usuario) return;
         setFormData(usuario);
@@ -93,6 +155,15 @@ export default function PerfilForm({
         setFormData({ id_pessoa: id_perfil });
         setErros({});
     };
+
+
+    const abrirModalDelete = () =>{
+        setModalDeleteOn(true);
+    }
+
+    const fecharModalDelete = () =>{
+        setModalSenhaOn(false);
+    }
 
     const abrirModalSenha = () =>{
         setModalSenhaOn(true);
@@ -243,7 +314,7 @@ export default function PerfilForm({
 
                             {isAdmin && !isUser && (
                                 <div className="w-full sm:w-auto">
-                                    <SubmitButton estilo="perigo" type="button" onClick={() => {/* API */}}>
+                                    <SubmitButton estilo="perigo" type="button" onClick={resetarSenha}>
                                         <span className="w-full text-center">Redefinir Senha</span>
                                     </SubmitButton>
                                 </div>
@@ -251,7 +322,7 @@ export default function PerfilForm({
 
                             {isAdmin && !isUser && !usuario?.ativo && (
                                 <div className="w-full sm:w-auto">
-                                    <SubmitButton estilo="primario" type="button" onClick={() => {/* API */}}>
+                                    <SubmitButton estilo="primario" type="button" onClick={()=>alterarStatusConta("ativar")}>
                                         <span className="w-full text-center">Ativar Conta</span>
                                     </SubmitButton>
                                 </div>
@@ -259,7 +330,7 @@ export default function PerfilForm({
 
                             {isAdmin && !isUser && usuario?.ativo && (
                                 <div className="w-full sm:w-auto">
-                                    <SubmitButton estilo="perigo" type="button" onClick={() => {/* API */}}>
+                                    <SubmitButton estilo="perigo" type="button" onClick={()=>alterarStatusConta("desativar")}>
                                         <span className="w-full text-center">Desativar Conta</span>
                                     </SubmitButton>
                                 </div>
@@ -267,7 +338,7 @@ export default function PerfilForm({
 
                             {isAdmin && !isUser && (
                                 <div className="w-full sm:w-auto sm:ml-auto">
-                                    <SubmitButton estilo="perigo" type="button" onClick={() => {/* API */}}>
+                                    <SubmitButton estilo="perigo" type="button" onClick={abrirModalDelete}>
                                         <span className="w-full text-center">Excluir Conta</span>
                                     </SubmitButton>
                                 </div>
@@ -276,6 +347,26 @@ export default function PerfilForm({
                     </div>
                 )}
             </div>
+
+            <CustomModal
+                estado={modalDeleteOn}
+                fechar={fecharModalDelete}
+                botoes={[
+                    {
+                        label:'Cancelar',
+                        estilo:'secundario',
+                        onClick:fecharModalDelete
+                    },
+                    {
+                        label:'Confirmar',
+                        estilo:'perigo',
+                        onClick:deletarConta
+                    }
+                ]}
+                titulo="Deletar Conta"
+            >
+                <p>Essa ação é irreversivel</p>
+            </CustomModal>
 
             <ModalSenha
                 estado={modalSenhaOn}

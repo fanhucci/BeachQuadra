@@ -121,7 +121,7 @@ export default class UsuarioService{
             const conta =  await this.conta.deletarContaPorPessoa(tx,id);
 
             if(conta.count ===0) throw new AppError('Nenhuma conta encontrada', 404);
-            
+
             return conta;
         })
     }
