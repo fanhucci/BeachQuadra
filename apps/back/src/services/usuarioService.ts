@@ -87,11 +87,17 @@ export default class UsuarioService{
     async editarUsuario(user: User, dados: EditarUsuario) {
         const id = Number(user.id);
         const cargo = Number(user.cargo);
+        
+        const ususario = await this.pessoa.listarUsuarioPorId(dados.id_pessoa);
 
         const isOwner = dados.id_pessoa === id;
 
         if (cargo < 2 && !isOwner) {
             throw new AppError('Sem autorização para editar outros usuários', 403);
+        }
+
+        if(dados.id_cargo != Number(ususario.id_cargo) && cargo<3){
+            throw new AppError('Sem autorização para alterar cargos', 403);
         }
 
         return await this.pessoa.editarPessoa(dados);
