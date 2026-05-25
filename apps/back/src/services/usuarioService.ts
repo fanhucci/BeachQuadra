@@ -94,6 +94,7 @@ export default class UsuarioService{
             throw new AppError('Sem autorização para editar outros usuários', 403);
         }
 
+        console.log(dados.id_cargo, cargo)
         if (dados.id_cargo !== undefined && cargo < 3) {
             throw new AppError('Você não tem permissão para alterar cargos', 403);
         }
