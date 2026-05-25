@@ -15,11 +15,13 @@ router.post(`/usuarios/proprio`, ctrl.adicionarUsuarioProprio.bind(ctrl));
 // ROTAS ESPECÍFICAS
 router.get(`/usuarios/perfil`, authMiddleware.auth, ctrl.listarUsuarioPerfil.bind(ctrl));
 router.get(`/usuarios/clientes`, authMiddleware.auth, RoleMiddleware.check(Permissao.CLIENTES), ctrl.buscarClientes.bind(ctrl));
+router.delete(`/usuarios`, authMiddleware.auth, ctrl.deletarUsuario.bind(ctrl));
 
 // ROTAS DINÂMICAS 
 router.get(`/usuarios/:id`, authMiddleware.auth, ctrl.listarUsuarioPorId.bind(ctrl));
 router.get(`/usuarios/:id/historico`, authMiddleware.auth, ctrl.listarHistorico.bind(ctrl));
 router.patch(`/usuarios/:id`, authMiddleware.auth, ctrl.editarUsuario.bind(ctrl));
+
 
 // ROTAS ADMINISTRATIVAS
 router.get(`/usuarios`, authMiddleware.auth, RoleMiddleware.check(Permissao.CLIENTES), ctrl.listarUsuarios.bind(ctrl));

@@ -81,4 +81,13 @@ export default class ContaRepository{
         `;
         return resposta;
     }
+
+    async deletarContaPorPessoa(tx:TransactionSql,id:number){
+        return tx`
+            update contas 
+            set senha = 'deletado',
+            ativo = false
+            where id_pessoa = ${id}
+        `;
+    }
 }

@@ -121,6 +121,7 @@ export default class UsuarioController{
     }
 
     async desativarUsuario(req:Request, res:Response){
+        
         const id = Number(req.params.id);
 
         if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
@@ -132,6 +133,18 @@ export default class UsuarioController{
     }
 
 
+    async deletarUsuario(req:Request, res:Response){
+
+        if(!req.user) return res.sendStatus(401);
+
+        const id = Number(req.user.id);
+
+        if(isNaN(id)) return res.status(400).json({erro: "Id inválido"})
+
+        const resposta = await this.service.deletarUsuario(id);
+
+        return res.sendStatus(204);
+    }
 
 
 }

@@ -111,4 +111,19 @@ export default class UsuarioService{
         return await this.pessoa.desativarPessoa(id);
     }
 
+    async deletarUsuario(id:number){
+
+        return await sql.begin(async(tx)=>{
+            const pessoa = await this.pessoa.anomalizarCliente(tx,id);
+
+            if(pessoa.count === 0) throw new AppError('Nenhum usuário encontrado', 404);
+
+            const conta =  await this.conta.deletarContaPorPessoa(tx,id);
+
+            if(conta.count ===0) throw new AppError('Nenhuma conta encontrada', 404);
+            
+            return conta;
+        })
+    }
+
 }

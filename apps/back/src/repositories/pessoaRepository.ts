@@ -2,6 +2,7 @@
 import { UsuarioHistoricoSearch, EditarUsuario, NovoUsuario, UsuarioSearch, } from "@app/shared";
 import sql from "../infra/db";
 import { sqlExecutor } from "./contaRepository";
+import { TransactionSql } from "postgres";
 
 export default class PessoaRepository {
 
@@ -241,4 +242,18 @@ export default class PessoaRepository {
         };
     }
 
+    async anomalizarCliente(sx:TransactionSql,id:number){
+        return await sx`
+
+            update pessoas
+            set 
+                nome = 'deletado',
+                cpf = '000000000',
+                email = 'deletado',
+                telefone = '00000000000',
+                id_cargo = 1,
+                ativo = false
+            where id_pessoa = ${id}
+        `;
+    }
 }
