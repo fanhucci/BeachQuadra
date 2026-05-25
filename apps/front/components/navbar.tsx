@@ -154,7 +154,7 @@ export function EmployeeSidebar() {
             <Link href="/" className="text-2xl font-bold text-white block">
               BeachQuadra 
               <span className="text-xs text-blue-400 block font-normal">
-                {user?.id_cargo === 3 ? 'Admin' : 'Staff'}
+                Staff
               </span>
             </Link>
             
