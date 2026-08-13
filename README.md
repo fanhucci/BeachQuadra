@@ -4,7 +4,7 @@
 
 ---
 
-## 🔎 Visão Geral
+## Visão Geral
 
 O **BeachQuadra** é uma solução de software projetada para otimizar o uso de quadras de *Beach Tennis*, reduzir conflitos de agendamento, automatizar fluxos financeiros de cobrança e oferecer relatórios de ocupação e faturamento para os gestores.
 
@@ -20,20 +20,20 @@ O **BeachQuadra** é uma solução de software projetada para otimizar o uso de 
 
 ## Objetivos e Metas
 
-- **Objetivo Principal**: Automatizar o fluxo de reservas de quadras[cite: 1].
-- **Meta de Ocupação**: Maior ocupação média das quadras nos horários operacionais[cite: 1].
-- **Eficiência Operacional**: Reduzir o tempo gasto no agendamento manual[cite: 1].
+- **Objetivo Principal**: Automatizar o fluxo de reservas de quadras.
+- **Meta de Ocupação**: Maior ocupação média das quadras nos horários operacionais.
+- **Eficiência Operacional**: Reduzir o tempo gasto no agendamento manual.
 
 ---
 
 ## Arquitetura e Tecnologias
 
-O projeto utiliza uma arquitetura baseada em **Monorepo / Workspaces** com desacoplamento entre frontend e backend[cite: 1].
+O projeto utiliza uma arquitetura baseada em **Monorepo / Workspaces** com desacoplamento entre frontend e backend.
 
-- **Frontend**: Aplicação Web Reativa (React / Next.js) hospedada na Vercel[cite: 1].
-- **Backend**: API RESTful em Node.js (TypeScript) com autenticação e validações de regras de negócio[cite: 1].
-- **Banco de Dados**: SGBD Relacional (PostgreSQL) utilizando da infraestrutura da Supabase[cite: 1].
-- **Gerenciador de Pacotes**: `npm` (Workspaces)[cite: 1].
+- **Frontend**: Aplicação Web Reativa (React / Next.js) hospedada na Vercel.
+- **Backend**: API RESTful em Node.js (TypeScript) com autenticação e validações de regras de negócio.
+- **Banco de Dados**: SGBD Relacional (PostgreSQL) utilizando da infraestrutura da Supabase.
+
 
 ---
 
